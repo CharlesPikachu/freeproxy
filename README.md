@@ -23,6 +23,6 @@ https://mp.weixin.qq.com/s/6gNRQDXK3Ch6Mt3Skrisow
 - Windows10
 
 # More
-### WeChat Official Accounts
-Charles_pikachu  
+#### WeChat Official Accounts
+*Charles_pikachu*
 ![img](pikachu.jpg)
