@@ -1,5 +1,8 @@
 # FreeProxy
+```sh
 Get free proxies.
+You can star this repository to keep track of the project if it's helpful for you, thank you for your support.
+```
 
 # Introduction
 https://mp.weixin.qq.com/s/6gNRQDXK3Ch6Mt3Skrisow
@@ -24,5 +27,5 @@ https://mp.weixin.qq.com/s/6gNRQDXK3Ch6Mt3Skrisow
 
 # More
 #### WeChat Official Accounts
-*Charles_pikachu*
+*Charles_pikachu*  
 ![img](pikachu.jpg)
