@@ -34,7 +34,7 @@ pip install git+https://github.com/CharlesPikachu/FreeProxy.git@master
 
 # Usage
 #### Arguments
-```python
+```sh
 Input:
 	ProxyTool:
 		initial:
