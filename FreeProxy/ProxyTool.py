@@ -13,10 +13,10 @@ from .proxies import *
 from .utils.utils import *
 try:
 	from .proxies import *
-	from .utils.utils import *
+	from .utils import *
 except:
 	from proxies import *
-	from utils.utils import *
+	from utils import *
 
 
 '''

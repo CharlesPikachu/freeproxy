@@ -9,11 +9,9 @@ Author:
 import re
 import requests
 try:
-	from utils.utils import *
+	from .utils import *
 except:
-	import sys
-	sys.path.append('..')
-	from utils.utils import *
+	from utils import *
 
 
 '''gatherproxy代理爬取(国内无法访问)'''
