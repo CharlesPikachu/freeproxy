@@ -9,8 +9,10 @@ Author:
 import re
 import requests
 try:
-	from ..utils.utils import *
+	from utils.utils import *
 except:
+	import sys
+	sys.path.append('..')
 	from utils.utils import *
 
 
