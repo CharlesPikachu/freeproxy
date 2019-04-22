@@ -11,10 +11,10 @@ import time
 import random
 try:
 	from .proxies import *
-	from .utils.utils import *
+	from .utils import *
 except:
 	from proxies import *
-	from utils.utils import *
+	from utils import *
 
 
 '''
