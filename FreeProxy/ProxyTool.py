@@ -9,14 +9,12 @@ Author:
 import os
 import time
 import random
-from .proxies import *
-from .utils.utils import *
 try:
 	from .proxies import *
-	from .utils import *
+	from .utils.utils import *
 except:
 	from proxies import *
-	from utils import *
+	from utils.utils import *
 
 
 '''
