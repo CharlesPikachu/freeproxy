@@ -9,7 +9,7 @@ Author:
 import re
 import requests
 try:
-	from ..utils import *
+	from .FreeProxy/utils import *
 except:
 	from utils import *
 
