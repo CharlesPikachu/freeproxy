@@ -22,11 +22,11 @@ Function:
 	免费代理获取工具
 Args:
 	--host: 验证代理是否可以请求host(默认为http://www.baidu.com/)
-	--headers: 验证host时的请求头
+	--headers: 验证host时的请求头(默认使用Chrome User-Agent)
 	--method: 验证host时的请求类型(GET/POST)
-	--post_data: POST验证时提交的data
-	--timeout: 代理最大延迟
-	--proxy_type: http/https, 代理类型
+	--post_data: POST验证时提交的data(默认为{})​
+	--timeout: 代理最大延迟(默认为1s)
+	--proxy_type: http/https, 代理类型(默认为http)
 '''
 class ProxyTool():
 	def __init__(self, host='http://www.baidu.com/', headers=None, method='GET', post_data={}, timeout=1, proxy_type='http', **kwargs):
