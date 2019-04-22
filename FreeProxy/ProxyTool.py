@@ -9,6 +9,8 @@ Author:
 import os
 import time
 import random
+from .proxies import *
+from .utils.utils import *
 try:
 	from .proxies import *
 	from .utils.utils import *

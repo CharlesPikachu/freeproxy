@@ -9,7 +9,7 @@ Author:
 import re
 import requests
 try:
-	from .utils.utils import *
+	from ..utils.utils import *
 except:
 	from utils.utils import *
 

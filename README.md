@@ -53,7 +53,7 @@ Return:
 #### Example
 ```python
 from FreeProxy import ProxyTool
-pt = ProxyTool()
+pt = ProxyTool.ProxyTool()
 proxies = pt.getProxy(num_proxies=2, max_tries=5)
 ```
 
