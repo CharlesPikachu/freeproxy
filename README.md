@@ -1,89 +1,66 @@
+<div align="center">
+  <img src="./docs/logo.png" width="600"/>
+</div>
+<br />
+
+[![docs](https://img.shields.io/badge/docs-latest-blue)](https://freeproxy.readthedocs.io/)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pyfreeproxy)](https://pypi.org/project/pyfreeproxy/)
+[![PyPI](https://img.shields.io/pypi/v/pyfreeproxy)](https://pypi.org/project/pyfreeproxy)
+[![license](https://img.shields.io/github/license/CharlesPikachu/freeproxy.svg)](https://github.com/CharlesPikachu/freeproxy/blob/master/LICENSE)
+[![PyPI - Downloads](https://pepy.tech/badge/pyfreeproxy)](https://pypi.org/project/pyfreeproxy/)
+[![issue resolution](https://isitmaintained.com/badge/resolution/CharlesPikachu/freeproxy.svg)](https://github.com/CharlesPikachu/freeproxy/issues)
+[![open issues](https://isitmaintained.com/badge/open/CharlesPikachu/freeproxy.svg)](https://github.com/CharlesPikachu/freeproxy/issues)
+
+Documents: https://freeproxy.readthedocs.io/
+
+
 # FreeProxy
 ```sh
-ProxyTool--Collecting free proxies from internet.
-Open an issues to get helps if you have any problems or suggestions.
+Collecting free proxies from internet.
 You can star this repository to keep track of the project if it's helpful for you, thank you for your support.
 ```
 
-# Introduction in Chinese
-https://mp.weixin.qq.com/s/OdBr2KhBDzmBI1GPFQteGQ
 
-# Proxy sources
-- [xici](http://www.xicidaili.com/)
-- [iphai](http://www.iphai.com/free/ng)
-- [ip3366](http://www.ip3366.net/free/)
-- [cn-proxy](https://cn-proxy.com/)
-- [proxylist](https://proxy-list.org/english/index.php)
-- [jiangxianli](http://ip.jiangxianli.com/?page=1)
-- [gatherproxy](http://www.gatherproxy.com/zh/)
-- [proxylistplus](https://list.proxylistplus.com/Fresh-HTTP-Proxy-List-1)
+# Support List
+|  Source        | in Chinese        |
+|  :----:        | :----:            |
+|                |                   |
+
 
 # Install
-### Use setup.py
-#### Step1
+
+#### Pip install
 ```sh
-git clone https://github.com/CharlesPikachu/FreeProxy.git
-```
-#### Step2
-```sh
-cd FreeProxy -> run "python setup.py install"
-```
-### Use pip
-```sh
-pip install git+https://github.com/CharlesPikachu/FreeProxy.git@master
+run "pip install pyfreeproxy"
 ```
 
-# Usage
-#### Arguments
+#### Source code install
 ```sh
-Input:
-	ProxyTool:
-		initial:
-			--host: Host used to verify the validity of the proxies.(http://www.baidu.com/ by default)
-			--headers: Used to add HTTP headers to a request for host.(use user-agent of chrome by default)
-			--method: Request method, expect GET(by default)/POST.
-			--post_data: The post data if method is POST.({} by default)
-			--timeout: Connection timeouts.(1s by default)
-			--proxy_type: http/https, the type of proxy.(http by default)
-		getProxy:
-			--num_proxies: The number of proxies you need.(1 by default)
-			--max_tries: Return the proxies if try to get enough proxies more max_tries times.(5 by default)
-Return:
-	[(ip_1, port_1), ..., (ip_n, port_n]
+(1) Offline
+Step1: git clone https://github.com/CharlesPikachu/freeproxy.git
+Step2: cd freeproxy -> run "python setup.py install"
+(2) Online
+run "pip install git+https://github.com/CharlesPikachu/freeproxy.git@master"
 ```
-#### Example1 - Singlethreading
+
+
+# Quick Start
 ```python
-from FreeProxy import ProxyTool
-pt = ProxyTool.ProxyTool()
-proxies = pt.getProxy(num_proxies=2, max_tries=5)
-print(proxies)
 ```
-#### Example2 - Multithreading
-```python
-import time
-import threading
-from FreeProxy import ProxyTool
 
 
-PROXIES = []
-pt = ProxyTool.ProxyTool()
-num_threadings = 3
+# Projects in Charles_pikachu
+- [Games](https://github.com/CharlesPikachu/Games): Create interesting games by pure python.
+- [DecryptLogin](https://github.com/CharlesPikachu/DecryptLogin): APIs for loginning some websites by using requests.
+- [Musicdl](https://github.com/CharlesPikachu/musicdl): A lightweight music downloader written by pure python.
+- [Videodl](https://github.com/CharlesPikachu/videodl): A lightweight video downloader written by pure python.
+- [Pytools](https://github.com/CharlesPikachu/pytools): Some useful tools written by pure python.
+- [PikachuWeChat](https://github.com/CharlesPikachu/pikachuwechat): Play WeChat with itchat-uos.
+- [Pydrawing](https://github.com/CharlesPikachu/pydrawing): Beautify your image or video.
+- [ImageCompressor](https://github.com/CharlesPikachu/imagecompressor): Image compressors written by pure python.
 
-
-def getProxy(num, max_tries):
-	global PROXIES
-	PROXIES += pt.getProxy(num, max_tries)
-
-
-for i in range(num_threadings):
-	t = threading.Thread(target=getProxy, args=(1, 5))
-	time.sleep(0.1)
-	t.start()
-	t.join()
-print(PROXIES)
-```
 
 # More
 #### WeChat Official Accounts
 *Charles_pikachu*  
-![img](pikachu.jpg)
+![img](./docs/pikachu.jpg)

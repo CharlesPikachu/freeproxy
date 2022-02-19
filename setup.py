@@ -1,34 +1,41 @@
 '''
 Function:
-	setup
+    setup the freeproxy
 Author:
-	Charles
+    Charles
 微信公众号:
-	Charles的皮卡丘
+    Charles的皮卡丘
 GitHub:
-	https://github.com/CharlesPikachu
-更新日期:
-	2019-04-08
+    https://github.com/CharlesPikachu
 '''
-import FreeProxy
+import freeproxy
 from setuptools import setup, find_packages
 
 
+'''readme'''
+with open('README.md', 'r', encoding='utf-8') as f:
+    long_description = f.read()
+
+
+'''setup'''
 setup(
-	name='FreeProxy',
-	version=FreeProxy.__version__,
-	description='ProxyTool--Collecting free proxies from internet.',
-	classifiers=[
-			'License :: OSI Approved :: MIT License',
-			'Programming Language :: Python',
-			'Intended Audience :: Developers',
-			'Operating System :: OS Independent'],
-	author='Charles',
-	url='https://github.com/CharlesPikachu/FreeProxy',
-	author_email='charlesjzc@qq.com',
-	license='MIT',
-	include_package_data=True,
-	install_requires=['requests'],
-	zip_safe=True,
-	packages=find_packages()
+    name=freeproxy.__title__,
+    version=freeproxy.__version__,
+    description=freeproxy.__description__,
+    long_description=long_description,
+    long_description_content_type='text/markdown',
+    classifiers=[
+        'License :: OSI Approved :: MIT License',
+        'Programming Language :: Python :: 3',
+        'Intended Audience :: Developers',
+        'Operating System :: OS Independent'
+    ],
+    author=freeproxy.__author__,
+    url=freeproxy.__url__,
+    author_email=freeproxy.__email__,
+    license=freeproxy.__license__,
+    include_package_data=True,
+    install_requires=list(open('requirements.txt', 'r').readlines()),
+    zip_safe=True,
+    packages=find_packages()
 )
