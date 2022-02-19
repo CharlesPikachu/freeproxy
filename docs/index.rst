@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Pydrawing中文文档
+FreeProxy中文文档
 ========================================
 
 .. toctree::
