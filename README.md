@@ -22,10 +22,11 @@ You can star this repository to keep track of the project if it's helpful for yo
 
 
 # Support List
-| Source                 | Official Website                         | in Chinese        |
-| :----:                 | :----:                                   | :----:            |
-| kuaidaili              | [click](https://www.kuaidaili.com/)      | 快代理            |
-| ip3366                 | [click](http://www.ip3366.net/free/)     | 云代理            |
+| Source                 | Official Website                               | Core Code                                              | in Chinese        |
+| :----:                 | :----:                                         | :----:                                                 | :----:            |
+| kuaidaili              | [click](https://www.kuaidaili.com/)            | [click](./freeproxy/modules/proxies/kuaidaili.py)      | 快代理            |
+| ip3366                 | [click](http://www.ip3366.net/free/)           | [click](./freeproxy/modules/proxies/ip3366.py)         | 云代理            |
+| jiangxianli            | [click](http://ip.jiangxianli.com/?page=1)     | [click](./freeproxy/modules/proxies/jiangxianli.py)    | jiangxianli代理   |
 
 
 # Install
