@@ -22,9 +22,9 @@ You can star this repository to keep track of the project if it's helpful for yo
 
 
 # Support List
-|  Source        | in Chinese        |
-|  :----:        | :----:            |
-|                |                   |
+|  Source                                        | in Chinese        |
+|  :----:                                        | :----:            |
+|  [kuaidaili](https://www.kuaidaili.com/)       | 快代理            |
 
 
 # Install
@@ -46,6 +46,10 @@ run "pip install git+https://github.com/CharlesPikachu/freeproxy.git@master"
 
 # Quick Start
 ```python
+from freeproxy import freeproxy
+
+client = freeproxy.FreeProxy()
+response = client.get('https://www.baidu.com/')
 ```
 
 
