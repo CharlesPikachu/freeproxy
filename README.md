@@ -35,7 +35,7 @@ You can star this repository to keep track of the project if it's helpful for yo
 | zdaye                  | [click](https://www.zdaye.com/dayProxy/1.html)                   | [click](./freeproxy/modules/proxies/zdaye.py)          | 站大爷代理        |
 | yqie                   | [click](http://ip.yqie.com/ipproxy.htm)                          | [click](./freeproxy/modules/proxies/yqie.py)           | yqie代理          |
 | taiyanghttp            | [click](http://www.taiyanghttp.com/free/page1/)                  | [click](./freeproxy/modules/proxies/taiyanghttp.py)    | 太阳HTTP代理      |
-
+"kuaidaili", "ip3366", "jiangxianli", "proxylistplus", "daili66", "fatezero", "ip89", "seofangfa", "zdaye", "yqie", "taiyanghttp"
 
 # Install
 
