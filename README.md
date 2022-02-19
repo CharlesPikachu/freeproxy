@@ -22,9 +22,9 @@ You can star this repository to keep track of the project if it's helpful for yo
 
 
 # Support List
-|  Source                                        | in Chinese        |
-|  :----:                                        | :----:            |
-|  [kuaidaili](https://www.kuaidaili.com/)       | 快代理            |
+| Source                 | Official Website                         | in Chinese        |
+| :----:                 | :----:                                   | :----:            |
+| kuaidaili              | [click](https://www.kuaidaili.com/)      | 快代理            |
 
 
 # Install
