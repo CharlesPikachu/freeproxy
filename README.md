@@ -25,6 +25,7 @@ You can star this repository to keep track of the project if it's helpful for yo
 | Source                 | Official Website                         | in Chinese        |
 | :----:                 | :----:                                   | :----:            |
 | kuaidaili              | [click](https://www.kuaidaili.com/)      | 快代理            |
+| ip3366                 | [click](http://www.ip3366.net/free/)     | 云代理            |
 
 
 # Install

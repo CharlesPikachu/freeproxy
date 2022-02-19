@@ -22,6 +22,7 @@ class FreeProxy():
         self.proxy_type = proxy_type
         # 支持的代理
         self.supported_proxies = {
+            'ip3366': IP3366Proxy,
             'kuaidaili': KuaidailiProxy,
         }
         # 设置代理源
@@ -40,3 +41,9 @@ class FreeProxy():
     '''post请求'''
     def post(self, url):
         pass
+
+
+'''test'''
+if __name__ == '__main__':
+    proxy = IP3366Proxy()
+    print(proxy.refreshproxies())
