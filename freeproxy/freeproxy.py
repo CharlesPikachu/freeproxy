@@ -25,6 +25,7 @@ class FreeProxy():
             'ip3366': IP3366Proxy,
             'kuaidaili': KuaidailiProxy,
             'jiangxianli': JiangxianliProxy,
+            'proxylistplus': ProxylistplusProxy,
         }
         # 设置代理源
         if proxy_sources is None:
@@ -46,5 +47,5 @@ class FreeProxy():
 
 '''test'''
 if __name__ == '__main__':
-    proxy = JiangxianliProxy()
+    proxy = ProxylistplusProxy()
     print(proxy.refreshproxies())
