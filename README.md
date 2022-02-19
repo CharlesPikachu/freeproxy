@@ -28,6 +28,13 @@ You can star this repository to keep track of the project if it's helpful for yo
 | ip3366                 | [click](http://www.ip3366.net/free/)                             | [click](./freeproxy/modules/proxies/ip3366.py)         | 云代理            |
 | jiangxianli            | [click](http://ip.jiangxianli.com/?page=1)                       | [click](./freeproxy/modules/proxies/jiangxianli.py)    | jiangxianli代理   |
 | proxylistplus          | [click](https://list.proxylistplus.com/Fresh-HTTP-Proxy-List-1)  | [click](./freeproxy/modules/proxies/proxylistplus.py)  | proxylistplus代理 |
+| daili66                | [click](http://www.66ip.cn/index.html)                           | [click](./freeproxy/modules/proxies/daili66.py)        | 代理66            |
+| fatezero               | [click](http://proxylist.fatezero.org/proxy.list)                | [click](./freeproxy/modules/proxies/fatezero.py)       | fatezero代理      |
+| ip89                   | [click](http://api.89ip.cn/)                                     | [click](./freeproxy/modules/proxies/ip89.py)           | IP89代理          |
+| seofangfa              | [click](https://proxy.seofangfa.com/)                            | [click](./freeproxy/modules/proxies/seofangfa.py)      | seofangfa代理     |
+| zdaye                  | [click](https://www.zdaye.com/dayProxy/1.html)                   | [click](./freeproxy/modules/proxies/zdaye.py)          | 站大爷代理        |
+| yqie                   | [click](http://ip.yqie.com/ipproxy.htm)                          | [click](./freeproxy/modules/proxies/yqie.py)           | yqie代理          |
+| taiyanghttp            | [click](http://www.taiyanghttp.com/free/page1/)                  | [click](./freeproxy/modules/proxies/taiyanghttp.py)    | 太阳HTTP代理      |
 
 
 # Install
@@ -51,8 +58,13 @@ run "pip install git+https://github.com/CharlesPikachu/freeproxy.git@master"
 ```python
 from freeproxy import freeproxy
 
-client = freeproxy.FreeProxy()
-response = client.get('https://www.baidu.com/')
+proxy_sources = ['proxylistplus', 'kuaidaili']
+proxy_session = freeproxy.FreeProxy(proxy_sources=proxy_sources)
+headers = {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36'
+}
+response = proxy_session.get('https://space.bilibili.com/406756145', headers=headers)
+print(response.text)
 ```
 
 
@@ -65,6 +77,7 @@ response = client.get('https://www.baidu.com/')
 - [PikachuWeChat](https://github.com/CharlesPikachu/pikachuwechat): Play WeChat with itchat-uos.
 - [Pydrawing](https://github.com/CharlesPikachu/pydrawing): Beautify your image or video.
 - [ImageCompressor](https://github.com/CharlesPikachu/imagecompressor): Image compressors written by pure python.
+- [FreeProxy](https://github.com/CharlesPikachu/freeproxy): Collecting free proxies from internet.
 
 
 # More
