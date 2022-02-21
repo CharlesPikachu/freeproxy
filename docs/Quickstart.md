@@ -77,5 +77,5 @@ from freeproxy import freeproxy
 
 proxy_sources = ['proxylistplus', 'kuaidaili']
 proxy_session = freeproxy.FreeProxy(proxy_sources=proxy_sources)
-proxy = proxy_session.getrandomproxysession()
+session = proxy_session.getrandomproxysession()
 ```
