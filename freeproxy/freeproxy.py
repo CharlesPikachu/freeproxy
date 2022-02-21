@@ -40,13 +40,19 @@ class FreeProxy():
         self.used_proxies = {}
         if proxy_sources is None:
             for source in self.supported_proxies:
-                self.used_proxies[source] = self.supported_proxies[source](**init_session_cfg)
-                self.used_proxies[source].refreshproxies()
+                try:
+                    self.used_proxies[source] = self.supported_proxies[source](**init_session_cfg)
+                    self.used_proxies[source].refreshproxies()
+                except:
+                    continue
         else:
             for source in proxy_sources:
-                assert source in self.supported_proxies
-                self.used_proxies[source] = self.supported_proxies[source](**init_session_cfg)
-                self.used_proxies[source].refreshproxies()
+                try:
+                    assert source in self.supported_proxies
+                    self.used_proxies[source] = self.supported_proxies[source](**init_session_cfg)
+                    self.used_proxies[source].refreshproxies()
+                except:
+                    continue
         # session初始化配置文件
         self.init_session_cfg = init_session_cfg
         # logger handle
