@@ -8,7 +8,7 @@
 from freeproxy import freeproxy
 
 proxy_sources = ['proxylistplus', 'kuaidaili']
-proxy_session = freeproxy.FreeProxy(proxy_sources=proxy_sources)
+fp_client = freeproxy.FreeProxy(proxy_sources=proxy_sources)
 ```
 
 FreeProxy支持的参数如下：
@@ -27,11 +27,11 @@ FreeProxy支持的参数如下：
 from freeproxy import freeproxy
 
 proxy_sources = ['proxylistplus', 'kuaidaili']
-proxy_session = freeproxy.FreeProxy(proxy_sources=proxy_sources)
+fp_client = freeproxy.FreeProxy(proxy_sources=proxy_sources)
 headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36'
 }
-response = proxy_session.get('https://space.bilibili.com/406756145', headers=headers)
+response = fp_client.get('https://space.bilibili.com/406756145', headers=headers)
 print(response.text)
 ```
 
@@ -46,11 +46,11 @@ GET请求支持的参数同[requests.Session.get](https://docs.python-requests.o
 from freeproxy import freeproxy
 
 proxy_sources = ['proxylistplus', 'kuaidaili']
-proxy_session = freeproxy.FreeProxy(proxy_sources=proxy_sources)
+fp_client = freeproxy.FreeProxy(proxy_sources=proxy_sources)
 headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36'
 }
-response = proxy_session.post('https://space.bilibili.com/406756145', headers=headers)
+response = fp_client.post('https://space.bilibili.com/406756145', headers=headers)
 print(response.text)
 ```
 
@@ -65,8 +65,8 @@ POST请求支持的参数同[requests.Session.post](https://docs.python-requests
 from freeproxy import freeproxy
 
 proxy_sources = ['proxylistplus', 'kuaidaili']
-proxy_session = freeproxy.FreeProxy(proxy_sources=proxy_sources)
-proxy = proxy_session.getrandomproxy()
+fp_client = freeproxy.FreeProxy(proxy_sources=proxy_sources)
+proxy = fp_client.getrandomproxy()
 ```
 
 
@@ -76,6 +76,6 @@ proxy = proxy_session.getrandomproxy()
 from freeproxy import freeproxy
 
 proxy_sources = ['proxylistplus', 'kuaidaili']
-proxy_session = freeproxy.FreeProxy(proxy_sources=proxy_sources)
-session = proxy_session.getrandomproxysession()
+fp_client = freeproxy.FreeProxy(proxy_sources=proxy_sources)
+session = fp_client.getrandomproxysession()
 ```
