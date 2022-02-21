@@ -44,6 +44,7 @@ class FreeProxy():
                     self.used_proxies[source] = self.supported_proxies[source](**init_session_cfg)
                     self.used_proxies[source].refreshproxies()
                 except:
+                    if source in self.used_proxies: self.used_proxies.pop(source)
                     continue
         else:
             for source in proxy_sources:
@@ -52,6 +53,7 @@ class FreeProxy():
                     self.used_proxies[source] = self.supported_proxies[source](**init_session_cfg)
                     self.used_proxies[source].refreshproxies()
                 except:
+                    if source in self.used_proxies: self.used_proxies.pop(source)
                     continue
         # session初始化配置文件
         self.init_session_cfg = init_session_cfg
