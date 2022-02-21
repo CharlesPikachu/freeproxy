@@ -19,7 +19,7 @@ FreeProxy支持的参数如下：
 - logfilepath: 日志文件, 如果是None, 则不打印, 默认值为"freeproxy.log"。
 
 
-## GET请求
+#### GET请求
 
 代码示例如下：
 
@@ -38,7 +38,7 @@ print(response.text)
 GET请求支持的参数同[requests.Session.get](https://docs.python-requests.org/en/latest/)
 
 
-## POST请求
+#### POST请求
 
 代码示例如下：
 
@@ -55,3 +55,27 @@ print(response.text)
 ```
 
 POST请求支持的参数同[requests.Session.post](https://docs.python-requests.org/en/latest/)
+
+
+#### 随机获得一个免费代理
+
+代码示例如下：
+
+```python
+from freeproxy import freeproxy
+
+proxy_sources = ['proxylistplus', 'kuaidaili']
+proxy_session = freeproxy.FreeProxy(proxy_sources=proxy_sources)
+proxy = proxy_session.getrandomproxy()
+```
+
+
+#### 随机获得一个设置了免费代理的session
+
+```python
+from freeproxy import freeproxy
+
+proxy_sources = ['proxylistplus', 'kuaidaili']
+proxy_session = freeproxy.FreeProxy(proxy_sources=proxy_sources)
+proxy = proxy_session.getrandomproxysession()
+```

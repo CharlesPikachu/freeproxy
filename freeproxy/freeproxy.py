@@ -8,6 +8,7 @@ Author:
 '''
 import random
 import warnings
+import requests
 if __name__ == '__main__':
     from modules import *
 else:
@@ -73,6 +74,17 @@ class FreeProxy():
             if response.status_code == 200: break
             if self.logger_handle is not None: self.logger_handle.info(f'代理{session.proxies}无效')
         return response
+    '''随机获得一个代理'''
+    def getrandomproxy(self):
+        session_name = random.choice(list(self.used_proxies.keys()))
+        session = self.used_proxies[session_name]
+        session.setproxy(proxy_type=self.proxy_type)
+        return session.proxies
+    '''随机获得一个设置了代理的session'''
+    def getrandomproxysession(self):
+        session = requests.Session()
+        session.proxies = self.getrandomproxy()
+        return session
 
 
 '''test'''
