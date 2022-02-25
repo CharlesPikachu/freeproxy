@@ -11,6 +11,6 @@ FreeProxy中文文档
 	
 	Install.md
 	Quickstart.md
-	Changelog.md
 	Examples.md
+	Changelog.md
 	Author.md
