@@ -37,6 +37,12 @@ You can star this repository to keep track of the project if it's helpful for yo
 | taiyanghttp            | [click](http://www.taiyanghttp.com/free/page1/)                  | [click](./freeproxy/modules/proxies/taiyanghttp.py)    | 太阳HTTP代理      |
 
 
+# Practice with FreeProxy
+| Project                | Introduction                                                | Core Code                                              | in Chinese                                    |
+| :----:                 | :----:                                                      | :----:                                                 | :----:                                        |
+| ICU996                 | [click](https://mp.weixin.qq.com/s/58AHrbp0jfFltYqZsJPu5Q)  | [click](./examples/ICU996)                             | 用数万条数据带大家看看到底是哪些人在反对996~  |
+
+
 # Install
 
 #### Pip install
