@@ -93,6 +93,9 @@ class FreeProxy():
         session = requests.Session()
         session.proxies = self.getrandomproxy()
         return session
+    '''str'''
+    def __str__(self):
+        return 'Welcome to use freeproxy!\nYou can visit https://github.com/CharlesPikachu/freeproxy for more details.'
 
 
 '''test'''
