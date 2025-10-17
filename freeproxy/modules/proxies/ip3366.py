@@ -28,6 +28,7 @@ class IP3366ProxiedSession(BaseProxiedSession):
             url = f'http://www.ip3366.net/free/?stype=1&page={page}'
             headers = {'User-Agent': generate_user_agent()}
             resp = requests.get(url, headers=headers)
+            if resp.status_code != 200: continue
             soup = BeautifulSoup(resp.text, 'lxml')
             soup = soup.find('table', attrs={'class': 'table table-bordered table-striped'})
             for item in soup.find('tbody').find_all('tr'):
