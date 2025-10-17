@@ -80,10 +80,10 @@ python setup.py install
 # Quick Start
 
 ```python
-from freeproxy import ProxiedSessionClient
+from freeproxy import freeproxy
 
 proxy_sources = ['KuaidailiProxiedSession']
-proxied_session_client = ProxiedSessionClient(proxy_sources=proxy_sources)
+proxied_session_client = freeproxy.ProxiedSessionClient(proxy_sources=proxy_sources)
 headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36'
 }

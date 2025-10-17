@@ -5,10 +5,10 @@
 Use the following code to make a request to any website with a randomly selected proxy by default,
 
 ```python
-from freeproxy import ProxiedSessionClient
+from freeproxy import freeproxy
 
 proxy_sources = ['KuaidailiProxiedSession']
-proxied_session_client = ProxiedSessionClient(proxy_sources=proxy_sources)
+proxied_session_client = freeproxy.ProxiedSessionClient(proxy_sources=proxy_sources)
 headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36'
 }
@@ -31,10 +31,10 @@ Supported arguments for `proxied_session_client.post` is the same as [requests.S
 The following snippet selects a random proxy from the pool,
 
 ```python
-from freeproxy import ProxiedSessionClient
+from freeproxy import freeproxy
 
 proxy_sources = ['KuaidailiProxiedSession']
-proxied_session_client = ProxiedSessionClient(proxy_sources=proxy_sources)
+proxied_session_client = freeproxy.ProxiedSessionClient(proxy_sources=proxy_sources)
 proxy = proxied_session_client.getrandomproxy()
 print(proxy)
 ```
@@ -50,10 +50,10 @@ Example output,
 The following snippet initializes a `proxied_session` restricted to one proxy source (randomly sampled):
 
 ```python
-from freeproxy import ProxiedSessionClient
+from freeproxy import freeproxy
 
 proxy_sources = ['KuaidailiProxiedSession']
-proxied_session_client = ProxiedSessionClient(proxy_sources=proxy_sources)
+proxied_session_client = freeproxy.ProxiedSessionClient(proxy_sources=proxy_sources)
 proxied_session_name, proxied_session = proxied_session_client.getrandomproxiedsession()
 print(proxied_session_name, proxied_session)
 ```
