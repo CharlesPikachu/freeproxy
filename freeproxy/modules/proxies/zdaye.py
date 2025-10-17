@@ -29,6 +29,7 @@ class ZdayeProxiedSession(BaseProxiedSession):
             url = f'https://www.zdaye.com/free/{page}/'
             headers = {'User-Agent': generate_user_agent()}
             resp = requests.get(url, headers=headers)
+            if resp.status_code != 200: continue
             soup = BeautifulSoup(resp.text, 'lxml')
             soup = soup.find('table', attrs={'id': 'ipc'})
             for item in soup.find('tbody').find_all('tr'):
