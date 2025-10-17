@@ -28,6 +28,7 @@ class ProxylistplusProxiedSession(BaseProxiedSession):
             url = f'https://list.proxylistplus.com/Fresh-HTTP-Proxy-List-{page}'
             headers = {'User-Agent': generate_user_agent()}
             resp = requests.get(url, headers=headers)
+            if resp.status_code != 200: continue
             soup = BeautifulSoup(resp.text, 'lxml')
             for item in soup.find_all('tr', attrs={'class': 'cells'}):
                 try:
