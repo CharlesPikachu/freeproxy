@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://github.com/CharlesPikachu/freeproxy/blob/160bb08f8919027ec2abd022aab6b1276fd4d307/docs/logo.png" width="600"/>
+  <img src="https://raw.githubusercontent.com/CharlesPikachu/freeproxy/master/docs/logo.png" width="600"/>
 </div>
 <br />
 
@@ -120,4 +120,4 @@ print(resp.text)
 # WeChat Official Account (微信公众号):
 
 Charles的皮卡丘 (*Charles_pikachu*)  
-![img](https://github.com/CharlesPikachu/freeproxy/blob/160bb08f8919027ec2abd022aab6b1276fd4d307/docs/pikachu.jpg)
+![img](https://raw.githubusercontent.com/CharlesPikachu/freeproxy/master/docs/pikachu.jpg)
