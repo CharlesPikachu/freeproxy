@@ -47,10 +47,12 @@ class LoggerHandle():
     '''log'''
     @staticmethod
     def log(level, message):
+        message = str(message)
         logger = logging.getLogger(LoggerHandle.appname)
         logger.log(level, message)
     '''debug'''
     def debug(self, message, disable_print=False):
+        message = str(message)
         if disable_print:
             fp = open(self.log_file_path, 'a', encoding='utf-8')
             fp.write(message + '\n')
@@ -58,6 +60,7 @@ class LoggerHandle():
             LoggerHandle.log(logging.DEBUG, message)
     '''info'''
     def info(self, message, disable_print=False):
+        message = str(message)
         if disable_print:
             fp = open(self.log_file_path, 'a', encoding='utf-8')
             fp.write(message + '\n')
@@ -65,6 +68,7 @@ class LoggerHandle():
             LoggerHandle.log(logging.INFO, message)
     '''warning'''
     def warning(self, message, disable_print=False):
+        message = str(message)
         if disable_print:
             fp = open(self.log_file_path, 'a', encoding='utf-8')
             fp.write(message + '\n')
@@ -74,6 +78,7 @@ class LoggerHandle():
             LoggerHandle.log(logging.WARNING, message)
     '''error'''
     def error(self, message, disable_print=False):
+        message = str(message)
         if disable_print:
             fp = open(self.log_file_path, 'a', encoding='utf-8')
             fp.write(message + '\n')

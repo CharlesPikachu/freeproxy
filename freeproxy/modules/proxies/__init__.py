@@ -11,8 +11,7 @@ from .proxylistplus import ProxylistplusProxiedSession
 '''ProxiedSessionBuilder'''
 class ProxiedSessionBuilder(BaseModuleBuilder):
     REGISTERED_MODULES = {
-        'BaseProxiedSession': BaseProxiedSession, 'IP89ProxiedSession': IP89ProxiedSession,
-        'ZdayeProxiedSession': ZdayeProxiedSession, 'IP3366ProxiedSession': IP3366ProxiedSession,
+        'IP89ProxiedSession': IP89ProxiedSession, 'ZdayeProxiedSession': ZdayeProxiedSession, 'IP3366ProxiedSession': IP3366ProxiedSession,
         'KuaidailiProxiedSession': KuaidailiProxiedSession, 'ProxylistplusProxiedSession': ProxylistplusProxiedSession,
     }
 

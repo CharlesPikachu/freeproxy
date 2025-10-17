@@ -1,3 +1,3 @@
 '''initialize'''
-from .proxies import BuildProxiedSession, ProxiedSessionBuilder
-from .utils import touchdir, BaseModuleBuilder, LoggerHandle, printtable, colorize
+from .utils import BaseModuleBuilder, LoggerHandle, printtable, colorize, touchdir
+from .proxies import BaseProxiedSession, ProxiedSessionBuilder, BuildProxiedSession

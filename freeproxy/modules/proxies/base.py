@@ -19,9 +19,12 @@ class BaseProxiedSession(requests.Session):
     '''refreshproxies'''
     def refreshproxies(self):
         raise NotImplementedError('not to be implemented')
-    '''randomsetproxy'''
-    def randomsetproxy(self):
+    '''getrandomproxy'''
+    def getrandomproxy(self):
         if len(self.candidate_proxies) < 1: self.refreshproxies()
         idx = random.randint(0, len(self.candidate_proxies)-1)
-        self.proxies = self.candidate_proxies.pop(idx)
+        return self.candidate_proxies.pop(idx)
+    '''setrandomproxy'''
+    def randomsetproxy(self):
+        self.proxies = self.getrandomproxy()
         return self.proxies

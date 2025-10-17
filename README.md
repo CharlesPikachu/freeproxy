@@ -78,20 +78,21 @@ python setup.py install
 
 
 # Quick Start
-```python
-from freeproxy import freeproxy
 
-proxy_sources = ['proxylistplus', 'kuaidaili']
-fp_client = freeproxy.FreeProxy(proxy_sources=proxy_sources)
+```python
+from freeproxy import ProxiedSessionClient
+
+proxy_sources = ['KuaidailiProxiedSession']
+proxied_session_client = ProxiedSessionClient(proxy_sources=proxy_sources)
 headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36'
 }
-response = fp_client.get('https://space.bilibili.com/406756145', headers=headers)
-print(response.text)
+resp = proxied_session_client.get('https://space.bilibili.com/406756145', headers=headers)
+print(resp.text)
 ```
 
 
-# Projects in Charles_pikachu
+# Recommended Projects
 
 - [Games](https://github.com/CharlesPikachu/Games): Create interesting games by pure python.
 - [DecryptLogin](https://github.com/CharlesPikachu/DecryptLogin): APIs for loginning some websites by using requests.
