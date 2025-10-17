@@ -5,6 +5,8 @@ from ..utils import BaseModuleBuilder
 from .zdaye import ZdayeProxiedSession
 from .ip3366 import IP3366ProxiedSession
 from .qiyunip import QiyunipProxiedSession
+from .proxydb import ProxydbProxiedSession
+from .proxyhub import ProxyhubProxiedSession
 from .kuaidaili import KuaidailiProxiedSession
 from .proxylistplus import ProxylistplusProxiedSession
 
@@ -14,6 +16,7 @@ class ProxiedSessionBuilder(BaseModuleBuilder):
     REGISTERED_MODULES = {
         'IP89ProxiedSession': IP89ProxiedSession, 'ZdayeProxiedSession': ZdayeProxiedSession, 'IP3366ProxiedSession': IP3366ProxiedSession,
         'KuaidailiProxiedSession': KuaidailiProxiedSession, 'ProxylistplusProxiedSession': ProxylistplusProxiedSession, 'QiyunipProxiedSession': QiyunipProxiedSession,
+        'ProxyhubProxiedSession': ProxyhubProxiedSession, 'ProxydbProxiedSession': ProxydbProxiedSession,
     }
 
 

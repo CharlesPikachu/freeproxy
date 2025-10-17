@@ -37,6 +37,7 @@
 
 # What's New
 
+- 2025-10-18: Released pyfreeproxy v0.1.6 — new sources `QiyunipProxiedSession`, `ProxyhubProxiedSession` and `ProxydbProxiedSession` added.
 - 2025-10-17: Released pyfreeproxy v0.1.5 — code cleanup, deprecated/invalid proxy sources removed, new sources added.
 
 
@@ -54,6 +55,9 @@ FreeProxy continuously discovers and updates lists of free proxies. If you find 
 | ProxylistplusProxiedSession          | [click](https://list.proxylistplus.com/Fresh-HTTP-Proxy-List-1)              | [click](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/proxylistplus.py)  |
 | IP89ProxiedSession                   | [click](http://api.89ip.cn/tqdl.html?api=1&num=1000&port=&address=&isp=)     | [click](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/ip89.py)           |
 | ZdayeProxiedSession                  | [click](https://www.zdaye.com/free/1/)                                       | [click](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/zdaye.py)          |
+| QiyunipProxiedSession                | [click](https://www.qiyunip.com/freeProxy/1.html)                            | [click](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/qiyunip.py)        |
+| ProxyhubProxiedSession               | [click](https://proxyhub.me/)                                                | [click](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/proxyhub.py)       |
+| ProxydbProxiedSession                | [click](https://proxydb.net/?offset=0)                                       | [click](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/proxydb.py)        |
 
 
 # Playground
