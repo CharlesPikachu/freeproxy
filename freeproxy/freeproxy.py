@@ -1,27 +1,24 @@
 '''
 Function:
-    免费代理获取工具
+    Implementation of FreeProxy
 Author:
-    Charles
-微信公众号:
+    Zhenchao Jin
+WeChat Official Account (微信公众号):
     Charles的皮卡丘
 '''
 import random
 import warnings
 import requests
 if __name__ == '__main__':
-    from modules import *
+    from modules import BuildProxiedSession
 else:
-    from .modules import *
+    from .modules import BuildProxiedSession
 warnings.filterwarnings('ignore')
 
 
-'''免费代理获取工具'''
+'''FreeProxy'''
 class FreeProxy():
-    def __init__(self, proxy_type='all', proxy_sources=None, init_session_cfg={}, logfilepath='freeproxy.log', **kwargs):
-        # 代理类型
-        assert proxy_type in ['all', 'http', 'https']
-        self.proxy_type = proxy_type
+    def __init__(self, proxy_sources=None, init_session_cfg={}):
         # 支持的代理
         self.supported_proxies = {
             'yqie': YqieProxy,

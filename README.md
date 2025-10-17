@@ -1,63 +1,79 @@
 <div align="center">
-  <img src="./docs/logo.png" width="600"/>
+  <img src="https://github.com/CharlesPikachu/freeproxy/blob/160bb08f8919027ec2abd022aab6b1276fd4d307/docs/logo.png" width="600"/>
 </div>
 <br />
 
-[![docs](https://img.shields.io/badge/docs-latest-blue)](https://freeproxy.readthedocs.io/)
-[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pyfreeproxy)](https://pypi.org/project/pyfreeproxy/)
-[![PyPI](https://img.shields.io/pypi/v/pyfreeproxy)](https://pypi.org/project/pyfreeproxy)
-[![license](https://img.shields.io/github/license/CharlesPikachu/freeproxy.svg)](https://github.com/CharlesPikachu/freeproxy/blob/master/LICENSE)
-[![PyPI - Downloads](https://pepy.tech/badge/pyfreeproxy)](https://pypi.org/project/pyfreeproxy/)
-[![PyPI - Downloads](https://img.shields.io/pypi/dm/pyfreeproxy?style=flat-square)](https://pypi.org/project/pyfreeproxy/)
-[![issue resolution](https://isitmaintained.com/badge/resolution/CharlesPikachu/freeproxy.svg)](https://github.com/CharlesPikachu/freeproxy/issues)
-[![open issues](https://isitmaintained.com/badge/open/CharlesPikachu/freeproxy.svg)](https://github.com/CharlesPikachu/freeproxy/issues)
+<p align="center">
+  <a href="https://freeproxy.readthedocs.io/">
+    <img alt="docs" src="https://img.shields.io/badge/docs-latest-blue">
+  </a>
+  <a href="https://pypi.org/project/pyfreeproxy/">
+    <img alt="PyPI - Python Version" src="https://img.shields.io/pypi/pyversions/pyfreeproxy">
+  </a>
+  <a href="https://pypi.org/project/pyfreeproxy">
+    <img alt="PyPI" src="https://img.shields.io/pypi/v/pyfreeproxy">
+  </a>
+  <a href="https://github.com/CharlesPikachu/freeproxy/blob/master/LICENSE">
+    <img alt="license" src="https://img.shields.io/github/license/CharlesPikachu/freeproxy.svg">
+  </a>
+  <a href="https://pypi.org/project/pyfreeproxy/">
+    <img alt="PyPI - Downloads (pepy mirror)" src="https://pepy.tech/badge/pyfreeproxy">
+  </a>
+  <a href="https://pypi.org/project/pyfreeproxy/">
+    <img alt="PyPI - Downloads" src="https://img.shields.io/pypi/dm/pyfreeproxy?style=flat-square">
+  </a>
+  <a href="https://github.com/CharlesPikachu/freeproxy/issues">
+    <img alt="issue resolution" src="https://isitmaintained.com/badge/resolution/CharlesPikachu/freeproxy.svg">
+  </a>
+  <a href="https://github.com/CharlesPikachu/freeproxy/issues">
+    <img alt="open issues" src="https://isitmaintained.com/badge/open/CharlesPikachu/freeproxy.svg">
+  </a>
+</p>
 
-Documents: https://freeproxy.readthedocs.io/
-
-
-# FreeProxy
-```sh
-Collecting free proxies from internet.
-You can star this repository to keep track of the project if it's helpful for you, thank you for your support.
-```
-
-
-# Support List
-| Source                 | Official Website                                                 | Core Code                                              | in Chinese        |
-| :----:                 | :----:                                                           | :----:                                                 | :----:            |
-| kuaidaili              | [click](https://www.kuaidaili.com/)                              | [click](./freeproxy/modules/proxies/kuaidaili.py)      | 快代理            |
-| ip3366                 | [click](http://www.ip3366.net/free/)                             | [click](./freeproxy/modules/proxies/ip3366.py)         | 云代理            |
-| jiangxianli            | [click](http://ip.jiangxianli.com/?page=1)                       | [click](./freeproxy/modules/proxies/jiangxianli.py)    | jiangxianli代理   |
-| proxylistplus          | [click](https://list.proxylistplus.com/Fresh-HTTP-Proxy-List-1)  | [click](./freeproxy/modules/proxies/proxylistplus.py)  | proxylistplus代理 |
-| daili66                | [click](http://www.66ip.cn/index.html)                           | [click](./freeproxy/modules/proxies/daili66.py)        | 代理66            |
-| fatezero               | [click](http://proxylist.fatezero.org/proxy.list)                | [click](./freeproxy/modules/proxies/fatezero.py)       | fatezero代理      |
-| ip89                   | [click](http://api.89ip.cn/)                                     | [click](./freeproxy/modules/proxies/ip89.py)           | IP89代理          |
-| seofangfa              | [click](https://proxy.seofangfa.com/)                            | [click](./freeproxy/modules/proxies/seofangfa.py)      | seofangfa代理     |
-| zdaye                  | [click](https://www.zdaye.com/dayProxy/1.html)                   | [click](./freeproxy/modules/proxies/zdaye.py)          | 站大爷代理        |
-| yqie                   | [click](http://ip.yqie.com/ipproxy.htm)                          | [click](./freeproxy/modules/proxies/yqie.py)           | yqie代理          |
-| taiyanghttp            | [click](http://www.taiyanghttp.com/free/page1/)                  | [click](./freeproxy/modules/proxies/taiyanghttp.py)    | 太阳HTTP代理      |
+<p align="center">
+  Documents: <a href="https://freeproxy.readthedocs.io/">https://freeproxy.readthedocs.io/</a>
+</p>
 
 
-# Practice with FreeProxy
-| Project                | Introduction                                                | Core Code                                              | in Chinese                                    |
-| :----:                 | :----:                                                      | :----:                                                 | :----:                                        |
-| ICU996                 | [click](https://mp.weixin.qq.com/s/58AHrbp0jfFltYqZsJPu5Q)  | [click](./examples/ICU996)                             | 用数万条数据带大家看看到底是哪些人在反对996~  |
+# What's New
+
+- 2025-10-17: Released pyfreeproxy v0.1.5 — code cleanup, deprecated/invalid proxy sources removed, new sources added.
+
+
+# Introduction
+
+FreeProxy continuously discovers and updates lists of free proxies. If you find value here, please star the project to keep it on your radar.
+
+
+# Support Proxy Sources
+
+| ProxiedSession                       | Official Website                                                             | Code Snippet                                                                                                 |
+| :----:                               | :----:                                                                       | :----:                                                                                                       |
+| KuaidailiProxiedSession              | [click](https://www.kuaidaili.com/free/inha/1/)                              | [click](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/kuaidaili.py)      |
+| IP3366ProxiedSession                 | [click](http://www.ip3366.net/free/?stype=1&page=1)                          | [click](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/ip3366.py)         |
+| ProxylistplusProxiedSession          | [click](https://list.proxylistplus.com/Fresh-HTTP-Proxy-List-1)              | [click](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/proxylistplus.py)  |
+| IP89ProxiedSession                   | [click](http://api.89ip.cn/tqdl.html?api=1&num=1000&port=&address=&isp=)     | [click](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/ip89.py)           |
+| ZdayeProxiedSession                  | [click](https://www.zdaye.com/free/1/)                                       | [click](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/zdaye.py)          |
+
+
+# Playground
+
+| Project                | Introduction                                                                                       | Code Snippet                                                                                                 |
+| :----:                 | :----:                                                                                             | :----:                                                                                                       |
+| ICU996                 | [用数万条数据带大家看看到底是哪些人在反对996~](https://mp.weixin.qq.com/s/58AHrbp0jfFltYqZsJPu5Q)  | [click](https://github.com/CharlesPikachu/freeproxy/tree/master/examples/ICU996)                             |
 
 
 # Install
 
-#### Pip install
 ```sh
-run "pip install pyfreeproxy"
-```
-
-#### Source code install
-```sh
-(1) Offline
-Step1: git clone https://github.com/CharlesPikachu/freeproxy.git
-Step2: cd freeproxy -> run "python setup.py install"
-(2) Online
-run "pip install git+https://github.com/CharlesPikachu/freeproxy.git@master"
+# from pip
+pip install pyfreeproxy
+# from github repo method-1
+pip install git+https://github.com/CharlesPikachu/freeproxy.git@master
+# from github repo method-2
+git clone https://github.com/CharlesPikachu/freeproxy.git
+cd freeproxy
+python setup.py install
 ```
 
 
@@ -76,6 +92,7 @@ print(response.text)
 
 
 # Projects in Charles_pikachu
+
 - [Games](https://github.com/CharlesPikachu/Games): Create interesting games by pure python.
 - [DecryptLogin](https://github.com/CharlesPikachu/DecryptLogin): APIs for loginning some websites by using requests.
 - [Musicdl](https://github.com/CharlesPikachu/musicdl): A lightweight music downloader written by pure python.
@@ -95,7 +112,8 @@ print(response.text)
 - [NovelDL](https://github.com/CharlesPikachu/noveldl): Search and download novels from some specific websites.
 
 
-# More
-#### WeChat Official Accounts
-*Charles_pikachu*  
-![img](./docs/pikachu.jpg)
+# WeChat Official Account (微信公众号):
+
+Charles的皮卡丘 (*Charles_pikachu*)
+
+![img](https://github.com/CharlesPikachu/freeproxy/blob/160bb08f8919027ec2abd022aab6b1276fd4d307/docs/pikachu.jpg)
