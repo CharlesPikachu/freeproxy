@@ -1,7 +1,7 @@
 # Project Disclaimer
 
 <div align="center">
-  <img src="https://github.com/CharlesPikachu/freeproxy/blob/160bb08f8919027ec2abd022aab6b1276fd4d307/docs/logo.png" width="600"/>
+  <img src="https://raw.githubusercontent.com/CharlesPikachu/freeproxy/master/docs/logo.png" width="600"/>
 </div>
 <br />
 
