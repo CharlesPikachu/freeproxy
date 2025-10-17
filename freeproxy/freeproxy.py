@@ -1,6 +1,6 @@
 '''
 Function:
-    Implementation of FreeProxy
+    Implementation of ProxiedSessionClient
 Author:
     Zhenchao Jin
 WeChat Official Account (微信公众号):

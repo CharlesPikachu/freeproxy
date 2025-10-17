@@ -23,7 +23,7 @@ class GithubStarPeople():
         self.num_pages = num_pages
         self.access_tokens = access_tokens
         self.api_url = 'https://api.github.com/repos/{}/{}/stargazers?page={}'
-        self.fp_client = freeproxy.FreeProxy()
+        self.fs_client = freeproxy.ProxiedSessionClient()
     '''run'''
     def run(self):
         # 构造所有star的人的url
@@ -97,7 +97,7 @@ class GithubStarPeople():
         if random.random() > 0.5: return requests.Session()
         while True:
             try:
-                session = self.fp_client.getrandomproxysession()
+                session = self.fs_client.getrandomproxiedsession()
                 break
             except:
                 continue
