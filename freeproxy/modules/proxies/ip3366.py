@@ -1,47 +1,44 @@
 '''
 Function:
-    云代理
+    Implementation of IP3366ProxiedSession
 Author:
-    Charles
-微信公众号:
+    Zhenchao Jin
+WeChat Official Account (微信公众号):
     Charles的皮卡丘
 '''
-import random
 import requests
-from .base import BaseProxy
 from bs4 import BeautifulSoup
+from user_agent import generate_user_agent
+try:
+    from base import BaseProxiedSession
+except:
+    from .base import BaseProxiedSession
 
 
-'''云代理'''
-class IP3366Proxy(BaseProxy):
+'''IP3366ProxiedSession'''
+class IP3366ProxiedSession(BaseProxiedSession):
     def __init__(self, **kwargs):
-        super(IP3366Proxy, self).__init__(**kwargs)
-        self.http_proxies = []
-        self.https_proxies = []
-        self.http_https_proxies = []
-    '''刷新代理'''
+        super(IP3366ProxiedSession, self).__init__(**kwargs)
+    '''refreshproxies'''
     def refreshproxies(self):
-        # 初始化
-        self.http_proxies = []
-        self.https_proxies = []
-        proxies_format = '{ip}:{port}'
-        # 获得代理
-        page = random.randint(1, 2)
-        url = f'http://www.ip3366.net/free/?page={page}'
-        headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36',
-        }
-        response = requests.get(url, headers=headers)
-        soup = BeautifulSoup(response.text, 'lxml')
-        soup = soup.find('table', attrs={'class': 'table table-bordered table-striped'})
-        for item in soup.find('tbody').find_all('tr'):
-            ip = item.find_all('td')[0].text.strip()
-            port = item.find_all('td')[1].text.strip()
-            proxy_type = item.find_all('td')[3].text.strip()
-            if proxy_type.lower() == 'http':
-                self.http_proxies.append({'http': proxies_format.format(ip=ip, port=port)})
-            else:
-                self.https_proxies.append({'https': proxies_format.format(ip=ip, port=port)})
-        self.http_https_proxies = self.http_proxies.copy() + self.https_proxies.copy()
-        # 返回
-        return self.http_proxies, self.https_proxies, self.http_https_proxies
+        # initialize
+        self.candidate_proxies = []
+        # obtain proxies
+        for page in range(1, self.max_pages+1):
+            url = f'http://www.ip3366.net/free/?stype=1&page={page}'
+            headers = {'User-Agent': generate_user_agent()}
+            resp = requests.get(url, headers=headers)
+            soup = BeautifulSoup(resp.text, 'lxml')
+            soup = soup.find('table', attrs={'class': 'table table-bordered table-striped'})
+            for item in soup.find('tbody').find_all('tr'):
+                formatted_proxy = f"{item.find_all('td')[3].text.strip().lower()}://{item.find_all('td')[0].text.strip()}:{item.find_all('td')[1].text.strip()}"
+                self.candidate_proxies.append({
+                    'http': formatted_proxy, 'https': formatted_proxy
+                })
+        # return
+        return self.candidate_proxies
+
+
+'''tests'''
+if __name__ == '__main__':
+    print(IP3366ProxiedSession().refreshproxies())
