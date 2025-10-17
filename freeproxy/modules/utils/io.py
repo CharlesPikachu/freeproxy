@@ -1,17 +1,14 @@
 '''
 Function:
-    utils related with io operation
+    Implementation of IO related operations
 Author:
-    Charles
-微信公众号:
+    Zhenchao Jin
+WeChat Official Account (微信公众号):
     Charles的皮卡丘
 '''
 import os
 
 
-'''touch dir'''
-def touchdir(dirname):
-    if not os.path.exists(dirname):
-        os.mkdir(dirname)
-        return False
-    return True
+'''touchdir'''
+def touchdir(directory, exist_ok=True, mode=511):
+    return os.makedirs(directory, exist_ok=exist_ok, mode=mode)

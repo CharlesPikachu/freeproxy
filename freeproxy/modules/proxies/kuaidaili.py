@@ -1,47 +1,89 @@
 '''
 Function:
-    快代理
+    Implementation of KuaidailiProxiedSession
 Author:
-    Charles
-微信公众号:
+    Zhenchao Jin
+WeChat Official Account (微信公众号):
     Charles的皮卡丘
 '''
-import random
+import re
 import requests
-from .base import BaseProxy
-from bs4 import BeautifulSoup
+from user_agent import generate_user_agent
+try:
+    from base import BaseProxiedSession
+except:
+    from .base import BaseProxiedSession
 
 
-'''快代理'''
-class KuaidailiProxy(BaseProxy):
+'''KuaidailiProxiedSession'''
+class KuaidailiProxiedSession(BaseProxiedSession):
     def __init__(self, **kwargs):
-        super(KuaidailiProxy, self).__init__(**kwargs)
-        self.http_proxies = []
-        self.https_proxies = []
-        self.http_https_proxies = []
-    '''刷新代理'''
+        super(KuaidailiProxiedSession, self).__init__(**kwargs)
+    '''refreshproxies'''
     def refreshproxies(self):
-        # 初始化
-        self.http_proxies = []
-        self.https_proxies = []
-        proxies_format = '{ip}:{port}'
-        # 获得代理
-        page = random.randint(1, 2)
-        url = f'https://www.kuaidaili.com/free/inha/{page}/'
-        headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36',
-        }
-        response = requests.get(url, headers=headers)
-        soup = BeautifulSoup(response.text, 'lxml')
-        soup = soup.find('table', attrs={'class': 'table table-bordered table-striped'})
-        for item in soup.find('tbody').find_all('tr'):
-            proxy_type = item.find('td', attrs={'data-title': '类型'}).text.strip()
-            ip = item.find('td', attrs={'data-title': 'IP'}).text.strip()
-            port = item.find('td', attrs={'data-title': 'PORT'}).text.strip()
-            if proxy_type.lower() == 'http':
-                self.http_proxies.append({'http': proxies_format.format(ip=ip, port=port)})
-            else:
-                self.https_proxies.append({'https': proxies_format.format(ip=ip, port=port)})
-        self.http_https_proxies = self.http_proxies.copy() + self.https_proxies.copy()
-        # 返回
-        return self.http_proxies, self.https_proxies, self.http_https_proxies
+        # initialize
+        self.candidate_proxies = []
+        # obtain proxies: 'https://www.kuaidaili.com/free/inha/1/'
+        for page in range(1, self.max_pages+1):
+            url = f'https://www.kuaidaili.com/free/inha/{page}/'
+            headers = {'User-Agent': generate_user_agent()}
+            resp = requests.get(url, headers=headers)
+            if resp.status_code != 200: continue
+            proxies = re.findall(r'const fpsList = (\[.*?\]);', resp.text)
+            if len(proxies) < 1: continue
+            proxies = eval(proxies[0])
+            for proxy in proxies:
+                formatted_proxy = f"http://{proxy['ip']}:{proxy['port']}"
+                self.candidate_proxies.append({
+                    'http': formatted_proxy, 'https': formatted_proxy
+                })
+        # obtain proxies: 'https://www.kuaidaili.com/free/dps/1/'
+        for page in range(1, self.max_pages+1):
+            url = f'https://www.kuaidaili.com/free/dps/{page}/'
+            headers = {'User-Agent': generate_user_agent()}
+            resp = requests.get(url, headers=headers)
+            if resp.status_code != 200: continue
+            proxies = re.findall(r'const fpsList = (\[.*?\]);', resp.text)
+            if len(proxies) < 1: continue
+            proxies = eval(proxies[0].replace('true', 'True').replace('false', 'False'))
+            for proxy in proxies:
+                formatted_proxy = f"http://{proxy['ip']}:{proxy['port']}"
+                if not proxy['is_valid']: continue
+                self.candidate_proxies.append({
+                    'http': formatted_proxy, 'https': formatted_proxy
+                })
+        # obtain proxies: 'https://www.kuaidaili.com/free/intr/1/'
+        for page in range(1, self.max_pages+1):
+            url = f'https://www.kuaidaili.com/free/inha/{page}/'
+            headers = {'User-Agent': generate_user_agent()}
+            resp = requests.get(url, headers=headers)
+            if resp.status_code != 200: continue
+            proxies = re.findall(r'const fpsList = (\[.*?\]);', resp.text)
+            if len(proxies) < 1: continue
+            proxies = eval(proxies[0])
+            for proxy in proxies:
+                formatted_proxy = f"http://{proxy['ip']}:{proxy['port']}"
+                self.candidate_proxies.append({
+                    'http': formatted_proxy, 'https': formatted_proxy
+                })
+        # obtain proxies: 'https://www.kuaidaili.com/free/fps/1/'
+        for page in range(1, self.max_pages+1):
+            url = f'https://www.kuaidaili.com/free/fps/{page}/'
+            headers = {'User-Agent': generate_user_agent()}
+            resp = requests.get(url, headers=headers)
+            if resp.status_code != 200: continue
+            proxies = re.findall(r'const fpsList = (\[.*?\]);', resp.text)
+            if len(proxies) < 1: continue
+            proxies = eval(proxies[0])
+            for proxy in proxies:
+                formatted_proxy = f"http://{proxy['ip']}:{proxy['port']}"
+                self.candidate_proxies.append({
+                    'http': formatted_proxy, 'https': formatted_proxy
+                })
+        # return
+        return self.candidate_proxies
+
+
+'''tests'''
+if __name__ == '__main__':
+    print(KuaidailiProxiedSession().refreshproxies())
