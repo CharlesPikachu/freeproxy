@@ -1,12 +1,12 @@
 '''
 Function:
-    setup the freeproxy
+    Implementation of Setup
 Author:
-    Charles
-微信公众号:
+    Zhenchao Jin
+WeChat Official Account (微信公众号):
     Charles的皮卡丘
 GitHub:
-    https://github.com/CharlesPikachu
+    https://github.com/CharlesPikachu/freeproxy
 '''
 import freeproxy
 from setuptools import setup, find_packages

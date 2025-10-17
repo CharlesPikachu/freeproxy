@@ -1,14 +1,22 @@
-# 关于作者
+# Personal Information
 
+#### Homepage
 
-学生党, 主要研究方向是计算机视觉, 顺便对信息安全感兴趣。
+Personal Homepage: https://charlespikachu.github.io/
 
-我的个人微信公众号是: Charles_pikachu (欢迎搜索关注，或者搜"Charles的皮卡丘")  
+#### WeChat Official Account (微信公众号)
 
-我的Github账号是: [https://github.com/CharlesPikachu](https://github.com/CharlesPikachu) (欢迎搜索关注)
+Charles的皮卡丘 (*Charles_pikachu*)  
+![img](https://github.com/CharlesPikachu/freeproxy/blob/160bb08f8919027ec2abd022aab6b1276fd4d307/docs/pikachu.jpg)
 
-我的知乎账号是: [https://www.zhihu.com/people/charles_pikachu](https://www.zhihu.com/people/charles_pikachu) (欢迎搜索关注)
+#### Github
 
-我的B站账号是: [https://space.bilibili.com/406756145](https://space.bilibili.com/406756145) (欢迎搜索关注)
+Persional Github: https://github.com/CharlesPikachu
 
-个人邮箱: charlesblwx@gmail.com
+#### Zhihu (知乎账号)
+
+Persional Zhihu: https://www.zhihu.com/people/charles_pikachu
+
+#### Bilibili (B站账号)
+
+Persional Bilibili: https://space.bilibili.com/406756145

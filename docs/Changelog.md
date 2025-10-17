@@ -1,16 +1,6 @@
-# 开发日志
+# Release Log
 
-**2022-02-19**
-
-- 版本号: v0.1.0, 
-- 更新内容: 支持11种代理源。
-
-**2022-02-21** 
-
-- 版本号: v0.1.1-0.1.3, 
-- 更新内容: 增加getrandomproxysession和getrandomproxy两个API, 鲁棒性增强。
-
-**2022-03-25**
-
-- 版本号: v0.1.4
-- 更新内容: 切换License, 增加作者信息打印。
+- 2025-10-17: Released pyfreeproxy v0.1.5 — Code cleanup, deprecated/invalid proxy sources removed, new sources added.
+- 2022-03-25: Released pyfreeproxy v0.1.4 — Switched license; added author information printout.
+- 2022-02-21: Released pyfreeproxy v0.1.1 to 0.1.3 — Added two APIs, `getrandomproxysession` and `getrandomproxy`; improved robustness.
+- 2022-02-19: Released pyfreeproxy v0.1.0 — Supports 11 proxy sources.

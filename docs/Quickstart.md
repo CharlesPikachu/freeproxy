@@ -1,81 +1,65 @@
-# 快速开始
+# Quick Start
 
-## FreeProxy类
+#### Making requests with a proxy-enabled session
 
-实例化FreeProxy类的示例代码如下：
-
-```python
-from freeproxy import freeproxy
-
-proxy_sources = ['proxylistplus', 'kuaidaili']
-fp_client = freeproxy.FreeProxy(proxy_sources=proxy_sources)
-```
-
-FreeProxy支持的参数如下：
-
-- proxy_type: 代理类型, 支持"https", "http"和"all", 默认值为"all";
-- proxy_sources: 代理获取源, 支持"kuaidaili", "ip3366", "jiangxianli", "proxylistplus", "daili66", "fatezero", "ip89", "seofangfa", "zdaye", "yqie", "taiyanghttp", 默认值为None, 即使用所有代理源;
-- init_session_cfg: 初始化session的参数, 支持的变量同[requests.Session](https://docs.python-requests.org/en/latest/), 默认值为{};
-- logfilepath: 日志文件, 如果是None, 则不打印, 默认值为"freeproxy.log"。
-
-
-#### GET请求
-
-代码示例如下：
+Use the following code to make a request to any website with a randomly selected proxy by default,
 
 ```python
-from freeproxy import freeproxy
+from freeproxy import ProxiedSessionClient
 
-proxy_sources = ['proxylistplus', 'kuaidaili']
-fp_client = freeproxy.FreeProxy(proxy_sources=proxy_sources)
+proxy_sources = ['KuaidailiProxiedSession']
+proxied_session_client = ProxiedSessionClient(proxy_sources=proxy_sources)
 headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36'
 }
-response = fp_client.get('https://space.bilibili.com/406756145', headers=headers)
-print(response.text)
+resp = proxied_session_client.get('https://space.bilibili.com/406756145', headers=headers)
+print(resp.text)
 ```
 
-GET请求支持的参数同[requests.Session.get](https://docs.python-requests.org/en/latest/)
+Supported arguments for `ProxiedSessionClient`:
 
+- `proxy_sources` (Default: `['KuaidailiProxiedSession', 'IP3366ProxiedSession']`): The proxy sources to use. Currently supported `['IP89ProxiedSession', 'ZdayeProxiedSession', 'IP3366ProxiedSession', 'KuaidailiProxiedSession', 'ProxylistplusProxiedSession']`.
+- `init_proxied_session_cfg` (Default: `{'max_pages': 1}`): Accepts the same options as `requests.Session`, plus an extra `max_pages` field that specifies how many pages of proxies to fetch from each free source.
+- `disable_print` (Default: `False`): Whether to suppress proxy usage logs in the terminal.
 
-#### POST请求
+Supported arguments for `proxied_session_client.get` is the same as [requests.Session.get](https://requests.readthedocs.io/en/latest/).
 
-代码示例如下：
+Supported arguments for `proxied_session_client.post` is the same as [requests.Session.post](https://requests.readthedocs.io/en/latest/).
+
+#### Retrieve a random free proxy
+
+The following snippet selects a random proxy from the pool,
 
 ```python
-from freeproxy import freeproxy
+from freeproxy import ProxiedSessionClient
 
-proxy_sources = ['proxylistplus', 'kuaidaili']
-fp_client = freeproxy.FreeProxy(proxy_sources=proxy_sources)
-headers = {
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36'
-}
-response = fp_client.post('https://space.bilibili.com/406756145', headers=headers)
-print(response.text)
+proxy_sources = ['KuaidailiProxiedSession']
+proxied_session_client = ProxiedSessionClient(proxy_sources=proxy_sources)
+proxy = proxied_session_client.getrandomproxy()
+print(proxy)
 ```
 
-POST请求支持的参数同[requests.Session.post](https://docs.python-requests.org/en/latest/)
+Example output,
 
-
-#### 随机获得一个免费代理
-
-代码示例如下：
-
-```python
-from freeproxy import freeproxy
-
-proxy_sources = ['proxylistplus', 'kuaidaili']
-fp_client = freeproxy.FreeProxy(proxy_sources=proxy_sources)
-proxy = fp_client.getrandomproxy()
+```
+{'http': 'http://103.158.62.186:8088', 'https': 'http://103.158.62.186:8088'}
 ```
 
+#### Retrieve a random proxied session
 
-#### 随机获得一个设置了免费代理的session
+The following snippet initializes a `proxied_session` restricted to one proxy source (randomly sampled):
 
 ```python
-from freeproxy import freeproxy
+from freeproxy import ProxiedSessionClient
 
-proxy_sources = ['proxylistplus', 'kuaidaili']
-fp_client = freeproxy.FreeProxy(proxy_sources=proxy_sources)
-session = fp_client.getrandomproxysession()
+proxy_sources = ['KuaidailiProxiedSession']
+proxied_session_client = ProxiedSessionClient(proxy_sources=proxy_sources)
+proxied_session_name, proxied_session = proxied_session_client.getrandomproxiedsession()
+print(proxied_session_name, proxied_session)
+```
+
+Example output,
+
+```
+('KuaidailiProxiedSession', <modules.proxies.kuaidaili.KuaidailiProxiedSession object at 0x000002CE2D137220>)
 ```

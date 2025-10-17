@@ -18,9 +18,9 @@
 # -- Project information -----------------------------------------------------
 
 project = 'freeproxy'
-copyright = '2022, Zhenchao Jin'
+copyright = '2022-2030, Zhenchao Jin'
 author = 'Zhenchao Jin'
-release = '0.1.0'
+release = '0.1.5'
 
 # -- General configuration ---------------------------------------------------
 
