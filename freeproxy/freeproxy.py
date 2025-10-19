@@ -29,7 +29,8 @@ class ProxiedSessionClient():
                 module_cfg = copy.deepcopy(init_proxied_session_cfg)
                 module_cfg['type'] = source
                 self.proxied_sessions[source] = BuildProxiedSession(module_cfg=module_cfg)
-                self.proxied_sessions[source].refreshproxies()
+                candidate_proxies = self.proxied_sessions[source].refreshproxies()
+                if len(candidate_proxies) < 1: self.proxied_sessions.pop(source)
             except Exception as err:
                 self.logger_handle.error(err, disable_print=disable_print)
                 if source in self.proxied_sessions: self.proxied_sessions.pop(source)
