@@ -1,5 +1,6 @@
 # Release Log
 
+- 2025-10-20: Released pyfreeproxy v0.1.8 — Replace `user_agent` as `fake-useragent`.
 - 2025-10-20: Released pyfreeproxy v0.1.7 — Auto remove invalid proxied sessions in `ProxiedSessionClient`.
 - 2025-10-18: Released pyfreeproxy v0.1.6 — New sources `QiyunipProxiedSession`, `ProxyhubProxiedSession` and `ProxydbProxiedSession` added.
 - 2025-10-17: Released pyfreeproxy v0.1.5 — Code cleanup, deprecated/invalid proxy sources removed, new sources added.

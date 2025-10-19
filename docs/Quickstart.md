@@ -18,9 +18,9 @@ print(resp.text)
 
 Supported arguments for `ProxiedSessionClient`:
 
-- `proxy_sources` (Default: `['KuaidailiProxiedSession', 'IP3366ProxiedSession']`): The proxy sources to use. Currently supported `['IP89ProxiedSession', 'ZdayeProxiedSession', 'IP3366ProxiedSession', 'KuaidailiProxiedSession', 'ProxylistplusProxiedSession', 'QiyunipProxiedSession', 'ProxyhubProxiedSession', 'ProxydbProxiedSession']`.
-- `init_proxied_session_cfg` (Default: `{'max_pages': 1}`): Accepts the same options as `requests.Session`, plus an extra `max_pages` field that specifies how many pages of proxies to fetch from each free source.
-- `disable_print` (Default: `False`): Whether to suppress proxy usage logs in the terminal.
+- `proxy_sources` (`list`, default: `['KuaidailiProxiedSession', 'IP3366ProxiedSession']`): The proxy sources to use. Currently supported `['IP89ProxiedSession', 'ZdayeProxiedSession', 'IP3366ProxiedSession', 'KuaidailiProxiedSession', 'ProxylistplusProxiedSession', 'QiyunipProxiedSession', 'ProxyhubProxiedSession', 'ProxydbProxiedSession']`.
+- `init_proxied_session_cfg` (`dict`, default: `{'max_pages': 1}`): Accepts the same options as `requests.Session`, plus an extra `max_pages` field that specifies how many pages of proxies to fetch from each free source.
+- `disable_print` (`bool`, default: `False`): Whether to suppress proxy usage logs in the terminal.
 
 Supported arguments for `proxied_session_client.get` is the same as [requests.Session.get](https://requests.readthedocs.io/en/latest/).
 

@@ -9,7 +9,7 @@ WeChat Official Account (微信公众号):
 import re
 import requests
 from bs4 import BeautifulSoup
-from user_agent import generate_user_agent
+from fake_useragent import UserAgent
 try:
     from base import BaseProxiedSession
 except:
@@ -27,7 +27,7 @@ class ZdayeProxiedSession(BaseProxiedSession):
         # obtain proxies
         for page in range(1, self.max_pages+1):
             url = f'https://www.zdaye.com/free/{page}/'
-            headers = {'User-Agent': generate_user_agent()}
+            headers = {'User-Agent': UserAgent().random}
             resp = requests.get(url, headers=headers)
             if resp.status_code != 200: continue
             soup = BeautifulSoup(resp.text, 'lxml')

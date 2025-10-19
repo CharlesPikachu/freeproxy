@@ -8,7 +8,7 @@ WeChat Official Account (微信公众号):
 '''
 import requests
 from bs4 import BeautifulSoup
-from user_agent import generate_user_agent
+from fake_useragent import UserAgent
 try:
     from base import BaseProxiedSession
 except:
@@ -25,7 +25,7 @@ class ProxyhubProxiedSession(BaseProxiedSession):
         self.candidate_proxies = []
         # obtain proxies
         url = 'https://proxyhub.me/'
-        headers = {'User-Agent': generate_user_agent()}
+        headers = {'User-Agent': UserAgent().random}
         resp = requests.get(url, headers=headers)
         if resp.status_code != 200: return self.candidate_proxies
         soup = BeautifulSoup(resp.text, 'lxml')
