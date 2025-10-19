@@ -48,16 +48,16 @@ FreeProxy continuously discovers and updates lists of free proxies. If you find 
 
 # Support Proxy Sources
 
-| ProxiedSession                       | Official Website                                                             | Code Snippet                                                                                                 |
-| :----:                               | :----:                                                                       | :----:                                                                                                       |
-| KuaidailiProxiedSession              | [click](https://www.kuaidaili.com/free/inha/1/)                              | [click](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/kuaidaili.py)      |
-| IP3366ProxiedSession                 | [click](http://www.ip3366.net/free/?stype=1&page=1)                          | [click](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/ip3366.py)         |
-| ProxylistplusProxiedSession          | [click](https://list.proxylistplus.com/Fresh-HTTP-Proxy-List-1)              | [click](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/proxylistplus.py)  |
-| IP89ProxiedSession                   | [click](http://api.89ip.cn/tqdl.html?api=1&num=1000&port=&address=&isp=)     | [click](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/ip89.py)           |
-| ZdayeProxiedSession                  | [click](https://www.zdaye.com/free/1/)                                       | [click](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/zdaye.py)          |
-| QiyunipProxiedSession                | [click](https://www.qiyunip.com/freeProxy/1.html)                            | [click](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/qiyunip.py)        |
-| ProxyhubProxiedSession               | [click](https://proxyhub.me/)                                                | [click](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/proxyhub.py)       |
-| ProxydbProxiedSession                | [click](https://proxydb.net/?offset=0)                                       | [click](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/proxydb.py)        |
+| ProxiedSession                       | Official Website                                                             | Code Snippet                                                                                                            |
+| :----:                               | :----:                                                                       | :----:                                                                                                                  |
+| KuaidailiProxiedSession              | [click](https://www.kuaidaili.com/free/inha/1/)                              | [kuaidaili.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/kuaidaili.py)          |
+| IP3366ProxiedSession                 | [click](http://www.ip3366.net/free/?stype=1&page=1)                          | [ip3366.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/ip3366.py)                |
+| ProxylistplusProxiedSession          | [click](https://list.proxylistplus.com/Fresh-HTTP-Proxy-List-1)              | [proxylistplus.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/proxylistplus.py)  |
+| IP89ProxiedSession                   | [click](http://api.89ip.cn/tqdl.html?api=1&num=1000&port=&address=&isp=)     | [ip89.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/ip89.py)                    |
+| ZdayeProxiedSession                  | [click](https://www.zdaye.com/free/1/)                                       | [zdaye.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/zdaye.py)                  |
+| QiyunipProxiedSession                | [click](https://www.qiyunip.com/freeProxy/1.html)                            | [qiyunip.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/qiyunip.py)              |
+| ProxyhubProxiedSession               | [click](https://proxyhub.me/)                                                | [proxyhub.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/proxyhub.py)            |
+| ProxydbProxiedSession                | [click](https://proxydb.net/?offset=0)                                       | [proxydb.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/proxydb.py)              |
 
 
 # Playground
