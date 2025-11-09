@@ -23,9 +23,6 @@ COLORS = {
     'cyan': '\033[36m',
     'highlight': '\033[93m',
     'number': '\033[96m',
-    'singer': '\033[93m',
-    'flac': '\033[95m',
-    'songname': '\033[91m'
 }
 
 
