@@ -35,7 +35,7 @@
 </p>
 
 
-# What's New
+# ✨ What's New
 
 - 2025-10-20: Released pyfreeproxy v0.1.8 — Replace `user_agent` as `fake-useragent`.
 - 2025-10-20: Released pyfreeproxy v0.1.7 — Auto remove invalid proxied sessions in `ProxiedSessionClient`.
@@ -43,12 +43,12 @@
 - 2025-10-17: Released pyfreeproxy v0.1.5 — Code cleanup, deprecated/invalid proxy sources removed, new sources added.
 
 
-# Introduction
+# 📘 Introduction
 
 FreeProxy continuously discovers and updates lists of free proxies. If you find value here, please star the project to keep it on your radar.
 
 
-# Supported Proxy Sources
+# 🌐 Supported Proxy Sources
 
 | ProxiedSession                       | Official Website                                                             | Code Snippet                                                                                                            |
 | :----:                               | :----:                                                                       | :----:                                                                                                                  |
@@ -62,14 +62,18 @@ FreeProxy continuously discovers and updates lists of free proxies. If you find 
 | ProxydbProxiedSession                | [click](https://proxydb.net/?offset=0)                                       | [proxydb.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/proxydb.py)              |
 
 
-# Playground
+# 🎮 Playground
 
-| Project                | Introduction                                                                                       | Code Snippet                                                                                                 |
+Here are some projects built on top of pyfreeproxy,
+
+| Project                | WeChat Article	                                                                                  | Project Location                                                                                             |
 | :----:                 | :----:                                                                                             | :----:                                                                                                       |
 | ICU996                 | [用数万条数据带大家看看到底是哪些人在反对996~](https://mp.weixin.qq.com/s/58AHrbp0jfFltYqZsJPu5Q)  | [click](https://github.com/CharlesPikachu/freeproxy/tree/master/examples/ICU996)                             |
 
 
-# Install
+# 📦 Install
+
+You have three installation methods to choose from,
 
 ```sh
 # from pip
@@ -83,7 +87,9 @@ python setup.py install
 ```
 
 
-# Quick Start
+# 🚀 Quick Start
+
+After a successful installation, you can run the snippet below,
 
 ```python
 from freeproxy import freeproxy
@@ -98,7 +104,7 @@ print(resp.text)
 ```
 
 
-# Recommended Projects
+# ⭐ Recommended Projects
 
 - [Games](https://github.com/CharlesPikachu/Games): Create interesting games in pure python.
 - [DecryptLogin](https://github.com/CharlesPikachu/DecryptLogin): APIs for loginning some websites by using requests.
@@ -119,7 +125,7 @@ print(resp.text)
 - [NovelDL](https://github.com/CharlesPikachu/noveldl): Search and download novels from some specific websites.
 
 
-# WeChat Official Account (微信公众号):
+# 📱 WeChat Official Account (微信公众号):
 
 Charles的皮卡丘 (*Charles_pikachu*)  
 ![img](https://raw.githubusercontent.com/CharlesPikachu/freeproxy/master/docs/pikachu.jpg)
