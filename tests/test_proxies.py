@@ -15,7 +15,7 @@ def main():
     # proxy_sources
     proxy_sources = ProxiedSessionBuilder.REGISTERED_MODULES.keys()
     # iter to test
-    print_titles, print_items = ['Source', 'Effectiveness', 'Retrieved Examples'], []
+    print_titles, print_items = ['Source', 'Effectiveness', 'Retrieved Examples', 'Total'], []
     for proxy_source in tqdm(proxy_sources):
         try:
             module_cfg = {'max_pages': 1, 'type': proxy_source}
@@ -24,12 +24,15 @@ def main():
         except:
             candidate_proxies = []
         if len(candidate_proxies) > 0:
-            print_items.append([proxy_source.removesuffix('ProxiedSession'), colorize('True', 'green'), ', '.join([f'{k.upper()}: {v}' for k, v in candidate_proxies[0].items()])])
+            print_items.append([
+                proxy_source.removesuffix('ProxiedSession'), colorize('True', 'green'), [f'{v}' for v in candidate_proxies[0].values()][0],
+                colorize(str(len(candidate_proxies)), 'number'),
+            ])
         else:
-            print_items.append([proxy_source.removesuffix('ProxiedSession'), colorize('False', 'red'), 'NULL'])
+            print_items.append([proxy_source.removesuffix('ProxiedSession'), colorize('False', 'red'), 'NULL', colorize(str(len(candidate_proxies)), 'number')])
     # visualize test results
     print('The effectiveness test results of each proxy are as follows:')
-    printtable(titles=print_titles, items=print_items)
+    printtable(titles=print_titles, items=print_items, terminal_right_space_len=1)
 
 
 '''tests'''

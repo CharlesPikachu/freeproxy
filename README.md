@@ -89,29 +89,6 @@ python setup.py install
 
 # 🚀 Quick Start
 
-After a successful installation, you can use code like this to automatically set a free proxy found online and send a GET / POST request to a website,
-
-```python
-from freeproxy import freeproxy
-
-proxy_sources = ['KuaidailiProxiedSession']
-proxied_session_client = freeproxy.ProxiedSessionClient(proxy_sources=proxy_sources)
-headers = {
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36'
-}
-resp = proxied_session_client.get('https://space.bilibili.com/406756145', headers=headers)
-print(resp.text)
-```
-
-When using pyfreeproxy as a third-party package, if you don’t want it to print too much extra information, you can set `disable_print=True`, for example:`
-
-```python
-from freeproxy import freeproxy
-
-proxy_sources = ['ProxydbProxiedSession']
-proxied_session_client = freeproxy.ProxiedSessionClient(proxy_sources=proxy_sources, disable_print=True)
-```
-
 After installing pyfreeproxy, you can use the following code to quickly test the effectiveness of each proxy source,
 
 ```python
@@ -150,18 +127,41 @@ The sample output of the above code is:
 
 ```
 The effectiveness test results of each proxy are as follows:
-+---------------+---------------+--------------------------------------------------------------------+
-|     Source    | Effectiveness |                         Retrieved Examples                         |
-+---------------+---------------+--------------------------------------------------------------------+
-|      IP89     |     False     |                                NULL                                |
-|     Zdaye     |     False     |                                NULL                                |
-|     IP3366    |     False     |                                NULL                                |
-|   Kuaidaili   |      True     |  HTTP: http://119.3.113.150:9094,HTTPS: http://119.3.113.150:9094  |
-| Proxylistplus |      True     | HTTP: http://110.77.134.112:8080,HTTPS: http://110.77.134.112:8080 |
-|    Qiyunip    |      True     | HTTP: https://123.182.58.59:8089,HTTPS: https://123.182.58.59:8089 |
-|    Proxyhub   |      True     | HTTP: socks4://183.88.2.244:4145,HTTPS: socks4://183.88.2.244:4145 |
-|    Proxydb    |      True     |   HTTP: http://45.186.6.104:3128,HTTPS: http://45.186.6.104:3128   |
-+---------------+---------------+--------------------------------------------------------------------+
++---------------+---------------+----------------------------+-------+
+|     Source    | Effectiveness |     Retrieved Examples     | Total |
++---------------+---------------+----------------------------+-------+
+|      IP89     |      True     | http://189.90.255.208:3128 |  199  |
+|     Zdaye     |     False     |            NULL            |   0   |
+|     IP3366    |      True     | https://36.6.144.202:8089  |   30  |
+|   Kuaidaili   |      True     |  http://58.216.109.17:800  |   12  |
+| Proxylistplus |      True     | http://110.77.134.112:8080 |   50  |
+|    Qiyunip    |      True     |  http://112.17.16.211:80   |   15  |
+|    Proxyhub   |      True     | socks4://181.6.240.89:1080 |   20  |
+|    Proxydb    |      True     |  http://45.186.6.104:3128  |   30  |
++---------------+---------------+----------------------------+-------+
+```
+
+Then, you can use code like this to automatically set a free proxy found online and send a GET / POST request to a website,
+
+```python
+from freeproxy import freeproxy
+
+proxy_sources = ['KuaidailiProxiedSession']
+proxied_session_client = freeproxy.ProxiedSessionClient(proxy_sources=proxy_sources)
+headers = {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36'
+}
+resp = proxied_session_client.get('https://space.bilibili.com/406756145', headers=headers)
+print(resp.text)
+```
+
+When using pyfreeproxy as a third-party package, if you don’t want it to print too much extra information, you can set `disable_print=True`, for example:`
+
+```python
+from freeproxy import freeproxy
+
+proxy_sources = ['ProxydbProxiedSession']
+proxied_session_client = freeproxy.ProxiedSessionClient(proxy_sources=proxy_sources, disable_print=True)
 ```
 
 
