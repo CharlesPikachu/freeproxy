@@ -150,7 +150,7 @@ The effectiveness test results of each proxy are as follows:
 | Freeproxylist |      True     |  https://128.140.113.110:3128 |  300  |
 |   Proxylist   |      True     |   http://188.166.30.17:8888   |  2082 |
 |    Kxdaili    |      True     |   http://116.63.160.98:8899   |   40  |
-|     Ihuan     |      True     |              NULL             |  2607 |
+|     Ihuan     |      True     |   http://189.90.255.208:3128  |  2607 |
 +---------------+---------------+-------------------------------+-------+
 ```
 
