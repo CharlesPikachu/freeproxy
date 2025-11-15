@@ -7,6 +7,8 @@
 
 #### Installation Instructions
 
+You have three installation methods to choose from,
+
 ```sh
 # from pip
 pip install pyfreeproxy

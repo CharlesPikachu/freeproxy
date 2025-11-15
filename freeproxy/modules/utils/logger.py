@@ -7,6 +7,7 @@ WeChat Official Account (微信公众号):
     Charles的皮卡丘
 '''
 import os
+import shutil
 import logging
 import collections.abc
 from prettytable import PrettyTable
@@ -86,10 +87,13 @@ class LoggerHandle():
 
 
 '''printtable'''
-def printtable(titles, items):
+def printtable(titles, items, terminal_right_space_len=10):
     assert isinstance(titles, collections.abc.Sequence) and isinstance(items, collections.abc.Sequence), 'title and items should be iterable'
     table = PrettyTable(titles)
     for item in items: table.add_row(item)
+    max_width = shutil.get_terminal_size().columns - terminal_right_space_len
+    assert max_width > 0, f'"terminal_right_space_len" should smaller than {shutil.get_terminal_size()}'
+    table.max_table_width = max_width
     print(table)
     return table
 
