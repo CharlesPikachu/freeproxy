@@ -134,17 +134,24 @@ The sample output of the above code is:
 
 ```
 The effectiveness test results of each proxy are as follows:
-+---------------+---------------+----------------------------+-------+
-|     Source    | Effectiveness |     Retrieved Examples     | Total |
-+---------------+---------------+----------------------------+-------+
-|      IP89     |      True     | http://189.90.255.208:3128 |  199  |
-|     IP3366    |      True     | https://36.6.144.202:8089  |   30  |
-|   Kuaidaili   |      True     |  http://58.216.109.17:800  |   12  |
-| Proxylistplus |      True     | http://110.77.134.112:8080 |   50  |
-|    Qiyunip    |      True     |  http://112.17.16.211:80   |   15  |
-|    Proxyhub   |      True     | socks4://181.6.240.89:1080 |   20  |
-|    Proxydb    |      True     |  http://45.186.6.104:3128  |   30  |
-+---------------+---------------+----------------------------+-------+
++---------------+---------------+-------------------------------+-------+
+|     Source    | Effectiveness |       Retrieved Examples      | Total |
++---------------+---------------+-------------------------------+-------+
+|      IP89     |      True     |   http://113.223.214.73:8089  |  199  |
+|     IP3366    |      True     |    http://36.6.145.198:8089   |   30  |
+|   Kuaidaili   |      True     |    http://103.85.53.62:8080   |   36  |
+| Proxylistplus |      True     |   http://110.77.134.112:8080  |   50  |
+|    Qiyunip    |      True     |  https://183.164.243.79:8089  |   15  |
+|   Proxydaily  |      True     |   http://3.122.235.189:55607  |   7   |
+|    Proxyhub   |      True     | socks4://165.22.220.151:36362 |   20  |
+|    Proxydb    |      True     |    http://45.186.6.104:3128   |   30  |
+|   Tomcat1235  |      True     |  socks5://188.235.21.247:2080 |   30  |
+|    Spysone    |      True     |  http://201.238.248.136:9229  |   30  |
+| Freeproxylist |      True     |  https://128.140.113.110:3128 |  300  |
+|   Proxylist   |      True     |   http://188.166.30.17:8888   |  2082 |
+|    Kxdaili    |      True     |   http://116.63.160.98:8899   |   40  |
+|     Ihuan     |     False     |              NULL             |  2607 |
++---------------+---------------+-------------------------------+-------+
 ```
 
 Then, you can use code like this to automatically set a free proxy found online and send a GET / POST request to a website,
