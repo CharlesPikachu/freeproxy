@@ -46,7 +46,7 @@ def main():
         except:
             candidate_proxies = []
         if len(candidate_proxies) > 0:
-            print_items.append([proxy_source.removesuffix('ProxiedSession'), colorize('True', 'green'), ','.join([f'{k.upper()}: {v}' for k, v in candidate_proxies[0].items()])])
+            print_items.append([proxy_source.removesuffix('ProxiedSession'), colorize('True', 'green'), ', '.join([f'{k.upper()}: {v}' for k, v in candidate_proxies[0].items()])])
         else:
             print_items.append([proxy_source.removesuffix('ProxiedSession'), colorize('False', 'red'), 'NULL'])
     # visualize test results
