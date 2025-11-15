@@ -8,10 +8,7 @@ WeChat Official Account (微信公众号):
 '''
 import re
 import requests
-try:
-    from base import BaseProxiedSession
-except:
-    from .base import BaseProxiedSession
+from .base import BaseProxiedSession
 
 
 '''IP89ProxiedSession'''
@@ -42,8 +39,3 @@ class IP89ProxiedSession(BaseProxiedSession):
             })
         # return
         return self.candidate_proxies
-
-
-'''tests'''
-if __name__ == '__main__':
-    print(IP89ProxiedSession().refreshproxies())

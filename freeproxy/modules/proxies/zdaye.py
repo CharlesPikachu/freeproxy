@@ -10,10 +10,7 @@ import re
 import requests
 from bs4 import BeautifulSoup
 from fake_useragent import UserAgent
-try:
-    from base import BaseProxiedSession
-except:
-    from .base import BaseProxiedSession
+from .base import BaseProxiedSession
 
 
 '''ZdayeProxiedSession'''
@@ -44,8 +41,3 @@ class ZdayeProxiedSession(BaseProxiedSession):
                 })
         # return
         return self.candidate_proxies
-
-
-'''tests'''
-if __name__ == '__main__':
-    print(ZdayeProxiedSession().refreshproxies())

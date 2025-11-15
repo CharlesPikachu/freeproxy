@@ -9,10 +9,7 @@ WeChat Official Account (微信公众号):
 import requests
 from bs4 import BeautifulSoup
 from fake_useragent import UserAgent
-try:
-    from base import BaseProxiedSession
-except:
-    from .base import BaseProxiedSession
+from .base import BaseProxiedSession
 
 
 '''QiyunipProxiedSession'''
@@ -38,8 +35,3 @@ class QiyunipProxiedSession(BaseProxiedSession):
                 })
         # return
         return self.candidate_proxies
-
-
-'''tests'''
-if __name__ == '__main__':
-    print(QiyunipProxiedSession().refreshproxies())
