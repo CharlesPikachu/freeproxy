@@ -1,6 +1,6 @@
 # Quick Start
 
-## Example Usage
+#### Example Usage
 
 After installing pyfreeproxy, you can use the following code to quickly test the effectiveness of each proxy source,
 
