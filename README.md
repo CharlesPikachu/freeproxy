@@ -60,6 +60,8 @@ FreeProxy continuously discovers and updates lists of free proxies. If you find 
 | ProxyhubProxiedSession               | [Proxyhub](https://proxyhub.me/)                                                  | [proxyhub.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/proxyhub.py)            |
 | ProxydbProxiedSession                | [Proxydb](https://proxydb.net/?offset=0)                                          | [proxydb.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/proxydb.py)              |
 | Tomcat1235ProxiedSession             | [Tomcat1235](https://tomcat1235.nyc.mn/proxy_list?page=1)                         | [tomcat1235.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/tomcat1235.py)        |
+| ProxydailyProxiedSession             | [Proxydaily](https://proxy-daily.com/)                                            | [proxydaily.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/proxydaily.py)        |
+| SpysoneProxiedSession                | [Spysone](https://spys.one/en/free-proxy-list/)                                   | [spysone.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/spysone.py)              |
 
 
 # 🎮 Playground
