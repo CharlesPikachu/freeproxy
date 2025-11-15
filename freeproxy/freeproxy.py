@@ -18,7 +18,8 @@ warnings.filterwarnings('ignore')
 
 '''ProxiedSessionClient'''
 class ProxiedSessionClient():
-    def __init__(self, proxy_sources=['KuaidailiProxiedSession', 'IP3366ProxiedSession'], init_proxied_session_cfg={'max_pages': 1}, disable_print=False):
+    def __init__(self, proxy_sources=['KuaidailiProxiedSession', 'IP3366ProxiedSession', 'QiyunipProxiedSession', 'Tomcat1235ProxiedSession', 'ProxydailyProxiedSession', 'SpysoneProxiedSession'], 
+                 init_proxied_session_cfg={'max_pages': 1}, disable_print=False):
         # logger handle
         self.logger_handle = LoggerHandle()
         # proxied sessions 

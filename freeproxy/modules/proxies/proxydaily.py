@@ -8,8 +8,8 @@ WeChat Official Account (微信公众号):
 '''
 import time
 import requests
-from fake_useragent import UserAgent
 from .base import BaseProxiedSession
+from ..utils import ensurevalidrequestsproxies
 
 
 '''ProxydailyProxiedSession'''
@@ -17,6 +17,7 @@ class ProxydailyProxiedSession(BaseProxiedSession):
     def __init__(self, **kwargs):
         super(ProxydailyProxiedSession, self).__init__(**kwargs)
     '''refreshproxies'''
+    @ensurevalidrequestsproxies
     def refreshproxies(self):
         # initialize
         self.candidate_proxies = []
@@ -34,12 +35,10 @@ class ProxydailyProxiedSession(BaseProxiedSession):
                 "columns[5][searchable]": "true", "columns[5][orderable]": "false", "columns[5][search][value]": "", "columns[5][search][regex]": "false",
                 "start": f"{(page - 1) * 10}", "length": "10", "search[value]": "", "search[regex]": "false", "_": f"{int(time.time() * 1000)}"
             }
-            resp = requests.get('https://proxy-daily.com/api/serverside/proxies', headers={'User-Agent': UserAgent().random}, params=params)
+            resp = requests.get('https://proxy-daily.com/api/serverside/proxies', headers=self.randomheaders(), params=params)
             if resp.status_code != 200: continue
             for item in resp.json().get('data', []):
                 formatted_proxy = f"{item['protocol'].lower()}://{item['ip']}:{item['port']}"
-                self.candidate_proxies.append({
-                    'http': formatted_proxy, 'https': formatted_proxy
-                })
+                self.candidate_proxies.append({'http': formatted_proxy, 'https': formatted_proxy})
         # return
         return self.candidate_proxies

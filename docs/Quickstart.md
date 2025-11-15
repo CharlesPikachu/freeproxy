@@ -94,7 +94,7 @@ print(resp.text)
 
 Supported arguments for `ProxiedSessionClient`:
 
-- `proxy_sources` (`list`, default: `['KuaidailiProxiedSession', 'IP3366ProxiedSession']`): The proxy sources to use. Currently supported `['IP89ProxiedSession', 'IP3366ProxiedSession', 'KuaidailiProxiedSession', 'ProxylistplusProxiedSession', 'QiyunipProxiedSession', 'ProxyhubProxiedSession', 'ProxydbProxiedSession', 'Tomcat1235ProxiedSession']`.
+- `proxy_sources` (`list`, default: `['KuaidailiProxiedSession', 'IP3366ProxiedSession', 'QiyunipProxiedSession', 'Tomcat1235ProxiedSession', 'ProxydailyProxiedSession', 'SpysoneProxiedSession']`): The proxy sources to use. Currently supported proxies see [Supported Proxy Sources](https://github.com/CharlesPikachu/freeproxy?tab=readme-ov-file#-supported-proxy-sources) or call `from freeproxy.modules import ProxiedSessionBuilder; ProxiedSessionBuilder.REGISTERED_MODULES.keys()`.
 - `init_proxied_session_cfg` (`dict`, default: `{'max_pages': 1}`): Accepts the same options as `requests.Session`, plus an extra `max_pages` field that specifies how many pages of proxies to fetch from each free source.
 - `disable_print` (`bool`, default: `False`): Whether to suppress proxy usage logs in the terminal.
 
@@ -118,8 +118,11 @@ print(proxy)
 Example output,
 
 ```
-{'http': 'http://103.158.62.186:8088', 'https': 'http://103.158.62.186:8088'}
+{'http': 'http://103.158.62.186:8088', 'https': 'socks5://103.158.62.186:8088'}
 ```
+
+You should note that our proxy output format follows the `proxies` format used by the `requests` module. 
+In other words, for `'https': 'socks5://103.158.62.186:8088'`, the proxy protocol is `socks5`, not `https`.
 
 #### Retrieve a random proxied session
 

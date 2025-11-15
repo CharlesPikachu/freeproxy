@@ -9,6 +9,7 @@ WeChat Official Account (微信公众号):
 import re
 import requests
 from .base import BaseProxiedSession
+from ..utils import ensurevalidrequestsproxies
 
 
 '''IP89ProxiedSession'''
@@ -16,6 +17,7 @@ class IP89ProxiedSession(BaseProxiedSession):
     def __init__(self, **kwargs):
         super(IP89ProxiedSession, self).__init__(**kwargs)
     '''refreshproxies'''
+    @ensurevalidrequestsproxies
     def refreshproxies(self):
         # initialize
         self.candidate_proxies = []
@@ -30,12 +32,12 @@ class IP89ProxiedSession(BaseProxiedSession):
             "Accept-Language": "zh-CN,zh;q=0.9",
         }
         params = {"api": "1", "num": "200", "port": "", "address": "", "isp": ""}
-        resp = requests.get('https://api.89ip.cn/tqdl.html', params=params, headers=headers)
+        resp = requests.get('https://api.89ip.cn/tqdl.html', params=params, headers=self.randomheaders(headers_override=headers))
         if resp.status_code != 200: return self.candidate_proxies
         for item in resp.text.split('<br>'):
             if PATTERN.fullmatch(item.strip()) is None: continue
             self.candidate_proxies.append({
-                'http': f"http://{item}", 'https': f"http://{item}",
+                'http': f"http://{item}", 'https': f"http://{item}", # here, we assume all proxies are http proxies as it fail to clarify
             })
         # return
         return self.candidate_proxies

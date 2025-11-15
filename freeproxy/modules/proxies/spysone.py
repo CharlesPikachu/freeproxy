@@ -10,6 +10,7 @@ import re
 import requests
 from bs4 import BeautifulSoup
 from .base import BaseProxiedSession
+from ..utils import ensurevalidrequestsproxies
 
 
 '''SpysoneProxiedSession'''
@@ -47,6 +48,7 @@ class SpysoneProxiedSession(BaseProxiedSession):
             if s: return s
         return ''
     '''refreshproxies'''
+    @ensurevalidrequestsproxies
     def refreshproxies(self):
         # initialize
         self.candidate_proxies = []
@@ -54,7 +56,7 @@ class SpysoneProxiedSession(BaseProxiedSession):
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
         }
         # obtain proxies
-        resp = requests.get('https://spys.one/en/free-proxy-list/', headers=headers)
+        resp = requests.get('https://spys.one/en/free-proxy-list/', headers=self.randomheaders(headers_override=headers))
         if resp.status_code != 200: return self.candidate_proxies
         soup = BeautifulSoup(resp.text, 'lxml')
         valmap = self._buildvaluemap(soup)
@@ -70,8 +72,6 @@ class SpysoneProxiedSession(BaseProxiedSession):
             proto_font = tds[1].find('font', class_='spy1')
             protocol = (proto_font.get_text(strip=True).lower() if proto_font else '').strip()
             if not protocol: continue
-            self.candidate_proxies.append({
-                'http': f"{protocol}://{ip}:{port}", 'https': f"{protocol}://{ip}:{port}",
-            })
+            self.candidate_proxies.append({'http': f"{protocol}://{ip}:{port}", 'https': f"{protocol}://{ip}:{port}"})
         # return
         return self.candidate_proxies

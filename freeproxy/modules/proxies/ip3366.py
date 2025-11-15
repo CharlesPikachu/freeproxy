@@ -9,8 +9,8 @@ WeChat Official Account (微信公众号):
 import requests
 from bs4 import BeautifulSoup
 from .base import BaseProxiedSession
-from ..utils import ensureplaywrightchromium
 from playwright.sync_api import sync_playwright
+from ..utils import ensureplaywrightchromium, ensurevalidrequestsproxies
 
 
 '''IP3366ProxiedSession'''
@@ -30,6 +30,7 @@ class IP3366ProxiedSession(BaseProxiedSession):
             cookies_str = "; ".join([f"{cookie['name']}={cookie['value']}" for cookie in cookies])
             return cookies_str
     '''refreshproxies'''
+    @ensurevalidrequestsproxies
     def refreshproxies(self):
         # initialize
         self.candidate_proxies = []
@@ -49,7 +50,7 @@ class IP3366ProxiedSession(BaseProxiedSession):
                 'Upgrade-Insecure-Requests': '1',
                 'Cookie': self._getcookies(),
             }
-            session.headers.update(headers)
+            session.headers.update(self.randomheaders(headers_override=headers))
             for page in range(1, self.max_pages+1):
                 for stype in [1, 2]:
                     resp = session.get(f'http://www.ip3366.net/free/?stype={stype}&page={page}')
@@ -58,9 +59,7 @@ class IP3366ProxiedSession(BaseProxiedSession):
                     soup = soup.find('table', attrs={'class': 'table table-bordered table-striped'})
                     for item in soup.find('tbody').find_all('tr'):
                         formatted_proxy = f"{item.find_all('td')[3].text.strip().lower()}://{item.find_all('td')[0].text.strip()}:{item.find_all('td')[1].text.strip()}"
-                        self.candidate_proxies.append({
-                            'http': formatted_proxy, 'https': formatted_proxy
-                        })
+                        self.candidate_proxies.append({'http': formatted_proxy, 'https': formatted_proxy})
             num_tries += 1
             if num_tries > 5 or len(self.candidate_proxies) > 0: break
         # return

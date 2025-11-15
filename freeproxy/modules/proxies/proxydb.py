@@ -8,8 +8,8 @@ WeChat Official Account (微信公众号):
 '''
 import requests
 from bs4 import BeautifulSoup
-from fake_useragent import UserAgent
 from .base import BaseProxiedSession
+from ..utils import ensurevalidrequestsproxies
 
 
 '''ProxydbProxiedSession'''
@@ -17,14 +17,13 @@ class ProxydbProxiedSession(BaseProxiedSession):
     def __init__(self, **kwargs):
         super(ProxydbProxiedSession, self).__init__(**kwargs)
     '''refreshproxies'''
+    @ensurevalidrequestsproxies
     def refreshproxies(self):
         # initialize
         self.candidate_proxies = []
         # obtain proxies
         for page in range(1, self.max_pages+1):
-            url = f'https://proxydb.net/?offset={(page - 1) * 30}'
-            headers = {'User-Agent': UserAgent().random}
-            resp = requests.get(url, headers=headers)
+            resp = requests.get(f'https://proxydb.net/?offset={(page - 1) * 30}', headers=self.randomheaders())
             if resp.status_code != 200: continue
             soup = BeautifulSoup(resp.text, 'lxml')
             soup = soup.select_one("table.table.table-sm.table-hover.table-striped")
@@ -36,8 +35,6 @@ class ProxydbProxiedSession(BaseProxiedSession):
                 port = (port_link.get_text(strip=True) if port_link else tds[1].get_text(strip=True)).strip()
                 ptype_raw = tds[2].get_text(strip=True).lower()
                 formatted_proxy = f"{ptype_raw}://{ip}:{port}"
-                self.candidate_proxies.append({
-                    'http': formatted_proxy, 'https': formatted_proxy
-                })
+                self.candidate_proxies.append({'http': formatted_proxy, 'https': formatted_proxy})
         # return
         return self.candidate_proxies
