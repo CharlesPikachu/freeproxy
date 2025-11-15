@@ -36,4 +36,5 @@ class ProxyhubProxiedSession(BaseProxiedSession):
             self.candidate_proxies.append({
                 'http': formatted_proxy, 'https': formatted_proxy
             })
+        # return
         return self.candidate_proxies
