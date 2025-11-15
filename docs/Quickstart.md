@@ -22,7 +22,7 @@ When using pyfreeproxy as a third-party package, if you don’t want it to print
 from freeproxy import freeproxy
 
 proxy_sources = ['ProxydbProxiedSession']
-proxied_session_client = freeproxy.ProxiedSessionClient(proxy_sources=proxy_sources, disable_print=False)
+proxied_session_client = freeproxy.ProxiedSessionClient(proxy_sources=proxy_sources, disable_print=True)
 ```
 
 After installing pyfreeproxy, you can use the following code to quickly test the effectiveness of each proxy source,
