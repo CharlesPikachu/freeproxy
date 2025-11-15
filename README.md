@@ -37,6 +37,7 @@
 
 # ✨ What's New
 
+- 2025-11-16: Released pyfreeproxy v0.2.0 — Refactored the code to improve the quality of the retrieved proxies and added support for fetching proxies from seven additional free proxy sources.
 - 2025-10-20: Released pyfreeproxy v0.1.8 — Replace `user_agent` as `fake-useragent`.
 - 2025-10-20: Released pyfreeproxy v0.1.7 — Auto remove invalid proxied sessions in `ProxiedSessionClient`.
 - 2025-10-18: Released pyfreeproxy v0.1.6 — New sources `QiyunipProxiedSession`, `ProxyhubProxiedSession` and `ProxydbProxiedSession` added.
@@ -65,6 +66,7 @@ FreeProxy continuously discovers and updates lists of free proxies. If you find 
 | FreeproxylistProxiedSession          | [Freeproxylist](https://free-proxy-list.net/)                                     | [freeproxylist.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/freeproxylist.py)  |
 | KxdailiProxiedSession                | [Kxdaili](http://www.kxdaili.com/dailiip/1/)                                      | [kxdaili.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/kxdaili.py)              |
 | ProxylistProxiedSession              | [Proxylist](https://www.proxy-list.download/HTTP/)                                | [proxylist.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/proxylist.py)          |
+| IhuanProxiedSession                  | [IhuanProxiedSession](https://ip.ihuan.me/?page=4ce63706)                         | [ihuan.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/ihuan.py)                  |
 
 
 # 🎮 Playground
