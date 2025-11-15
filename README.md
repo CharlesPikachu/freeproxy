@@ -56,7 +56,6 @@ FreeProxy continuously discovers and updates lists of free proxies. If you find 
 | IP3366ProxiedSession                 | [click](http://www.ip3366.net/free/?stype=1&page=1)                          | [ip3366.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/ip3366.py)                |
 | ProxylistplusProxiedSession          | [click](https://list.proxylistplus.com/Fresh-HTTP-Proxy-List-1)              | [proxylistplus.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/proxylistplus.py)  |
 | IP89ProxiedSession                   | [click](http://api.89ip.cn/tqdl.html?api=1&num=1000&port=&address=&isp=)     | [ip89.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/ip89.py)                    |
-| ZdayeProxiedSession                  | [click](https://www.zdaye.com/free/1/)                                       | [zdaye.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/zdaye.py)                  |
 | QiyunipProxiedSession                | [click](https://www.qiyunip.com/freeProxy/1.html)                            | [qiyunip.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/qiyunip.py)              |
 | ProxyhubProxiedSession               | [click](https://proxyhub.me/)                                                | [proxyhub.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/proxyhub.py)            |
 | ProxydbProxiedSession                | [click](https://proxydb.net/?offset=0)                                       | [proxydb.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/proxydb.py)              |
@@ -131,7 +130,6 @@ The effectiveness test results of each proxy are as follows:
 |     Source    | Effectiveness |     Retrieved Examples     | Total |
 +---------------+---------------+----------------------------+-------+
 |      IP89     |      True     | http://189.90.255.208:3128 |  199  |
-|     Zdaye     |     False     |            NULL            |   0   |
 |     IP3366    |      True     | https://36.6.144.202:8089  |   30  |
 |   Kuaidaili   |      True     |  http://58.216.109.17:800  |   12  |
 | Proxylistplus |      True     | http://110.77.134.112:8080 |   50  |

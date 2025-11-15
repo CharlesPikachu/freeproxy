@@ -44,7 +44,6 @@ The effectiveness test results of each proxy are as follows:
 |     Source    | Effectiveness |     Retrieved Examples     | Total |
 +---------------+---------------+----------------------------+-------+
 |      IP89     |      True     | http://189.90.255.208:3128 |  199  |
-|     Zdaye     |     False     |            NULL            |   0   |
 |     IP3366    |      True     | https://36.6.144.202:8089  |   30  |
 |   Kuaidaili   |      True     |  http://58.216.109.17:800  |   12  |
 | Proxylistplus |      True     | http://110.77.134.112:8080 |   50  |
@@ -95,7 +94,7 @@ print(resp.text)
 
 Supported arguments for `ProxiedSessionClient`:
 
-- `proxy_sources` (`list`, default: `['KuaidailiProxiedSession', 'IP3366ProxiedSession']`): The proxy sources to use. Currently supported `['IP89ProxiedSession', 'ZdayeProxiedSession', 'IP3366ProxiedSession', 'KuaidailiProxiedSession', 'ProxylistplusProxiedSession', 'QiyunipProxiedSession', 'ProxyhubProxiedSession', 'ProxydbProxiedSession']`.
+- `proxy_sources` (`list`, default: `['KuaidailiProxiedSession', 'IP3366ProxiedSession']`): The proxy sources to use. Currently supported `['IP89ProxiedSession', 'IP3366ProxiedSession', 'KuaidailiProxiedSession', 'ProxylistplusProxiedSession', 'QiyunipProxiedSession', 'ProxyhubProxiedSession', 'ProxydbProxiedSession']`.
 - `init_proxied_session_cfg` (`dict`, default: `{'max_pages': 1}`): Accepts the same options as `requests.Session`, plus an extra `max_pages` field that specifies how many pages of proxies to fetch from each free source.
 - `disable_print` (`bool`, default: `False`): Whether to suppress proxy usage logs in the terminal.
 
