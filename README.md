@@ -30,13 +30,31 @@
   </a>
 </p>
 
-<p align="center">
-  Documents: <a href="https://freeproxy.readthedocs.io/">https://freeproxy.readthedocs.io/</a><br/>
-  ⚡ Live Proxies (半小时内最新代理): <a href="https://charlespikachu.github.io/freeproxy/"><b>https://charlespikachu.github.io/freeproxy/</b></a>
-  <a href="https://charlespikachu.github.io/freeproxy/">
-    <img alt="demo" src="https://img.shields.io/badge/demo-online-brightgreen?style=for-the-badge">
-  </a>
-</p>
+<div align="center">
+
+  <h3>📚 Documentation</h3>
+  <p>
+    <a href="https://freeproxy.readthedocs.io/">
+      https://freeproxy.readthedocs.io/
+    </a>
+  </p>
+
+  <h3>⚡ Live Proxies <span style="font-size:0.9em;">(半小时内最新代理)</span></h3>
+  <p>
+    <a href="https://charlespikachu.github.io/freeproxy/">
+      <code>https://charlespikachu.github.io/freeproxy/</code>
+    </a>
+  </p>
+  <p>
+    <a href="https://charlespikachu.github.io/freeproxy/">
+      <img
+        alt="demo"
+        src="https://img.shields.io/badge/demo-online-brightgreen?style=for-the-badge"
+      />
+    </a>
+  </p>
+
+</div>
 
 
 # ✨ What's New
