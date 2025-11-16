@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>皮卡丘的代理站 · Pikachu Proxy Hub</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    /* ===== 基础样式 ===== */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto;
+      background: radial-gradient(circle at top, #111827 0, #020617 50%, #000 100%);
+      color: #e5e7eb;
+      overflow: hidden;
+    }
+    canvas#bg {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .app {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      backdrop-filter: blur(20px);
+      background: linear-gradient(135deg, rgba(15,23,42,0.7), rgba(15,23,42,0.3));
+    }
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,253,0.6);
+      background: radial-gradient(circle at top left, rgba(56,189,248,0.35), rgba(15,23,42,0.95));
+      box-shadow: 0 16px 40px rgba(0,0,0,0.7);
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 20%, #fff7cc, #facc15, #f97316);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 30px rgba(250,204,21,0.5);
+      border: 1px solid rgba(252,211,77,0.8);
+    }
+    .logo span { font-size: 22px; }
+    .title-main {
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .title-main small {
+      font-size: 11px;
+      padding: 0 6px;
+      border-radius: 999px;
+      border: 1px solid rgba(251,191,36,0.7);
+      background: rgba(15,23,42,0.8);
+      color: #facc15;
+    }
+    .subtitle {
+      font-size: 12px;
+      color: #9ca3af;
+    }
+    .header-right {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    button {
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,253,0.7);
+      background: rgba(15,23,42,0.95);
+      color: #e5e7eb;
+      padding: 5px 10px;
+      font-size: 12px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: 0.15s;
+    }
+    button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.7);
+      background: rgba(17,24,39,1);
+    }
+
+    /* ===== 布局 ===== */
+    main {
+      flex: 1;
+      display: grid;
+      grid-template-columns: minmax(0, 1.7fr) minmax(0, 1.2fr);
+      gap: 12px;
+      min-height: 0;
+    }
+    @media (max-width: 900px) {
+      main { grid-template-columns: minmax(0, 1fr); }
+    }
+    .card {
+      background: rgba(15,23,42,0.9);
+      border-radius: 18px;
+      border: 1px solid rgba(31,41,55,0.9);
+      box-shadow: 0 18px 50px rgba(0,0,0,0.7);
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      position: relative;
+      overflow: hidden;
+    }
+    .card h2 {
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .card h2 span.badge {
+      font-size: 11px;
+      padding: 0 6px;
+      border-radius: 999px;
+      border: 1px solid rgba(96,165,250,0.7);
+      color: #bfdbfe;
+    }
+    .card-desc {
+      font-size: 12px;
+      color: #9ca3af;
+    }
+
+    /* ===== 代理表 ===== */
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 4px;
+      align-items: center;
+    }
+    .filters input, .filters select {
+      font-size: 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,253,0.8);
+      background: rgba(15,23,42,0.95);
+      color: #e5e7eb;
+      padding: 4px 8px;
+      outline: none;
+    }
+    .filters input::placeholder {
+      color: rgba(148,163,253,0.8);
+    }
+    .table-wrap {
+      flex: 1;
+      margin-top: 6px;
+      border-radius: 12px;
+      border: 1px solid rgba(55,65,81,0.9);
+      overflow: hidden;
+      background: rgba(15,23,42,0.98);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+    thead {
+      background: linear-gradient(to right, #1d4ed8, #0f766e);
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+    th, td {
+      text-align: left;
+      padding: 5px 8px;
+      border-bottom: 1px solid rgba(31,41,55,0.9);
+      white-space: nowrap;
+    }
+    tbody tr:nth-child(2n) td {
+      background: rgba(15,23,42,0.98);
+    }
+    tbody tr:nth-child(2n+1) td {
+      background: rgba(17,24,39,0.98);
+    }
+    tbody tr:hover td {
+      background: rgba(59,130,246,0.35);
+    }
+    .mono {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Courier New", monospace;
+    }
+    .chip {
+      display: inline-flex;
+      border-radius: 999px;
+      border: 1px solid rgba(45,212,191,0.8);
+      padding: 1px 6px;
+      font-size: 11px;
+      color: #99f6e4;
+      background: rgba(15,118,110,0.4);
+    }
+    .speed-bar {
+      width: 70px;
+      height: 4px;
+      border-radius: 999px;
+      background: #111827;
+      overflow: hidden;
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 4px;
+    }
+    .speed-bar div {
+      height: 100%;
+      background: linear-gradient(90deg, #22c55e, #eab308, #f97316, #ef4444);
+      transform-origin: left center;
+      transform: scaleX(0.6);
+    }
+    .footer-text {
+      margin-top: 4px;
+      font-size: 11px;
+      color: #9ca3af;
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    /* ===== 测试实验室 ===== */
+    .lab-form {
+      border-radius: 12px;
+      border: 1px solid rgba(55,65,81,0.9);
+      padding: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .lab-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .lab-label {
+      font-size: 12px;
+      color: #9ca3af;
+      min-width: 70px;
+    }
+    .lab-input {
+      flex: 1;
+      min-width: 0;
+    }
+    .lab-input input, .lab-input select {
+      width: 100%;
+      font-size: 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,253,0.8);
+      background: rgba(15,23,42,0.95);
+      color: #e5e7eb;
+      padding: 4px 8px;
+      outline: none;
+    }
+    .preview {
+      margin-top: 6px;
+      border-radius: 10px;
+      border: 1px solid rgba(55,65,81,0.9);
+      background: rgba(15,23,42,0.95);
+      padding: 6px;
+      font-size: 11px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas;
+      max-height: 100px;
+      overflow: auto;
+    }
+    .log-card {
+      margin-top: 6px;
+      border-radius: 10px;
+      border: 1px solid rgba(30,64,175,0.9);
+      background: radial-gradient(circle at top left, rgba(37,99,235,0.5), rgba(15,23,42,0.98));
+      padding: 6px;
+      font-size: 11px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      border-radius: 999px;
+      padding: 1px 8px;
+      font-size: 11px;
+    }
+    .status-idle {
+      border: 1px solid rgba(75,85,99,0.9);
+      background: rgba(17,24,39,0.95);
+      color: #d1d5db;
+    }
+    .status-running {
+      border: 1px solid rgba(74,222,128,0.9);
+      background: rgba(22,101,52,0.95);
+      color: #bbf7d0;
+    }
+    .status-error {
+      border: 1px solid rgba(248,113,113,0.9);
+      background: rgba(127,29,29,0.95);
+      color: #fecaca;
+    }
+    .log-box {
+      border-radius: 8px;
+      background: rgba(15,23,42,0.98);
+      padding: 4px 6px;
+      max-height: 120px;
+      overflow: auto;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas;
+    }
+    .pikachu-note {
+      margin-top: 4px;
+      border-radius: 10px;
+      border: 1px dashed rgba(250,204,21,0.9);
+      background: rgba(30,64,175,0.7);
+      font-size: 11px;
+      padding: 4px 6px;
+      display: flex;
+      gap: 4px;
+      color: #fef3c7;
+    }
+    .small {
+      font-size: 11px;
+      color: #9ca3af;
+      margin-top: 2px;
+    }
+  </style>
+</head>
+<body>
+<canvas id="bg"></canvas>
+
+<div class="app">
+  <header>
+    <div class="brand">
+      <div class="logo"><span>⚡</span></div>
+      <div>
+        <div class="title-main">
+          <span id="title-text">皮卡丘的代理站</span>
+          <small>Pikachu Proxy Hub</small>
+        </div>
+        <div class="subtitle" id="subtitle-text">
+          可视化展示免费代理 · 多协议支持 · GitHub Actions 自动更新 · 皮卡丘陪你安全冲浪 ⚡
+        </div>
+      </div>
+    </div>
+    <div class="header-right">
+      <button id="lang-btn"><span id="lang-flag">🇨🇳</span><span>中文 / English</span></button>
+      <button id="pattern-btn"><span>✨</span><span id="pattern-text">切换粒子图案</span></button>
+    </div>
+  </header>
+
+  <main>
+    <!-- 左侧：代理列表 -->
+    <section class="card">
+      <div>
+        <h2>📡 <span id="list-title">实时代理列表</span> <span class="badge" id="list-badge">多协议 · 免费源</span></h2>
+        <div class="card-desc" id="list-desc">
+          从 GitHub 仓库根目录的 proxies.json 读取数据，proxies.json 由 GitHub Actions 定时更新。
+        </div>
+      </div>
+
+      <div class="filters">
+        <input id="search-input" placeholder="搜索 IP / 协议 / 位置...">
+        <select id="country-filter">
+          <option value="">全部国家</option>
+        </select>
+        <select id="protocol-filter">
+          <option value="">全部协议</option>
+          <option value="Http">Http</option>
+          <option value="Https">Https</option>
+          <option value="Socks4">Socks4</option>
+          <option value="Socks5">Socks5</option>
+        </select>
+      </div>
+
+      <div class="table-wrap">
+        <div style="max-height:340px; overflow:auto;">
+          <table>
+            <thead>
+            <tr>
+              <th>#</th>
+              <th id="th-country">国家</th>
+              <th id="th-ip">IP:端口</th>
+              <th id="th-proto">协议</th>
+              <th id="th-anon">匿名</th>
+              <th id="th-speed">速度</th>
+            </tr>
+            </thead>
+            <tbody id="proxy-tbody">
+            <tr><td colspan="6" style="font-size:12px;color:#fecaca;">
+              正在加载代理列表...
+            </td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="footer-text">
+        <span id="stats-text">共 0 条代理，当前显示 0 条。</span>
+        <span id="update-time"></span>
+      </div>
+    </section>
+
+    <!-- 右侧：测试实验室 -->
+    <section class="card">
+      <div>
+        <h2>🧪 <span id="lab-title">代理测试实验室</span> <span class="badge" id="lab-badge">流程演示 · cURL 示例</span></h2>
+        <div class="card-desc" id="lab-desc">
+          从左侧列表选一个代理，一键生成 curl 命令，并模拟展示请求过程和结果。
+        </div>
+      </div>
+      <div class="lab-form">
+        <div class="lab-row">
+          <div class="lab-label" id="url-label">目标 URL</div>
+          <div class="lab-input">
+            <input id="test-url" placeholder="例如：https://httpbin.org/ip">
+          </div>
+        </div>
+        <div class="lab-row">
+          <div class="lab-label" id="proxy-label">选择代理</div>
+          <div class="lab-input">
+            <select id="proxy-select">
+              <option value="">请先加载代理列表</option>
+            </select>
+          </div>
+        </div>
+        <div style="display:flex;justify-content:flex-end;">
+          <button id="run-btn"><span>⚡</span><span id="run-text">开始模拟测试</span></button>
+        </div>
+      </div>
+
+      <div class="preview">
+        <div id="preview-title">cURL 示例（前端不能直接使用代理，请在后端真实执行）</div>
+        <pre id="preview-cmd">curl -x http://IP:PORT https://httpbin.org/ip</pre>
+      </div>
+
+      <div class="log-card">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <span id="log-title">请求过程与结果（模拟）</span>
+          <span id="status-pill" class="status-pill status-idle">💤 空闲</span>
+        </div>
+        <div class="log-box" id="log-box">
+          点击「开始模拟测试」后，这里会按步骤展示通过代理发送请求的过程。
+        </div>
+        <div class="small" id="lab-tip">
+          注意：浏览器 JS 不能像 curl 一样直接用 HTTP 代理。真实测试请在后端实现 /test-proxy 接口，再把结果展示在这里。
+        </div>
+      </div>
+
+      <div class="pikachu-note">
+        <span>⚡</span>
+        <span id="pikachu-note">
+          皮卡丘提示：你可以在服务器上实现一个 /test-proxy 接口，接收 {ip,port,url}，用代理去请求，然后把真实返回结果显示在上面的日志里。
+        </span>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script>
+  /**************** 粒子背景：3 种模式 ****************/
+  (function () {
+    const canvas = document.getElementById("bg");
+    const ctx = canvas.getContext("2d");
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resize();
+    window.addEventListener("resize", resize);
+
+    const particles = [];
+    const N = 120;
+    let mode = 0; // 0: 飘动, 1: 旋转环, 2: 心形
+    const center = () => ({ x: canvas.width / 2, y: canvas.height / 2 });
+
+    for (let i = 0; i < N; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 0.4,
+        vy: (Math.random() - 0.5) * 0.4,
+        r: Math.random() * 2 + 0.5,
+        a: Math.random() * Math.PI * 2,
+        t: Math.random() * Math.PI * 2,
+        radius: 40 + Math.random() * 120
+      });
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.globalAlpha = 1;
+      ctx.globalCompositeOperation = "lighter";
+
+      const c = center();
+      const time = Date.now() * 0.0005;
+
+      for (let i = 0; i < N; i++) {
+        const p = particles[i];
+        if (mode === 0) {
+          p.x += p.vx;
+          p.y += p.vy;
+          if (p.x < -50 || p.x > canvas.width + 50 || p.y < -50 || p.y > canvas.height + 50) {
+            p.x = Math.random() * canvas.width;
+            p.y = Math.random() * canvas.height;
+          }
+        } else if (mode === 1) {
+          p.a += 0.01;
+          const r = p.radius + Math.sin(time + i * 0.1) * 14;
+          p.x = c.x + Math.cos(p.a) * r;
+          p.y = c.y + Math.sin(p.a) * r * 0.6;
+        } else {
+          p.t += 0.02;
+          const t = p.t;
+          const sx = 16 * Math.pow(Math.sin(t), 3);
+          const sy =
+            13 * Math.cos(t) -
+            5 * Math.cos(2 * t) -
+            2 * Math.cos(3 * t) -
+            Math.cos(4 * t);
+          const S = Math.min(canvas.width, canvas.height) * 0.05;
+          p.x = c.x + sx * S;
+          p.y = c.y - sy * S;
+        }
+
+        const grd = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 4);
+        grd.addColorStop(0, "rgba(255,253,230,0.9)");
+        grd.addColorStop(0.3, "rgba(250,204,21,0.8)");
+        grd.addColorStop(1, "rgba(30,64,175,0)");
+        ctx.fillStyle = grd;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r * 3, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      requestAnimationFrame(draw);
+    }
+    draw();
+
+    const patternBtn = document.getElementById("pattern-btn");
+    if (patternBtn) {
+      patternBtn.addEventListener("click", () => {
+        mode = (mode + 1) % 3;
+        const label = document.getElementById("pattern-text");
+        if (!label) return;
+        if (mode === 0) label.textContent = currentLang === "zh" ? "切换粒子图案（飘动）" : "Pattern: float";
+        if (mode === 1) label.textContent = currentLang === "zh" ? "切换粒子图案（光环）" : "Pattern: ring";
+        if (mode === 2) label.textContent = currentLang === "zh" ? "切换粒子图案（爱心）" : "Pattern: heart";
+      });
+    }
+  })();
+
+  /**************** 多语言切换 ****************/
+  let currentLang = "zh";
+  let allProxies = [];
+  let lastUpdated = "";
+
+  function setUpdateTime() {
+    const el = document.getElementById("update-time");
+    if (!el) return;
+    if (!lastUpdated) {
+      el.textContent = "";
+      return;
+    }
+    el.textContent =
+      currentLang === "zh"
+        ? `数据更新时间：${lastUpdated}`
+        : `Updated at: ${lastUpdated}`;
+  }
+
+  function updateStats() {
+    const total = allProxies.length;
+    const tbody = document.getElementById("proxy-tbody");
+    let visible = 0;
+    if (tbody) {
+      const rows = [...tbody.children];
+      visible = rows.filter(tr => tr.children.length && tr.children[0].textContent !== "").length;
+    }
+    const el = document.getElementById("stats-text");
+    if (!el) return;
+    if (currentLang === "zh") {
+      el.textContent = `共 ${total} 条代理，当前显示 ${visible || total} 条。`;
+    } else {
+      el.textContent = `${visible || total} shown out of ${total} proxies.`;
+    }
+  }
+
+  function applyLang() {
+    if (currentLang === "zh") {
+      document.getElementById("title-text").textContent = "皮卡丘的代理站";
+      document.getElementById("subtitle-text").textContent =
+        "可视化展示免费代理 · 多协议支持 · GitHub Actions 自动更新 · 皮卡丘陪你安全冲浪 ⚡";
+      document.getElementById("lang-flag").textContent = "🇨🇳";
+
+      document.getElementById("list-title").textContent = "实时代理列表";
+      document.getElementById("list-badge").textContent = "多协议 · 免费源";
+      document.getElementById("list-desc").textContent =
+        "从 GitHub 仓库根目录的 proxies.json 读取数据，proxies.json 由 GitHub Actions 定时更新。";
+      document.getElementById("search-input").placeholder = "搜索 IP / 协议 / 位置...";
+      document.getElementById("th-country").textContent = "国家";
+      document.getElementById("th-ip").textContent = "IP:端口";
+      document.getElementById("th-proto").textContent = "协议";
+      document.getElementById("th-anon").textContent = "匿名";
+      document.getElementById("th-speed").textContent = "速度";
+
+      document.getElementById("lab-title").textContent = "代理测试实验室";
+      document.getElementById("lab-badge").textContent = "流程演示 · cURL 示例";
+      document.getElementById("lab-desc").textContent =
+        "从左侧列表选一个代理，一键生成 curl 命令，并模拟展示请求过程和结果。";
+      document.getElementById("url-label").textContent = "目标 URL";
+      document.getElementById("test-url").placeholder = "例如：https://httpbin.org/ip";
+      document.getElementById("proxy-label").textContent = "选择代理";
+      document.getElementById("run-text").textContent = "开始模拟测试";
+      document.getElementById("preview-title").textContent =
+        "cURL 示例（前端不能直接使用代理，请在后端真实执行）";
+      document.getElementById("log-title").textContent = "请求过程与结果（模拟）";
+      document.getElementById("lab-tip").textContent =
+        "注意：浏览器 JS 不能像 curl 一样直接用 HTTP 代理。真实测试请在后端实现 /test-proxy 接口，再把结果展示在这里。";
+      document.getElementById("pikachu-note").textContent =
+        "皮卡丘提示：你可以在服务器上实现一个 /test-proxy 接口，接收 {ip,port,url}，用代理去请求，然后把真实返回结果显示在上面的日志里。";
+
+      document.getElementById("pattern-text").textContent = "切换粒子图案";
+    } else {
+      document.getElementById("title-text").textContent = "Pikachu Proxy Hub";
+      document.getElementById("subtitle-text").textContent =
+        "Visualize free proxies · Multi-protocol support · Auto-updated by GitHub Actions ⚡";
+      document.getElementById("lang-flag").textContent = "🇺🇸";
+
+      document.getElementById("list-title").textContent = "Live Proxy List";
+      document.getElementById("list-badge").textContent = "Multi-protocol · Free source";
+      document.getElementById("list-desc").textContent =
+        "Reads from proxies.json in this repo; proxies.json is periodically updated by a GitHub Actions workflow.";
+      document.getElementById("search-input").placeholder = "Search IP / protocol / location...";
+      document.getElementById("th-country").textContent = "Country";
+      document.getElementById("th-ip").textContent = "IP:Port";
+      document.getElementById("th-proto").textContent = "Protocol(s)";
+      document.getElementById("th-anon").textContent = "Anonymity";
+      document.getElementById("th-speed").textContent = "Speed";
+
+      document.getElementById("lab-title").textContent = "Proxy Test Lab";
+      document.getElementById("lab-badge").textContent = "Flow demo · cURL example";
+      document.getElementById("lab-desc").textContent =
+        "Pick a proxy on the left, auto-generate a curl command and simulate the request flow.";
+      document.getElementById("url-label").textContent = "Target URL";
+      document.getElementById("test-url").placeholder = "e.g. https://httpbin.org/ip";
+      document.getElementById("proxy-label").textContent = "Proxy";
+      document.getElementById("run-text").textContent = "Run simulated test";
+      document.getElementById("preview-title").textContent =
+        "cURL example (frontend JS cannot directly use HTTP proxies; execute on server side).";
+      document.getElementById("log-title").textContent = "Request flow & result (simulation)";
+      document.getElementById("lab-tip").textContent =
+        "Note: browser JS cannot use HTTP proxies like curl. Implement a /test-proxy endpoint on your server and show its results here.";
+      document.getElementById("pikachu-note").textContent =
+        "Pikachu tip: implement /test-proxy on your server to send requests via {ip,port,url} and display the real response above.";
+
+      document.getElementById("pattern-text").textContent = "Switch particle pattern";
+    }
+    updateStats();
+    setUpdateTime();
+  }
+
+  document.getElementById("lang-btn").addEventListener("click", () => {
+    currentLang = currentLang === "zh" ? "en" : "zh";
+    applyLang();
+  });
+
+  /**************** 代理数据：只从本仓库的 proxies.json 读取 ****************/
+  const API_URL = "./proxies.json";
+
+  function renderCountryFilter() {
+    const sel = document.getElementById("country-filter");
+    if (!sel) return;
+    const oldVal = sel.value;
+    sel.innerHTML = "";
+    const optAll = document.createElement("option");
+    optAll.value = "";
+    optAll.textContent = currentLang === "zh" ? "全部国家" : "All countries";
+    sel.appendChild(optAll);
+
+    const set = new Set(allProxies.map(p => p.country).filter(Boolean));
+    [...set].sort().forEach(c => {
+      const o = document.createElement("option");
+      o.value = c;
+      o.textContent = c;
+      sel.appendChild(o);
+    });
+    sel.value = oldVal;
+  }
+
+  function fillProxySelect(list) {
+    const sel = document.getElementById("proxy-select");
+    if (!sel) return;
+    sel.innerHTML = "";
+    const defaultOpt = document.createElement("option");
+    defaultOpt.value = "";
+    defaultOpt.textContent =
+      currentLang === "zh" ? "请选择一个代理" : "Choose a proxy";
+    sel.appendChild(defaultOpt);
+
+    (list.length ? list : allProxies).slice(0, 200).forEach((p, idx) => {
+      const o = document.createElement("option");
+      o.value = idx;
+      o.textContent = `[${p.country || "-"}] ${p.ip}:${p.port} (${p.protocol})`;
+      o.dataset.ip = p.ip;
+      o.dataset.port = p.port;
+      o.dataset.protocol = p.protocol;
+      sel.appendChild(o);
+    });
+    updatePreviewCmd();
+  }
+
+  function applyFiltersAndRender() {
+    const tbody = document.getElementById("proxy-tbody");
+    if (!tbody) return;
+    tbody.innerHTML = "";
+
+    const keyword = document.getElementById("search-input").value.trim().toLowerCase();
+    const country = document.getElementById("country-filter").value;
+    const proto = document.getElementById("protocol-filter").value;
+
+    const list = allProxies.filter(p => {
+      if (country && p.country !== country) return false;
+      if (proto && !String(p.protocol).toLowerCase().includes(proto.toLowerCase())) return false;
+      if (keyword) {
+        const t = [p.ip, p.country || "", p.protocol || "", p.anonymity || ""].join(" ").toLowerCase();
+        if (!t.includes(keyword)) return false;
+      }
+      return true;
+    });
+
+    if (!list.length) {
+      const tr = document.createElement("tr");
+      const td = document.createElement("td");
+      td.colSpan = 6;
+      td.style.color = "#fecaca";
+      td.style.fontSize = "12px";
+      td.textContent = currentLang === "zh"
+        ? "没有匹配到任何代理。"
+        : "No proxies match current filters.";
+      tr.appendChild(td);
+      tbody.appendChild(tr);
+    } else {
+      list.forEach((p, i) => {
+        const tr = document.createElement("tr");
+        const tdIdx = document.createElement("td");
+        tdIdx.textContent = i + 1;
+        tr.appendChild(tdIdx);
+
+        const tdC = document.createElement("td");
+        tdC.textContent = p.country || "-";
+        tr.appendChild(tdC);
+
+        const tdIP = document.createElement("td");
+        tdIP.className = "mono";
+        tdIP.textContent = `${p.ip}:${p.port}`;
+        tr.appendChild(tdIP);
+
+        const tdProto = document.createElement("td");
+        tdProto.textContent = p.protocol || "-";
+        tr.appendChild(tdProto);
+
+        const tdAnon = document.createElement("td");
+        const chip = document.createElement("span");
+        chip.className = "chip";
+        chip.textContent = p.anonymity || "-";
+        tdAnon.appendChild(chip);
+        tr.appendChild(tdAnon);
+
+        const tdSpeed = document.createElement("td");
+		const bar = document.createElement("span");
+		bar.className = "speed-bar";
+		const inner = document.createElement("div");
+
+		// 判断是否真的有速度
+		let hasSpeed = p.speed !== null && p.speed !== undefined && p.speed !== "" && !Number.isNaN(Number(p.speed));
+		let speedNum = hasSpeed ? Number(p.speed) : null;
+
+		if (hasSpeed) {
+		  // 有速度：正常画彩色条 + 数字
+		  inner.style.transform = `scaleX(${Math.max(0.2, Math.min(1, (160 - speedNum) / 160)).toFixed(2)})`;
+		} else {
+		  // 没速度：条变成 0（或你喜欢设置 0.2），只是当装饰
+		  inner.style.transform = "scaleX(0)";
+		}
+
+		bar.appendChild(inner);
+		tdSpeed.appendChild(bar);
+
+		const txt = document.createElement("span");
+		if (hasSpeed) {
+		  txt.textContent = `${speedNum} ms`;
+		} else {
+		  txt.textContent = currentLang === "zh" ? "-" : "-";
+		}
+		tdSpeed.appendChild(txt);
+
+		tr.appendChild(tdSpeed);
+
+        tbody.appendChild(tr);
+      });
+    }
+    updateStats();
+    fillProxySelect(list);
+  }
+
+  async function loadProxies() {
+    const tbody = document.getElementById("proxy-tbody");
+    if (tbody) {
+      tbody.innerHTML = `<tr><td colspan="6" style="font-size:12px;">${
+        currentLang === "zh" ? "正在加载 proxies.json..." : "Loading proxies.json..."
+      }</td></tr>`;
+    }
+    try {
+      const res = await fetch(API_URL, { cache: "no-store" });
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      const json = await res.json();
+      allProxies = json.data || [];
+      lastUpdated = json.updated_at || "";
+    } catch (e) {
+      console.error("加载 proxies.json 失败：", e);
+      allProxies = [];
+      lastUpdated = "";
+    }
+    renderCountryFilter();
+    applyFiltersAndRender();
+    setUpdateTime();
+  }
+
+  document.getElementById("search-input").addEventListener("input", applyFiltersAndRender);
+  document.getElementById("country-filter").addEventListener("change", applyFiltersAndRender);
+  document.getElementById("protocol-filter").addEventListener("change", applyFiltersAndRender);
+
+  /**************** 测试实验室：模拟流程 + curl 命令 ****************/
+  function selectedProxy() {
+    const sel = document.getElementById("proxy-select");
+    if (!sel) return null;
+    const opt = sel.options[sel.selectedIndex];
+    if (!opt || !opt.dataset.ip) return null;
+    return {
+      ip: opt.dataset.ip,
+      port: opt.dataset.port,
+      protocol: opt.dataset.protocol
+    };
+  }
+
+  function updatePreviewCmd() {
+    const proxy = selectedProxy();
+    const url = document.getElementById("test-url").value.trim() || "https://httpbin.org/ip";
+    const cmd = proxy
+      ? `curl -x ${String(proxy.protocol || "http").toLowerCase().split(",")[0].trim()}://${proxy.ip}:${proxy.port} \\\n  -H "User-Agent: PikachuProxy/1.0" \\\n  "${url}"`
+      : `curl -x http://IP:PORT \\\n  -H "User-Agent: PikachuProxy/1.0" \\\n  "${url}"`;
+    document.getElementById("preview-cmd").textContent = cmd;
+  }
+
+  document.getElementById("test-url").addEventListener("input", updatePreviewCmd);
+  document.getElementById("proxy-select").addEventListener("change", updatePreviewCmd);
+
+  function setStatus(state) {
+    const pill = document.getElementById("status-pill");
+    pill.classList.remove("status-idle", "status-running", "status-error");
+    if (state === "running") {
+      pill.classList.add("status-running");
+      pill.textContent = currentLang === "zh" ? "⚙️ 测试中..." : "⚙️ Running...";
+    } else if (state === "error") {
+      pill.classList.add("status-error");
+      pill.textContent = currentLang === "zh" ? "❌ 错误" : "❌ Error";
+    } else {
+      pill.classList.add("status-idle");
+      pill.textContent = currentLang === "zh" ? "💤 空闲" : "💤 Idle";
+    }
+  }
+
+  function logLine(text) {
+    const box = document.getElementById("log-box");
+    const div = document.createElement("div");
+    div.textContent = text;
+    box.appendChild(div);
+    box.scrollTop = box.scrollHeight;
+  }
+
+  document.getElementById("run-btn").addEventListener("click", () => {
+    const proxy = selectedProxy();
+    const url = document.getElementById("test-url").value.trim() || "https://httpbin.org/ip";
+    const box = document.getElementById("log-box");
+    box.innerHTML = "";
+    if (!proxy) {
+      setStatus("error");
+      logLine(currentLang === "zh" ? "[系统] 请先选择一个代理。" : "[system] Please choose a proxy first.");
+      setTimeout(() => setStatus("idle"), 1000);
+      return;
+    }
+    setStatus("running");
+    const stepsZh = [
+      `🧪 [步骤 1] 构建请求：目标 URL = ${url}`,
+      `⚡ [步骤 2] 通过代理连接：${proxy.ip}:${proxy.port} (${proxy.protocol})`,
+      "📡 [步骤 3] 发送 HTTP 请求（模拟）...",
+      "⏱️ [步骤 4] 等待响应中（约 300ms）...",
+      "✅ [步骤 5] 请求成功（示意数据）：状态码 200。",
+      `📦 [示例返回体] {"origin": "${proxy.ip}"}`
+    ];
+    const stepsEn = [
+      `🧪 [Step 1] Build request: target URL = ${url}`,
+      `⚡ [Step 2] Connect via proxy: ${proxy.ip}:${proxy.port} (${proxy.protocol})`,
+      "📡 [Step 3] Send HTTP request (simulated)...",
+      "⏱️ [Step 4] Waiting for response (~300ms)...",
+      "✅ [Step 5] Request succeeded (mock data): status 200.",
+      `📦 [Sample body] {"origin": "${proxy.ip}"}`
+    ];
+    const steps = currentLang === "zh" ? stepsZh : stepsEn;
+    let i = 0;
+    function next() {
+      if (i >= steps.length) {
+        setStatus("idle");
+        return;
+      }
+      logLine(steps[i++]);
+      setTimeout(next, 420);
+    }
+    next();
+  });
+
+  /**************** 启动：语言 + 加载数据 ****************/
+  applyLang();
+  loadProxies();
+</script>
+</body>
+</html>

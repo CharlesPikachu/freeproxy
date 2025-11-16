@@ -33,7 +33,7 @@ class ProxydailyProxiedSession(BaseProxiedSession):
                 "columns[4][data]": "anonymity", "columns[4][name]": "anonymity", "columns[4][searchable]": "true", "columns[4][orderable]": "false",
                 "columns[4][search][value]": "", "columns[4][search][regex]": "false", "columns[5][data]": "country", "columns[5][name]": "country",
                 "columns[5][searchable]": "true", "columns[5][orderable]": "false", "columns[5][search][value]": "", "columns[5][search][regex]": "false",
-                "start": f"{(page - 1) * 10}", "length": "10", "search[value]": "", "search[regex]": "false", "_": f"{int(time.time() * 1000)}"
+                "start": f"{(page - 1) * 100}", "length": "100", "search[value]": "", "search[regex]": "false", "_": f"{int(time.time() * 1000)}"
             }
             resp = requests.get('https://proxy-daily.com/api/serverside/proxies', headers=self.randomheaders(), params=params)
             if resp.status_code != 200: continue
