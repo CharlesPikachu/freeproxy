@@ -12,6 +12,7 @@ from .proxydb import ProxydbProxiedSession
 from .proxyhub import ProxyhubProxiedSession
 from .proxylist import ProxylistProxiedSession
 from .kuaidaili import KuaidailiProxiedSession
+from .fineproxy import FineProxyProxiedSession
 from .proxydaily import ProxydailyProxiedSession
 from .tomcat1235 import Tomcat1235ProxiedSession
 from .proxylistplus import ProxylistplusProxiedSession
@@ -26,6 +27,7 @@ class ProxiedSessionBuilder(BaseModuleBuilder):
         'ProxyhubProxiedSession': ProxyhubProxiedSession, 'ProxydbProxiedSession': ProxydbProxiedSession, 'Tomcat1235ProxiedSession': Tomcat1235ProxiedSession,
         'SpysoneProxiedSession': SpysoneProxiedSession, 'FreeproxylistProxiedSession': FreeproxylistProxiedSession, 'ProxylistProxiedSession': ProxylistProxiedSession,
         'KxdailiProxiedSession': KxdailiProxiedSession, 'IhuanProxiedSession': IhuanProxiedSession, 'ZdayeProxiedSession': ZdayeProxiedSession,
+        'FineProxyProxiedSession': FineProxyProxiedSession,
     }
 
 

@@ -37,6 +37,7 @@
 
 # ✨ What's New
 
+- 2025-11-16: Released pyfreeproxy v0.2.1 — Add support for ZdayeProxiedSession and FineProxyProxiedSession.
 - 2025-11-16: Released pyfreeproxy v0.2.0 — Refactored the code to improve the quality of the retrieved proxies and added support for fetching proxies from seven additional free proxy sources.
 - 2025-10-20: Released pyfreeproxy v0.1.8 — Replace `user_agent` as `fake-useragent`.
 - 2025-10-20: Released pyfreeproxy v0.1.7 — Auto remove invalid proxied sessions in `ProxiedSessionClient`.
@@ -68,6 +69,7 @@ FreeProxy continuously discovers and updates lists of free proxies. If you find 
 | ProxylistProxiedSession              | [Proxylist](https://www.proxy-list.download/HTTP/)                                | [proxylist.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/proxylist.py)          |
 | IhuanProxiedSession                  | [Ihuan](https://ip.ihuan.me/?page=4ce63706)                                       | [ihuan.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/ihuan.py)                  |
 | ZdayeProxiedSession                  | [Zdaye](https://www.zdaye.com/free/1/)                                            | [zdaye.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/zdaye.py)                  |
+| FineProxyProxiedSession              | [FineProxy](https://fineproxy.org/cn/free-proxy/)                                 | [fineproxy.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/fineproxy.py)          |
 
 
 # 🎮 Playground
