@@ -2,6 +2,7 @@
 from .base import BaseProxiedSession
 from .ip89 import IP89ProxiedSession
 from ..utils import BaseModuleBuilder
+from .zdaye import ZdayeProxiedSession
 from .ihuan import IhuanProxiedSession
 from .ip3366 import IP3366ProxiedSession
 from .qiyunip import QiyunipProxiedSession
@@ -24,7 +25,7 @@ class ProxiedSessionBuilder(BaseModuleBuilder):
         'ProxylistplusProxiedSession': ProxylistplusProxiedSession, 'QiyunipProxiedSession': QiyunipProxiedSession, 'ProxydailyProxiedSession': ProxydailyProxiedSession,
         'ProxyhubProxiedSession': ProxyhubProxiedSession, 'ProxydbProxiedSession': ProxydbProxiedSession, 'Tomcat1235ProxiedSession': Tomcat1235ProxiedSession,
         'SpysoneProxiedSession': SpysoneProxiedSession, 'FreeproxylistProxiedSession': FreeproxylistProxiedSession, 'ProxylistProxiedSession': ProxylistProxiedSession,
-        'KxdailiProxiedSession': KxdailiProxiedSession, 'IhuanProxiedSession': IhuanProxiedSession,
+        'KxdailiProxiedSession': KxdailiProxiedSession, 'IhuanProxiedSession': IhuanProxiedSession, 'ZdayeProxiedSession': ZdayeProxiedSession,
     }
 
 

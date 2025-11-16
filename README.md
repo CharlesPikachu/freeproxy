@@ -66,7 +66,8 @@ FreeProxy continuously discovers and updates lists of free proxies. If you find 
 | FreeproxylistProxiedSession          | [Freeproxylist](https://free-proxy-list.net/)                                     | [freeproxylist.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/freeproxylist.py)  |
 | KxdailiProxiedSession                | [Kxdaili](http://www.kxdaili.com/dailiip/1/)                                      | [kxdaili.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/kxdaili.py)              |
 | ProxylistProxiedSession              | [Proxylist](https://www.proxy-list.download/HTTP/)                                | [proxylist.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/proxylist.py)          |
-| IhuanProxiedSession                  | [IhuanProxiedSession](https://ip.ihuan.me/?page=4ce63706)                         | [ihuan.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/ihuan.py)                  |
+| IhuanProxiedSession                  | [Ihuan](https://ip.ihuan.me/?page=4ce63706)                                       | [ihuan.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/ihuan.py)                  |
+| ZdayeProxiedSession                  | [Zdaye](https://www.zdaye.com/free/1/)                                            | [zdaye.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/zdaye.py)                  |
 
 
 # 🎮 Playground
