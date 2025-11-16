@@ -33,7 +33,7 @@ class ProxiedSessionClient():
                 candidate_proxies = self.proxied_sessions[source].refreshproxies()
                 if len(candidate_proxies) < 1: self.proxied_sessions.pop(source)
             except Exception as err:
-                self.logger_handle.error(err, disable_print=disable_print)
+                self.logger_handle.error(f'{self.__class__.__name__}.__init__ >>> {source} (Error: {err})', disable_print=self.disable_print)
                 if source in self.proxied_sessions: self.proxied_sessions.pop(source)
                 continue
         # set attributes
@@ -49,7 +49,8 @@ class ProxiedSessionClient():
             resp = proxied_session.get(url, **kwargs)
             if resp.status_code == 200:
                 return resp
-            self.logger_handle.warning(f'Invalid proxy {proxied_session.proxies}, auto switching to other proxies.', disable_print=self.disable_print)
+            warnings_msg = f'invalid proxy {proxied_session.proxies}, auto switching to other proxies.'
+            self.logger_handle.warning(f'{self.__class__.__name__}.get >>> {url} (Error: {warnings_msg})', disable_print=self.disable_print)
     '''post'''
     def post(self, url, **kwargs):
         while True:
@@ -59,7 +60,8 @@ class ProxiedSessionClient():
             resp = proxied_session.post(url, **kwargs)
             if resp.status_code == 200:
                 return resp
-            self.logger_handle.warning(f'Invalid proxy {proxied_session.proxies}, auto switching to other proxies.', disable_print=self.disable_print)
+            warnings_msg = f'invalid proxy {proxied_session.proxies}, auto switching to other proxies.'
+            self.logger_handle.warning(f'{self.__class__.__name__}.post >>> {url} (Error: {warnings_msg})', disable_print=self.disable_print)
     '''getrandomproxy'''
     def getrandomproxy(self):
         proxied_session: BaseProxiedSession = random.choice(list(self.proxied_sessions.values()))
