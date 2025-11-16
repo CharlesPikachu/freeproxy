@@ -31,7 +31,11 @@
 </p>
 
 <p align="center">
-  Documents: <a href="https://freeproxy.readthedocs.io/">https://freeproxy.readthedocs.io/</a>
+  Documents: <a href="https://freeproxy.readthedocs.io/">https://freeproxy.readthedocs.io/</a><br/>
+  ⚡ Live Proxies (半小时内最新代理): <a href="https://charlespikachu.github.io/freeproxy/"><b>https://charlespikachu.github.io/freeproxy/</b></a>
+  <a href="https://charlespikachu.github.io/freeproxy/">
+    <img alt="demo" src="https://img.shields.io/badge/demo-online-brightgreen?style=for-the-badge">
+  </a>
 </p>
 
 
