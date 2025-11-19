@@ -31,7 +31,9 @@ class BaseProxiedSession(requests.Session):
         self.proxies = self.getrandomproxy()
         return self.proxies
     '''randomheaders'''
-    def randomheaders(self, headers_override: dict = {}):
+    def randomheaders(self, headers_override: dict = None):
+        # init
+        headers_override = headers_override or {}
         # random public ipv4
         while True:
             ip_str = ".".join(str(random.randint(0, 255)) for _ in range(4))
