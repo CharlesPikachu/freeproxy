@@ -239,7 +239,7 @@ proxied_session_client = freeproxy.ProxiedSessionClient(proxy_sources=proxy_sour
        alt="WeChat Appreciation QR Code"
        width="260" />
   &nbsp;&nbsp;&nbsp;&nbsp;
-  <img src="https://raw.githubusercontent.com/CharlesPikachu/freeproxy/master/.github/pictures/alipay_reward.jpg"
+  <img src="https://raw.githubusercontent.com/CharlesPikachu/freeproxy/master/.github/pictures/alipay_reward.png"
        alt="Alipay Appreciation QR Code"
        width="260" />
 </p>
