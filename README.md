@@ -234,15 +234,9 @@ proxied_session_client = freeproxy.ProxiedSessionClient(proxy_sources=proxy_sour
 
 # ☕ Appreciation (赞赏 / 打赏)
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/CharlesPikachu/freeproxy/master/.github/pictures/wechat_reward.jpg"
-       alt="WeChat Appreciation QR Code"
-       width="260" />
-  &nbsp;&nbsp;&nbsp;&nbsp;
-  <img src="https://raw.githubusercontent.com/CharlesPikachu/freeproxy/master/.github/pictures/alipay_reward.png"
-       alt="Alipay Appreciation QR Code"
-       width="260" />
-</p>
+| WeChat Appreciation QR Code (微信赞赏码)                                                                                       | Alipay Appreciation QR Code (支付宝赞赏码)                                                                                     |
+| :--------:                                                                                                                     | :----------:                                                                                                                   |
+| <img src="https://raw.githubusercontent.com/CharlesPikachu/freeproxy/master/.github/pictures/wechat_reward.jpg" width="260" /> | <img src="https://raw.githubusercontent.com/CharlesPikachu/freeproxy/master/.github/pictures/alipay_reward.png" width="260" /> |
 
 
 # 📱 WeChat Official Account (微信公众号):
