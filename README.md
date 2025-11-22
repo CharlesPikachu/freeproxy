@@ -232,6 +232,19 @@ proxied_session_client = freeproxy.ProxiedSessionClient(proxy_sources=proxy_sour
 [![Star History Chart](https://api.star-history.com/svg?repos=CharlesPikachu/freeproxy&type=date&legend=top-left)](https://www.star-history.com/#CharlesPikachu/freeproxy&type=date&legend=top-left)
 
 
+# ☕ Appreciation (赞赏 / 打赏)
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/CharlesPikachu/freeproxy/master/.github/pictures/wechat_reward.jpg"
+       alt="WeChat Appreciation QR Code"
+       width="260" />
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="https://raw.githubusercontent.com/CharlesPikachu/freeproxy/master/.github/pictures/alipay_reward.jpg"
+       alt="Alipay Appreciation QR Code"
+       width="260" />
+</p>
+
+
 # 📱 WeChat Official Account (微信公众号):
 
 Charles的皮卡丘 (*Charles_pikachu*)  
