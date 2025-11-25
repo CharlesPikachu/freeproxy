@@ -17,10 +17,10 @@
     <img alt="license" src="https://img.shields.io/github/license/CharlesPikachu/freeproxy.svg">
   </a>
   <a href="https://pypi.org/project/pyfreeproxy/">
-    <img alt="PyPI - Downloads (pepy mirror)" src="https://pepy.tech/badge/pyfreeproxy">
+    <img src="https://static.pepy.tech/badge/pyfreeproxy" alt="PyPI - Downloads">
   </a>
   <a href="https://pypi.org/project/pyfreeproxy/">
-    <img alt="PyPI - Downloads" src="https://img.shields.io/pypi/dm/pyfreeproxy?style=flat-square">
+    <img src="https://static.pepy.tech/badge/pyfreeproxy/month" alt="PyPI - Downloads">
   </a>
   <a href="https://github.com/CharlesPikachu/freeproxy/issues">
     <img alt="issue resolution" src="https://isitmaintained.com/badge/resolution/CharlesPikachu/freeproxy.svg">
