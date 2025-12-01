@@ -227,6 +227,22 @@ proxied_session_client = freeproxy.ProxiedSessionClient(proxy_sources=proxy_sour
 - [NovelDL](https://github.com/CharlesPikachu/noveldl): Search and download novels from some specific websites.
 
 
+# 📚 Citation
+
+If you use this project in your research, please cite the repository.
+
+```
+@misc{freeproxy2022,
+    author = {Zhenchao Jin},
+    title = {FreeProxy: Collecting free proxies from internet},
+    year = {2022},
+    publisher = {GitHub},
+    journal = {GitHub repository},
+    howpublished = {\url{https://github.com/CharlesPikachu/freeproxy}},
+}
+```
+
+
 # 🌟 Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=CharlesPikachu/freeproxy&type=date&legend=top-left)](https://www.star-history.com/#CharlesPikachu/freeproxy&type=date&legend=top-left)
