@@ -330,6 +330,10 @@ and also requires the proxy server’s response time when requesting the `test_u
 The `protocol` argument can be either a single string or a list. 
 The available options include `http`, `https`, `socks4` and `socks5`.
 
+Currently, the implementation of freeproxy does not use asynchronous operations or spawn a large number of threads for parallel testing. 
+Therefore, when too many proxies are scraped, setting `max_tcp_ms` or `max_http_ms` can cause the program to freeze for a long time. 
+In general, it is not recommended to use these two speed-test arguments during crawling; if needed, you can run a separate script to test the proxies after the crawl is finished.
+
 #### `freeproxy.freeproxy.ProxiedSessionClient`
 
 `ProxiedSessionClient` provides a unified interface for all supported proxy sources. You can call it as shown in the following example:
