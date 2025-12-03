@@ -36,6 +36,7 @@ def filterinvalidproxies(func):
             ok, reason = p.selfcheck()
             if ok: valid.append(p)
             else: invalid_info.append((p, reason))
+        # logging if necessary
         if args:
             self_obj = args[0]
             logger_handle: LoggerHandle = getattr(self_obj, "logger_handle", None)
@@ -53,6 +54,10 @@ def filterinvalidproxies(func):
             if p.proxy in unique_identifiers: continue
             unique_identifiers.add(p.proxy)
             unique_proxy_infos.append(p)
+        # setting to class attributes
+        if args:
+            self_obj = args[0]
+            self_obj.candidate_proxies = unique_proxy_infos
         # return
         return unique_proxy_infos
     return wrapper
@@ -86,6 +91,7 @@ def applyfilterrule():
                 if max_tcp_ms is not None and p.tcp_connect_delay > max_tcp_ms: continue
                 if max_http_ms is not None and p.http_connect_delay > max_http_ms: continue
                 filtered.append(p)
+            self.candidate_proxies = filtered
             return filtered
         return wrapper
     return decorator

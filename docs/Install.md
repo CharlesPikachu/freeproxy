@@ -19,3 +19,7 @@ git clone https://github.com/CharlesPikachu/freeproxy.git
 cd freeproxy
 python setup.py install
 ```
+
+Please note that some proxy sources need to be crawled using [Playwright](https://playwright.dev/). 
+Playwright will automatically download and configure the browser drivers, so there is no need to worry — it is not malware. 
+For more details, you can refer to the [official Playwright documentation](https://playwright.dev/docs/intro).

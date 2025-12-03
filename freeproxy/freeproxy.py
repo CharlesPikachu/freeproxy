@@ -74,8 +74,12 @@ class ProxiedSessionClient():
                 continue
     '''getrandomproxy'''
     def getrandomproxy(self, proxy_format: str = 'requests'):
-        proxied_session: BaseProxiedSession = random.choice(list(self.proxied_sessions.values()))
-        return proxied_session.getrandomproxy(proxy_format=proxy_format)
+        for _ in range(self.max_tries):
+            try:
+                proxied_session: BaseProxiedSession = random.choice(list(self.proxied_sessions.values()))
+                return proxied_session.getrandomproxy(proxy_format=proxy_format)
+            except:
+                continue
     '''savetojson'''
     def savetojson(self, save_path: dict = './free_proxies.json'):
         touchdir(os.path.dirname(save_path))
@@ -83,7 +87,7 @@ class ProxiedSessionClient():
         for proxied_session_name, proxied_session in self.proxied_sessions.items():
             candidate_proxies: List[ProxyInfo] = proxied_session.candidate_proxies
             free_proxies[proxied_session_name] = [p.todict() for p in candidate_proxies]
-        json.dump(free_proxies, open(save_path, 'w'))
+        json.dump(free_proxies, open(save_path, 'w'), indent=2)
     '''getrandomproxiedsession'''
     def getrandomproxiedsession(self):
         proxied_session_name = random.choice(list(self.proxied_sessions.keys()))
