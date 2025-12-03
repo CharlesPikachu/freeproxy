@@ -332,7 +332,7 @@ The available options include `http`, `https`, `socks4` and `socks5`.
 
 #### `freeproxy.freeproxy.ProxiedSessionClient`
 
-ProxiedSessionClient provides a unified interface for all supported proxy sources. You can call it as shown in the following example:
+`ProxiedSessionClient` provides a unified interface for all supported proxy sources. You can call it as shown in the following example:
 
 ```python
 from freeproxy.freeproxy import ProxiedSessionClient
