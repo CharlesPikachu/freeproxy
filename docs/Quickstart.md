@@ -121,7 +121,7 @@ dict_keys([
 
 #### Stricter Proxy Filtering Strategy
 
-By default, freeproxy fetches all proxies provided by the specified free proxy sources and only validates their format. 
+By default, freeproxy fetches all proxies provided by the specified free proxy sources, only validating their format and performing simple de-duplication.
 If you want to further filter the crawled proxies to obtain a higher-quality proxy pool, you can do so by setting the `filter_rule` argument.
 
 For example, if you want to ensure that the proxy IPs are located in mainland China, you can do the following:
@@ -130,6 +130,7 @@ For example, if you want to ensure that the proxy IPs are located in mainland Ch
 from freeproxy.modules.proxies import IP3366ProxiedSession
 
 ip3366_session = IP3366ProxiedSession(filter_rule={'country_code': ['CN']})
+# all obtained proxies can be accessed by `ip3366_session.candidate_proxies`
 print(ip3366_session.getrandomproxy(proxy_format='freeproxy'))
 ```
 
@@ -154,30 +155,69 @@ ProxyInfo(
 )
 ```
 
-If you want high-anonymity proxies whose addresses are in mainland China, you can do the following:
+If you want high-anonymity proxies whose addresses are in the United States, you can do the following:
 
 ```python
-from freeproxy.modules.proxies import IP89ProxiedSession
+from freeproxy.modules.proxies import SpysoneProxiedSession
 
-ip89_session = IP89ProxiedSession(filter_rule={'anonymity': ['elite']})
-print(ip89_session.getrandomproxy(proxy_format='freeproxy'))
+spy_session = SpysoneProxiedSession(filter_rule={'anonymity': ['elite'], 'country_code': ['US']})
+# all obtained proxies can be accessed by `spy_session.candidate_proxies`
+print(spy_session.getrandomproxy(proxy_format='freeproxy'))
 ```
 
+Sample output is as follows:
+
+```python
+ProxyInfo(
+  source='SpysoneProxiedSession', 
+  protocol='http', 
+  ip='88.216.98.209', 
+  port=48852, 
+  country_code='US',
+  in_chinese_mainland=False, 
+  anonymity='elite', 
+  delay=21515, 
+  test_timeout=5, 
+  test_url='http://www.baidu.com', 
+  test_headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'}, 
+  failed_connection_default_timeout=3600000, 
+  created_at=datetime.datetime(2025, 12, 3, 14, 17, 41, 502702), 
+  extra={}
+)
+```
+
+The `anonymity` argument can be either a single string or a list. 
+The available options include `elite` (high anonymity proxies), `anonymous` (standard anonymous proxies), and `transparent` (transparent proxies).
+
+If you have specific requirements for the proxy type, you can set the `protocol` argument. 
+If you care about server response speed, you can set the `max_tcp_ms` or `max_http_ms` arguments.
+An example code snippet can be written as follows:
+
+```python
+from freeproxy.modules.proxies import FreeproxylistProxiedSession
+
+fpl_session = FreeproxylistProxiedSession(filter_rule={'protocol': ['http', 'https'], 'max_tcp_ms': 10000, 'max_http_ms': 10000})
+# all obtained proxies can be accessed by `fpl_session.candidate_proxies`
+print(fpl_session.getrandomproxy(proxy_format='freeproxy'))
+```
+
+The above code means that it only retrieves HTTP and HTTPS proxies, 
+requires the TCP connection latency between your machine and the proxy server to be no more than 10,000 ms, 
+and also requires the proxy server’s response time when requesting the `test_url` (which defaults to http://www.baidu.com) to be no more than 10,000 ms.
+
+The `protocol` argument can be either a single string or a list. 
+The available options include `http`, `https`, `socks4` and `socks5`.
 
 #### `freeproxy.freeproxy.ProxiedSessionClient`
 
-
-
-
-
-
-Then, you can use code like this to automatically set a free proxy found online and send a GET / POST request to a website,
+ProxiedSessionClient provides a unified interface for all supported proxy sources. You can call it as shown in the following example:
 
 ```python
-from freeproxy import freeproxy
+from freeproxy.freeproxy import ProxiedSessionClient
 
 proxy_sources = ['KuaidailiProxiedSession']
-proxied_session_client = freeproxy.ProxiedSessionClient(proxy_sources=proxy_sources)
+init_proxied_session_cfg = {'filter_rule': {'country_code': ['CN', 'US']}}
+proxied_session_client = ProxiedSessionClient(proxy_sources=proxy_sources, init_proxied_session_cfg=init_proxied_session_cfg)
 headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36'
 }
@@ -194,69 +234,16 @@ proxy_sources = ['ProxydbProxiedSession']
 proxied_session_client = freeproxy.ProxiedSessionClient(proxy_sources=proxy_sources, disable_print=True)
 ```
 
-#### Making requests with a proxy-enabled session
+`ProxiedSessionClient` automatically maintains a proxy pool in which all proxies satisfy the `filter_rule` criteria. 
+Each time you call the `.get` or `.post` method, it will consume at least one proxy from the pool, and when the pool is running low, 
+it will automatically fetch and replenish more proxies. 
+The usage of `.get` and `.post` is exactly the same as `requests.get` and `requests.post`.
 
-Use the following code to make a request to any website with a randomly selected proxy by default,
+The arguments supported when initializing the `ProxiedSessionClient` class are as follows:
 
-```python
-from freeproxy import freeproxy
+- `proxy_sources` (`list`): The proxy sources to use. Currently supported proxies see [Supported Proxy Sources](https://github.com/CharlesPikachu/freeproxy?tab=readme-ov-file#-supported-proxy-sources) or call `from freeproxy.modules import ProxiedSessionBuilder; print(ProxiedSessionBuilder.REGISTERED_MODULES.keys())`.
+- `init_proxied_session_cfg` (`dict`): Accepts the same options as `requests.Session`, plus an extra `max_pages` field and an extra `filter_rule` field that specifies how many pages of proxies to fetch from each free source and the rules to filter fetched proxies.
+- `disable_print` (`bool`): Whether to suppress proxy usage logs in the terminal.
+- `max_tries` (`int`): The maximum number of attempts for each `.get` and `.post` call.
 
-proxy_sources = ['KuaidailiProxiedSession']
-proxied_session_client = freeproxy.ProxiedSessionClient(proxy_sources=proxy_sources)
-headers = {
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36'
-}
-resp = proxied_session_client.get('https://space.bilibili.com/406756145', headers=headers)
-print(resp.text)
-```
-
-Supported arguments for `ProxiedSessionClient`:
-
-- `proxy_sources` (`list`, default: `['KuaidailiProxiedSession', 'IP3366ProxiedSession', 'QiyunipProxiedSession', 'Tomcat1235ProxiedSession', 'ProxydailyProxiedSession', 'SpysoneProxiedSession']`): The proxy sources to use. Currently supported proxies see [Supported Proxy Sources](https://github.com/CharlesPikachu/freeproxy?tab=readme-ov-file#-supported-proxy-sources) or call `from freeproxy.modules import ProxiedSessionBuilder; ProxiedSessionBuilder.REGISTERED_MODULES.keys()`.
-- `init_proxied_session_cfg` (`dict`, default: `{'max_pages': 1}`): Accepts the same options as `requests.Session`, plus an extra `max_pages` field that specifies how many pages of proxies to fetch from each free source.
-- `disable_print` (`bool`, default: `False`): Whether to suppress proxy usage logs in the terminal.
-
-Supported arguments for `proxied_session_client.get` is the same as [requests.Session.get](https://requests.readthedocs.io/en/latest/).
-
-Supported arguments for `proxied_session_client.post` is the same as [requests.Session.post](https://requests.readthedocs.io/en/latest/).
-
-#### Retrieve a random free proxy
-
-The following snippet selects a random proxy from the pool,
-
-```python
-from freeproxy import freeproxy
-
-proxy_sources = ['KuaidailiProxiedSession']
-proxied_session_client = freeproxy.ProxiedSessionClient(proxy_sources=proxy_sources)
-proxy = proxied_session_client.getrandomproxy()
-print(proxy)
-```
-
-Example output,
-
-```
-{'http': 'http://103.158.62.186:8088', 'https': 'socks5://103.158.62.186:8088'}
-```
-
-You should note that our proxy output format follows the `proxies` format used by the `requests` module. 
-In other words, for `'https': 'socks5://103.158.62.186:8088'`, the proxy protocol is `socks5`, not `https`.
-
-#### Retrieve a random proxied session
-
-The following snippet initializes a `proxied_session` restricted to one proxy source (randomly sampled):
-
-```python
-from freeproxy import freeproxy
-
-proxy_sources = ['KuaidailiProxiedSession']
-proxied_session_client = freeproxy.ProxiedSessionClient(proxy_sources=proxy_sources)
-proxied_session_name, proxied_session = proxied_session_client.getrandomproxiedsession()
-print(proxied_session_name, proxied_session)
-```
-
-Example output,
-
-```
-('KuaidailiProxiedSession', <modules.proxies.kuaidaili.KuaidailiProxiedSession object at 0x000002CE2D137220>)
-```
+You can refer to freeproxy’s source code to unlock more features. The overall codebase is not very large.

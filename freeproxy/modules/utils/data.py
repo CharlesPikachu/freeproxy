@@ -28,7 +28,7 @@ class ProxyInfo:
     in_chinese_mainland: bool | None = None
     anonymity: str | None = None
     delay: int | None = None
-    test_timeout: int = 5
+    test_timeout: int = 60
     test_url: str = "http://www.baidu.com"
     test_headers: Dict[str, Any] = field(default_factory=lambda: {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"})
     failed_connection_default_timeout: int = 3600000
@@ -46,7 +46,7 @@ class ProxyInfo:
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.settimeout(self.test_timeout)
         try:
-            s.connect((self.ip, self.port))
+            s.connect((self.ip, int(float(self.port))))
             elapsed_ms = int((time.monotonic() - start) * 1000)
             return elapsed_ms
         except (socket.timeout, OSError):

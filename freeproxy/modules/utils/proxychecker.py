@@ -64,8 +64,11 @@ def filterinvalidproxies(func):
 
 
 '''__tolist__'''
-def __tolist__(obj: Optional[str | list] = None):
-    obj = obj or []
+def __tolist__(obj: Optional[str | list | tuple] = None):
+    try:
+        obj = list(obj or [])
+    except:
+        obj = []
     if isinstance(obj, str): obj: list[str] = [obj]
     return [o.lower() for o in obj]
 
@@ -88,8 +91,8 @@ def applyfilterrule():
                 if anonymity and (p.anonymity.lower() not in anonymity): continue
                 if protocol and (p.protocol.lower() not in protocol): continue
                 if country_code and (p.country_code.lower() not in country_code): continue
-                if max_tcp_ms is not None and p.tcp_connect_delay > max_tcp_ms: continue
-                if max_http_ms is not None and p.http_connect_delay > max_http_ms: continue
+                if (max_tcp_ms is not None) and isinstance(max_tcp_ms, (int, float)) and p.tcp_connect_delay > max_tcp_ms: continue
+                if (max_http_ms is not None) and isinstance(max_tcp_ms, (int, float)) and p.http_connect_delay > max_http_ms: continue
                 filtered.append(p)
             self.candidate_proxies = filtered
             return filtered
