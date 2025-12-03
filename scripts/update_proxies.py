@@ -6,62 +6,36 @@ Author:
 WeChat Official Account (微信公众号):
     Charles的皮卡丘
 '''
-import requests
 import json
+import requests
 from datetime import datetime
 
 
 # APIs
-JSON_ENDPOINTS = [
+JSON_ENDPOINTS1 = [
     {"url": "https://proxy-daily.com/api/serverside/proxies?draw=1&start=0&length=100"},
     {"url": "https://proxy-daily.com/api/serverside/proxies?draw=2&start=100&length=100"},
     {"url": "https://proxy-daily.com/api/serverside/proxies?draw=3&start=200&length=100"},
     {"url": "https://proxy-daily.com/api/serverside/proxies?draw=4&start=300&length=100"},
     {"url": "https://proxy-daily.com/api/serverside/proxies?draw=5&start=400&length=100"},
 ]
-TEXT_ENDPOINTS = [
-    {"url": "https://www.proxy-list.download/api/v1/get?type=http",   "protocol": "Http"},
-    {"url": "https://www.proxy-list.download/api/v1/get?type=https",  "protocol": "Https"},
-    {"url": "https://www.proxy-list.download/api/v1/get?type=socks4", "protocol": "Socks4"},
-    {"url": "https://www.proxy-list.download/api/v1/get?type=socks5", "protocol": "Socks5"},
+JSON_ENDPOINTS2 = [
+    {"url": "https://cdn.jsdelivr.net/gh/proxifly/free-proxy-list@main/proxies/all/data.json"},
+    {"url": "https://cdn.jsdelivr.net/gh/proxifly/free-proxy-list@main/proxies/countries/us/data.json"},
 ]
+DEFAULT_HEADERS = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"}
 
 
-'''fetchtextendpoint'''
-def fetchtextendpoint(ep):
-    print(f"[TEXT] Fetching {ep['protocol']} from {ep['url']}")
-    resp = requests.get(ep["url"], timeout=25)
-    resp.raise_for_status()
-    text = resp.text
-    proxies = []
-    for line in text.splitlines():
-        line = line.strip()
-        if not line or ":" not in line:
-            continue
-        ip, port = line.split(":", 1)
-        ip = ip.strip()
-        port = port.strip()
-        if not ip or not port:
-            continue
-        try:
-            port_val = int(port)
-        except ValueError:
-            port_val = port
-        proxies.append({"ip": ip, "port": port_val, "protocol": ep["protocol"], "country": None, "anonymity": None, "speed": None})
-    print(f"[TEXT] {ep['protocol']} proxies fetched: {len(proxies)}")
-    return proxies
-
-
-'''fetchjsonendpoint'''
-def fetchjsonendpoint(ep):
+'''fetchjsonendpoint1'''
+def fetchjsonendpoint1(ep):
     url = ep["url"]
-    print(f"[JSON] Fetching from {url}")
+    print(f"[JSON1] Fetching from {url}")
     try:
-        resp = requests.get(url, timeout=25)
+        resp = requests.get(url, timeout=25, headers=DEFAULT_HEADERS)
         resp.raise_for_status()
         data = resp.json()
     except Exception as e:
-        print(f"[JSON] Error fetching JSON endpoint: {e}")
+        print(f"[JSON1] Error fetching JSON endpoint: {e}")
         return []
     rows = data.get("data", []) or []
     proxies = []
@@ -73,23 +47,48 @@ def fetchjsonendpoint(ep):
         proxies.append({
             "ip": ip, "port": port, "protocol": row.get("protocol"), "country": row.get("country"), "anonymity": row.get("anonymity"), "speed": row.get("speed"),
         })
-    print(f"[JSON] proxies fetched: {len(proxies)}")
+    print(f"[JSON1] proxies fetched: {len(proxies)}")
+    return proxies
+
+
+'''fetchjsonendpoint2'''
+def fetchjsonendpoint2(ep):
+    url = ep["url"]
+    print(f"[JSON2] Fetching from {url}")
+    try:
+        resp = requests.get(url, timeout=25, headers=DEFAULT_HEADERS)
+        resp.raise_for_status()
+        data = resp.json()
+    except Exception as e:
+        print(f"[JSON2] Error fetching JSON endpoint: {e}")
+        return []
+    rows = data or []
+    proxies = []
+    for row in rows:
+        ip = row.get("ip")
+        port = row.get("port")
+        if not ip or not port:
+            continue
+        proxies.append({
+            "ip": ip, "port": port, "protocol": row.get("protocol"), "country": row.get("geolocation", {}).get("country"), "anonymity": row.get("anonymity"), "speed": row.get("speed", 100),
+        })
+    print(f"[JSON2] proxies fetched: {len(proxies)}")
     return proxies
 
 
 '''main'''
 def main():
     all_proxies = []
-    for ep in JSON_ENDPOINTS:
+    for ep in JSON_ENDPOINTS1:
         try:
-            all_proxies.extend(fetchjsonendpoint(ep))
-        except Exception as e:
-            print(f"[WARN] Failed to fetch JSON endpoint: {e}")
-    for ep in TEXT_ENDPOINTS:
+            all_proxies.extend(fetchjsonendpoint1(ep))
+        except Exception as err:
+            print(f"[WARN] Failed to fetch JSON1 endpoint {ep}: {err}")
+    for ep in JSON_ENDPOINTS2:
         try:
-            all_proxies.extend(fetchtextendpoint(ep))
-        except Exception as e:
-            print(f"[WARN] Failed to fetch {ep['protocol']}: {e}")
+            all_proxies.extend(fetchjsonendpoint2(ep))
+        except Exception as err:
+            print(f"[WARN] Failed to fetch JSON2 endpoint {ep}: {err}")
     uniq = {}
     for p in all_proxies:
         key = (p["ip"], p["port"], p["protocol"])
