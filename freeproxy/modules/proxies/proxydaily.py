@@ -7,20 +7,40 @@ WeChat Official Account (微信公众号):
     Charles的皮卡丘
 '''
 import time
+import random
 import requests
 from .base import BaseProxiedSession
-from ..utils import ensurevalidrequestsproxies
+from ..utils import filterinvalidproxies, applyfilterrule, ProxyInfo
 
 
 '''ProxydailyProxiedSession'''
 class ProxydailyProxiedSession(BaseProxiedSession):
+    source = 'ProxydailyProxiedSession'
+    homepage = 'https://proxy-daily.com/'
     def __init__(self, **kwargs):
         super(ProxydailyProxiedSession, self).__init__(**kwargs)
     '''refreshproxies'''
-    @ensurevalidrequestsproxies
+    @applyfilterrule()
+    @filterinvalidproxies
     def refreshproxies(self):
         # initialize
-        self.candidate_proxies = []
+        self.candidate_proxies, session = [], requests.Session()
+        headers = {
+            "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+            "Accept-Encoding": "gzip, deflate, br, zstd",
+            "Accept-Language": "zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7",
+            "Cache-Control": "max-age=0",
+            "Priority": "u=0, i",
+            "sec-ch-ua": '"Chromium";v="142", "Google Chrome";v="142", "Not_A Brand";v="99"',
+            "sec-ch-ua-mobile": "?0",
+            "sec-ch-ua-platform": '"Windows"',
+            "Sec-Fetch-Dest": "document",
+            "Sec-Fetch-Mode": "navigate",
+            "Sec-Fetch-Site": "none",
+            "Sec-Fetch-User": "?1",
+            "Upgrade-Insecure-Requests": "1",
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36",
+        }
         # obtain proxies
         for page in range(1, self.max_pages+1):
             params = {
@@ -35,10 +55,21 @@ class ProxydailyProxiedSession(BaseProxiedSession):
                 "columns[5][searchable]": "true", "columns[5][orderable]": "false", "columns[5][search][value]": "", "columns[5][search][regex]": "false",
                 "start": f"{(page - 1) * 100}", "length": "100", "search[value]": "", "search[regex]": "false", "_": f"{int(time.time() * 1000)}"
             }
-            resp = requests.get('https://proxy-daily.com/api/serverside/proxies', headers=self.randomheaders(), params=params)
-            if resp.status_code != 200: continue
-            for item in resp.json().get('data', []):
-                formatted_proxy = f"{item['protocol'].lower()}://{item['ip']}:{item['port']}"
-                self.candidate_proxies.append({'http': formatted_proxy, 'https': formatted_proxy})
+            try:
+                resp = session.get('https://proxy-daily.com/api/serverside/proxies', headers=self.getrandomheaders(headers_override=headers), params=params)
+                resp.raise_for_status()
+                data_items = resp.json()['data']
+            except:
+                continue
+            for item in data_items:
+                try:
+                    protocol = random.choice(item['protocol'].split(','))
+                    proxy_info = ProxyInfo(
+                        source=self.source, protocol=protocol.strip().lower(), ip=item['ip'], port=item['port'], anonymity=item['anonymity'].lower(), 
+                        country_code=item['country'], delay=item['speed'], in_chinese_mainland=(item['country'].lower() in ['cn'])
+                    )
+                except:
+                    continue
+                self.candidate_proxies.append(proxy_info)
         # return
         return self.candidate_proxies

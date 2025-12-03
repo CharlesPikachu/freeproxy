@@ -10,28 +10,36 @@ import random
 import requests
 import ipaddress
 from fake_useragent import UserAgent
+from ..utils import LoggerHandle, ProxyInfo
 
 
 '''BaseProxiedSession'''
 class BaseProxiedSession(requests.Session):
-    def __init__(self, max_pages=1, **kwargs):
+    source = "BaseProxiedSession"
+    homepage = "https://github.com/CharlesPikachu/freeproxy"
+    def __init__(self, max_pages=1, logger_handle: LoggerHandle | None = None, disable_print: bool = False, filter_rule: dict = None, **kwargs):
         super(BaseProxiedSession, self).__init__(**kwargs)
         self.max_pages = max_pages
+        self.logger_handle = logger_handle if logger_handle else LoggerHandle()
+        self.disable_print = disable_print
+        self.filter_rule = filter_rule or {}
         self.candidate_proxies = []
     '''refreshproxies'''
     def refreshproxies(self):
         raise NotImplementedError('not to be implemented')
     '''getrandomproxy'''
-    def getrandomproxy(self):
+    def getrandomproxy(self, proxy_format: str = 'requests'):
+        assert proxy_format in ['requests', 'freeproxy']
         if len(self.candidate_proxies) < 1: self.refreshproxies()
         idx = random.randint(0, len(self.candidate_proxies)-1)
-        return self.candidate_proxies.pop(idx)
+        proxy: ProxyInfo = self.candidate_proxies.pop(idx)
+        return proxy if proxy_format in ['freeproxy'] else proxy.requests_format_proxy
     '''setrandomproxy'''
-    def randomsetproxy(self):
-        self.proxies = self.getrandomproxy()
+    def setrandomproxy(self):
+        self.proxies = self.getrandomproxy(proxy_format='requests')
         return self.proxies
-    '''randomheaders'''
-    def randomheaders(self, headers_override: dict = None):
+    '''getrandomheaders'''
+    def getrandomheaders(self, headers_override: dict = None):
         # init
         headers_override = headers_override or {}
         # random public ipv4

@@ -9,69 +9,120 @@ WeChat Official Account (微信公众号):
 import re
 import requests
 from bs4 import BeautifulSoup
+from urllib.parse import urlparse
 from .base import BaseProxiedSession
-from ..utils import ensurevalidrequestsproxies
+from ..utils import filterinvalidproxies, applyfilterrule, ProxyInfo
 
 
 '''SpysoneProxiedSession'''
 class SpysoneProxiedSession(BaseProxiedSession):
+    source = 'SpysoneProxiedSession'
+    homepage = 'https://spys.one/en/free-proxy-list/'
     def __init__(self, **kwargs):
         super(SpysoneProxiedSession, self).__init__(**kwargs)
-    '''_buildvaluemap'''
-    def _buildvaluemap(self, soup: BeautifulSoup):
-        val = {}
-        for sc in soup.find_all('script', attrs={'type': 'text/javascript'}):
-            txt = (sc.string or '').replace('\n', '').replace('\r', '')
-            if not (re.search(r'=\d+;', txt) and '^' in txt): continue
-            for name, num in re.findall(r'([a-z0-9]{3,})=(\d+);', txt):
-                val[name] = int(num)
-            for name, num, other in re.findall(r'([a-z0-9]{3,})=(\d+)\^([a-z0-9]{3,});', txt):
-                if other in val: val[name] = int(num) ^ val[other]
-            if val: return val
-        return val
-    '''_decodeportfromcell'''
-    def _decodeportfromcell(self, td: BeautifulSoup, valmap: dict):
-        sc = td.find('script')
-        if not sc or not sc.string: return ''
-        expr = sc.string
-        pairs = re.findall(r'\((\w+)\^(\w+)\)', expr)
-        digits = []
-        for a, b in pairs:
-            va, vb = valmap.get(a), valmap.get(b)
-            if va is None or vb is None: return ''
-            digits.append(str(va ^ vb))
-        return ''.join(digits)
-    '''_firsttextbeforescript'''
-    def _firsttextbeforescript(self, font_tag: BeautifulSoup):
-        for s in font_tag.strings:
-            s = s.strip()
-            if s: return s
-        return ''
+    '''extractspysproxies'''
+    def extractspysproxies(self, html: str):
+        soup, obf_script = BeautifulSoup(html, 'html.parser'), None
+        for s in soup.find_all('script'):
+            if s.string and "eval(function(p,r,o,x,y,s)" in s.string:
+                obf_script = s.string
+                break
+        if not obf_script: return []
+        m = re.search(r"return p\}\('([^']+)',(\d+),(\d+),'([^']+)'\.split\('([^']*)'\),0,\{\}\)\)", obf_script)
+        if not m: return []
+        p_code, base, cnt, dict_str, sep = m.groups()
+        base, cnt = int(base), int(cnt)
+        tokens = dict_str.split('^')
+        def _yfunc(c: int, r: int) -> str:
+            if c < r:
+                if c > 35: return chr(c + 29)
+                else:
+                    chars = "0123456789abcdefghijklmnopqrstuvwxyz"
+                    return chars[c]
+            else:
+                prefix = _yfunc(int(c / r), r)
+                c = c % r
+                if c > 35: sfx = chr(c + 29)
+                else:
+                    chars = "0123456789abcdefghijklmnopqrstuvwxyz"
+                    sfx = chars[c]
+                return prefix + sfx
+        def _unpack(p: str, r: int, c: int, k: list[str]) -> str:
+            for idx in range(c - 1, -1, -1):
+                if k[idx]:
+                    word = _yfunc(idx, r)
+                    p = re.sub(r"\b%s\b" % re.escape(word), k[idx], p)
+            return p
+        decoded = _unpack(p_code, base, cnt, tokens)
+        env = {}
+        exec(decoded.replace(";", "\n"), {}, env)
+        proxies = []
+        anonymity_map = {'NOA': 'transparent', 'ANM': 'anonymous', 'HIA': 'elite'}
+        for row in soup.find_all('tr', onmouseover=True):
+            tds = row.find_all('td')
+            if len(tds) < 6: continue
+            ip_font = tds[0].find('font', class_='spy14')
+            if not ip_font or not ip_font.contents: continue
+            ip = str(ip_font.contents[0]).strip()
+            script = tds[0].find('script')
+            if not script or not script.string: continue
+            pairs = re.findall(r'(\w+)\^(\w+)', script.string)
+            if not pairs: continue
+            port_digits = []
+            for left, right in pairs:
+                v1 = env[left] if left in env else int(left)
+                v2 = env[right] if right in env else int(right)
+                port_digits.append(str(v1 ^ v2))
+            port = int("".join(port_digits))
+            type_text = tds[1].get_text(" ", strip=True).upper()
+            if 'SOCKS5' in type_text: protocol = 'socks5'
+            elif 'SOCKS4' in type_text or 'SOCKS ' in type_text: protocol = 'socks4'
+            elif 'HTTPS' in type_text or 'SSL' in type_text: protocol = 'https'
+            else: protocol = 'http'
+            anonymity_raw = tds[2].get_text(strip=True)
+            anonymity = anonymity_map.get(anonymity_raw, anonymity_raw)
+            latency_text = tds[5].get_text(strip=True)
+            try: delay_ms = int(float(latency_text.replace(',', '.')) * 1000)
+            except ValueError: delay_ms = None
+            proxies.append({"ip": ip, "port": port, "protocol": protocol, "anonymity": anonymity, "anonymity_raw": anonymity_raw, "delay_ms": delay_ms})
+        return proxies
     '''refreshproxies'''
-    @ensurevalidrequestsproxies
+    @applyfilterrule()
+    @filterinvalidproxies
     def refreshproxies(self):
         # initialize
-        self.candidate_proxies = []
-        headers = {
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
-        }
+        self.candidate_proxies, session = [], requests.Session()
+        headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"}
         # obtain proxies
-        resp = requests.get('https://spys.one/en/free-proxy-list/', headers=self.randomheaders(headers_override=headers))
-        if resp.status_code != 200: return self.candidate_proxies
-        soup = BeautifulSoup(resp.text, 'lxml')
-        valmap = self._buildvaluemap(soup)
-        rows = soup.find_all('tr', class_=re.compile(r'^spy1x{0,3}$'))
+        try:
+            resp = session.get('https://spys.one/en/free-proxy-list/', headers=self.getrandomheaders(headers_override=headers))
+            resp.raise_for_status()
+            soup = BeautifulSoup(resp.text, 'lxml')
+            rows = soup.find_all('tr', class_=re.compile(r'^spy1x{0,3}$'))
+        except:
+            return self.candidate_proxies
+        urls = []
         for tr in rows:
             tds = tr.find_all('td')
-            if len(tds) < 2: continue
-            ip_font = tds[0].find('font', class_='spy14')
-            if not ip_font: continue
-            ip = self._firsttextbeforescript(ip_font)
-            port = self._decodeportfromcell(tds[0], valmap)
-            if not ip or not port: continue
-            proto_font = tds[1].find('font', class_='spy1')
-            protocol = (proto_font.get_text(strip=True).lower() if proto_font else '').strip()
-            if not protocol: continue
-            self.candidate_proxies.append({'http': f"{protocol}://{ip}:{port}", 'https': f"{protocol}://{ip}:{port}"})
+            try:
+                urls.append(f"https://spys.one{tds[3].find('a')['href']}")
+            except:
+                continue
+        urls: list[str] = list(set(urls))
+        if not urls: return self.candidate_proxies
+        for url in urls:
+            try:
+                resp = session.get(url, headers=self.getrandomheaders(headers_override=headers))
+                resp.raise_for_status()
+                results = self.extractspysproxies(resp.text)
+            except:
+                continue
+            country_code = urlparse(url).path.strip('/').split('/')[-1].upper()
+            for result in results:
+                proxy_info = ProxyInfo(
+                    source=self.source, ip=result['ip'], port=result['port'], protocol=result['protocol'], anonymity=result['anonymity'], 
+                    delay=result['delay_ms'], country_code=country_code, in_chinese_mainland=(country_code.lower() in ['cn'])
+                )
+                self.candidate_proxies.append(proxy_info)
         # return
         return self.candidate_proxies
