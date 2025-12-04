@@ -17,7 +17,7 @@ WORKDIR /app
 COPY freeproxy/ ./freeproxy/
 COPY requirements.txt .
 
-# Install Python dependencies (including Flask & redis)
+# Install Python dependencies (including Flask)
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Install Playwright browsers and dependencies

@@ -55,7 +55,7 @@ def refresh_proxies_task():
                 "filter_rule": None,
             },
         )
-        temp_client.save_to_redis()
+        temp_client.save_to_file()
         print("Scheduled proxy refresh complete.")
     except Exception as e:
         print(f"Error during scheduled proxy refresh: {e}")
@@ -64,7 +64,7 @@ def refresh_proxies_task():
 # We run this in a separate thread or just let the scheduler handle the first run if we want faster startup,
 # but usually we want data immediately. Let's keep the initial sync.
 print("Performing initial proxy crawl...")
-client.save_to_redis()
+client.save_to_file()
 
 # Setup Scheduler
 from apscheduler.schedulers.background import BackgroundScheduler
@@ -140,7 +140,7 @@ def get_proxies():
     Return cached proxies (JSON) with optional filtering.
     """
     # Load from Redis (or fallback to empty dict)
-    data = client.load_from_redis()
+    data = client.load_from_file()
     # Flatten: {source: [proxy_dict, ...]} -> list of dicts with a `source` field
     flat = []
     for src, lst in data.items():

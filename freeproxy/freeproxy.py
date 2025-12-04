@@ -184,56 +184,36 @@ class ProxiedSessionClient:
         raise RuntimeError(f"POST request failed after {self.max_tries} attempts: {url}")
 
     # ---------------------------------------------------------------------
-    # Redis caching
+    # File caching
     # ---------------------------------------------------------------------
-    def save_to_redis(self, redis_key: str = "freeproxy:proxies"):
-        """Cache the collected proxy list in Redis as a JSON string.
+    def save_to_file(self, filepath: str = "proxies.json"):
+        """Save the collected proxy list to a JSON file.
         """
-        try:
-            import redis
-        except Exception as e:
-            self.logger_handle.error(
-                f"Redis library not available: {e}", disable_print=self.disable_print
-            )
-            return
-        try:
-            host = os.getenv("REDIS_HOST", "localhost")
-            r = redis.StrictRedis(host=host, port=6379, db=0, decode_responses=True)
-        except Exception as e:
-            self.logger_handle.error(
-                f"Failed to connect to Redis: {e}", disable_print=self.disable_print
-            )
-            return
         # Build the same structure that ``savetojson`` used previously
         data: Dict[str, List[dict]] = {}
         for name, session in self.proxied_sessions.items():
             data[name] = [p.todict() for p in session.candidate_proxies]
         try:
-            r.set(redis_key, json.dumps(data, ensure_ascii=False))
+            with open(filepath, "w", encoding="utf-8") as f:
+                json.dump(data, f, ensure_ascii=False, indent=4)
             self.logger_handle.info(
-                f"Proxies cached in Redis key '{redis_key}'", disable_print=self.disable_print
+                f"Proxies saved to file '{filepath}'", disable_print=self.disable_print
             )
         except Exception as e:
             self.logger_handle.error(
-                f"Failed to write proxies to Redis: {e}", disable_print=self.disable_print
+                f"Failed to write proxies to file: {e}", disable_print=self.disable_print
             )
 
-    def load_from_redis(self, redis_key: str = "freeproxy:proxies") -> Dict[str, List[dict]]:
-        """Load cached proxies from Redis.
+    def load_from_file(self, filepath: str = "proxies.json") -> Dict[str, List[dict]]:
+        """Load cached proxies from a JSON file.
 
-        Returns an empty dict if the key does not exist or on error.
+        Returns an empty dict if the file does not exist or on error.
         """
-        try:
-            import redis
-        except Exception:
+        if not os.path.exists(filepath):
             return {}
         try:
-            host = os.getenv("REDIS_HOST", "localhost")
-            r = redis.StrictRedis(host=host, port=6379, db=0, decode_responses=True)
-            raw = r.get(redis_key)
-            if not raw:
-                return {}
-            return json.loads(raw)
+            with open(filepath, "r", encoding="utf-8") as f:
+                return json.load(f)
         except Exception:
             return {}
 
@@ -258,4 +238,4 @@ if __name__ == "__main__":
     except Exception as e:
         print(f"Demo request failed: {e}")
     # Cache proxies
-    client.save_to_redis()
+    client.save_to_file()
