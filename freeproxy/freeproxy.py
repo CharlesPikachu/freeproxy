@@ -29,7 +29,7 @@ class ProxiedSessionClient():
         if proxy_sources is None or not proxy_sources: proxy_sources = ProxiedSessionBuilder.REGISTERED_MODULES.keys()
         if init_proxied_session_cfg is None: init_proxied_session_cfg = dict(max_pages=1, logger_handle=self.logger_handle, disable_print=disable_print, filter_rule=None)
         for source in proxy_sources:
-            self.logger_handle.info(f'{self.__class__.__name__}.__init__ >>> initializing {source}.')
+            self.logger_handle.info(f'{self.__class__.__name__}.__init__ >>> initializing {source}.', disable_print=disable_print)
             try:
                 module_cfg = copy.deepcopy(init_proxied_session_cfg)
                 module_cfg['type'] = source
@@ -40,6 +40,7 @@ class ProxiedSessionClient():
                 self.logger_handle.error(f'{self.__class__.__name__}.__init__ >>> {source} (Error: {err})', disable_print=disable_print)
                 if source in self.proxied_sessions: self.proxied_sessions.pop(source)
                 continue
+            self.logger_handle.info(f'{self.__class__.__name__}.__init__ >>> initializing {source} done, fetched {len(candidate_proxies)} proxies.', disable_print=disable_print)
         # set attributes
         self.max_tries = max_tries
         self.disable_print = disable_print

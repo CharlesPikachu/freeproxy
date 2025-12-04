@@ -7,6 +7,7 @@ WeChat Official Account (微信公众号):
     Charles的皮卡丘
 '''
 import requests
+from tqdm import tqdm
 from bs4 import BeautifulSoup
 from .base import BaseProxiedSession
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -51,7 +52,9 @@ class Tomcat1235ProxiedSession(BaseProxiedSession):
             future_map = {
                 executor.submit(IPLocater.locate, p.ip): p for p in self.candidate_proxies
             }
-            for future in as_completed(future_map):
+            if not self.disable_print: future_map_wrapper = tqdm(as_completed(future_map), desc=f"{self.source} >>> adding country_code")
+            else: future_map_wrapper = as_completed(future_map)
+            for future in future_map_wrapper:
                 try:
                     country_code = future.result()
                     assert country_code

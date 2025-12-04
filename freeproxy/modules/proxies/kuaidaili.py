@@ -9,6 +9,7 @@ WeChat Official Account (微信公众号):
 import re
 import requests
 import json_repair
+from tqdm import tqdm
 from .base import BaseProxiedSession
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from ..utils import filterinvalidproxies, applyfilterrule, ProxyInfo, IPLocater
@@ -118,7 +119,9 @@ class KuaidailiProxiedSession(BaseProxiedSession):
             future_map = {
                 executor.submit(IPLocater.locate, p.ip): p for p in self.candidate_proxies
             }
-            for future in as_completed(future_map):
+            if not self.disable_print: future_map_wrapper = tqdm(as_completed(future_map), desc=f"{self.source} >>> adding country_code")
+            else: future_map_wrapper = as_completed(future_map)
+            for future in future_map_wrapper:
                 try:
                     country_code = future.result()
                     assert country_code

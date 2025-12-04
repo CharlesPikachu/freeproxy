@@ -8,6 +8,7 @@ from .qiyunip import QiyunipProxiedSession
 from .kxdaili import KxdailiProxiedSession
 from .proxydb import ProxydbProxiedSession
 from .spysone import SpysoneProxiedSession
+from .databay import DatabayProxiedSession
 from .proxifly import ProxiflyProxiedSession
 from .proxyhub import ProxyhubProxiedSession
 from .proxylist import ProxylistProxiedSession
@@ -24,7 +25,7 @@ class ProxiedSessionBuilder(BaseModuleBuilder):
         'IP89ProxiedSession': IP89ProxiedSession, 'IP3366ProxiedSession': IP3366ProxiedSession, 'KuaidailiProxiedSession': KuaidailiProxiedSession,
         'KxdailiProxiedSession': KxdailiProxiedSession, 'ProxydailyProxiedSession': ProxydailyProxiedSession, 'ProxydbProxiedSession': ProxydbProxiedSession,
         'ProxyhubProxiedSession': ProxyhubProxiedSession, 'ProxylistProxiedSession': ProxylistProxiedSession, 'QiyunipProxiedSession': QiyunipProxiedSession,
-        'SpysoneProxiedSession': SpysoneProxiedSession, 'Tomcat1235ProxiedSession': Tomcat1235ProxiedSession, 
+        'SpysoneProxiedSession': SpysoneProxiedSession, 'Tomcat1235ProxiedSession': Tomcat1235ProxiedSession, 'DatabayProxiedSession': DatabayProxiedSession,
     }
 
 
