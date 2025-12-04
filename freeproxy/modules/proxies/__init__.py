@@ -1,17 +1,11 @@
 '''initialize'''
 from .base import BaseProxiedSession
-from .ip89 import IP89ProxiedSession
 from ..utils import BaseModuleBuilder
-from .ihuan import IhuanProxiedSession
-from .ip3366 import IP3366ProxiedSession
-from .qiyunip import QiyunipProxiedSession
-from .kxdaili import KxdailiProxiedSession
 from .proxydb import ProxydbProxiedSession
 from .spysone import SpysoneProxiedSession
 from .proxifly import ProxiflyProxiedSession
 from .proxyhub import ProxyhubProxiedSession
 from .proxylist import ProxylistProxiedSession
-from .kuaidaili import KuaidailiProxiedSession
 from .tomcat1235 import Tomcat1235ProxiedSession
 from .proxydaily import ProxydailyProxiedSession
 from .freeproxylist import FreeproxylistProxiedSession
@@ -20,10 +14,9 @@ from .freeproxylist import FreeproxylistProxiedSession
 '''ProxiedSessionBuilder'''
 class ProxiedSessionBuilder(BaseModuleBuilder):
     REGISTERED_MODULES = {
-        'ProxiflyProxiedSession': ProxiflyProxiedSession, 'FreeproxylistProxiedSession': FreeproxylistProxiedSession, 'IhuanProxiedSession': IhuanProxiedSession,
-        'IP89ProxiedSession': IP89ProxiedSession, 'IP3366ProxiedSession': IP3366ProxiedSession, 'KuaidailiProxiedSession': KuaidailiProxiedSession,
-        'KxdailiProxiedSession': KxdailiProxiedSession, 'ProxydailyProxiedSession': ProxydailyProxiedSession, 'ProxydbProxiedSession': ProxydbProxiedSession,
-        'ProxyhubProxiedSession': ProxyhubProxiedSession, 'ProxylistProxiedSession': ProxylistProxiedSession, 'QiyunipProxiedSession': QiyunipProxiedSession,
+        'ProxiflyProxiedSession': ProxiflyProxiedSession, 'FreeproxylistProxiedSession': FreeproxylistProxiedSession,
+        'ProxydailyProxiedSession': ProxydailyProxiedSession, 'ProxydbProxiedSession': ProxydbProxiedSession,
+        'ProxyhubProxiedSession': ProxyhubProxiedSession, 'ProxylistProxiedSession': ProxylistProxiedSession,
         'SpysoneProxiedSession': SpysoneProxiedSession, 'Tomcat1235ProxiedSession': Tomcat1235ProxiedSession, 
     }
 

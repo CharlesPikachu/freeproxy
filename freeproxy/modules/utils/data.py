@@ -29,7 +29,7 @@ class ProxyInfo:
     anonymity: str | None = None
     delay: int | None = None
     test_timeout: int = 60
-    test_url: str = "https://www.google.com"
+    test_url: str = "https://www.facebook.com"
     test_headers: Dict[str, Any] = field(default_factory=lambda: {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"})
     failed_connection_default_timeout: int = 3600000
     created_at: datetime = field(default_factory=datetime.utcnow)
