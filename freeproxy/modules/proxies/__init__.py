@@ -4,6 +4,7 @@ from .ip89 import IP89ProxiedSession
 from ..utils import BaseModuleBuilder
 from .ihuan import IhuanProxiedSession
 from .ip3366 import IP3366ProxiedSession
+from .geonode import GeonodeProxiedSession
 from .qiyunip import QiyunipProxiedSession
 from .kxdaili import KxdailiProxiedSession
 from .proxydb import ProxydbProxiedSession
@@ -19,6 +20,7 @@ from .fineproxy import FineProxyProxiedSession
 from .thespeedx import TheSpeedXProxiedSession
 from .tomcat1235 import Tomcat1235ProxiedSession
 from .proxydaily import ProxydailyProxiedSession
+from .freeproxydb import FreeProxyDBProxiedSession
 from .freeproxylist import FreeproxylistProxiedSession
 
 
@@ -31,7 +33,7 @@ class ProxiedSessionBuilder(BaseModuleBuilder):
         'ProxyhubProxiedSession': ProxyhubProxiedSession, 'ProxylistProxiedSession': ProxylistProxiedSession, 'QiyunipProxiedSession': QiyunipProxiedSession,
         'SpysoneProxiedSession': SpysoneProxiedSession, 'Tomcat1235ProxiedSession': Tomcat1235ProxiedSession, 'DatabayProxiedSession': DatabayProxiedSession,
         'FineProxyProxiedSession': FineProxyProxiedSession, 'IPLocateProxiedSession': IPLocateProxiedSession, 'JiliuipProxiedSession': JiliuipProxiedSession,
-        'TheSpeedXProxiedSession': TheSpeedXProxiedSession,
+        'TheSpeedXProxiedSession': TheSpeedXProxiedSession, 'GeonodeProxiedSession': GeonodeProxiedSession, 'FreeProxyDBProxiedSession': FreeProxyDBProxiedSession,
     }
 
 

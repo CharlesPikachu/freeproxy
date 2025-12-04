@@ -29,7 +29,6 @@ class IPLocateProxiedSession(BaseProxiedSession):
         urls = {
             'https://raw.githubusercontent.com/iplocate/free-proxy-list/refs/heads/main/all-proxies.txt',
         }
-        # obtain proxies
         headers = {
             "sec-ch-ua": '"Chromium";v="142", "Google Chrome";v="142", "Not_A Brand";v="99"',
             "sec-ch-ua-mobile": "?0",
@@ -41,6 +40,7 @@ class IPLocateProxiedSession(BaseProxiedSession):
             "upgrade-insecure-requests": "1",
             "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36",
         }
+        # obtain proxies
         for url in urls:
             try:
                 resp = session.get(url, headers=self.getrandomheaders(headers_override=headers))

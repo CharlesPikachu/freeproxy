@@ -30,7 +30,6 @@ class TheSpeedXProxiedSession(BaseProxiedSession):
             'socks4': 'https://raw.githubusercontent.com/TheSpeedX/SOCKS-List/master/socks4.txt',
             'http': 'https://raw.githubusercontent.com/TheSpeedX/SOCKS-List/master/http.txt',
         }
-        # obtain proxies
         headers = {
             "sec-ch-ua": '"Chromium";v="142", "Google Chrome";v="142", "Not_A Brand";v="99"',
             "sec-ch-ua-mobile": "?0",
@@ -42,6 +41,7 @@ class TheSpeedXProxiedSession(BaseProxiedSession):
             "upgrade-insecure-requests": "1",
             "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36",
         }
+        # obtain proxies
         for protocol, url in urls.items():
             try:
                 resp = session.get(url, headers=self.getrandomheaders(headers_override=headers))
