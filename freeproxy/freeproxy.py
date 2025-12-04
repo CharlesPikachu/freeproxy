@@ -29,6 +29,7 @@ class ProxiedSessionClient():
         if proxy_sources is None or not proxy_sources: proxy_sources = ProxiedSessionBuilder.REGISTERED_MODULES.keys()
         if init_proxied_session_cfg is None: init_proxied_session_cfg = dict(max_pages=1, logger_handle=self.logger_handle, disable_print=disable_print, filter_rule=None)
         for source in proxy_sources:
+            self.logger_handle.info(f'{self.__class__.__name__}.__init__ >>> initializing {source}.')
             try:
                 module_cfg = copy.deepcopy(init_proxied_session_cfg)
                 module_cfg['type'] = source

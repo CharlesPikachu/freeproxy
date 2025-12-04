@@ -34,6 +34,8 @@ class ProxyInfo:
     failed_connection_default_timeout: int = 3600000
     created_at: datetime = field(default_factory=datetime.utcnow)
     extra: Dict[str, Any] = field(default_factory=dict)
+    _tcp_connect_delay: int | None = None
+    _http_connect_delay: int | None = None
     @property
     def proxy(self) -> str:
         return f"{self.protocol}://{self.ip}:{self.port}"
@@ -42,12 +44,14 @@ class ProxyInfo:
         return {"http": self.proxy, "https": self.proxy}
     @property
     def tcp_connect_delay(self) -> int:
+        if self._tcp_connect_delay: return self._tcp_connect_delay
         start = time.monotonic()
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.settimeout(self.test_timeout)
         try:
             s.connect((self.ip, int(float(self.port))))
             elapsed_ms = int((time.monotonic() - start) * 1000)
+            self._tcp_connect_delay = elapsed_ms
             return elapsed_ms
         except (socket.timeout, OSError):
             return self.failed_connection_default_timeout
@@ -55,11 +59,13 @@ class ProxyInfo:
             s.close()
     @property
     def http_connect_delay(self) -> int:
+        if self._http_connect_delay: return self._http_connect_delay
         start = time.monotonic()
         try:
             resp = requests.head(self.test_url, proxies=self.requests_format_proxy, timeout=self.test_timeout, headers=self.test_headers)
             resp.raise_for_status()
             elapsed_ms = int((time.monotonic() - start) * 1000)
+            self._http_connect_delay = elapsed_ms
             return elapsed_ms
         except Exception:
             return self.failed_connection_default_timeout
