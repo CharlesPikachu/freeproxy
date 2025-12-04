@@ -24,7 +24,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 # We set the PLAYWRIGHT_BROWSERS_PATH environment variable so browsers are installed
 # in a predictable location that we can persist or cache.
 ENV PLAYWRIGHT_BROWSERS_PATH=/ms-playwright
-RUN playwright install --with-deps chromium
 
 # Expose the Flask port
 EXPOSE 5000

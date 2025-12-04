@@ -29,7 +29,7 @@ class ProxyInfo:
     anonymity: str | None = None
     delay: int | None = None
     test_timeout: int = 60
-    test_url: str = "http://www.baidu.com"
+    test_url: str = "https://www.google.com"
     test_headers: Dict[str, Any] = field(default_factory=lambda: {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"})
     failed_connection_default_timeout: int = 3600000
     created_at: datetime = field(default_factory=datetime.utcnow)
@@ -81,7 +81,7 @@ class ProxyInfo:
         return cls(
             source=item.get("source", ""), protocol=item.get("protocol", ""), ip=item.get("ip", ""), port=item.get("port", ""),
             country_code=item.get("country_code", ""), in_chinese_mainland=item.get("in_chinese_mainland", None), anonymity=item.get("anonymity", None),
-            delay=item.get("delay", None), test_timeout=item.get("test_timeout", 5), test_url=item.get("test_url", "http://www.baidu.com"), 
+            delay=item.get("delay", None), test_timeout=item.get("test_timeout", 5), test_url=item.get("test_url", "https://www.facebook.com"), 
             test_headers=item.get("test_headers", {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"}), 
             failed_connection_default_timeout=item.get("failed_connection_default_timeout", 3600000), created_at=created_at, extra=item.get("extra", {}),
         )
