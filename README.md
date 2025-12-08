@@ -39,7 +39,7 @@
     </a>
   </p>
 
-  <h3>⚡ Live Proxies <span style="font-size:0.9em;">(24小时内最新代理)</span></h3>
+  <h3>⚡ Live Proxies <span style="font-size:0.9em;">(最新免费高质量代理, 每小时更新一次)</span></h3>
   <p>
     <a href="https://charlespikachu.github.io/freeproxy/">
       <code>https://charlespikachu.github.io/freeproxy/</code>
