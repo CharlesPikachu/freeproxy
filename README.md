@@ -232,6 +232,7 @@ All proxies will be saved to `free_proxies.json` in the current directory, in a 
   "ProxiflyProxiedSession": [...],
   "QiyunipProxiedSession": [...],
   "ProxylistProxiedSession": [...],
+}
 ```
 
 In the above code, you can also set the `max_pages` argument to a larger value to obtain a larger number of high-quality proxies.
