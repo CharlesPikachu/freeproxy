@@ -12,8 +12,9 @@ import requests
 from tqdm import tqdm
 from bs4 import BeautifulSoup
 from .base import BaseProxiedSession
-from ..utils import filterinvalidproxies, ProxyInfo, IPLocater
+from playwright.sync_api import sync_playwright
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from ..utils import filterinvalidproxies, ensureplaywrightchromium, ProxyInfo, IPLocater
 
 
 '''FineProxyProxiedSession'''
@@ -22,13 +23,26 @@ class FineProxyProxiedSession(BaseProxiedSession):
     homepage = 'https://fineproxy.org/cn/free-proxy/'
     def __init__(self, **kwargs):
         super(FineProxyProxiedSession, self).__init__(**kwargs)
+    '''_fetchnonce'''
+    def _fetchnonce(self):
+        ensureplaywrightchromium()
+        with sync_playwright() as pw:
+            browser = pw.chromium.launch(headless=False)
+            context = browser.new_context()
+            page = context.new_page()
+            page.goto(self.homepage)
+            html = page.content()
+            browser.close()
+            m = re.search(r'"nonce"\s*:\s*"([^"]+)"', html)
+            nonce = m.group(1)
+            return nonce
     '''refreshproxies'''
     @filterinvalidproxies
     def refreshproxies(self):
         # initialize
         self.candidate_proxies, session = [], requests.Session()
         headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'}
-        nonce = "e8d88d3f9b"
+        nonce = self._fetchnonce()
         # obtain proxies
         for page in range(1, self.max_pages+1):
             try:
