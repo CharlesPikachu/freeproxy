@@ -10,6 +10,7 @@ from functools import wraps
 from .data import ProxyInfo
 from .logger import LoggerHandle
 from typing import Any, Iterable, Optional, Callable
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 
 '''filterinvalidproxies'''
@@ -84,15 +85,33 @@ def applyfilterrule():
             anonymity = __tolist__(rule.get('anonymity'))
             protocol = __tolist__(rule.get('protocol'))
             country_code = __tolist__(rule.get('country_code'))
-            max_tcp_ms = rule.get('max_tcp_ms')
-            max_http_ms = rule.get('max_http_ms')
+            max_tcp_ms, max_tcp_ms_flag = rule.get('max_tcp_ms'), False
+            if (max_tcp_ms is not None) and isinstance(max_tcp_ms, (int, float)):
+                with ThreadPoolExecutor(max_workers=20) as executor:
+                    futures = [executor.submit(p.tcp_connect_delay,) for p in proxies]
+                    for future in as_completed(futures):
+                        try:
+                            future.result()
+                        except Exception:
+                            continue
+                max_tcp_ms_flag = True
+            max_http_ms, max_http_ms_flag = rule.get('max_http_ms'), False
+            if (max_http_ms is not None) and isinstance(max_http_ms, (int, float)):
+                with ThreadPoolExecutor(max_workers=20) as executor:
+                    futures = [executor.submit(p.http_connect_delay,) for p in proxies]
+                    for future in as_completed(futures):
+                        try:
+                            future.result()
+                        except Exception:
+                            continue
+                max_http_ms_flag = True
             for p in proxies:
                 if not isinstance(p, ProxyInfo): continue
                 if anonymity and (p.anonymity.lower() not in anonymity): continue
                 if protocol and (p.protocol.lower() not in protocol): continue
                 if country_code and (p.country_code.lower() not in country_code): continue
-                if (max_tcp_ms is not None) and isinstance(max_tcp_ms, (int, float)) and p.tcp_connect_delay > max_tcp_ms: continue
-                if (max_http_ms is not None) and isinstance(max_tcp_ms, (int, float)) and p.http_connect_delay > max_http_ms: continue
+                if max_tcp_ms_flag and p.tcp_connect_delay > max_tcp_ms: continue
+                if max_http_ms_flag and p.http_connect_delay > max_http_ms: continue
                 filtered.append(p)
             self.candidate_proxies = filtered
             return filtered

@@ -1,6 +1,6 @@
 '''
 Function:
-    Implementation of Tomcat1235ProxiedSession
+    Implementation of TheSpeedXProxiedSession
 Author:
     Zhenchao Jin
 WeChat Official Account (微信公众号):
@@ -8,44 +8,54 @@ WeChat Official Account (微信公众号):
 '''
 import requests
 from tqdm import tqdm
-from bs4 import BeautifulSoup
 from .base import BaseProxiedSession
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from ..utils import filterinvalidproxies, applyfilterrule, ProxyInfo, IPLocater
 
 
-'''Tomcat1235ProxiedSession'''
-class Tomcat1235ProxiedSession(BaseProxiedSession):
-    source = 'Tomcat1235ProxiedSession'
-    homepage = 'https://tomcat1235.nyc.mn/proxy_list?page=1'
+'''TheSpeedXProxiedSession'''
+class TheSpeedXProxiedSession(BaseProxiedSession):
+    source = 'TheSpeedXProxiedSession'
+    homepage = 'https://github.com/TheSpeedX'
     def __init__(self, **kwargs):
-        super(Tomcat1235ProxiedSession, self).__init__(**kwargs)
+        super(TheSpeedXProxiedSession, self).__init__(**kwargs)
     '''refreshproxies'''
     @applyfilterrule()
     @filterinvalidproxies
     def refreshproxies(self):
         # initialize
         self.candidate_proxies, session = [], requests.Session()
-        headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'}
+        urls = {
+            'socks5': 'https://raw.githubusercontent.com/TheSpeedX/SOCKS-List/master/socks5.txt',
+            'socks4': 'https://raw.githubusercontent.com/TheSpeedX/SOCKS-List/master/socks4.txt',
+            'http': 'https://raw.githubusercontent.com/TheSpeedX/SOCKS-List/master/http.txt',
+        }
+        headers = {
+            "sec-ch-ua": '"Chromium";v="142", "Google Chrome";v="142", "Not_A Brand";v="99"',
+            "sec-ch-ua-mobile": "?0",
+            "sec-ch-ua-platform": '"Windows"',
+            "sec-fetch-dest": "document",
+            "sec-fetch-mode": "navigate",
+            "sec-fetch-site": "none",
+            "sec-fetch-user": "?1",
+            "upgrade-insecure-requests": "1",
+            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36",
+        }
         # obtain proxies
-        for page in range(1, self.max_pages+1):
+        for protocol, url in urls.items():
             try:
-                resp = session.get(f'https://tomcat1235.nyc.mn/proxy_list?page={page}', headers=self.getrandomheaders(headers_override=headers), timeout=60)
+                resp = session.get(url, headers=self.getrandomheaders(headers_override=headers))
                 resp.raise_for_status()
-                resp.encoding = 'utf-8'
-                soup = BeautifulSoup(resp.text, 'html.parser')
-                table = soup.find('table')
-                trs = table.find_all('tr')[1:]
             except:
                 continue
-            for row in trs:
-                cells = row.find_all('td')
+            for item in resp.text.split('\n'):
+                item = item.strip()
+                if not item: continue
                 try:
-                    proxy_info = ProxyInfo(
-                        source=self.source, protocol=cells[0].text.strip().lower(), ip=cells[1].text.strip(), port=cells[2].text.strip(),
-                    )
+                    ip, port = item.split(':')
                 except:
                     continue
+                proxy_info = ProxyInfo(source=self.source, protocol=protocol, ip=ip, port=port, anonymity="")
                 self.candidate_proxies.append(proxy_info)
         # append country code info
         with ThreadPoolExecutor(max_workers=20) as executor:

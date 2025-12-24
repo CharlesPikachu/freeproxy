@@ -81,6 +81,7 @@ class ProxiedSessionClient:
 
         # Initialise each source module
         for source in proxy_sources:
+            self.logger_handle.info(f'{self.__class__.__name__}.__init__ >>> initializing {source}.', disable_print=disable_print)
             try:
                 cfg = copy.deepcopy(init_proxied_session_cfg)
                 cfg["type"] = source
@@ -97,8 +98,8 @@ class ProxiedSessionClient:
                     disable_print=disable_print,
                 )
                 continue
-
-        # Store runtime attributes
+            self.logger_handle.info(f'{self.__class__.__name__}.__init__ >>> initializing {source} done, fetched {len(candidate_proxies)} proxies.', disable_print=disable_print)
+        # set attributes
         self.max_tries = max_tries
         self.disable_print = disable_print
         self.proxy_sources = proxy_sources

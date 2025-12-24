@@ -39,7 +39,7 @@
     </a>
   </p>
 
-  <h3>⚡ Live Proxies <span style="font-size:0.9em;">(24小时内最新代理)</span></h3>
+  <h3>⚡ Live Proxies <span style="font-size:0.9em;">(最新免费高质量代理, 每小时更新一次)</span></h3>
   <p>
     <a href="https://charlespikachu.github.io/freeproxy/">
       <code>https://charlespikachu.github.io/freeproxy/</code>
@@ -56,13 +56,17 @@
 
 </div>
 
+<p align="center">
+  <strong>学习收获更多有趣的内容, 欢迎关注微信公众号：Charles的皮卡丘</strong>
+</p>
+
 
 # ✨ What's New
 
+- 2025-12-23: Released pyfreeproxy v0.3.2 — Add a new free proxy source, with automatic retrieval of the FineProxy nonce parameter.
+- 2025-12-03: Released pyfreeproxy v0.3.1 — Add support for more proxy sources to make a massive proxy pool a reality.
 - 2025-12-03: Released pyfreeproxy v0.3.0 — Code refactoring, removal of two low-quality free proxy sources, addition of multiple high-quality free proxy sources, and introduction of more features such as proxy rule filtering, more stable proxy scraping, and so on.
 - 2025-11-19: Released pyfreeproxy v0.2.2 — Fix potential in-place modified bugs.
-- 2025-11-16: Released pyfreeproxy v0.2.1 — Add support for ZdayeProxiedSession and FineProxyProxiedSession.
-- 2025-11-16: Released pyfreeproxy v0.2.0 — Refactored the code to improve the quality of the retrieved proxies and added support for fetching proxies from seven additional free proxy sources.
 
 
 # 📘 Introduction
@@ -89,6 +93,13 @@ FreeProxy continuously discovers and updates lists of free proxies. If you find 
 | [IhuanProxiedSession](https://ip.ihuan.me/?page=4ce63706)                              | [小幻代理](https://ip.ihuan.me/?page=4ce63706)                              | ✔           | ✔         | ❌         | ❌         | [ihuan.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/ihuan.py)                  |
 | [ProxiflyProxiedSession](https://proxifly.dev/)                                        | [Proxifly](https://proxifly.dev/)                                           | ✔           | ✔         | ✔         | ✔         | [proxifly.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/proxifly.py)            |
 | [FineProxyProxiedSession](https://fineproxy.org/cn/free-proxy/)                        | [FineProxy](https://fineproxy.org/cn/free-proxy/)                           | ✔           | ✔         | ✔         | ✔         | [fineproxy.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/fineproxy.py)          |
+| [DatabayProxiedSession](https://databay.com/free-proxy-list)                           | [Databay](https://databay.com/free-proxy-list)                              | ✔           | ✔         | ❌         | ✔         | [databay.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/databay.py)              |
+| [IPLocateProxiedSession](https://www.iplocate.io/)                                     | [IPLocate](https://www.iplocate.io/)                                        | ✔           | ✔         | ✔         | ✔         | [iplocate.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/iplocate.py)            |
+| [JiliuipProxiedSession](https://www.jiliuip.com/free/page-1/)                          | [积流代理](https://www.jiliuip.com/free/page-1/)                            | ✔           | ❌         | ❌         | ❌         | [jiliuip.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/jiliuip.py)              |
+| [TheSpeedXProxiedSession](https://github.com/TheSpeedX)                                | [TheSpeedX](https://github.com/TheSpeedX)                                   | ✔           | ❌         | ✔         | ✔         | [thespeedx.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/thespeedx.py)          |
+| [GeonodeProxiedSession](https://geonode.com/free-proxy-list)                           | [Geonode](https://geonode.com/free-proxy-list)                              | ✔           | ✔         | ✔         | ✔         | [geonode.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/geonode.py)              |
+| [FreeProxyDBProxiedSession](https://freeproxydb.com/)                                  | [FreeProxyDB](https://freeproxydb.com/)                                     | ✔           | ❌         | ✔         | ✔         | [freeproxydb.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/freeproxydb.py)      |
+| [ProxyScrapeProxiedSession](https://proxyscrape.com/free-proxy-list)                   | [ProxyScrape](https://proxyscrape.com/free-proxy-list)                      | ✔           | ❌         | ✔         | ✔         | [proxyscrape.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/proxyscrape.py)      |
 
 
 # 🎮 Playground
@@ -221,6 +232,7 @@ All proxies will be saved to `free_proxies.json` in the current directory, in a 
   "ProxiflyProxiedSession": [...],
   "QiyunipProxiedSession": [...],
   "ProxylistProxiedSession": [...],
+}
 ```
 
 In the above code, you can also set the `max_pages` argument to a larger value to obtain a larger number of high-quality proxies.
@@ -377,23 +389,14 @@ You can refer to freeproxy’s source code to unlock more features. The overall 
 
 # ⭐ Recommended Projects
 
-- [Games](https://github.com/CharlesPikachu/Games): Create interesting games in pure python.
-- [DecryptLogin](https://github.com/CharlesPikachu/DecryptLogin): APIs for loginning some websites by using requests.
-- [Musicdl](https://github.com/CharlesPikachu/musicdl): A lightweight music downloader written in pure python.
-- [Videodl](https://github.com/CharlesPikachu/videodl): A lightweight video downloader written in pure python.
-- [Pytools](https://github.com/CharlesPikachu/pytools): Some useful tools written in pure python.
-- [PikachuWeChat](https://github.com/CharlesPikachu/pikachuwechat): Play WeChat with itchat-uos.
-- [Pydrawing](https://github.com/CharlesPikachu/pydrawing): Beautify your image or video.
-- [ImageCompressor](https://github.com/CharlesPikachu/imagecompressor): Image compressors written in pure python.
-- [FreeProxy](https://github.com/CharlesPikachu/freeproxy): Collecting free proxies from internet.
-- [Paperdl](https://github.com/CharlesPikachu/paperdl): Search and download paper from specific websites.
-- [Sciogovterminal](https://github.com/CharlesPikachu/sciogovterminal): Browse "The State Council Information Office of the People's Republic of China" in the terminal.
-- [CodeFree](https://github.com/CharlesPikachu/codefree): Make no code a reality.
-- [DeepLearningToys](https://github.com/CharlesPikachu/deeplearningtoys): Some deep learning toys implemented in pytorch.
-- [DataAnalysis](https://github.com/CharlesPikachu/dataanalysis): Some data analysis projects in charles_pikachu.
-- [Imagedl](https://github.com/CharlesPikachu/imagedl): Search and download images from specific websites.
-- [Pytoydl](https://github.com/CharlesPikachu/pytoydl): A toy deep learning framework built upon numpy.
-- [NovelDL](https://github.com/CharlesPikachu/noveldl): Search and download novels from some specific websites.
+| Project                                                    | ⭐ Stars                                                                                                                                               | 📦 Version                                                                                                 | ⏱ Last Update                                                                                                                                                                   | 🛠 Repository                                                        |
+| -------------                                              | ---------                                                                                                                                             | -----------                                                                                                | ----------------                                                                                                                                                                 | --------                                                             |
+| 🎵 **Musicdl**<br/>轻量级无损音乐下载器                    | [![Stars](https://img.shields.io/github/stars/CharlesPikachu/musicdl?style=flat-square)](https://github.com/CharlesPikachu/musicdl)                   | [![Version](https://img.shields.io/pypi/v/musicdl)](https://pypi.org/project/musicdl)                      | [![Last Commit](https://img.shields.io/github/last-commit/CharlesPikachu/musicdl?style=flat-square)](https://github.com/CharlesPikachu/musicdl/commits/master)                   | [🛠 Repository](https://github.com/CharlesPikachu/musicdl)           |
+| 🎬 **Videodl**<br/>轻量级高清无水印视频下载器              | [![Stars](https://img.shields.io/github/stars/CharlesPikachu/videodl?style=flat-square)](https://github.com/CharlesPikachu/videodl)                   | [![Version](https://img.shields.io/pypi/v/videofetch)](https://pypi.org/project/videofetch)                | [![Last Commit](https://img.shields.io/github/last-commit/CharlesPikachu/videodl?style=flat-square)](https://github.com/CharlesPikachu/videodl/commits/master)                   | [🛠 Repository](https://github.com/CharlesPikachu/videodl)           |
+| 🖼️ **Imagedl**<br/>轻量级海量图片搜索下载器                | [![Stars](https://img.shields.io/github/stars/CharlesPikachu/imagedl?style=flat-square)](https://github.com/CharlesPikachu/imagedl)                   | [![Version](https://img.shields.io/pypi/v/pyimagedl)](https://pypi.org/project/pyimagedl)                  | [![Last Commit](https://img.shields.io/github/last-commit/CharlesPikachu/imagedl?style=flat-square)](https://github.com/CharlesPikachu/imagedl/commits/main)                     | [🛠 Repository](https://github.com/CharlesPikachu/imagedl)           |
+| 🌐 **FreeProxy**<br/>全球海量高质量免费代理采集器          | [![Stars](https://img.shields.io/github/stars/CharlesPikachu/freeproxy?style=flat-square)](https://github.com/CharlesPikachu/freeproxy)               | [![Version](https://img.shields.io/pypi/v/pyfreeproxy)](https://pypi.org/project/pyfreeproxy)              | [![Last Commit](https://img.shields.io/github/last-commit/CharlesPikachu/freeproxy?style=flat-square)](https://github.com/CharlesPikachu/freeproxy/commits/master)               | [🛠 Repository](https://github.com/CharlesPikachu/freeproxy)         |
+| 🌐 **MusicSquare**<br/>简易音乐搜索下载和播放网页          | [![Stars](https://img.shields.io/github/stars/CharlesPikachu/musicsquare?style=flat-square)](https://github.com/CharlesPikachu/musicsquare)           | [![Version](https://img.shields.io/pypi/v/musicdl)](https://pypi.org/project/musicdl)                      | [![Last Commit](https://img.shields.io/github/last-commit/CharlesPikachu/musicsquare?style=flat-square)](https://github.com/CharlesPikachu/musicsquare/commits/main)             | [🛠 Repository](https://github.com/CharlesPikachu/musicsquare)       |
+| 🌐 **FreeGPTHub**<br/>真正免费的GPT统一接口                | [![Stars](https://img.shields.io/github/stars/CharlesPikachu/FreeGPTHub?style=flat-square)](https://github.com/CharlesPikachu/FreeGPTHub)             | [![Version](https://img.shields.io/pypi/v/freegpthub)](https://pypi.org/project/freegpthub)                | [![Last Commit](https://img.shields.io/github/last-commit/CharlesPikachu/FreeGPTHub?style=flat-square)](https://github.com/CharlesPikachu/FreeGPTHub/commits/main)               | [🛠 Repository](https://github.com/CharlesPikachu/FreeGPTHub)        |
 
 
 # 📚 Citation
