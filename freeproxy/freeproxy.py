@@ -53,12 +53,12 @@ class ProxiedSessionClient():
             proxied_session.setrandomproxy()
             try:
                 self.logger_handle.info(f'{self.__class__.__name__}.get >>> {url}, with proxy {proxied_session.proxies}.', disable_print=self.disable_print)
+                kwargs['proxies'] = proxied_session.proxies
                 resp = proxied_session.get(url, **kwargs)
                 resp.raise_for_status()
                 return resp
-            except:
-                warnings_msg = f'invalid proxy {proxied_session.proxies}, auto switching to other proxies.'
-                self.logger_handle.warning(f'{self.__class__.__name__}.get >>> {url} (Error: {warnings_msg})', disable_print=self.disable_print)
+            except Exception as err:
+                self.logger_handle.warning(f'{self.__class__.__name__}.get >>> {url}, with invalid proxy {proxied_session.proxies} (Error: {err}), auto switching to other proxies.', disable_print=self.disable_print)
                 continue
     '''post'''
     def post(self, url, **kwargs):
@@ -67,12 +67,12 @@ class ProxiedSessionClient():
             proxied_session.setrandomproxy()
             try:
                 self.logger_handle.info(f'{self.__class__.__name__}.post >>> {url}, with proxy {proxied_session.proxies}.', disable_print=self.disable_print)
+                kwargs['proxies'] = proxied_session.proxies
                 resp = proxied_session.post(url, **kwargs)
                 resp.raise_for_status()
                 return resp
-            except:
-                warnings_msg = f'invalid proxy {proxied_session.proxies}, auto switching to other proxies.'
-                self.logger_handle.warning(f'{self.__class__.__name__}.post >>> {url} (Error: {warnings_msg})', disable_print=self.disable_print)
+            except Exception as err:
+                self.logger_handle.warning(f'{self.__class__.__name__}.post >>> {url}, with invalid proxy {proxied_session.proxies} (Error: {err}), auto switching to other proxies.', disable_print=self.disable_print)
                 continue
     '''getrandomproxy'''
     def getrandomproxy(self, proxy_format: str = 'requests'):

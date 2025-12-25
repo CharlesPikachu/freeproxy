@@ -17,8 +17,9 @@ from ..utils import LoggerHandle, ProxyInfo
 class BaseProxiedSession(requests.Session):
     source = "BaseProxiedSession"
     homepage = "https://github.com/CharlesPikachu/freeproxy"
-    def __init__(self, max_pages=1, logger_handle: LoggerHandle | None = None, disable_print: bool = False, filter_rule: dict = None, **kwargs):
+    def __init__(self, max_pages=1, logger_handle: LoggerHandle | None = None, disable_print: bool = False, filter_rule: dict = None, trust_env: bool = False, **kwargs):
         super(BaseProxiedSession, self).__init__(**kwargs)
+        self.trust_env = trust_env # trust_env=True may cause requests to respect NO_PROXY or system proxy settings, which can bypass your configured proxy.
         self.max_pages = max_pages
         self.logger_handle = logger_handle if logger_handle else LoggerHandle()
         self.disable_print = disable_print
