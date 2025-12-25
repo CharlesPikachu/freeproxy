@@ -6,53 +6,67 @@ Author:
 WeChat Official Account (微信公众号):
     Charles的皮卡丘
 '''
-import json
-import random
+import json, random
 from tqdm import tqdm
 from freeproxy.modules import BaseProxiedSession, ProxyInfo, BuildProxiedSession, printtable, colorize
 
 
+'''settings'''
+SOURCES = ["ProxiflyProxiedSession", "KuaidailiProxiedSession", "QiyunipProxiedSession", "ProxylistProxiedSession"]
+TITLES = ["Source", "Retrieved Example", "HTTP", "HTTPS", "SOCKS4", "SOCKS5", "Chinese IP", "Elite", "Total"]
+
+
+'''scrape'''
+def scrape(src: str) -> list[ProxyInfo]:
+    try:
+        sess: BaseProxiedSession = BuildProxiedSession({"max_pages": 1, "type": src, "disable_print": False})
+        return sess.refreshproxies()
+    except Exception:
+        return []
+
+
+'''stats'''
+def stats(proxies: list[ProxyInfo]) -> dict:
+    return {
+        "http":   sum(p.protocol.lower() == "http"   for p in proxies),
+        "https":  sum(p.protocol.lower() == "https"  for p in proxies),
+        "socks4": sum(p.protocol.lower() == "socks4" for p in proxies),
+        "socks5": sum(p.protocol.lower() == "socks5" for p in proxies),
+        "cn":     sum(bool(p.in_chinese_mainland) for p in proxies),
+        "elite":  sum(p.anonymity.lower() == "elite" for p in proxies),
+        "total":  len(proxies),
+        "ex":     (random.choice(proxies).proxy if proxies else "NULL"),
+    }
+
+
+'''row'''
+def row(src: str, s: dict) -> list:
+    ex = colorize(s["ex"], "green") if s["total"] else "NULL"
+    return [
+        src.removesuffix("ProxiedSession"),
+        ex,
+        colorize(s["http"], "number"),
+        colorize(s["https"], "number"),
+        colorize(s["socks4"], "number"),
+        colorize(s["socks5"], "number"),
+        colorize(s["cn"], "number"),
+        colorize(s["elite"], "number"),
+        colorize(s["total"], "number"),
+    ]
+
+
 '''main'''
 def main():
-    # proxy_sources
-    proxy_sources = ['ProxiflyProxiedSession', 'KuaidailiProxiedSession', 'QiyunipProxiedSession', 'ProxylistProxiedSession']
-    # iter scraping
-    free_proxies = {}
-    print_titles, print_items = ['Source', 'Retrieved Examples', 'HTTP', 'HTTPS', 'SOCKS4', 'SOCKS5', 'Chinese IP', 'Elite', 'Total'], []
-    for proxy_source in tqdm(proxy_sources):
-        try:
-            module_cfg = {'max_pages': 1, 'type': proxy_source, 'disable_print': False}
-            proxied_session: BaseProxiedSession = BuildProxiedSession(module_cfg=module_cfg)
-            candidate_proxies: list[ProxyInfo] = proxied_session.refreshproxies()
-        except:
-            candidate_proxies = []
-        if len(candidate_proxies) > 0:
-            example_proxy = random.choice(candidate_proxies).proxy
-            count_http = sum([(p.protocol.lower() in ['http']) for p in candidate_proxies])
-            count_https = sum([(p.protocol.lower() in ['https']) for p in candidate_proxies])
-            count_socks4 = sum([(p.protocol.lower() in ['socks4']) for p in candidate_proxies])
-            count_socks5 = sum([(p.protocol.lower() in ['socks5']) for p in candidate_proxies])
-            count_cn = sum([p.in_chinese_mainland for p in candidate_proxies])
-            count_elite = sum([(p.anonymity.lower() in ['elite']) for p in candidate_proxies])
-            print_items.append([
-                proxy_source.removesuffix('ProxiedSession'), colorize(example_proxy, 'green'), colorize(count_http, 'number'), colorize(count_https, 'number'), 
-                colorize(count_socks4, 'number'), colorize(count_socks5, 'number'), colorize(count_cn, 'number'), colorize(count_elite, 'number'),
-                colorize(len(candidate_proxies), 'number'),
-            ])
-        else:
-            print_items.append([
-                proxy_source.removesuffix('ProxiedSession'), 'NULL', colorize('0', 'number'), colorize('0', 'number'), 
-                colorize('0', 'number'), colorize('0', 'number'), colorize('0', 'number'), colorize('0', 'number'),
-                colorize(len(candidate_proxies), 'number'),
-            ])
-        free_proxies[proxy_source] = [p.todict() for p in candidate_proxies]
-    # visualize scraping results
+    free_proxies, items = {}, []
+    for src in tqdm(SOURCES):
+        proxies = scrape(src)
+        items.append(row(src, stats(proxies)))
+        free_proxies[src] = [p.todict() for p in proxies]
     print("The proxy distribution for each source you specified is as follows:")
-    printtable(titles=print_titles, items=print_items, terminal_right_space_len=1)
-    # save scraping results
-    json.dump(free_proxies, open('free_proxies.json', 'w'), indent=2)
+    printtable(titles=TITLES, items=items, terminal_right_space_len=1)
+    json.dump(free_proxies, open("free_proxies.json", "w"), indent=2)
 
 
 '''tests'''
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

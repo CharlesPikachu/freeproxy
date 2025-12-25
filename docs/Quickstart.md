@@ -1,79 +1,96 @@
 # Quick Start
 
-#### Common Usage Scenarios
+#### Scrape proxies from multiple sources
 
-After installing freeproxy, you can write a script like this to gather basic statistics about the proxy sources you want to use and save all the retrieved proxies to a specified JSON file:
+After installing freeproxy, you can run a script to:
+
+- scrape proxies from multiple sources,
+- print basic statistics for each source,
+- save all retrieved proxies into a JSON file.
+
+Example code (scrape + summarize + save):
 
 ```python
-import json
-import random
+import json, random
 from tqdm import tqdm
 from freeproxy.modules import BaseProxiedSession, ProxyInfo, BuildProxiedSession, printtable, colorize
 
+'''settings'''
+SOURCES = ["ProxiflyProxiedSession", "KuaidailiProxiedSession", "QiyunipProxiedSession", "ProxylistProxiedSession"]
+TITLES = ["Source", "Retrieved Example", "HTTP", "HTTPS", "SOCKS4", "SOCKS5", "Chinese IP", "Elite", "Total"]
+
+'''scrape'''
+def scrape(src: str) -> list[ProxyInfo]:
+    try:
+        sess: BaseProxiedSession = BuildProxiedSession({"max_pages": 1, "type": src, "disable_print": False})
+        return sess.refreshproxies()
+    except Exception:
+        return []
+
+'''stats'''
+def stats(proxies: list[ProxyInfo]) -> dict:
+    return {
+        "http":   sum(p.protocol.lower() == "http"   for p in proxies),
+        "https":  sum(p.protocol.lower() == "https"  for p in proxies),
+        "socks4": sum(p.protocol.lower() == "socks4" for p in proxies),
+        "socks5": sum(p.protocol.lower() == "socks5" for p in proxies),
+        "cn":     sum(bool(p.in_chinese_mainland) for p in proxies),
+        "elite":  sum(p.anonymity.lower() == "elite" for p in proxies),
+        "total":  len(proxies),
+        "ex":     (random.choice(proxies).proxy if proxies else "NULL"),
+    }
+
+'''row'''
+def row(src: str, s: dict) -> list:
+    ex = colorize(s["ex"], "green") if s["total"] else "NULL"
+    return [
+        src.removesuffix("ProxiedSession"),
+        ex,
+        colorize(s["http"], "number"),
+        colorize(s["https"], "number"),
+        colorize(s["socks4"], "number"),
+        colorize(s["socks5"], "number"),
+        colorize(s["cn"], "number"),
+        colorize(s["elite"], "number"),
+        colorize(s["total"], "number"),
+    ]
+
 '''main'''
 def main():
-    # proxy_sources
-    proxy_sources = ['ProxiflyProxiedSession', 'KuaidailiProxiedSession', 'QiyunipProxiedSession', 'ProxylistProxiedSession']
-    # iter scraping
-    free_proxies = {}
-    print_titles, print_items = ['Source', 'Retrieved Examples', 'HTTP', 'HTTPS', 'SOCKS4', 'SOCKS5', 'Chinese IP', 'Elite', 'Total'], []
-    for proxy_source in tqdm(proxy_sources):
-        try:
-            module_cfg = {'max_pages': 1, 'type': proxy_source, 'disable_print': False}
-            proxied_session: BaseProxiedSession = BuildProxiedSession(module_cfg=module_cfg)
-            candidate_proxies: list[ProxyInfo] = proxied_session.refreshproxies()
-        except:
-            candidate_proxies = []
-        if len(candidate_proxies) > 0:
-            example_proxy = random.choice(candidate_proxies).proxy
-            count_http = sum([(p.protocol.lower() in ['http']) for p in candidate_proxies])
-            count_https = sum([(p.protocol.lower() in ['https']) for p in candidate_proxies])
-            count_socks4 = sum([(p.protocol.lower() in ['socks4']) for p in candidate_proxies])
-            count_socks5 = sum([(p.protocol.lower() in ['socks5']) for p in candidate_proxies])
-            count_cn = sum([p.in_chinese_mainland for p in candidate_proxies])
-            count_elite = sum([(p.anonymity.lower() in ['elite']) for p in candidate_proxies])
-            print_items.append([
-                proxy_source.removesuffix('ProxiedSession'), colorize(example_proxy, 'green'), colorize(count_http, 'number'), colorize(count_https, 'number'), 
-                colorize(count_socks4, 'number'), colorize(count_socks5, 'number'), colorize(count_cn, 'number'), colorize(count_elite, 'number'),
-                colorize(len(candidate_proxies), 'number'),
-            ])
-        else:
-            print_items.append([
-                proxy_source.removesuffix('ProxiedSession'), 'NULL', colorize('0', 'number'), colorize('0', 'number'), 
-                colorize('0', 'number'), colorize('0', 'number'), colorize('0', 'number'), colorize('0', 'number'),
-                colorize(len(candidate_proxies), 'number'),
-            ])
-        free_proxies[proxy_source] = [p.todict() for p in candidate_proxies]
-    # visualize scraping results
+    free_proxies, items = {}, []
+    for src in tqdm(SOURCES):
+        proxies = scrape(src)
+        items.append(row(src, stats(proxies)))
+        free_proxies[src] = [p.todict() for p in proxies]
     print("The proxy distribution for each source you specified is as follows:")
-    printtable(titles=print_titles, items=print_items, terminal_right_space_len=1)
-    # save scraping results
-    json.dump(free_proxies, open('free_proxies.json', 'w'), indent=2)
+    printtable(titles=TITLES, items=items, terminal_right_space_len=1)
+    json.dump(free_proxies, open("free_proxies.json", "w"), indent=2)
 
 '''tests'''
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
 ```
 
-The terminal output of the above code will look roughly like this:
+Example output (terminal):
 
 ```bash
-C:\Users\xxxx\Desktop>python naive_scraping_proxies.py
-100%|████████████████████████████████████████████████████████████████████████████████████| 4/4 [00:37<00:00,  9.38s/it]
+C:\Users\Charles\Desktop>python test.py
+KuaidailiProxiedSession >>> adding country_code: 37it [00:05,  6.57it/s]                 | 1/4 [00:18<00:56, 18.95s/it]
+100%|████████████████████████████████████████████████████████████████████████████████████| 4/4 [00:28<00:00,  7.17s/it]
 The proxy distribution for each source you specified is as follows:
-+-----------+------------------------------+------+-------+--------+--------+------------+-------+-------+
-|   Source  |      Retrieved Examples      | HTTP | HTTPS | SOCKS4 | SOCKS5 | Chinese IP | Elite | Total |
-+-----------+------------------------------+------+-------+--------+--------+------------+-------+-------+
-|  Proxifly | socks4://69.61.200.104:36181 | 5975 |   0   |  706   |  365   |     21     |  4052 |  7046 |
-| Kuaidaili | https://118.175.131.176:3128 |  20  |   13  |   0    |   0    |     18     |   33  |   33  |
-|  Qiyunip  | http://112.244.231.189:9000  |  6   |   9   |   0    |   0    |     15     |   12  |   15  |
-| Proxylist |  http://185.88.177.197:8936  | 287  |   8   |  114   |   83   |     33     |  368  |  492  |
-+-----------+------------------------------+------+-------+--------+--------+------------+-------+-------+
++-----------+-------------------------------+------+-------+--------+--------+------------+-------+-------+
+|   Source  |       Retrieved Example       | HTTP | HTTPS | SOCKS4 | SOCKS5 | Chinese IP | Elite | Total |
++-----------+-------------------------------+------+-------+--------+--------+------------+-------+-------+
+|  Proxifly |   http://195.231.69.203:443   | 5112 |   0   |  1043  |  477   |     48     |  2157 |  6632 |
+| Kuaidaili |   http://113.45.158.25:3128   |  20  |   13  |   0    |   0    |     19     |   33  |   33  |
+|  Qiyunip  |   https://114.103.88.18:8089  |  6   |   9   |   0    |   0    |     15     |   14  |   15  |
+| Proxylist | socks4://184.181.217.206:4145 | 420  |   59  |  182   |  156   |     54     |  699  |  817  |
++-----------+-------------------------------+------+-------+--------+--------+------------+-------+-------+
 ```
 
-All proxies will be saved to `free_proxies.json` in the current directory, in a format similar to this:
+All proxies are saved to `free_proxies.json` in the current directory, e.g.:
 
-```
+```python
 {
   "KuaidailiProxiedSession": [
     {
@@ -93,165 +110,165 @@ All proxies will be saved to `free_proxies.json` in the current directory, in a 
       "failed_connection_default_timeout": 3600000,
       "created_at": "2025-12-03T12:43:25.018208",
       "extra": {}
-    },
-    ...
+    }
   ],
-  "ProxiflyProxiedSession": [...],
-  "QiyunipProxiedSession": [...],
-  "ProxylistProxiedSession": [...],
+  "ProxiflyProxiedSession": [],
+  "QiyunipProxiedSession": [],
+  "ProxylistProxiedSession": []
 }
 ```
 
-In the above code, you can also set the `max_pages` argument to a larger value to obtain a larger number of high-quality proxies.
+*Tip: Increase `max_pages` to fetch more proxies from each source.*
 
-You can also enter the following command in the terminal to list all proxy sources supported by your current version of freeproxy:
+#### List supported proxy sources
+
+To list all proxy sources supported by your current freeproxy version:
 
 ```bash
 python -c "from freeproxy.modules import ProxiedSessionBuilder; print(ProxiedSessionBuilder.REGISTERED_MODULES.keys())"
 ```
 
-Sample output is as follows:
+Example output:
 
-```python
+```bash
 dict_keys([
-  'ProxiflyProxiedSession', 'FreeproxylistProxiedSession', 'IhuanProxiedSession', 'IP89ProxiedSession', 'IP3366ProxiedSession', 
-  'KuaidailiProxiedSession', 'KxdailiProxiedSession', 'ProxydailyProxiedSession', 'ProxydbProxiedSession', 'ProxyhubProxiedSession', 
-  'ProxylistProxiedSession', 'QiyunipProxiedSession', 'SpysoneProxiedSession', 'Tomcat1235ProxiedSession'
+  'ProxiflyProxiedSession', 'FreeproxylistProxiedSession', 'IhuanProxiedSession', 'IP89ProxiedSession', 
+  'IP3366ProxiedSession', 'KuaidailiProxiedSession', 'KxdailiProxiedSession', 'ProxydailyProxiedSession', 
+  'ProxydbProxiedSession', 'ProxyhubProxiedSession', 'ProxylistProxiedSession', 'QiyunipProxiedSession', 
+  'SpysoneProxiedSession', 'Tomcat1235ProxiedSession', 'DatabayProxiedSession', 'FineProxyProxiedSession', 
+  'IPLocateProxiedSession', 'JiliuipProxiedSession', 'TheSpeedXProxiedSession', 'GeonodeProxiedSession', 
+  'FreeProxyDBProxiedSession', 'ProxyScrapeProxiedSession'
 ])
 ```
 
-#### Stricter Proxy Filtering Strategy
+#### Apply stricter filtering
 
-By default, freeproxy fetches all proxies provided by the specified free proxy sources, only validating their format and performing simple de-duplication.
-If you want to further filter the crawled proxies to obtain a higher-quality proxy pool, you can do so by setting the `filter_rule` argument.
+By default, freeproxy:
 
-For example, if you want to ensure that the proxy IPs are located in mainland China, you can do the following:
+- validates proxy format,
+- de-duplicates results,
+- does not aggressively filter by geography/anonymity/speed unless you specify rules.
+
+You can enforce stricter filtering by passing `filter_rule`.
+
+Common fields in filter_rule:
+
+- `country_code`: *e.g.*, `['CN']`, `['US']`
+- `anonymity`: `elite`, `anonymous`, `transparent` (string or list)
+- `protocol`: `http`, `https`, `socks4`, `socks5` (string or list)
+- `max_tcp_ms`: maximum TCP connect latency (ms)
+- `max_http_ms`: maximum HTTP request latency to `test_url` (ms)
+
+Example A: only mainland China proxies
 
 ```python
 from freeproxy.modules.proxies import IP3366ProxiedSession
 
-ip3366_session = IP3366ProxiedSession(filter_rule={'country_code': ['CN']})
-ip3366_session.refreshproxies()
-# all obtained proxies can be accessed by `ip3366_session.candidate_proxies`
-print(ip3366_session.getrandomproxy(proxy_format='freeproxy'))
+sess = IP3366ProxiedSession(filter_rule={"country_code": ["CN"]})
+sess.refreshproxies()
+print(sess.getrandomproxy(proxy_format="freeproxy"))
 ```
 
-Sample output is as follows:
-
-```python
-ProxyInfo(
-  source='IP3366ProxiedSession', 
-  protocol='https', 
-  ip='114.231.82.145', 
-  port='8888', 
-  country_code='CN', 
-  in_chinese_mainland=True, 
-  anonymity='elite', 
-  delay=3000, 
-  test_timeout=5, 
-  test_url='http://www.baidu.com', 
-  test_headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'}, 
-  failed_connection_default_timeout=3600000, 
-  created_at=datetime.datetime(2025, 12, 3, 14, 3, 42, 535847), 
-  extra={}
-)
-```
-
-If you want high-anonymity proxies whose addresses are in the United States, you can do the following:
+Example B: US + elite anonymity
 
 ```python
 from freeproxy.modules.proxies import SpysoneProxiedSession
 
-spy_session = SpysoneProxiedSession(filter_rule={'anonymity': ['elite'], 'country_code': ['US']})
-spy_session.refreshproxies()
-# all obtained proxies can be accessed by `spy_session.candidate_proxies`
-print(spy_session.getrandomproxy(proxy_format='freeproxy'))
+sess = SpysoneProxiedSession(filter_rule={"anonymity": ["elite"], "country_code": ["US"]})
+sess.refreshproxies()
+print(sess.getrandomproxy(proxy_format="freeproxy"))
 ```
 
-Sample output is as follows:
-
-```python
-ProxyInfo(
-  source='SpysoneProxiedSession', 
-  protocol='http', 
-  ip='88.216.98.209', 
-  port=48852, 
-  country_code='US',
-  in_chinese_mainland=False, 
-  anonymity='elite', 
-  delay=21515, 
-  test_timeout=5, 
-  test_url='http://www.baidu.com', 
-  test_headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'}, 
-  failed_connection_default_timeout=3600000, 
-  created_at=datetime.datetime(2025, 12, 3, 14, 17, 41, 502702), 
-  extra={}
-)
-```
-
-The `anonymity` argument can be either a single string or a list. 
-The available options include `elite` (high anonymity proxies), `anonymous` (standard anonymous proxies), and `transparent` (transparent proxies).
-
-If you have specific requirements for the proxy type, you can set the `protocol` argument. 
-If you care about server response speed, you can set the `max_tcp_ms` or `max_http_ms` arguments.
-An example code snippet can be written as follows:
+Example C: constrain protocol + speed
 
 ```python
 from freeproxy.modules.proxies import FreeproxylistProxiedSession
 
-fpl_session = FreeproxylistProxiedSession(filter_rule={'protocol': ['http', 'https'], 'max_tcp_ms': 10000, 'max_http_ms': 10000})
-fpl_session.refreshproxies()
-# all obtained proxies can be accessed by `fpl_session.candidate_proxies`
-print(fpl_session.getrandomproxy(proxy_format='freeproxy'))
+sess = FreeproxylistProxiedSession(
+    filter_rule={
+        "protocol": ["http", "https"],
+        "max_tcp_ms": 10000,
+        "max_http_ms": 10000,
+    }
+)
+sess.refreshproxies()
+print(sess.getrandomproxy(proxy_format="freeproxy"))
 ```
 
-The above code means that it only retrieves HTTP and HTTPS proxies, 
-requires the TCP connection latency between your machine and the proxy server to be no more than 10,000 ms, 
-and also requires the proxy server’s response time when requesting the `test_url` (which defaults to http://www.baidu.com) to be no more than 10,000 ms.
+*Note (performance): `max_tcp_ms` / `max_http_ms` may significantly slow down crawling when too many proxies are scraped, because each proxy requires additional testing.*
+*In general, it’s better to crawl first, then run a separate post-test script if you need strict speed constraints.*
 
-The `protocol` argument can be either a single string or a list. 
-The available options include `http`, `https`, `socks4` and `socks5`.
+#### Unified client: `ProxiedSessionClient`
 
-Currently, the implementation of freeproxy does not use asynchronous operations or spawn a large number of threads for parallel testing. 
-Therefore, when too many proxies are scraped, setting `max_tcp_ms` or `max_http_ms` can cause the program to freeze for a long time. 
-In general, it is not recommended to use these two speed-test arguments during crawling; if needed, you can run a separate script to test the proxies after the crawl is finished.
+`ProxiedSessionClient` provides a unified interface across proxy sources and behaves like a `requests.Session` with an automatically maintained proxy pool.
 
-#### `freeproxy.freeproxy.ProxiedSessionClient`
+- It keeps a proxy pool where all proxies satisfy your `filter_rule`.
+- Each `.get()` / `.post()` consumes at least one proxy.
+- When the pool is low, it automatically replenishes proxies by scraping again.
 
-`ProxiedSessionClient` provides a unified interface for all supported proxy sources. You can call it as shown in the following example:
+Minimal example:
 
 ```python
 from freeproxy.freeproxy import ProxiedSessionClient
 
-proxy_sources = ['KuaidailiProxiedSession']
-init_proxied_session_cfg = {'filter_rule': {'country_code': ['CN', 'US']}}
-proxied_session_client = ProxiedSessionClient(proxy_sources=proxy_sources, init_proxied_session_cfg=init_proxied_session_cfg)
+proxy_sources = ["KuaidailiProxiedSession"]
+init_proxied_session_cfg = {"filter_rule": {"country_code": ["CN", "US"]}}
+client = ProxiedSessionClient(
+    proxy_sources=proxy_sources, init_proxied_session_cfg=init_proxied_session_cfg,
+)
 headers = {
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36'
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36"
 }
-resp = proxied_session_client.get('https://space.bilibili.com/406756145', headers=headers)
+resp = client.get("https://space.bilibili.com/406756145", headers=headers)
 print(resp.text)
 ```
 
-When using freeproxy as a third-party package, if you don’t want it to print too much extra information, you can set `disable_print=True`, for example:`
+Quiet mode (suppress logs):
 
 ```python
 from freeproxy import freeproxy
 
-proxy_sources = ['ProxydbProxiedSession']
-proxied_session_client = freeproxy.ProxiedSessionClient(proxy_sources=proxy_sources, disable_print=True)
+client = freeproxy.ProxiedSessionClient(
+    proxy_sources=["ProxydbProxiedSession"], disable_print=True,
+)
 ```
 
-`ProxiedSessionClient` automatically maintains a proxy pool in which all proxies satisfy the `filter_rule` criteria. 
-Each time you call the `.get` or `.post` method, it will consume at least one proxy from the pool, and when the pool is running low, 
-it will automatically fetch and replenish more proxies. 
-The usage of `.get` and `.post` is exactly the same as `requests.get` and `requests.post`.
+Init arguments:
 
-The arguments supported when initializing the `ProxiedSessionClient` class are as follows:
+- `proxy_sources (list[str])`: proxy sources to use.
+- `init_proxied_session_cfg (dict)`: session config; supports:
+  - `max_pages`: pages to fetch per source
+  - `filter_rule`: filtering rules described above
+  - plus standard `requests.Session` options
+- `disable_print (bool)`: suppress proxy usage logs.
+- `max_tries (int)`: max attempts per `.get()` / `.post()` call.
 
-- `proxy_sources` (`list`): The proxy sources to use. Currently supported proxies see [Supported Proxy Sources](https://github.com/CharlesPikachu/freeproxy?tab=readme-ov-file#-supported-proxy-sources) or call `from freeproxy.modules import ProxiedSessionBuilder; print(ProxiedSessionBuilder.REGISTERED_MODULES.keys())`.
-- `init_proxied_session_cfg` (`dict`): Accepts the same options as `requests.Session`, plus an extra `max_pages` field and an extra `filter_rule` field that specifies how many pages of proxies to fetch from each free source and the rules to filter fetched proxies.
-- `disable_print` (`bool`): Whether to suppress proxy usage logs in the terminal.
-- `max_tries` (`int`): The maximum number of attempts for each `.get` and `.post` call.
+Example: filter scraped proxies via the unified client
 
-You can refer to freeproxy’s source code to unlock more features. The overall codebase is not very large.
+```python
+from freeproxy.freeproxy import ProxiedSessionClient
+
+client = ProxiedSessionClient(
+    proxy_sources=["KuaidailiProxiedSession"],
+    init_proxied_session_cfg={
+        "max_pages": 2,
+        "filter_rule": {
+            "country_code": ["US"],
+            "anonymity": ["elite"],
+            "protocol": ["http", "https"],
+        },
+    },
+    disable_print=False,
+    max_tries=3,
+)
+resp = client.get("https://httpbin.org/ip", timeout=10)
+print(resp.json())
+resp = client.get("https://httpbin.org/anything", timeout=15)
+print(resp.json())
+print("origin:", resp.json().get("origin"))
+print("X-Forwarded-For:", resp.json()["headers"].get("X-Forwarded-For"))
+print("Forwarded:", resp.json()["headers"].get("Forwarded"))
+```
+
+*Final note: you can refer to freeproxy’s source code to unlock more features, the overall codebase is small and easy to navigate.*
+
