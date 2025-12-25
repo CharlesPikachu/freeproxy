@@ -131,6 +131,7 @@ For example, if you want to ensure that the proxy IPs are located in mainland Ch
 from freeproxy.modules.proxies import IP3366ProxiedSession
 
 ip3366_session = IP3366ProxiedSession(filter_rule={'country_code': ['CN']})
+ip3366_session.refreshproxies()
 # all obtained proxies can be accessed by `ip3366_session.candidate_proxies`
 print(ip3366_session.getrandomproxy(proxy_format='freeproxy'))
 ```
@@ -162,6 +163,7 @@ If you want high-anonymity proxies whose addresses are in the United States, you
 from freeproxy.modules.proxies import SpysoneProxiedSession
 
 spy_session = SpysoneProxiedSession(filter_rule={'anonymity': ['elite'], 'country_code': ['US']})
+spy_session.refreshproxies()
 # all obtained proxies can be accessed by `spy_session.candidate_proxies`
 print(spy_session.getrandomproxy(proxy_format='freeproxy'))
 ```
@@ -198,6 +200,7 @@ An example code snippet can be written as follows:
 from freeproxy.modules.proxies import FreeproxylistProxiedSession
 
 fpl_session = FreeproxylistProxiedSession(filter_rule={'protocol': ['http', 'https'], 'max_tcp_ms': 10000, 'max_http_ms': 10000})
+fpl_session.refreshproxies()
 # all obtained proxies can be accessed by `fpl_session.candidate_proxies`
 print(fpl_session.getrandomproxy(proxy_format='freeproxy'))
 ```
