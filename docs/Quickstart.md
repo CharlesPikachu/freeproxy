@@ -249,19 +249,24 @@ Example: filter scraped proxies via the unified client
 from freeproxy.freeproxy import ProxiedSessionClient
 
 client = ProxiedSessionClient(
-    proxy_sources=["KuaidailiProxiedSession"],
+    proxy_sources=["ProxyScrapeProxiedSession", "ProxylistProxiedSession"],
     init_proxied_session_cfg={
         "max_pages": 2,
         "filter_rule": {
-            "country_code": ["US"],
+            "country_code": ["CN"],
             "anonymity": ["elite"],
             "protocol": ["http", "https"],
         },
     },
     disable_print=False,
-    max_tries=3,
+    max_tries=20,
 )
-resp = client.get("https://httpbin.org/ip", timeout=10)
+headers = {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36',
+}
+resp = client.get("https://www.baidu.com/", timeout=10, headers=headers)
+print(resp.text)
+resp = client.get("https://httpbin.org/ip", timeout=5)
 print(resp.json())
 resp = client.get("https://httpbin.org/anything", timeout=15)
 print(resp.json())
