@@ -10,7 +10,6 @@ import re
 import requests
 from bs4 import BeautifulSoup
 from .base import BaseProxiedSession
-from playwright.sync_api import sync_playwright
 from ..utils import ensureplaywrightchromium, filterinvalidproxies, applyfilterrule, ProxyInfo
 
 
@@ -22,6 +21,7 @@ class IP3366ProxiedSession(BaseProxiedSession):
         super(IP3366ProxiedSession, self).__init__(**kwargs)
     '''_getcookies'''
     def _getcookies(self):
+        from playwright.sync_api import sync_playwright
         ensureplaywrightchromium()
         with sync_playwright() as pw:
             browser = pw.chromium.launch(headless=True)

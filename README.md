@@ -63,6 +63,7 @@
 
 # ✨ What's New
 
+- 2026-01-10: Released pyfreeproxy v0.3.4 — Implemented partial code optimizations and introduced an additional free proxy source.
 - 2025-12-25: Released pyfreeproxy v0.3.3 — Adopt a more robust proxy auto-configuration approach.
 - 2025-12-23: Released pyfreeproxy v0.3.2 — Add a new free proxy source, with automatic retrieval of the FineProxy nonce parameter.
 - 2025-12-03: Released pyfreeproxy v0.3.1 — Add support for more proxy sources to make a massive proxy pool a reality.
@@ -96,6 +97,7 @@ FreeProxy continuously discovers and updates lists of free proxies. If you find 
 | [ProxiflyProxiedSession](https://proxifly.dev/)                                        | [Proxifly](https://proxifly.dev/)                                           | ✔           | ✔         | ✔         | ✔         | [proxifly.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/proxifly.py)            |
 | [ProxydailyProxiedSession](https://proxy-daily.com/)                                   | [ProxyDaily](https://proxy-daily.com/)                                      | ✔           | ✔         | ✔         | ✔         | [proxydaily.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/proxydaily.py)        |
 | [ProxyScrapeProxiedSession](https://proxyscrape.com/free-proxy-list)                   | [ProxyScrape](https://proxyscrape.com/free-proxy-list)                      | ✔           | ❌         | ✔         | ✔         | [proxyscrape.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/proxyscrape.py)      |
+| [ProxyEliteProxiedSession](https://proxyelite.info/cn/free/asia/china/)                | [ProxyElite](https://proxyelite.info/cn/free/asia/china/)                   | ✔           | ❌         | ✔         | ✔         | [proxyelite.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/proxyelite.py)        |
 | [QiyunipProxiedSession](https://www.qiyunip.com/freeProxy/1.html)                      | [齐云代理](https://www.qiyunip.com/freeProxy/1.html)                        | ✔           | ✔         | ❌         | ❌         | [qiyunip.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/qiyunip.py)              |
 | [SpysoneProxiedSession](https://spys.one/en/free-proxy-list/)                          | [SPYS.ONE](https://spys.one/en/free-proxy-list/)                            | ✔           | ❌         | ❌         | ✔         | [spysone.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/spysone.py)              |
 | [Tomcat1235ProxiedSession](https://tomcat1235.nyc.mn/proxy_list?page=1)                | [北极光代理](https://tomcat1235.nyc.mn/proxy_list?page=1)                   | ❌           | ❌         | ❌         | ✔         | [tomcat1235.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/tomcat1235.py)        |
