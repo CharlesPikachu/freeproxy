@@ -67,7 +67,6 @@
 - 2025-12-23: Released pyfreeproxy v0.3.2 — Add a new free proxy source, with automatic retrieval of the FineProxy nonce parameter.
 - 2025-12-03: Released pyfreeproxy v0.3.1 — Add support for more proxy sources to make a massive proxy pool a reality.
 - 2025-12-03: Released pyfreeproxy v0.3.0 — Code refactoring, removal of two low-quality free proxy sources, addition of multiple high-quality free proxy sources, and introduction of more features such as proxy rule filtering, more stable proxy scraping, and so on.
-- 2025-11-19: Released pyfreeproxy v0.2.2 — Fix potential in-place modified bugs.
 
 
 # 📘 Introduction
