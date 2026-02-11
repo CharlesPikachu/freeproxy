@@ -32,7 +32,7 @@ class FineProxyProxiedSession(BaseProxiedSession):
             page = context.new_page()
             page.goto(self.homepage)
             html = page.content()
-            browser.close()
+            context.close(); browser.close()
             m = re.search(r'"nonce"\s*:\s*"([^"]+)"', html)
             nonce = m.group(1)
             return nonce
@@ -48,11 +48,7 @@ class FineProxyProxiedSession(BaseProxiedSession):
             try:
                 data = {'action': 'proxylister_load_more', 'nonce': nonce, 'page': f'{page}', 'atts[downloads]': 'true'}
                 resp = session.post('https://fineproxy.org/wp-admin/admin-ajax.php', headers=self.getrandomheaders(headers_override=headers), timeout=60, data=data)
-                resp.raise_for_status()
-                resp.encoding = 'utf-8'
-                rows = resp.json()['data']['rows']
-                soup = BeautifulSoup(rows, 'html.parser')
-                trs = soup.find_all('tr')
+                resp.raise_for_status(); resp.encoding = 'utf-8'; rows = resp.json()['data']['rows']; soup = BeautifulSoup(rows, 'html.parser'); trs = soup.find_all('tr')
             except:
                 continue
             for row in trs:
@@ -61,26 +57,18 @@ class FineProxyProxiedSession(BaseProxiedSession):
                     protocol: str = random.choice(cells[2].text.strip().lower().split(','))
                     if cells[3].text.strip().lower() in ('anonymous', 'elite', 'transparent'): anonymity = cells[3].text.strip().lower()
                     elif '佚名' in cells[3].text.strip(): anonymity = 'anonymous'
-                    proxy_info = ProxyInfo(
-                        source=self.source, ip=cells[0].text.strip(), port=cells[1].text.strip(), protocol=protocol.strip(),
-                        delay=int(float(re.search(r'^(\d+)', cells[6].text.strip()).group(1))), anonymity=anonymity.lower()
-                    )
+                    proxy_info = ProxyInfo(source=self.source, ip=cells[0].text.strip(), port=cells[1].text.strip(), protocol=protocol.strip(), delay=int(float(re.search(r'^(\d+)', cells[6].text.strip()).group(1))), anonymity=anonymity.lower())
                 except:
                     continue
                 self.candidate_proxies.append(proxy_info)
         # append country code info
         with ThreadPoolExecutor(max_workers=20) as executor:
-            future_map = {
-                executor.submit(IPLocater.locate, p.ip): p for p in self.candidate_proxies
-            }
+            future_map = {executor.submit(IPLocater.locate, p.ip): p for p in self.candidate_proxies}
             if not self.disable_print: future_map_wrapper = tqdm(as_completed(future_map), desc=f"{self.source} >>> adding country_code")
             else: future_map_wrapper = as_completed(future_map)
             for future in future_map_wrapper:
-                try:
-                    country_code = future.result()
-                    assert country_code
-                except Exception:
-                    continue
+                try: country_code = future.result(); assert country_code
+                except Exception: continue
                 proxy_info: ProxyInfo = future_map[future]
                 proxy_info.country_code = country_code
                 proxy_info.in_chinese_mainland = (country_code.lower() in ['cn'])

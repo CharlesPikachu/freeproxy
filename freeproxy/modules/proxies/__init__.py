@@ -1,5 +1,6 @@
 '''initialize'''
 from .base import BaseProxiedSession
+from .scdn import SCDNProxiedSession
 from .ip89 import IP89ProxiedSession
 from ..utils import BaseModuleBuilder
 from .ihuan import IhuanProxiedSession
@@ -29,14 +30,12 @@ from .freeproxylist import FreeproxylistProxiedSession
 '''ProxiedSessionBuilder'''
 class ProxiedSessionBuilder(BaseModuleBuilder):
     REGISTERED_MODULES = {
-        'ProxiflyProxiedSession': ProxiflyProxiedSession, 'FreeproxylistProxiedSession': FreeproxylistProxiedSession, 'IhuanProxiedSession': IhuanProxiedSession,
-        'IP89ProxiedSession': IP89ProxiedSession, 'IP3366ProxiedSession': IP3366ProxiedSession, 'KuaidailiProxiedSession': KuaidailiProxiedSession,
-        'KxdailiProxiedSession': KxdailiProxiedSession, 'ProxydailyProxiedSession': ProxydailyProxiedSession, 'ProxydbProxiedSession': ProxydbProxiedSession,
-        'ProxyhubProxiedSession': ProxyhubProxiedSession, 'ProxylistProxiedSession': ProxylistProxiedSession, 'QiyunipProxiedSession': QiyunipProxiedSession,
-        'SpysoneProxiedSession': SpysoneProxiedSession, 'Tomcat1235ProxiedSession': Tomcat1235ProxiedSession, 'DatabayProxiedSession': DatabayProxiedSession,
-        'FineProxyProxiedSession': FineProxyProxiedSession, 'IPLocateProxiedSession': IPLocateProxiedSession, 'JiliuipProxiedSession': JiliuipProxiedSession,
-        'TheSpeedXProxiedSession': TheSpeedXProxiedSession, 'GeonodeProxiedSession': GeonodeProxiedSession, 'FreeProxyDBProxiedSession': FreeProxyDBProxiedSession,
-        'ProxyScrapeProxiedSession': ProxyScrapeProxiedSession, 'ProxyEliteProxiedSession': ProxyEliteProxiedSession,
+        'ProxiflyProxiedSession': ProxiflyProxiedSession, 'FreeproxylistProxiedSession': FreeproxylistProxiedSession, 'IhuanProxiedSession': IhuanProxiedSession, 'IP89ProxiedSession': IP89ProxiedSession, 
+        'IP3366ProxiedSession': IP3366ProxiedSession, 'KuaidailiProxiedSession': KuaidailiProxiedSession, 'KxdailiProxiedSession': KxdailiProxiedSession, 'ProxydailyProxiedSession': ProxydailyProxiedSession, 
+        'ProxydbProxiedSession': ProxydbProxiedSession, 'ProxyhubProxiedSession': ProxyhubProxiedSession, 'ProxylistProxiedSession': ProxylistProxiedSession, 'QiyunipProxiedSession': QiyunipProxiedSession,
+        'SpysoneProxiedSession': SpysoneProxiedSession, 'Tomcat1235ProxiedSession': Tomcat1235ProxiedSession, 'DatabayProxiedSession': DatabayProxiedSession, 'FineProxyProxiedSession': FineProxyProxiedSession, 
+        'IPLocateProxiedSession': IPLocateProxiedSession, 'JiliuipProxiedSession': JiliuipProxiedSession, 'TheSpeedXProxiedSession': TheSpeedXProxiedSession, 'GeonodeProxiedSession': GeonodeProxiedSession, 
+        'FreeProxyDBProxiedSession': FreeProxyDBProxiedSession, 'ProxyScrapeProxiedSession': ProxyScrapeProxiedSession, 'ProxyEliteProxiedSession': ProxyEliteProxiedSession, 'SCDNProxiedSession': SCDNProxiedSession,
     }
 
 

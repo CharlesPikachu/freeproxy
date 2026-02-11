@@ -137,7 +137,7 @@ dict_keys([
   'ProxydbProxiedSession', 'ProxyhubProxiedSession', 'ProxylistProxiedSession', 'QiyunipProxiedSession', 
   'SpysoneProxiedSession', 'Tomcat1235ProxiedSession', 'DatabayProxiedSession', 'FineProxyProxiedSession', 
   'IPLocateProxiedSession', 'JiliuipProxiedSession', 'TheSpeedXProxiedSession', 'GeonodeProxiedSession', 
-  'FreeProxyDBProxiedSession', 'ProxyScrapeProxiedSession'
+  'FreeProxyDBProxiedSession', 'ProxyScrapeProxiedSession', 'SCDNProxiedSession'
 ])
 ```
 

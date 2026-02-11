@@ -49,9 +49,7 @@ class BaseProxiedSession(requests.Session):
             ip = ipaddress.ip_address(ip_str)
             if ip.is_global: break
         # construct default headers
-        default_headers = {
-            'X-Forwarded-For': ip_str, 'User-Agent': UserAgent().random, 
-        }
+        default_headers = {'X-Forwarded-For': ip_str, 'User-Agent': UserAgent().random}
         default_headers.update(headers_override)
         # return
         return default_headers

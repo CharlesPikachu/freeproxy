@@ -98,6 +98,7 @@ FreeProxy continuously discovers and updates lists of free proxies. If you find 
 | [ProxyEliteProxiedSession](https://proxyelite.info/cn/free/asia/china/)                | [ProxyElite](https://proxyelite.info/cn/free/asia/china/)                   | ✔           | ❌         | ✔         | ✔         | [proxyelite.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/proxyelite.py)        |
 | [QiyunipProxiedSession](https://www.qiyunip.com/freeProxy/1.html)                      | [齐云代理](https://www.qiyunip.com/freeProxy/1.html)                        | ✔           | ✔         | ❌         | ❌         | [qiyunip.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/qiyunip.py)              |
 | [SpysoneProxiedSession](https://spys.one/en/free-proxy-list/)                          | [SPYS.ONE](https://spys.one/en/free-proxy-list/)                            | ✔           | ❌         | ❌         | ✔         | [spysone.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/spysone.py)              |
+| [SCDNProxiedSession](https://proxy.scdn.io/)                                           | [永久免费公共代理池](https://proxy.scdn.io/)                                | ✔           | ✔         | ✔         | ✔         | [scdn.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/scdn.py)                    |
 | [Tomcat1235ProxiedSession](https://tomcat1235.nyc.mn/proxy_list?page=1)                | [北极光代理](https://tomcat1235.nyc.mn/proxy_list?page=1)                   | ❌           | ❌         | ❌         | ✔         | [tomcat1235.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/tomcat1235.py)        |
 | [TheSpeedXProxiedSession](https://github.com/TheSpeedX)                                | [TheSpeedX](https://github.com/TheSpeedX)                                   | ✔           | ❌         | ✔         | ✔         | [thespeedx.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/thespeedx.py)          |
 
@@ -270,7 +271,7 @@ dict_keys([
   'ProxydbProxiedSession', 'ProxyhubProxiedSession', 'ProxylistProxiedSession', 'QiyunipProxiedSession', 
   'SpysoneProxiedSession', 'Tomcat1235ProxiedSession', 'DatabayProxiedSession', 'FineProxyProxiedSession', 
   'IPLocateProxiedSession', 'JiliuipProxiedSession', 'TheSpeedXProxiedSession', 'GeonodeProxiedSession', 
-  'FreeProxyDBProxiedSession', 'ProxyScrapeProxiedSession'
+  'FreeProxyDBProxiedSession', 'ProxyScrapeProxiedSession', 'SCDNProxiedSession'
 ])
 ```
 
