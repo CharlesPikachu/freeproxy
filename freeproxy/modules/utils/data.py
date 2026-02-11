@@ -72,8 +72,7 @@ class ProxyInfo:
     '''todict'''
     def todict(self) -> Dict[str, Any]:
         item = asdict(self)
-        if isinstance(self.created_at, datetime):
-            item["created_at"] = self.created_at.isoformat()
+        if isinstance(self.created_at, datetime): item["created_at"] = self.created_at.isoformat()
         return item
     '''fromdict'''
     @classmethod
@@ -85,10 +84,9 @@ class ProxyInfo:
         else:
             created_at = datetime.utcnow()
         return cls(
-            source=item.get("source", ""), protocol=item.get("protocol", ""), ip=item.get("ip", ""), port=item.get("port", ""),
-            country_code=item.get("country_code", ""), in_chinese_mainland=item.get("in_chinese_mainland", None), anonymity=item.get("anonymity", None),
-            delay=item.get("delay", None), test_timeout=item.get("test_timeout", 5), test_url=item.get("test_url", "http://www.baidu.com"), 
-            test_headers=item.get("test_headers", {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"}), 
+            source=item.get("source", "UNKNOWNSOURCE"), protocol=item.get("protocol", ""), ip=item.get("ip", ""), port=item.get("port", ""), country_code=item.get("country_code", ""), 
+            in_chinese_mainland=item.get("in_chinese_mainland", None), anonymity=item.get("anonymity", None), delay=item.get("delay", None), test_timeout=item.get("test_timeout", 5),
+            test_url=item.get("test_url", "http://www.baidu.com"), test_headers=item.get("test_headers", {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/124.0.0.0"}), 
             failed_connection_default_timeout=item.get("failed_connection_default_timeout", 3600000), created_at=created_at, extra=item.get("extra", {}),
         )
     '''selfcheck'''
@@ -106,10 +104,8 @@ class ProxyInfo:
         if not self.ip: return False, "ip is empty"
         if "://" in self.ip: return False, f"ip should not contain scheme: {self.ip!r}"
         # step4: ip check
-        try:
-            ipaddress.ip_address(self.ip)
-        except:
-            return False, f"invalid hostname: {self.ip!r}"
+        try: ipaddress.ip_address(self.ip)
+        except: return False, f"invalid hostname: {self.ip!r}"
         # step5: proxy check
         parsed = urlparse(self.proxy)
         if not (parsed.scheme and parsed.hostname and parsed.port): return False, f"invalid proxy URL: {self.proxy!r}"
