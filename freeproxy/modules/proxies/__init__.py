@@ -4,6 +4,7 @@ from .scdn import SCDNProxiedSession
 from .ip89 import IP89ProxiedSession
 from ..utils import BaseModuleBuilder
 from .ip3366 import IP3366ProxiedSession
+from .goodips import GoodIPSProxiedSession
 from .geonode import GeonodeProxiedSession
 from .qiyunip import QiyunipProxiedSession
 from .kxdaili import KxdailiProxiedSession
@@ -34,7 +35,7 @@ class ProxiedSessionBuilder(BaseModuleBuilder):
         'ProxydbProxiedSession': ProxydbProxiedSession, 'ProxyhubProxiedSession': ProxyhubProxiedSession, 'ProxylistProxiedSession': ProxylistProxiedSession, 'QiyunipProxiedSession': QiyunipProxiedSession,
         'SpysoneProxiedSession': SpysoneProxiedSession, 'Tomcat1235ProxiedSession': Tomcat1235ProxiedSession, 'DatabayProxiedSession': DatabayProxiedSession, 'FineProxyProxiedSession': FineProxyProxiedSession, 
         'IPLocateProxiedSession': IPLocateProxiedSession, 'JiliuipProxiedSession': JiliuipProxiedSession, 'TheSpeedXProxiedSession': TheSpeedXProxiedSession, 'GeonodeProxiedSession': GeonodeProxiedSession, 
-        'FreeProxyDBProxiedSession': FreeProxyDBProxiedSession, 'ProxyScrapeProxiedSession': ProxyScrapeProxiedSession, 'SCDNProxiedSession': SCDNProxiedSession,
+        'FreeProxyDBProxiedSession': FreeProxyDBProxiedSession, 'ProxyScrapeProxiedSession': ProxyScrapeProxiedSession, 'SCDNProxiedSession': SCDNProxiedSession, 'GoodIPSProxiedSession': GoodIPSProxiedSession,
     }
 
 
