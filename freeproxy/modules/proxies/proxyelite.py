@@ -30,7 +30,7 @@ class ProxyEliteProxiedSession(BaseProxiedSession):
             page = context.new_page()
             page.goto(self.homepage)
             html = page.content()
-            browser.close()
+            context.close(); browser.close()
             m = re.search(r'"nonce"\s*:\s*"([^"]+)"', html)
             nonce = m.group(1)
             return nonce
@@ -46,11 +46,7 @@ class ProxyEliteProxiedSession(BaseProxiedSession):
             try:
                 data = {'action': 'proxylister_load_more', 'nonce': nonce, 'page': f'{page}', 'atts[downloads]': 'true'}
                 resp = session.post('https://proxyelite.info/wp-admin/admin-ajax.php', headers=self.getrandomheaders(headers_override=headers), timeout=60, data=data)
-                resp.raise_for_status()
-                resp.encoding = 'utf-8'
-                rows = resp.json()['data']['rows']
-                soup = BeautifulSoup(rows, 'html.parser')
-                trs = soup.find_all('tr')
+                resp.raise_for_status(); resp.encoding = 'utf-8'; rows = resp.json()['data']['rows']; soup = BeautifulSoup(rows, 'html.parser'); trs = soup.find_all('tr')
             except:
                 continue
             for row in trs:
@@ -61,10 +57,7 @@ class ProxyEliteProxiedSession(BaseProxiedSession):
                     elif '匿名' in cells[3].text.strip(): anonymity = 'anonymous'
                     elif '精英' in cells[3].text.strip(): anonymity = 'elite'
                     else: anonymity = 'transparent'
-                    proxy_info = ProxyInfo(
-                        source=self.source, ip=cells[0].text.strip(), port=cells[1].text.strip(), protocol=protocol.strip(), delay=int(float(re.search(r'^(\d+)', cells[6].text.strip()).group(1))), 
-                        anonymity=anonymity.lower(), country_code='CN', in_chinese_mainland=True
-                    )
+                    proxy_info = ProxyInfo(source=self.source, ip=cells[0].text.strip(), port=cells[1].text.strip(), protocol=protocol.strip(), delay=int(float(re.search(r'^(\d+)', cells[6].text.strip()).group(1))), anonymity=anonymity.lower(), country_code='CN', in_chinese_mainland=True)
                 except:
                     continue
                 self.candidate_proxies.append(proxy_info)
