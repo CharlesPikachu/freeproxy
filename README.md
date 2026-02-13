@@ -78,6 +78,7 @@ FreeProxy continuously discovers and updates lists of free proxies. If you find 
 | Proxy Source (EN)                                                                      | Proxy Source (CN)                                                           | HTTP         | HTTPS      | SOCKS4     | SOCKS5     | Code Snippet                                                                                                            |
 | :----                                                                                  | :----                                                                       | :----:       | :----:     | :----:     | :----:     | :----                                                                                                                   |
 | [DatabayProxiedSession](https://databay.com/free-proxy-list)                           | [Databay](https://databay.com/free-proxy-list)                              | ✔           | ✔         | ❌         | ✔         | [databay.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/databay.py)              |
+| [DpangestuwProxiedSession](https://github.com/dpangestuw/Free-Proxy)                   | [Dpangestuw](https://github.com/dpangestuw/Free-Proxy)                      | ✔           | ✔         | ✔         | ✔         | [dpangestuw.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/dpangestuw.py)        |
 | [FreeproxylistProxiedSession](https://free-proxy-list.net/)                            | [FreeProxyList](https://free-proxy-list.net/)                               | ✔           | ✔         | ✔         | ❌         | [freeproxylist.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/freeproxylist.py)  |
 | [FineProxyProxiedSession](https://fineproxy.org/cn/free-proxy/)                        | [FineProxy](https://fineproxy.org/cn/free-proxy/)                           | ✔           | ✔         | ✔         | ✔         | [fineproxy.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/fineproxy.py)          |
 | [FreeProxyDBProxiedSession](https://freeproxydb.com/)                                  | [FreeProxyDB](https://freeproxydb.com/)                                     | ✔           | ❌         | ✔         | ✔         | [freeproxydb.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/freeproxydb.py)      |
@@ -273,7 +274,7 @@ dict_keys([
   'SpysoneProxiedSession': SpysoneProxiedSession, 'Tomcat1235ProxiedSession': Tomcat1235ProxiedSession, 'DatabayProxiedSession': DatabayProxiedSession, 'FineProxyProxiedSession': FineProxyProxiedSession, 
   'IPLocateProxiedSession': IPLocateProxiedSession, 'JiliuipProxiedSession': JiliuipProxiedSession, 'TheSpeedXProxiedSession': TheSpeedXProxiedSession, 'GeonodeProxiedSession': GeonodeProxiedSession, 
   'FreeProxyDBProxiedSession': FreeProxyDBProxiedSession, 'ProxyScrapeProxiedSession': ProxyScrapeProxiedSession, 'SCDNProxiedSession': SCDNProxiedSession, 'GoodIPSProxiedSession': GoodIPSProxiedSession,
-  'SixSixDailiProxiedSession': SixSixDailiProxiedSession,
+  'SixSixDailiProxiedSession': SixSixDailiProxiedSession, 'DpangestuwProxiedSession': DpangestuwProxiedSession,
 ])
 ```
 

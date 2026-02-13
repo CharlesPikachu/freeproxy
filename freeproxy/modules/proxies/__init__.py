@@ -22,6 +22,7 @@ from .thespeedx import TheSpeedXProxiedSession
 from .tomcat1235 import Tomcat1235ProxiedSession
 from .proxydaily import ProxydailyProxiedSession
 from .proxyelite import ProxyEliteProxiedSession
+from .dpangestuw import DpangestuwProxiedSession
 from .freeproxydb import FreeProxyDBProxiedSession
 from .proxyscrape import ProxyScrapeProxiedSession
 from .sixsixdaili import SixSixDailiProxiedSession
@@ -37,7 +38,7 @@ class ProxiedSessionBuilder(BaseModuleBuilder):
         'SpysoneProxiedSession': SpysoneProxiedSession, 'Tomcat1235ProxiedSession': Tomcat1235ProxiedSession, 'DatabayProxiedSession': DatabayProxiedSession, 'FineProxyProxiedSession': FineProxyProxiedSession, 
         'IPLocateProxiedSession': IPLocateProxiedSession, 'JiliuipProxiedSession': JiliuipProxiedSession, 'TheSpeedXProxiedSession': TheSpeedXProxiedSession, 'GeonodeProxiedSession': GeonodeProxiedSession, 
         'FreeProxyDBProxiedSession': FreeProxyDBProxiedSession, 'ProxyScrapeProxiedSession': ProxyScrapeProxiedSession, 'SCDNProxiedSession': SCDNProxiedSession, 'GoodIPSProxiedSession': GoodIPSProxiedSession,
-        'SixSixDailiProxiedSession': SixSixDailiProxiedSession,
+        'SixSixDailiProxiedSession': SixSixDailiProxiedSession, 'DpangestuwProxiedSession': DpangestuwProxiedSession,
     }
 
 
