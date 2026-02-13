@@ -24,6 +24,7 @@ from .proxydaily import ProxydailyProxiedSession
 from .proxyelite import ProxyEliteProxiedSession
 from .freeproxydb import FreeProxyDBProxiedSession
 from .proxyscrape import ProxyScrapeProxiedSession
+from .sixsixdaili import SixSixDailiProxiedSession
 from .freeproxylist import FreeproxylistProxiedSession
 
 
@@ -36,6 +37,7 @@ class ProxiedSessionBuilder(BaseModuleBuilder):
         'SpysoneProxiedSession': SpysoneProxiedSession, 'Tomcat1235ProxiedSession': Tomcat1235ProxiedSession, 'DatabayProxiedSession': DatabayProxiedSession, 'FineProxyProxiedSession': FineProxyProxiedSession, 
         'IPLocateProxiedSession': IPLocateProxiedSession, 'JiliuipProxiedSession': JiliuipProxiedSession, 'TheSpeedXProxiedSession': TheSpeedXProxiedSession, 'GeonodeProxiedSession': GeonodeProxiedSession, 
         'FreeProxyDBProxiedSession': FreeProxyDBProxiedSession, 'ProxyScrapeProxiedSession': ProxyScrapeProxiedSession, 'SCDNProxiedSession': SCDNProxiedSession, 'GoodIPSProxiedSession': GoodIPSProxiedSession,
+        'SixSixDailiProxiedSession': SixSixDailiProxiedSession,
     }
 
 

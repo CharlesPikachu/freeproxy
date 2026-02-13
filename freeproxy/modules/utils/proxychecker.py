@@ -1,6 +1,6 @@
 '''
 Function:
-    Implementation of checking proxy related utils
+    Implementation of Checking Proxy Related Utils
 Author:
     Zhenchao Jin
 WeChat Official Account (微信公众号):
