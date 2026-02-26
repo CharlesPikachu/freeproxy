@@ -20,7 +20,7 @@
     <img src="https://static.pepy.tech/badge/pyfreeproxy" alt="PyPI - Downloads">
   </a>
   <a href="https://pypi.org/project/pyfreeproxy/">
-    <img src="https://static.pepy.tech/badge/pyfreeproxy/month" alt="PyPI - Downloads">
+    <img src="https://img.shields.io/pypi/dm/pyfreeproxy" alt="PyPI - Downloads">
   </a>
   <a href="https://github.com/CharlesPikachu/freeproxy/issues">
     <img alt="issue resolution" src="https://isitmaintained.com/badge/resolution/CharlesPikachu/freeproxy.svg">
