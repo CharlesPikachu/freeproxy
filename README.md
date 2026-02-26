@@ -17,7 +17,7 @@
     <img alt="license" src="https://badgen.net/github/license/CharlesPikachu/freeproxy">
   </a>
   <a href="https://pypi.org/project/pyfreeproxy/">
-    <img src="https://static.pepy.tech/badge/pyfreeproxy" alt="PyPI - Downloads">
+    <img src="https://static.pepy.tech/badge/pyfreeproxy?v=1" alt="PyPI - Downloads">
   </a>
   <a href="https://pypi.org/project/pyfreeproxy/">
     <img src="https://img.shields.io/pypi/dm/pyfreeproxy" alt="PyPI - Downloads">
