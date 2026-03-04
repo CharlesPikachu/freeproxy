@@ -5,7 +5,7 @@
 
 <p align="center">
   <a href="https://freeproxy.readthedocs.io/">
-    <img alt="docs" src="https://img.shields.io/badge/docs-latest-blue">
+    <img alt="Docs" src="https://img.shields.io/badge/docs-latest-blue">
   </a>
   <a href="https://pypi.org/project/pyfreeproxy/">
     <img alt="PyPI - Python Version" src="https://img.shields.io/pypi/pyversions/pyfreeproxy">
@@ -14,19 +14,25 @@
     <img alt="PyPI" src="https://img.shields.io/pypi/v/pyfreeproxy">
   </a>
   <a href="https://github.com/CharlesPikachu/freeproxy/blob/master/LICENSE">
-    <img alt="license" src="https://badgen.net/github/license/CharlesPikachu/freeproxy">
+    <img alt="License" src="https://badgen.net/github/license/CharlesPikachu/freeproxy">
   </a>
   <a href="https://pypi.org/project/pyfreeproxy/">
-    <img src="https://static.pepy.tech/badge/pyfreeproxy" alt="PyPI - Downloads">
+    <img alt="PyPI - Downloads (total)" src="https://static.pepy.tech/badge/pyfreeproxy">
   </a>
   <a href="https://pypi.org/project/pyfreeproxy/">
-    <img src="https://img.shields.io/pypi/dm/pyfreeproxy" alt="PyPI - Downloads">
+    <img alt="PyPI - Downloads (month)" src="https://static.pepy.tech/badge/pyfreeproxy/month">
+  </a>
+  <a href="https://pypi.org/project/pyfreeproxy/">
+    <img alt="PyPI - Downloads (week)" src="https://static.pepy.tech/badge/pyfreeproxy/week">
+  </a>
+  <a href="https://github.com/CharlesPikachu/freeproxy/actions/workflows/update-proxies.yml">
+    <img alt="Update Proxies.json" src="https://github.com/CharlesPikachu/freeproxy/actions/workflows/update-proxies.yml/badge.svg">
   </a>
   <a href="https://github.com/CharlesPikachu/freeproxy/issues">
-    <img alt="issue resolution" src="https://isitmaintained.com/badge/resolution/CharlesPikachu/freeproxy.svg">
+    <img alt="Issue Resolution" src="https://isitmaintained.com/badge/resolution/CharlesPikachu/freeproxy.svg">
   </a>
   <a href="https://github.com/CharlesPikachu/freeproxy/issues">
-    <img alt="open issues" src="https://isitmaintained.com/badge/open/CharlesPikachu/freeproxy.svg">
+    <img alt="Open Issues" src="https://isitmaintained.com/badge/open/CharlesPikachu/freeproxy.svg">
   </a>
 </p>
 
