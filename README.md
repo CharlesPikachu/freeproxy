@@ -69,9 +69,9 @@
 
 # ✨ What's New
 
+- 2026-03-05: Released pyfreeproxy v0.3.7 — Add a new free proxy source, and perform a light refactor on parts of the codebase to unify the coding style without changing existing functionality.
 - 2026-02-13: Released pyfreeproxy v0.3.6 — Added crawling for two new free proxy sources, and optimized the free-proxy crawler for the Free Proxy List website to obtain more high-quality free proxies.
 - 2026-02-12: Released pyfreeproxy v0.3.5 — Introduced two new free proxy providers and remove one rubbish proxy provider; refactored code for all supported sources to enhance performance and validation accuracy.
-- 2026-01-10: Released pyfreeproxy v0.3.4 — Implemented partial code optimizations and introduced an additional free proxy source.
 
 
 # 📘 Introduction
@@ -103,6 +103,7 @@ FreeProxy continuously discovers and updates lists of free proxies. If you find 
 | [ProxydailyProxiedSession](https://proxy-daily.com/)                                   | [ProxyDaily](https://proxy-daily.com/)                                      | ✔           | ✔         | ✔         | ✔         | [proxydaily.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/proxydaily.py)        |
 | [ProxyScrapeProxiedSession](https://proxyscrape.com/free-proxy-list)                   | [ProxyScrape](https://proxyscrape.com/free-proxy-list)                      | ✔           | ❌         | ✔         | ✔         | [proxyscrape.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/proxyscrape.py)      |
 | [ProxyEliteProxiedSession](https://proxyelite.info/cn/free/asia/china/)                | [ProxyElite](https://proxyelite.info/cn/free/asia/china/)                   | ✔           | ❌         | ✔         | ✔         | [proxyelite.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/proxyelite.py)        |
+| [ProxyNovaProxiedSession](https://www.proxynova.com/proxy-server-list/)                | [ProxyNova](https://www.proxynova.com/proxy-server-list/)                   | ✔           | ❌         | ❌         | ❌         | [proxynova.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/proxynova.py)          |
 | [QiyunipProxiedSession](https://www.qiyunip.com/freeProxy/1.html)                      | [齐云代理](https://www.qiyunip.com/freeProxy/1.html)                        | ✔           | ✔         | ❌         | ❌         | [qiyunip.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/qiyunip.py)              |
 | [SpysoneProxiedSession](https://spys.one/en/free-proxy-list/)                          | [SPYS.ONE](https://spys.one/en/free-proxy-list/)                            | ✔           | ❌         | ❌         | ✔         | [spysone.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/spysone.py)              |
 | [SCDNProxiedSession](https://proxy.scdn.io/)                                           | [公共代理池](https://proxy.scdn.io/)                                        | ✔           | ✔         | ✔         | ✔         | [scdn.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/scdn.py)                    |
@@ -280,7 +281,7 @@ dict_keys([
   'SpysoneProxiedSession': SpysoneProxiedSession, 'Tomcat1235ProxiedSession': Tomcat1235ProxiedSession, 'DatabayProxiedSession': DatabayProxiedSession, 'FineProxyProxiedSession': FineProxyProxiedSession, 
   'IPLocateProxiedSession': IPLocateProxiedSession, 'JiliuipProxiedSession': JiliuipProxiedSession, 'TheSpeedXProxiedSession': TheSpeedXProxiedSession, 'GeonodeProxiedSession': GeonodeProxiedSession, 
   'FreeProxyDBProxiedSession': FreeProxyDBProxiedSession, 'ProxyScrapeProxiedSession': ProxyScrapeProxiedSession, 'SCDNProxiedSession': SCDNProxiedSession, 'GoodIPSProxiedSession': GoodIPSProxiedSession,
-  'SixSixDailiProxiedSession': SixSixDailiProxiedSession, 'DpangestuwProxiedSession': DpangestuwProxiedSession,
+  'SixSixDailiProxiedSession': SixSixDailiProxiedSession, 'DpangestuwProxiedSession': DpangestuwProxiedSession, 'ProxyNovaProxiedSession': ProxyNovaProxiedSession,
 ])
 ```
 

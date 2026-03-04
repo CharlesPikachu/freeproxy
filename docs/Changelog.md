@@ -1,5 +1,6 @@
 # Release Log
 
+- 2026-03-05: Released pyfreeproxy v0.3.7 — Add a new free proxy source, and perform a light refactor on parts of the codebase to unify the coding style without changing existing functionality.
 - 2026-02-13: Released pyfreeproxy v0.3.6 — Added crawling for two new free proxy sources, and optimized the free-proxy crawler for the Free Proxy List website to obtain more high-quality free proxies.
 - 2026-02-12: Released pyfreeproxy v0.3.5 — Introduced two new free proxy providers and remove one rubbish proxy provider; refactored code for all supported sources to enhance performance and validation accuracy.
 - 2026-01-10: Released pyfreeproxy v0.3.4 — Implemented partial code optimizations and introduced an additional free proxy source.
