@@ -230,7 +230,7 @@ The proxy distribution for each source you specified is as follows:
 +-----------+-------------------------------+------+-------+--------+--------+------------+-------+-------+
 ```
 
-All proxies are saved to `free_proxies.json` in the current directory, e.g.:
+All proxies are saved to `free_proxies.json` in the current directory, *e.g.*:
 
 ```python
 {
