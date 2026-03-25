@@ -17,6 +17,7 @@ from ..utils import filterinvalidproxies, applyfilterrule, ProxyInfo, IPLocater
 '''DpangestuwProxiedSession'''
 class DpangestuwProxiedSession(BaseProxiedSession):
     source = 'DpangestuwProxiedSession'
+    homepage = 'https://github.com/dpangestuw/Free-Proxy'
     def __init__(self, **kwargs):
         super(DpangestuwProxiedSession, self).__init__(**kwargs)
     '''refreshproxies'''
@@ -25,9 +26,9 @@ class DpangestuwProxiedSession(BaseProxiedSession):
     def refreshproxies(self):
         # initialize
         self.candidate_proxies, session = [], requests.Session()
-        headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36'}
+        headers = {"user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"}
         # obtain proxies
-        try: (resp := session.get('https://raw.githubusercontent.com/dpangestuw/Free-Proxy/refs/heads/main/allive.txt', headers=headers)).raise_for_status()
+        try: (resp := session.get('https://raw.githubusercontent.com/dpangestuw/Free-Proxy/refs/heads/main/All_proxies.txt', headers=headers)).raise_for_status()
         except Exception: return self.candidate_proxies
         for item in resp.text.split('\n'):
             try: protocol, ip, port = re.match(r'(?:(\w+)://)?(\d{1,3}(?:\.\d{1,3}){3}):(\d+)', item.strip()).groups(default='http')

@@ -8,6 +8,7 @@ WeChat Official Account (微信公众号):
 '''
 import re
 import base64
+import quickjs
 import requests
 from bs4 import BeautifulSoup
 from .base import BaseProxiedSession
@@ -22,9 +23,7 @@ class ProxyNovaProxiedSession(BaseProxiedSession):
         super(ProxyNovaProxiedSession, self).__init__(**kwargs)
     '''_jsiptotext'''
     def _jsiptotext(self, script_body: str) -> str:
-        import quickjs
-        m = re.search(r"document\.write\((.*)\)\s*;?\s*$", script_body.strip(), flags=re.S)
-        if not m: return ""
+        if not (m := re.search(r"document\.write\((.*)\)\s*;?\s*$", script_body.strip(), flags=re.S)): return ""
         expr = m.group(1); ctx = quickjs.Context(); out = {"s": ""}
         ctx.add_callable("py_write", lambda x: out.__setitem__("s", out["s"] + str(x)))
         ctx.add_callable("py_atob", lambda s: base64.b64decode(s).decode("utf-8", errors="ignore"))
@@ -33,10 +32,9 @@ class ProxyNovaProxiedSession(BaseProxiedSession):
         return out["s"].strip()
     '''_parserow'''
     def _parserow(self, tr: BeautifulSoup):
-        tds = tr.find_all("td")
-        if len(tds) < 7: return None
+        if len((tds := tr.find_all("td"))) < 7: return None
         # ip
-        ip = ""; script = tds[0].find("script")
+        ip, script = "", tds[0].find("script")
         if script and script.string: ip = self._jsiptotext(script.string)
         else: ip = tds[0].get_text(strip=True)
         # port
@@ -60,7 +58,7 @@ class ProxyNovaProxiedSession(BaseProxiedSession):
         self.candidate_proxies, session = [], requests.Session()
         headers = {"user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"}
         # obtain proxies
-        try: (resp := session.get(f"https://www.proxynova.com/proxy-server-list/", headers=self.getrandomheaders(headers_override=headers))).raise_for_status()
+        try: (resp := session.get(f"https://www.proxynova.com/proxy-server-list/", headers=self.getrandomheaders(base_headers=headers))).raise_for_status()
         except Exception: return self.candidate_proxies
         table = BeautifulSoup(resp.text, "lxml").select_one('table#tbl_proxy_list.table')
         if not table: return self.candidate_proxies

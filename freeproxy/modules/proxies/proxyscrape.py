@@ -26,7 +26,7 @@ class ProxyScrapeProxiedSession(BaseProxiedSession):
         headers = {"user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"}
         # obtain proxies
         for page in range(self.max_pages):
-            try: (resp := session.get(f"https://api.proxyscrape.com/v4/free-proxy-list/get?request=get_proxies&skip={page * 1000}&proxy_format=protocolipport&format=json&limit=1000", headers=self.getrandomheaders(headers_override=headers))).raise_for_status(); data_items: list[dict] = resp.json()['proxies']
+            try: (resp := session.get(f"https://api.proxyscrape.com/v4/free-proxy-list/get?request=get_proxies&skip={page * 1000}&proxy_format=protocolipport&format=json&limit=1000", headers=self.getrandomheaders(base_headers=headers))).raise_for_status(); data_items: list[dict] = resp.json()['proxies']
             except Exception: continue
             for item in data_items:
                 if not item.get('alive'): continue

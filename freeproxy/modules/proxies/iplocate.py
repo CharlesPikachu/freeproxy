@@ -25,8 +25,7 @@ class IPLocateProxiedSession(BaseProxiedSession):
     @filterinvalidproxies
     def refreshproxies(self):
         # initialize
-        self.candidate_proxies, session = [], requests.Session()
-        urls = {'https://raw.githubusercontent.com/iplocate/free-proxy-list/refs/heads/main/all-proxies.txt'}
+        self.candidate_proxies, session, urls = [], requests.Session(), {'https://raw.githubusercontent.com/iplocate/free-proxy-list/refs/heads/main/all-proxies.txt'}
         headers = {
             "sec-ch-ua": '"Chromium";v="142", "Google Chrome";v="142", "Not_A Brand";v="99"', "sec-ch-ua-mobile": "?0", "sec-ch-ua-platform": '"Windows"', 
             "sec-fetch-dest": "document", "sec-fetch-mode": "navigate", "sec-fetch-site": "none", "sec-fetch-user": "?1", "upgrade-insecure-requests": "1",
@@ -34,14 +33,9 @@ class IPLocateProxiedSession(BaseProxiedSession):
         }
         # obtain proxies
         for url in urls:
-            try: resp = session.get(url, headers=self.getrandomheaders(headers_override=headers)); resp.raise_for_status()
-            except: continue
-            for item in resp.text.split('\n'):
-                item = item.strip()
-                if not item: continue
-                parse_item = urlparse(item)
-                proxy_info = ProxyInfo(source=self.source, protocol=parse_item.scheme, ip=parse_item.hostname, port=parse_item.port, anonymity="")
-                self.candidate_proxies.append(proxy_info)
+            try: (resp := session.get(url, headers=self.getrandomheaders(base_headers=headers))).raise_for_status()
+            except Exception: continue
+            self.candidate_proxies.extend(ProxyInfo(source=self.source, protocol=u.scheme, ip=u.hostname, port=u.port, anonymity="") for raw in resp.text.split('\n') if (item := raw.strip()) for u in [urlparse(item)])
         # append country code info
         with ThreadPoolExecutor(max_workers=20) as executor:
             future_map = {executor.submit(IPLocater.locate, p.ip): p for p in self.candidate_proxies}

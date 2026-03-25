@@ -24,8 +24,7 @@ class TheSpeedXProxiedSession(BaseProxiedSession):
     @filterinvalidproxies
     def refreshproxies(self):
         # initialize
-        self.candidate_proxies, session = [], requests.Session()
-        urls = {'socks5': 'https://raw.githubusercontent.com/TheSpeedX/SOCKS-List/master/socks5.txt', 'socks4': 'https://raw.githubusercontent.com/TheSpeedX/SOCKS-List/master/socks4.txt', 'http': 'https://raw.githubusercontent.com/TheSpeedX/SOCKS-List/master/http.txt'}
+        self.candidate_proxies, session, urls = [], requests.Session(), {'socks5': 'https://raw.githubusercontent.com/TheSpeedX/SOCKS-List/master/socks5.txt', 'socks4': 'https://raw.githubusercontent.com/TheSpeedX/SOCKS-List/master/socks4.txt', 'http': 'https://raw.githubusercontent.com/TheSpeedX/SOCKS-List/master/http.txt'}
         headers = {
             "sec-ch-ua": '"Chromium";v="142", "Google Chrome";v="142", "Not_A Brand";v="99"', "sec-ch-ua-mobile": "?0", "sec-ch-ua-platform": '"Windows"', 
             "sec-fetch-dest": "document", "sec-fetch-mode": "navigate", "sec-fetch-site": "none", "sec-fetch-user": "?1", "upgrade-insecure-requests": "1",
@@ -33,11 +32,10 @@ class TheSpeedXProxiedSession(BaseProxiedSession):
         }
         # obtain proxies
         for protocol, url in urls.items():
-            try: (resp := session.get(url, headers=self.getrandomheaders(headers_override=headers))).raise_for_status()
+            try: (resp := session.get(url, headers=self.getrandomheaders(base_headers=headers))).raise_for_status()
             except Exception: continue
             for item in resp.text.split('\n'):
-                item = item.strip()
-                if not item: continue
+                if not (item := item.strip()): continue
                 try: ip, port = item.split(':')
                 except Exception: continue
                 proxy_info = ProxyInfo(source=self.source, protocol=protocol, ip=ip, port=port, anonymity="")

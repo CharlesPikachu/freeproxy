@@ -25,9 +25,7 @@ class IP89ProxiedSession(BaseProxiedSession):
     @filterinvalidproxies
     def refreshproxies(self):
         # initialize
-        self.candidate_proxies, session = [], requests.Session()
-        octet = r'(?:25[0-5]|2[0-4]\d|1?\d?\d)'
-        port  = r'(?:6553[0-5]|655[0-2]\d|65[0-4]\d{2}|6[0-4]\d{3}|[1-5]\d{4}|[1-9]\d{0,3})'
+        self.candidate_proxies, session, octet, port = [], requests.Session(), r'(?:25[0-5]|2[0-4]\d|1?\d?\d)', r'(?:6553[0-5]|655[0-2]\d|65[0-4]\d{2}|6[0-4]\d{3}|[1-5]\d{4}|[1-9]\d{0,3})'
         PATTERN = re.compile(rf'^{octet}\.{octet}\.{octet}\.{octet}:{port}$')
         # obtain proxies
         headers = {
@@ -36,14 +34,13 @@ class IP89ProxiedSession(BaseProxiedSession):
             "Sec-Fetch-Dest": "document", "Sec-Fetch-Mode": "navigate", "Sec-Fetch-Site": "same-origin", "Upgrade-Insecure-Requests": "1", "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36",
         }
         params = {"api": "1", "num": "200", "port": "", "address": "", "isp": ""}
-        try: (resp := session.get('https://api.89ip.cn/tqdl.html', params=params, headers=self.getrandomheaders(headers_override=headers))).raise_for_status()
+        try: (resp := session.get('https://api.89ip.cn/tqdl.html', params=params, headers=self.getrandomheaders(base_headers=headers))).raise_for_status()
         except Exception: return self.candidate_proxies
         for item in resp.text.split('<br>'):
             if PATTERN.fullmatch(item.strip()) is None: continue
             try: ip, port = item.split(':')
             except Exception: continue
-            proxy_info = ProxyInfo(source=self.source, protocol='http', ip=ip, port=port, anonymity="")
-            self.candidate_proxies.append(proxy_info)
+            self.candidate_proxies.append(ProxyInfo(source=self.source, protocol='http', ip=ip, port=port, anonymity=""))
         # append country code info
         with ThreadPoolExecutor(max_workers=20) as executor:
             future_map = {executor.submit(IPLocater.locate, p.ip): p for p in self.candidate_proxies}

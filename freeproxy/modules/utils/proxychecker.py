@@ -25,25 +25,16 @@ def filterinvalidproxies(func):
         else: raise TypeError(f"{func.__qualname__} must return ProxyInfo, dict, or iterable of them, but got {type(result)!r}")
         # proxies with valid and invalid format
         valid: list[ProxyInfo] = []; invalid_info: list[tuple[ProxyInfo, str]] = []
-        for p in proxies:
-            ok, reason = p.selfcheck()
-            if ok: valid.append(p)
-            else: invalid_info.append((p, reason))
+        for p in proxies: valid.append(p) if (res := p.selfcheck())[0] else invalid_info.append((p, res[1]))
         # logging if necessary
-        if args:
-            logger_handle: LoggerHandle = getattr(args[0], "logger_handle", None)
-            disable_print: bool = getattr(args[0], "disable_print", False)
-            homepage: str = getattr(args[0], "homepage", "")
-            if logger_handle and invalid_info:
-                for bad_p, reason in invalid_info: logger_handle.warning(f"{func.__qualname__} >>> {bad_p.proxy} (Error: {reason}, auto drop by default)", disable_print=disable_print)
-            if logger_handle and not valid:
-                reasons = ", ".join(set(reason for _, reason in invalid_info)) or "no proxies"
-                logger_handle.warning(f"{func.__qualname__} >>> {homepage} (Error: {reasons})", disable_print=disable_print)
+        homepage: str = getattr(args[0], "homepage", "") if args else ""
+        disable_print: bool = getattr(args[0], "disable_print", False) if args else False
+        logger_handle: LoggerHandle = getattr(args[0], "logger_handle", None) if args else None
+        (logger_handle and invalid_info) and [logger_handle.warning(f"{func.__qualname__} >>> {bad_p.proxy} (Error: {reason}, auto drop by default)", disable_print=disable_print) for bad_p, reason in invalid_info]
+        if logger_handle and not valid: logger_handle.warning(f"{func.__qualname__} >>> {homepage} (Error: {', '.join(set(reason for _, reason in invalid_info)) or 'no proxies'})", disable_print=disable_print)
         # filter repeated proxies
         unique_proxy_infos, unique_identifiers = [], set()
-        for p in valid:
-            if p.proxy in unique_identifiers: continue
-            unique_identifiers.add(p.proxy); unique_proxy_infos.append(p)
+        for p in valid: p.proxy in unique_identifiers or (unique_identifiers.add(p.proxy), unique_proxy_infos.append(p))
         # setting to class attributes
         if args: args[0].candidate_proxies = unique_proxy_infos
         # return
@@ -54,7 +45,7 @@ def filterinvalidproxies(func):
 '''tolist'''
 def __tolist__(obj: Optional[str | list | tuple] = None):
     try: obj = list(obj or [])
-    except: obj = []
+    except Exception: obj = []
     if isinstance(obj, str): obj: list[str] = [obj]
     return [o.lower() for o in obj]
 
@@ -64,7 +55,7 @@ def applyfilterrule():
     def decorator(func: Callable):
         @wraps(func)
         def wrapper(self, *args, **kwargs):
-            proxies, filtered = func(self, *args, **kwargs), []
+            proxies: list[ProxyInfo] = func(self, *args, **kwargs); filtered = []
             rule = getattr(self, "filter_rule", None)
             if rule is None or not rule or not isinstance(rule, dict): return proxies
             anonymity, protocol, country_code = __tolist__(rule.get('anonymity')), __tolist__(rule.get('protocol')), __tolist__(rule.get('country_code'))
@@ -84,14 +75,7 @@ def applyfilterrule():
                         try: future.result()
                         except Exception: continue
                 max_http_ms_flag = True
-            for p in proxies:
-                if not isinstance(p, ProxyInfo): continue
-                if anonymity and (p.anonymity.lower() not in anonymity): continue
-                if protocol and (p.protocol.lower() not in protocol): continue
-                if country_code and (p.country_code.lower() not in country_code): continue
-                if max_tcp_ms_flag and p.tcp_connect_delay > max_tcp_ms: continue
-                if max_http_ms_flag and p.http_connect_delay > max_http_ms: continue
-                filtered.append(p)
+            filtered.extend([p for p in proxies if isinstance(p, ProxyInfo) and (not anonymity or p.anonymity.lower() in anonymity) and (not protocol or p.protocol.lower() in protocol) and (not country_code or p.country_code.lower() in country_code) and (not max_tcp_ms_flag or p.tcp_connect_delay <= max_tcp_ms) and (not max_http_ms_flag or p.http_connect_delay <= max_http_ms)])
             self.candidate_proxies = filtered
             return filtered
         return wrapper

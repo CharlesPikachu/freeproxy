@@ -22,8 +22,7 @@ class ProxylistProxiedSession(BaseProxiedSession):
     @filterinvalidproxies
     def refreshproxies(self):
         # initialize
-        self.candidate_proxies, session = [], requests.Session()
-        headers = {
+        self.candidate_proxies, session, headers = [], requests.Session(), {
             "Referer": "https://www.proxy-list.download/SOCKS5", "sec-ch-ua": '"Chromium";v="142", "Google Chrome";v="142", "Not_A Brand";v="99"', "sec-ch-ua-mobile": "?0",
             "sec-ch-ua-platform": '"Windows"', "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36",
         }
@@ -31,7 +30,7 @@ class ProxylistProxiedSession(BaseProxiedSession):
         base_url = 'https://www.proxy-list.download/api/v2/get?l=en&t='
         for protocol in ['http', 'https', 'socks4', 'socks5']:
             headers['Referer'] = f"https://www.proxy-list.download/{protocol.upper()}"
-            try: (resp := session.get(f'{base_url}{protocol}', headers=self.getrandomheaders(headers_override=headers))).raise_for_status(); data_items = resp.json()['LISTA']
+            try: (resp := session.get(f'{base_url}{protocol}', headers=self.getrandomheaders(base_headers=headers))).raise_for_status(); data_items = resp.json()['LISTA']
             except Exception: continue
             for item in data_items:
                 try: proxy_info = ProxyInfo(source=self.source, protocol=protocol, ip=item["IP"], port=item["PORT"], anonymity=item["ANON"].lower(), country_code=item["ISO"], in_chinese_mainland=(item["ISO"].lower() in ['cn']), delay=item["PING"])

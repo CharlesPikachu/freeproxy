@@ -34,14 +34,13 @@ class DatabayProxiedSession(BaseProxiedSession):
         }
         # obtain proxies
         for url in urls:
-            try: resp = session.get(url, headers=self.getrandomheaders(headers_override=headers)); resp.raise_for_status()
-            except: continue
+            try: (resp := session.get(url, headers=self.getrandomheaders(base_headers=headers))).raise_for_status()
+            except Exception: continue
             protocol = urlparse(url).path.strip('/').split('/')[-1].split('.')[0]
             for item in resp.text.split('\n'):
-                item = item.strip()
-                if not item: continue
+                if not (item := item.strip()): continue
                 try: ip, port = item.split(':')
-                except: continue
+                except Exception: continue
                 proxy_info = ProxyInfo(source=self.source, protocol=protocol, ip=ip, port=port, anonymity="")
                 self.candidate_proxies.append(proxy_info)
         # append country code info

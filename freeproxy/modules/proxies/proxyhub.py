@@ -24,16 +24,14 @@ class ProxyhubProxiedSession(BaseProxiedSession):
     @filterinvalidproxies
     def refreshproxies(self):
         # initialize
-        self.candidate_proxies, session = [], requests.Session()
+        self.candidate_proxies, session, urls = [], requests.Session(), []
         # obtain proxies
         try: (resp := session.get('https://proxyhub.me/', headers=self.getrandomheaders())).raise_for_status(); soup = BeautifulSoup(resp.text, 'lxml'); soup = soup.select_one("div.list table.table"); trs = soup.select("tbody tr")
         except Exception: return self.candidate_proxies
-        urls = []
         for tr in trs:
             try: tds = tr.find_all("td"); urls.append(tds[4].find("a")['href'])
-            except: continue
-        if not urls: return self.candidate_proxies
-        urls = list(set(urls))
+            except Exception: continue
+        if not (urls := list(set(urls))): return self.candidate_proxies
         for url in urls:
             try: (resp := session.get(f'https://proxyhub.me{url}')).raise_for_status(); soup = BeautifulSoup(resp.text, 'lxml'); soup = soup.select_one("div.list table.table"); trs = soup.select("tbody tr"); m = re.search(r"/en/([a-z]{2})-free-proxy-list(?:\.html?)?$", url, re.IGNORECASE); country_code = m.group(1).upper()
             except Exception: continue

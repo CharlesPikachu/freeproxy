@@ -7,6 +7,7 @@ WeChat Official Account (微信公众号):
     Charles的皮卡丘
 '''
 import requests
+from tqdm import tqdm
 from .base import BaseProxiedSession
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from ..utils import filterinvalidproxies, applyfilterrule, ProxyInfo
@@ -29,18 +30,20 @@ class ProxiflyProxiedSession(BaseProxiedSession):
             "KH", "KR", "KZ", "LA", "LS", "LU", "LV", "LY", "MK", "MX", "MY", "MZ", "NG", "NL", "NO", "NP", "PE", "PH", "PK", "PL", "PR", "PY", "RO", "RU", "RW", "SC", "SE", "SG", "SK", "SN", "SY", "TH", "TL", "TV", "TW", "TZ", "UA", "US", "VE", "VN", "YE", "ZA", "ZZ",
         ]
         for country_code in country_codes: urls.append(f'https://cdn.jsdelivr.net/gh/proxifly/free-proxy-list@main/proxies/countries/{country_code}/data.json')
-        # obtain proxies
         headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"}
+        # obtain proxies
         def fetch_one_country_func(url: str):
-            try: session = requests.Session(); (resp := session.get(url, headers=self.getrandomheaders(headers_override=headers))).raise_for_status(); proxies_data = resp.json()
+            try: (resp := requests.get(url, headers=self.getrandomheaders(base_headers=headers))).raise_for_status(); proxies_data = resp.json()
             except Exception: return
             for item in proxies_data:
                 try: proxy_info = ProxyInfo(source=self.source, protocol=item['protocol'], ip=item['ip'], port=item['port'], anonymity=item['anonymity'], country_code=item['geolocation']['country'], in_chinese_mainland=(item['geolocation']['country'].lower() in ['cn']))
                 except Exception: continue
                 self.candidate_proxies.append(proxy_info)
         with ThreadPoolExecutor(max_workers=10) as executor:
-            futures = [executor.submit(fetch_one_country_func, url) for url in urls]
-            for future in as_completed(futures):
+            future_map = [executor.submit(fetch_one_country_func, url) for url in urls]
+            if not self.disable_print: future_map_wrapper = tqdm(as_completed(future_map), desc=f"{self.source} >>> scraping proxies from countries")
+            else: future_map_wrapper = as_completed(future_map)
+            for future in future_map_wrapper:
                 try: future.result()
                 except Exception: continue
         # return

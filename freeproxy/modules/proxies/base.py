@@ -21,10 +21,10 @@ class BaseProxiedSession(requests.Session):
         super(BaseProxiedSession, self).__init__(**kwargs)
         self.trust_env = trust_env # trust_env=True may cause requests to respect NO_PROXY or system proxy settings, which can bypass your configured proxy.
         self.max_pages = max_pages
-        self.logger_handle = logger_handle if logger_handle else LoggerHandle()
         self.disable_print = disable_print
         self.filter_rule = filter_rule or {}
-        self.candidate_proxies = []
+        self.candidate_proxies: list[ProxyInfo] = []
+        self.logger_handle = logger_handle if logger_handle else LoggerHandle()
     '''refreshproxies'''
     def refreshproxies(self):
         raise NotImplementedError('not to be implemented')
@@ -40,16 +40,15 @@ class BaseProxiedSession(requests.Session):
         self.proxies = self.getrandomproxy(proxy_format='requests')
         return self.proxies
     '''getrandomheaders'''
-    def getrandomheaders(self, headers_override: dict = None):
+    def getrandomheaders(self, base_headers: dict = None) -> dict:
         # init
-        headers_override = headers_override or {}
+        base_headers = dict(base_headers or {})
         # random public ipv4
         while True:
             ip_str = ".".join(str(random.randint(0, 255)) for _ in range(4))
             ip = ipaddress.ip_address(ip_str)
             if ip.is_global: break
         # construct default headers
-        default_headers = {'X-Forwarded-For': ip_str, 'User-Agent': UserAgent().random}
-        default_headers.update(headers_override)
+        (default_headers := {'X-Forwarded-For': ip_str, 'User-Agent': UserAgent().random}).update(base_headers)
         # return
         return default_headers

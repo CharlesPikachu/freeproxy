@@ -26,10 +26,10 @@ class Tomcat1235ProxiedSession(BaseProxiedSession):
     def refreshproxies(self):
         # initialize
         self.candidate_proxies, session = [], requests.Session()
-        headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'}
+        headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"}
         # obtain proxies
         for page in range(1, self.max_pages+1):
-            try: (resp := session.get(f'https://tomcat1235.nyc.mn/proxy_list?page={page}', headers=self.getrandomheaders(headers_override=headers), timeout=60)).raise_for_status(); resp.encoding = 'utf-8'; soup = BeautifulSoup(resp.text, 'html.parser'); table = soup.find('table'); trs = table.find_all('tr')[1:]
+            try: (resp := session.get(f'https://tomcat1235.nyc.mn/proxy_list?page={page}', headers=self.getrandomheaders(base_headers=headers), timeout=60)).raise_for_status(); resp.encoding = 'utf-8'; soup = BeautifulSoup(resp.text, 'html.parser'); table = soup.find('table'); trs = table.find_all('tr')[1:]
             except Exception: continue
             for row in trs:
                 cells = row.find_all('td')
