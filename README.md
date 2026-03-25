@@ -69,9 +69,9 @@
 
 # ✨ What's New
 
+- 2026-03-26: Released pyfreeproxy v0.4.0 — Partial code refactoring was completed to remove the Playwright dependency and switch to DrissionPage. Additionally, multiple free proxy sources were added, and some known bugs have been fixed.
 - 2026-03-05: Released pyfreeproxy v0.3.7 — Add a new free proxy source, and perform a light refactor on parts of the codebase to unify the coding style without changing existing functionality.
 - 2026-02-13: Released pyfreeproxy v0.3.6 — Added crawling for two new free proxy sources, and optimized the free-proxy crawler for the Free Proxy List website to obtain more high-quality free proxies.
-- 2026-02-12: Released pyfreeproxy v0.3.5 — Introduced two new free proxy providers and remove one rubbish proxy provider; refactored code for all supported sources to enhance performance and validation accuracy.
 
 
 # 📘 Introduction
@@ -96,6 +96,7 @@ FreeProxy continuously discovers and updates lists of free proxies. If you find 
 | [JiliuipProxiedSession](https://www.jiliuip.com/free/page-1/)                          | [积流代理](https://www.jiliuip.com/free/page-1/)                            | ✔           | ❌         | ❌         | ❌         | [jiliuip.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/jiliuip.py)              |
 | [KuaidailiProxiedSession](https://www.kuaidaili.com/free/inha/1/)                      | [快代理](https://www.kuaidaili.com/free/inha/1/)                            | ✔           | ✔         | ❌         | ❌         | [kuaidaili.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/kuaidaili.py)          |
 | [KxdailiProxiedSession](http://www.kxdaili.com/dailiip.html)                           | [开心代理](http://www.kxdaili.com/dailiip.html)                             | ✔           | ✔         | ❌         | ❌         | [kxdaili.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/kxdaili.py)              |
+| [OpenProxyListProxiedSession](https://api.openproxylist.xyz/)                          | [OpenProxyList](https://api.openproxylist.xyz/)                             | ✔           | ✔         | ✔         | ✔         | [openproxylist.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/openproxylist.py)  |
 | [ProxyhubProxiedSession](https://proxyhub.me/)                                         | [ProxyHub](https://proxyhub.me/)                                            | ✔           | ✔         | ✔         | ✔         | [proxyhub.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/proxyhub.py)            |
 | [ProxydbProxiedSession](https://proxydb.net/?offset=0)                                 | [ProxyDB](https://proxydb.net/?offset=0)                                    | ✔           | ✔         | ❌         | ✔         | [proxydb.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/proxydb.py)              |
 | [ProxylistProxiedSession](https://www.proxy-list.download/HTTP/)                       | [ProxyList](https://www.proxy-list.download/HTTP/)                          | ✔           | ✔         | ✔         | ✔         | [proxylist.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/proxylist.py)          |
@@ -104,6 +105,7 @@ FreeProxy continuously discovers and updates lists of free proxies. If you find 
 | [ProxyScrapeProxiedSession](https://proxyscrape.com/free-proxy-list)                   | [ProxyScrape](https://proxyscrape.com/free-proxy-list)                      | ✔           | ❌         | ✔         | ✔         | [proxyscrape.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/proxyscrape.py)      |
 | [ProxyEliteProxiedSession](https://proxyelite.info/cn/free/asia/china/)                | [ProxyElite](https://proxyelite.info/cn/free/asia/china/)                   | ✔           | ❌         | ✔         | ✔         | [proxyelite.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/proxyelite.py)        |
 | [ProxyNovaProxiedSession](https://www.proxynova.com/proxy-server-list/)                | [ProxyNova](https://www.proxynova.com/proxy-server-list/)                   | ✔           | ❌         | ❌         | ❌         | [proxynova.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/proxynova.py)          |
+| [ProxyShareProxiedSession](https://www.proxyshare.com/zh/free-proxy/)                  | [ProxyShare免费代理](https://www.proxyshare.com/zh/free-proxy/)             | ✔           | ✔         | ✔         | ✔         | [proxyshare.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/proxyshare.py)        |
 | [QiyunipProxiedSession](https://www.qiyunip.com/freeProxy/1.html)                      | [齐云代理](https://www.qiyunip.com/freeProxy/1.html)                        | ✔           | ✔         | ❌         | ❌         | [qiyunip.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/qiyunip.py)              |
 | [SpysoneProxiedSession](https://spys.one/en/free-proxy-list/)                          | [SPYS.ONE](https://spys.one/en/free-proxy-list/)                            | ✔           | ❌         | ❌         | ✔         | [spysone.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/spysone.py)              |
 | [SCDNProxiedSession](https://proxy.scdn.io/)                                           | [公共代理池](https://proxy.scdn.io/)                                        | ✔           | ✔         | ✔         | ✔         | [scdn.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/scdn.py)                    |
@@ -274,15 +276,23 @@ python -c "from freeproxy.modules import ProxiedSessionBuilder; print(ProxiedSes
 Example output:
 
 ```bash
-dict_keys([
-  'ProxiflyProxiedSession': ProxiflyProxiedSession, 'FreeproxylistProxiedSession': FreeproxylistProxiedSession, 'IP89ProxiedSession': IP89ProxiedSession, 'ProxyEliteProxiedSession': ProxyEliteProxiedSession,
-  'IP3366ProxiedSession': IP3366ProxiedSession, 'KuaidailiProxiedSession': KuaidailiProxiedSession, 'KxdailiProxiedSession': KxdailiProxiedSession, 'ProxydailyProxiedSession': ProxydailyProxiedSession, 
-  'ProxydbProxiedSession': ProxydbProxiedSession, 'ProxyhubProxiedSession': ProxyhubProxiedSession, 'ProxylistProxiedSession': ProxylistProxiedSession, 'QiyunipProxiedSession': QiyunipProxiedSession,
-  'SpysoneProxiedSession': SpysoneProxiedSession, 'Tomcat1235ProxiedSession': Tomcat1235ProxiedSession, 'DatabayProxiedSession': DatabayProxiedSession, 'FineProxyProxiedSession': FineProxyProxiedSession, 
-  'IPLocateProxiedSession': IPLocateProxiedSession, 'JiliuipProxiedSession': JiliuipProxiedSession, 'TheSpeedXProxiedSession': TheSpeedXProxiedSession, 'GeonodeProxiedSession': GeonodeProxiedSession, 
-  'FreeProxyDBProxiedSession': FreeProxyDBProxiedSession, 'ProxyScrapeProxiedSession': ProxyScrapeProxiedSession, 'SCDNProxiedSession': SCDNProxiedSession, 'GoodIPSProxiedSession': GoodIPSProxiedSession,
-  'SixSixDailiProxiedSession': SixSixDailiProxiedSession, 'DpangestuwProxiedSession': DpangestuwProxiedSession, 'ProxyNovaProxiedSession': ProxyNovaProxiedSession,
-])
+{
+  'ProxiflyProxiedSession':      ProxiflyProxiedSession,      'FreeproxylistProxiedSession': FreeproxylistProxiedSession,
+  'IP89ProxiedSession':          IP89ProxiedSession,          'ProxyEliteProxiedSession':    ProxyEliteProxiedSession,
+  'IP3366ProxiedSession':        IP3366ProxiedSession,        'KuaidailiProxiedSession':     KuaidailiProxiedSession,
+  'KxdailiProxiedSession':       KxdailiProxiedSession,       'ProxydailyProxiedSession':    ProxydailyProxiedSession,
+  'ProxydbProxiedSession':       ProxydbProxiedSession,       'ProxyhubProxiedSession':      ProxyhubProxiedSession,
+  'ProxylistProxiedSession':     ProxylistProxiedSession,     'QiyunipProxiedSession':       QiyunipProxiedSession,
+  'SpysoneProxiedSession':       SpysoneProxiedSession,       'Tomcat1235ProxiedSession':    Tomcat1235ProxiedSession,
+  'DatabayProxiedSession':       DatabayProxiedSession,       'FineProxyProxiedSession':     FineProxyProxiedSession,
+  'IPLocateProxiedSession':      IPLocateProxiedSession,      'JiliuipProxiedSession':       JiliuipProxiedSession,
+  'TheSpeedXProxiedSession':     TheSpeedXProxiedSession,     'GeonodeProxiedSession':       GeonodeProxiedSession,
+  'FreeProxyDBProxiedSession':   FreeProxyDBProxiedSession,   'ProxyScrapeProxiedSession':   ProxyScrapeProxiedSession,
+  'SCDNProxiedSession':          SCDNProxiedSession,          'GoodIPSProxiedSession':       GoodIPSProxiedSession,
+  'SixSixDailiProxiedSession':   SixSixDailiProxiedSession,   'DpangestuwProxiedSession':    DpangestuwProxiedSession,
+  'ProxyNovaProxiedSession':     ProxyNovaProxiedSession,     'ProxyShareProxiedSession':    ProxyShareProxiedSession,
+  'OpenProxyListProxiedSession': OpenProxyListProxiedSession,
+}
 ```
 
 #### Apply stricter filtering

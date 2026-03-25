@@ -131,15 +131,23 @@ python -c "from freeproxy.modules import ProxiedSessionBuilder; print(ProxiedSes
 Example output:
 
 ```bash
-dict_keys([
-  'ProxiflyProxiedSession': ProxiflyProxiedSession, 'FreeproxylistProxiedSession': FreeproxylistProxiedSession, 'IP89ProxiedSession': IP89ProxiedSession, 'ProxyEliteProxiedSession': ProxyEliteProxiedSession,
-  'IP3366ProxiedSession': IP3366ProxiedSession, 'KuaidailiProxiedSession': KuaidailiProxiedSession, 'KxdailiProxiedSession': KxdailiProxiedSession, 'ProxydailyProxiedSession': ProxydailyProxiedSession, 
-  'ProxydbProxiedSession': ProxydbProxiedSession, 'ProxyhubProxiedSession': ProxyhubProxiedSession, 'ProxylistProxiedSession': ProxylistProxiedSession, 'QiyunipProxiedSession': QiyunipProxiedSession,
-  'SpysoneProxiedSession': SpysoneProxiedSession, 'Tomcat1235ProxiedSession': Tomcat1235ProxiedSession, 'DatabayProxiedSession': DatabayProxiedSession, 'FineProxyProxiedSession': FineProxyProxiedSession, 
-  'IPLocateProxiedSession': IPLocateProxiedSession, 'JiliuipProxiedSession': JiliuipProxiedSession, 'TheSpeedXProxiedSession': TheSpeedXProxiedSession, 'GeonodeProxiedSession': GeonodeProxiedSession, 
-  'FreeProxyDBProxiedSession': FreeProxyDBProxiedSession, 'ProxyScrapeProxiedSession': ProxyScrapeProxiedSession, 'SCDNProxiedSession': SCDNProxiedSession, 'GoodIPSProxiedSession': GoodIPSProxiedSession,
-  'SixSixDailiProxiedSession': SixSixDailiProxiedSession, 'DpangestuwProxiedSession': DpangestuwProxiedSession, 'ProxyNovaProxiedSession': ProxyNovaProxiedSession,
-])
+{
+  'ProxiflyProxiedSession':      ProxiflyProxiedSession,      'FreeproxylistProxiedSession': FreeproxylistProxiedSession,
+  'IP89ProxiedSession':          IP89ProxiedSession,          'ProxyEliteProxiedSession':    ProxyEliteProxiedSession,
+  'IP3366ProxiedSession':        IP3366ProxiedSession,        'KuaidailiProxiedSession':     KuaidailiProxiedSession,
+  'KxdailiProxiedSession':       KxdailiProxiedSession,       'ProxydailyProxiedSession':    ProxydailyProxiedSession,
+  'ProxydbProxiedSession':       ProxydbProxiedSession,       'ProxyhubProxiedSession':      ProxyhubProxiedSession,
+  'ProxylistProxiedSession':     ProxylistProxiedSession,     'QiyunipProxiedSession':       QiyunipProxiedSession,
+  'SpysoneProxiedSession':       SpysoneProxiedSession,       'Tomcat1235ProxiedSession':    Tomcat1235ProxiedSession,
+  'DatabayProxiedSession':       DatabayProxiedSession,       'FineProxyProxiedSession':     FineProxyProxiedSession,
+  'IPLocateProxiedSession':      IPLocateProxiedSession,      'JiliuipProxiedSession':       JiliuipProxiedSession,
+  'TheSpeedXProxiedSession':     TheSpeedXProxiedSession,     'GeonodeProxiedSession':       GeonodeProxiedSession,
+  'FreeProxyDBProxiedSession':   FreeProxyDBProxiedSession,   'ProxyScrapeProxiedSession':   ProxyScrapeProxiedSession,
+  'SCDNProxiedSession':          SCDNProxiedSession,          'GoodIPSProxiedSession':       GoodIPSProxiedSession,
+  'SixSixDailiProxiedSession':   SixSixDailiProxiedSession,   'DpangestuwProxiedSession':    DpangestuwProxiedSession,
+  'ProxyNovaProxiedSession':     ProxyNovaProxiedSession,     'ProxyShareProxiedSession':    ProxyShareProxiedSession,
+  'OpenProxyListProxiedSession': OpenProxyListProxiedSession, 
+}
 ```
 
 #### Apply stricter filtering
