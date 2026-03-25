@@ -12,7 +12,7 @@ from freeproxy.modules import BaseProxiedSession, ProxyInfo, BuildProxiedSession
 
 
 '''settings'''
-SOURCES = ["ProxiflyProxiedSession", "KuaidailiProxiedSession", "QiyunipProxiedSession", "ProxylistProxiedSession"]
+SOURCES = ["ProxiflyProxiedSession", "KuaidailiProxiedSession", "QiyunipProxiedSession", "SCDNProxiedSession"]
 TITLES = ["Source", "Retrieved Example", "HTTP", "HTTPS", "SOCKS4", "SOCKS5", "Chinese IP", "Elite", "Total"]
 
 
