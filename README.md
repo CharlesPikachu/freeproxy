@@ -69,7 +69,7 @@
 
 # ✨ What's New
 
-- 2026-03-26: Released pyfreeproxy v0.4.0 — Partial code refactoring was completed to remove the Playwright dependency and switch to DrissionPage. Additionally, multiple free proxy sources were added, and some known bugs have been fixed.
+- 2026-03-26: Released pyfreeproxy v0.4.0 — Implemented a partial refactor to switch from Playwright to DrissionPage, expanded proxy support with multiple free sources, and fixed a number of known bugs.
 - 2026-03-05: Released pyfreeproxy v0.3.7 — Add a new free proxy source, and perform a light refactor on parts of the codebase to unify the coding style without changing existing functionality.
 - 2026-02-13: Released pyfreeproxy v0.3.6 — Added crawling for two new free proxy sources, and optimized the free-proxy crawler for the Free Proxy List website to obtain more high-quality free proxies.
 
