@@ -138,9 +138,9 @@ cd freeproxy
 python setup.py install
 ```
 
-Please note that some proxy sources need to be crawled using [Playwright](https://playwright.dev/). 
-Playwright will automatically download and configure the browser drivers, so there is no need to worry — it is not malware. 
-For more details, you can refer to the [official Playwright documentation](https://playwright.dev/docs/intro).
+Please note that some proxy sources need to be crawled using [DrissionPage](https://www.drissionpage.cn/). 
+If DrissionPage cannot find a suitable browser in the current environment, it will automatically download the latest compatible beta version of Google Chrome for the current system. 
+So if you notice that the program is downloading a browser, there is no need to be overly concerned.
 
 
 # 🚀 Quick Start
