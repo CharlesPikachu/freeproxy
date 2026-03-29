@@ -146,7 +146,8 @@ Example output:
   'SCDNProxiedSession':          SCDNProxiedSession,          'GoodIPSProxiedSession':       GoodIPSProxiedSession,
   'SixSixDailiProxiedSession':   SixSixDailiProxiedSession,   'DpangestuwProxiedSession':    DpangestuwProxiedSession,
   'ProxyNovaProxiedSession':     ProxyNovaProxiedSession,     'ProxyShareProxiedSession':    ProxyShareProxiedSession,
-  'OpenProxyListProxiedSession': OpenProxyListProxiedSession, 
+  'OpenProxyListProxiedSession': OpenProxyListProxiedSession, 'IProyalProxiedSession':       IPRoyalProxiedSession,
+  'ADVFPProxiedSession':         ADVFPProxiedSession,
 }
 ```
 

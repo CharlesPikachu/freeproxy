@@ -69,9 +69,9 @@
 
 # ✨ What's New
 
+- 2026-03-30: Released pyfreeproxy v0.4.1 — Added scraping for two new free proxy sources (*i.e.*, "advanced.name" and "iproyal.com"); optimized DrissionPage arguments.
 - 2026-03-26: Released pyfreeproxy v0.4.0 — Implemented a partial refactor to switch from Playwright to DrissionPage, expanded proxy support with multiple free sources, and fixed a number of known bugs.
 - 2026-03-05: Released pyfreeproxy v0.3.7 — Add a new free proxy source, and perform a light refactor on parts of the codebase to unify the coding style without changing existing functionality.
-- 2026-02-13: Released pyfreeproxy v0.3.6 — Added crawling for two new free proxy sources, and optimized the free-proxy crawler for the Free Proxy List website to obtain more high-quality free proxies.
 
 
 # 📘 Introduction
@@ -83,6 +83,7 @@ FreeProxy continuously discovers and updates lists of free proxies. If you find 
 
 | Proxy Source (EN)                                                                      | Proxy Source (CN)                                                           | HTTP         | HTTPS      | SOCKS4     | SOCKS5     | Code Snippet                                                                                                            |
 | :----                                                                                  | :----                                                                       | :----:       | :----:     | :----:     | :----:     | :----                                                                                                                   |
+| [ADVFPProxiedSession](https://advanced.name/freeproxy)                                 | [Advanced.Name](https://advanced.name/freeproxy)                            | ✔           | ✔         | ✔         | ✔         | [advfp.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/advfp.py)                  |
 | [DatabayProxiedSession](https://databay.com/free-proxy-list)                           | [Databay](https://databay.com/free-proxy-list)                              | ✔           | ✔         | ❌         | ✔         | [databay.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/databay.py)              |
 | [DpangestuwProxiedSession](https://github.com/dpangestuw/Free-Proxy)                   | [Dpangestuw](https://github.com/dpangestuw/Free-Proxy)                      | ✔           | ✔         | ✔         | ✔         | [dpangestuw.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/dpangestuw.py)        |
 | [FreeproxylistProxiedSession](https://free-proxy-list.net/)                            | [FreeProxyList](https://free-proxy-list.net/)                               | ✔           | ✔         | ✔         | ❌         | [freeproxylist.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/freeproxylist.py)  |
@@ -93,6 +94,7 @@ FreeProxy continuously discovers and updates lists of free proxies. If you find 
 | [IPLocateProxiedSession](https://www.iplocate.io/)                                     | [IPLocate](https://www.iplocate.io/)                                        | ✔           | ✔         | ✔         | ✔         | [iplocate.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/iplocate.py)            |
 | [IP3366ProxiedSession](http://www.ip3366.net/free/?stype=1&page=1)                     | [云代理](http://www.ip3366.net/free/?stype=1&page=1)                        | ✔           | ✔         | ❌         | ❌         | [ip3366.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/ip3366.py)                |
 | [IP89ProxiedSession](http://api.89ip.cn/tqdl.html?api=1&num=1000&port=&address=&isp=)  | [IP89](http://api.89ip.cn/tqdl.html?api=1&num=1000&port=&address=&isp=)     | ✔           | ❌         | ❌         | ❌         | [ip89.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/ip89.py)                    |
+| [IPRoyalProxiedSession](https://iproyal.com/free-proxy-list/)                          | [IPRoyal](https://iproyal.com/free-proxy-list/)                             | ❌           | ✔         | ❌         | ❌         | [iproyal.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/iproyal.py)              |
 | [JiliuipProxiedSession](https://www.jiliuip.com/free/page-1/)                          | [积流代理](https://www.jiliuip.com/free/page-1/)                            | ✔           | ❌         | ❌         | ❌         | [jiliuip.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/jiliuip.py)              |
 | [KuaidailiProxiedSession](https://www.kuaidaili.com/free/inha/1/)                      | [快代理](https://www.kuaidaili.com/free/inha/1/)                            | ✔           | ✔         | ❌         | ❌         | [kuaidaili.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/kuaidaili.py)          |
 | [KxdailiProxiedSession](http://www.kxdaili.com/dailiip.html)                           | [开心代理](http://www.kxdaili.com/dailiip.html)                             | ✔           | ✔         | ❌         | ❌         | [kxdaili.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/kxdaili.py)              |
@@ -138,7 +140,7 @@ cd freeproxy
 python setup.py install
 ```
 
-Please note that some proxy sources need to be crawled using [DrissionPage](https://www.drissionpage.cn/). 
+Please note that some proxy sources need to be crawled using [DrissionPage](https://www.drissionpage.cn/), such as `IP3366ProxiedSession`. 
 If DrissionPage cannot find a suitable browser in the current environment, it will automatically download the latest compatible beta version of Google Chrome for the current system. 
 So if you notice that the program is downloading a browser, there is no need to be overly concerned.
 
@@ -291,7 +293,8 @@ Example output:
   'SCDNProxiedSession':          SCDNProxiedSession,          'GoodIPSProxiedSession':       GoodIPSProxiedSession,
   'SixSixDailiProxiedSession':   SixSixDailiProxiedSession,   'DpangestuwProxiedSession':    DpangestuwProxiedSession,
   'ProxyNovaProxiedSession':     ProxyNovaProxiedSession,     'ProxyShareProxiedSession':    ProxyShareProxiedSession,
-  'OpenProxyListProxiedSession': OpenProxyListProxiedSession,
+  'OpenProxyListProxiedSession': OpenProxyListProxiedSession, 'IProyalProxiedSession':       IPRoyalProxiedSession,
+  'ADVFPProxiedSession':         ADVFPProxiedSession,
 }
 ```
 

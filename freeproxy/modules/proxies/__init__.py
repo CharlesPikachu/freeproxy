@@ -3,6 +3,7 @@ from .base import BaseProxiedSession
 from .scdn import SCDNProxiedSession
 from .ip89 import IP89ProxiedSession
 from ..utils import BaseModuleBuilder
+from .advfp import ADVFPProxiedSession
 from .ip3366 import IP3366ProxiedSession
 from .goodips import GoodIPSProxiedSession
 from .geonode import GeonodeProxiedSession
@@ -12,6 +13,7 @@ from .proxydb import ProxydbProxiedSession
 from .spysone import SpysoneProxiedSession
 from .databay import DatabayProxiedSession
 from .jiliuip import JiliuipProxiedSession
+from .iproyal import IPRoyalProxiedSession
 from .iplocate import IPLocateProxiedSession
 from .proxifly import ProxiflyProxiedSession
 from .proxyhub import ProxyhubProxiedSession
@@ -35,11 +37,11 @@ from .freeproxylist import FreeproxylistProxiedSession
 '''ProxiedSessionBuilder'''
 class ProxiedSessionBuilder(BaseModuleBuilder):
     REGISTERED_MODULES = {
-        'ProxiflyProxiedSession': ProxiflyProxiedSession, 'FreeproxylistProxiedSession': FreeproxylistProxiedSession, 'IP89ProxiedSession': IP89ProxiedSession, 'ProxyEliteProxiedSession': ProxyEliteProxiedSession, 'IP3366ProxiedSession': IP3366ProxiedSession, 'KuaidailiProxiedSession': KuaidailiProxiedSession, 'KxdailiProxiedSession': KxdailiProxiedSession, 
-        'ProxydailyProxiedSession': ProxydailyProxiedSession, 'ProxydbProxiedSession': ProxydbProxiedSession, 'ProxyhubProxiedSession': ProxyhubProxiedSession, 'ProxylistProxiedSession': ProxylistProxiedSession, 'QiyunipProxiedSession': QiyunipProxiedSession, 'SpysoneProxiedSession': SpysoneProxiedSession, 'Tomcat1235ProxiedSession': Tomcat1235ProxiedSession, 
-        'DatabayProxiedSession': DatabayProxiedSession, 'FineProxyProxiedSession': FineProxyProxiedSession, 'IPLocateProxiedSession': IPLocateProxiedSession, 'JiliuipProxiedSession': JiliuipProxiedSession, 'TheSpeedXProxiedSession': TheSpeedXProxiedSession, 'GeonodeProxiedSession': GeonodeProxiedSession, 'FreeProxyDBProxiedSession': FreeProxyDBProxiedSession, 
-        'ProxyScrapeProxiedSession': ProxyScrapeProxiedSession, 'SCDNProxiedSession': SCDNProxiedSession, 'GoodIPSProxiedSession': GoodIPSProxiedSession, 'SixSixDailiProxiedSession': SixSixDailiProxiedSession, 'DpangestuwProxiedSession': DpangestuwProxiedSession, 'ProxyNovaProxiedSession': ProxyNovaProxiedSession, 'ProxyShareProxiedSession': ProxyShareProxiedSession,
-        'OpenProxyListProxiedSession': OpenProxyListProxiedSession,
+        'ProxiflyProxiedSession': ProxiflyProxiedSession,             'FreeproxylistProxiedSession': FreeproxylistProxiedSession,    'IP89ProxiedSession': IP89ProxiedSession,              'ProxyEliteProxiedSession': ProxyEliteProxiedSession,            'IP3366ProxiedSession': IP3366ProxiedSession,            'KuaidailiProxiedSession': KuaidailiProxiedSession,    'KxdailiProxiedSession': KxdailiProxiedSession, 
+        'ProxydailyProxiedSession': ProxydailyProxiedSession,         'ProxydbProxiedSession': ProxydbProxiedSession,                'ProxyhubProxiedSession': ProxyhubProxiedSession,      'ProxylistProxiedSession': ProxylistProxiedSession,              'QiyunipProxiedSession': QiyunipProxiedSession,          'SpysoneProxiedSession': SpysoneProxiedSession,        'Tomcat1235ProxiedSession': Tomcat1235ProxiedSession, 
+        'DatabayProxiedSession': DatabayProxiedSession,               'FineProxyProxiedSession': FineProxyProxiedSession,            'IPLocateProxiedSession': IPLocateProxiedSession,      'JiliuipProxiedSession': JiliuipProxiedSession,                  'TheSpeedXProxiedSession': TheSpeedXProxiedSession,      'GeonodeProxiedSession': GeonodeProxiedSession,        'FreeProxyDBProxiedSession': FreeProxyDBProxiedSession, 
+        'ProxyScrapeProxiedSession': ProxyScrapeProxiedSession,       'SCDNProxiedSession': SCDNProxiedSession,                      'GoodIPSProxiedSession': GoodIPSProxiedSession,        'SixSixDailiProxiedSession': SixSixDailiProxiedSession,          'DpangestuwProxiedSession': DpangestuwProxiedSession,    'ProxyNovaProxiedSession': ProxyNovaProxiedSession,    'ProxyShareProxiedSession': ProxyShareProxiedSession,
+        'OpenProxyListProxiedSession': OpenProxyListProxiedSession,   'IProyalProxiedSession': IPRoyalProxiedSession,                'ADVFPProxiedSession': ADVFPProxiedSession,
     }
 
 
