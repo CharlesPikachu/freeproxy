@@ -33,7 +33,7 @@ class ProxiflyProxiedSession(BaseProxiedSession):
         headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"}
         # obtain proxies
         def fetch_one_country_func(url: str):
-            try: (resp := requests.get(url, headers=self.getrandomheaders(base_headers=headers))).raise_for_status(); proxies_data = resp.json()
+            try: (resp := requests.get(url, headers=self.getrandomheaders(base_headers=headers), timeout=10.0)).raise_for_status(); proxies_data = resp.json()
             except Exception: return
             for item in proxies_data:
                 try: proxy_info = ProxyInfo(source=self.source, protocol=item['protocol'], ip=item['ip'], port=item['port'], anonymity=item['anonymity'], country_code=item['geolocation']['country'], in_chinese_mainland=(item['geolocation']['country'].lower() in ['cn']))

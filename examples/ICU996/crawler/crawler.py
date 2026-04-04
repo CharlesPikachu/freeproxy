@@ -58,7 +58,7 @@ class GithubStarPeople():
             while True:
                 headers = self.getheaders()
                 try:
-                    response = session.get(url, headers=headers)
+                    response = session.get(url, headers=headers, timeout=10.0)
                 except:
                     session = self.getsession()
                     continue

@@ -18,62 +18,62 @@ class IPLocater:
     def locate(ip: str) -> str:
         # https://ipinfo.io/{ip}/json
         def api1_func(ip: str) -> str:
-            try: (resp := requests.get(f'https://ipinfo.io/{ip}/json', headers=IPLocater.DEFAULT_HEADERS)).raise_for_status(); country_code = str(resp.json()['country']).upper()
+            try: (resp := requests.get(f'https://ipinfo.io/{ip}/json', headers=IPLocater.DEFAULT_HEADERS, timeout=10.0)).raise_for_status(); country_code = str(resp.json()['country']).upper()
             except Exception: country_code = ""
             return country_code
         # https://ip.zhengbingdong.com/v1/get?ip={ip}
         def api2_func(ip: str) -> str:
-            try: (resp := requests.get(f'https://ip.zhengbingdong.com/v1/get?ip={ip}', headers=IPLocater.DEFAULT_HEADERS)).raise_for_status(); country_code = str(resp.json()['data']['country_code']).upper()
+            try: (resp := requests.get(f'https://ip.zhengbingdong.com/v1/get?ip={ip}', headers=IPLocater.DEFAULT_HEADERS, timeout=10.0)).raise_for_status(); country_code = str(resp.json()['data']['country_code']).upper()
             except Exception: country_code = ""
             return country_code
         # https://api.ip.sb/geoip/{ip}
         def api3_func(ip: str) -> str:
-            try: (resp := requests.get(f'https://api.ip.sb/geoip/{ip}', headers=IPLocater.DEFAULT_HEADERS)).raise_for_status(); country_code = str(resp.json()['country_code']).upper()
+            try: (resp := requests.get(f'https://api.ip.sb/geoip/{ip}', headers=IPLocater.DEFAULT_HEADERS, timeout=10.0)).raise_for_status(); country_code = str(resp.json()['country_code']).upper()
             except Exception: country_code = ""
             return country_code
         # http://demo.ip-api.com/json/{ip}
         def api4_func(ip: str) -> str:
-            try: (resp := requests.get(f'http://demo.ip-api.com/json/{ip}', headers=IPLocater.DEFAULT_HEADERS)).raise_for_status(); country_code = str(resp.json()['countryCode']).upper()
+            try: (resp := requests.get(f'http://demo.ip-api.com/json/{ip}', headers=IPLocater.DEFAULT_HEADERS, timeout=10.0)).raise_for_status(); country_code = str(resp.json()['countryCode']).upper()
             except Exception: country_code = ""
             return country_code
         # https://ipapi.co/{ip}/json/
         def api5_func(ip: str) -> str:
-            try: (resp := requests.get(f'https://ipapi.co/{ip}/json/', headers=IPLocater.DEFAULT_HEADERS)).raise_for_status(); country_code = str(resp.json()['country_code']).upper()
+            try: (resp := requests.get(f'https://ipapi.co/{ip}/json/', headers=IPLocater.DEFAULT_HEADERS, timeout=10.0)).raise_for_status(); country_code = str(resp.json()['country_code']).upper()
             except Exception: country_code = ""
             return country_code
         # http://ip-api.com/json/{ip}
         def api6_func(ip: str) -> str:
-            try: (resp := requests.get(f'http://ip-api.com/json/{ip}', headers=IPLocater.DEFAULT_HEADERS)).raise_for_status(); country_code = str(resp.json()['countryCode']).upper()
+            try: (resp := requests.get(f'http://ip-api.com/json/{ip}', headers=IPLocater.DEFAULT_HEADERS, timeout=10.0)).raise_for_status(); country_code = str(resp.json()['countryCode']).upper()
             except Exception: country_code = ""
             return country_code
         # https://api.db-ip.com/v2/free/{ip}
         def api7_func(ip: str) -> str:
-            try: (resp := requests.get(f'https://api.db-ip.com/v2/free/{ip}', headers=IPLocater.DEFAULT_HEADERS)).raise_for_status(); country_code = str(resp.json()['countryCode']).upper()
+            try: (resp := requests.get(f'https://api.db-ip.com/v2/free/{ip}', headers=IPLocater.DEFAULT_HEADERS, timeout=10.0)).raise_for_status(); country_code = str(resp.json()['countryCode']).upper()
             except Exception: country_code = ""
             return country_code
         # https://free.freeipapi.com/api/json/{ip}
         def api8_func(ip: str) -> str:
-            try: (resp := requests.get(f'https://free.freeipapi.com/api/json/{ip}', headers=IPLocater.DEFAULT_HEADERS)).raise_for_status(); country_code = str(resp.json()['countryCode']).upper()
+            try: (resp := requests.get(f'https://free.freeipapi.com/api/json/{ip}', headers=IPLocater.DEFAULT_HEADERS, timeout=10.0)).raise_for_status(); country_code = str(resp.json()['countryCode']).upper()
             except Exception: country_code = ""
             return country_code
         # https://ipwhois.app/json/{ip}?format=json/
         def api9_func(ip: str) -> str:
-            try: (resp := requests.get(f'https://ipwhois.app/json/{ip}?format=json/', headers=IPLocater.DEFAULT_HEADERS)).raise_for_status(); country_code = str(resp.json()['country_code']).upper()
+            try: (resp := requests.get(f'https://ipwhois.app/json/{ip}?format=json/', headers=IPLocater.DEFAULT_HEADERS, timeout=10.0)).raise_for_status(); country_code = str(resp.json()['country_code']).upper()
             except Exception: country_code = ""
             return country_code
         # http://ip-api.com/json/{ip}?fields=status,countryCode
         def api10_func(ip: str) -> str:
-            try: (resp := requests.get(f'http://ip-api.com/json/{ip}?fields=status,countryCode', headers=IPLocater.DEFAULT_HEADERS)).raise_for_status(); country_code = str(resp.json()['countryCode']).upper()
+            try: (resp := requests.get(f'http://ip-api.com/json/{ip}?fields=status,countryCode', headers=IPLocater.DEFAULT_HEADERS, timeout=10.0)).raise_for_status(); country_code = str(resp.json()['countryCode']).upper()
             except Exception: country_code = ""
             return country_code
         # https://ipwho.is/{ip}
         def api11_func(ip: str) -> str:
-            try: (resp := requests.get(f'https://ipwho.is/{ip}', headers=IPLocater.DEFAULT_HEADERS)).raise_for_status(); country_code = str(resp.json()['country_code']).upper()
+            try: (resp := requests.get(f'https://ipwho.is/{ip}', headers=IPLocater.DEFAULT_HEADERS, timeout=10.0)).raise_for_status(); country_code = str(resp.json()['country_code']).upper()
             except Exception: country_code = ""
             return country_code
         # https://get.geojs.io/v1/ip/geo/{}.json
         def api12_func(ip: str) -> str:
-            try: (resp := requests.get(f'https://get.geojs.io/v1/ip/geo/{ip}.json', headers=IPLocater.DEFAULT_HEADERS)).raise_for_status(); country_code = str(resp.json()['country_code']).upper()
+            try: (resp := requests.get(f'https://get.geojs.io/v1/ip/geo/{ip}.json', headers=IPLocater.DEFAULT_HEADERS, timeout=10.0)).raise_for_status(); country_code = str(resp.json()['country_code']).upper()
             except Exception: country_code = ""
             return country_code
         # random select one api to locate
