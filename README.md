@@ -76,7 +76,9 @@
 
 # 📘 Introduction
 
-FreeProxy continuously discovers and updates lists of free proxies. If you find value here, please star the project to keep it on your radar.
+🌍 FreeProxy continuously discovers, verifies, and updates free proxy lists with support for HTTP, HTTPS, SOCKS4, and SOCKS5. 
+It also offers flexible filtering by geography, anonymity, speed, and other rules, so you can quickly narrow down the best options. 
+If you find it valuable, please give the project a ⭐ to support its growth and follow future improvements.
 
 
 # 🌐 Supported Proxy Sources
