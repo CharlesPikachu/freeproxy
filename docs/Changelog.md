@@ -1,5 +1,7 @@
 # Release Log
 
+- 2026-04-04: Released pyfreeproxy v0.4.2 — Added scraping support for two additional free proxy sources, *i.e.*, "sockslist.us" and "roundproxies.com", and optimized the document content.
+- 2026-03-30: Released pyfreeproxy v0.4.1 — Added scraping for two new free proxy sources (*i.e.*, "advanced.name" and "iproyal.com"); optimized DrissionPage arguments.
 - 2026-03-26: Released pyfreeproxy v0.4.0 — Implemented a partial refactor to switch from Playwright to DrissionPage, expanded proxy support with multiple free sources, and fixed a number of known bugs.
 - 2026-03-05: Released pyfreeproxy v0.3.7 — Add a new free proxy source, and perform a light refactor on parts of the codebase to unify the coding style without changing existing functionality.
 - 2026-02-13: Released pyfreeproxy v0.3.6 — Added crawling for two new free proxy sources, and optimized the free-proxy crawler for the Free Proxy List website to obtain more high-quality free proxies.
