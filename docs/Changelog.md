@@ -1,5 +1,6 @@
 # Release Log
 
+- 2026-04-08: Released pyfreeproxy v0.4.4 — Added two high-quality free proxy sources, "freevpnnode.com" and "trustytech.io"; fixed some potential bugs in setup; and improved IDE support.
 - 2026-04-08: Released pyfreeproxy v0.4.3 — Added two new free proxy sources: "proxyfreeonly.com" and "proxiware.com"; optimized ProxyInfo implementation; optimized the implementation of the logging function.
 - 2026-04-04: Released pyfreeproxy v0.4.2 — Added scraping support for two additional free proxy sources, *i.e.*, "sockslist.us" and "roundproxies.com", and optimized the document content.
 - 2026-03-30: Released pyfreeproxy v0.4.1 — Added scraping for two new free proxy sources (*i.e.*, "advanced.name" and "iproyal.com"); optimized DrissionPage arguments.

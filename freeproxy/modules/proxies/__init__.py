@@ -33,6 +33,7 @@ from .proxyshare import ProxyShareProxiedSession
 from .freeproxydb import FreeProxyDBProxiedSession
 from .proxyscrape import ProxyScrapeProxiedSession
 from .sixsixdaili import SixSixDailiProxiedSession
+from .freevpnnode import FreeVPNNodeProxiedSession
 from .roundproxies import RoundProxiesProxiedSession
 from .openproxylist import OpenProxyListProxiedSession
 from .freeproxylist import FreeproxylistProxiedSession
@@ -47,7 +48,7 @@ class ProxiedSessionBuilder(BaseModuleBuilder):
         'DatabayProxiedSession': DatabayProxiedSession,               'FineProxyProxiedSession': FineProxyProxiedSession,            'IPLocateProxiedSession': IPLocateProxiedSession,      'JiliuipProxiedSession': JiliuipProxiedSession,                  'TheSpeedXProxiedSession': TheSpeedXProxiedSession,      'GeonodeProxiedSession': GeonodeProxiedSession,        'FreeProxyDBProxiedSession': FreeProxyDBProxiedSession, 
         'ProxyScrapeProxiedSession': ProxyScrapeProxiedSession,       'SCDNProxiedSession': SCDNProxiedSession,                      'GoodIPSProxiedSession': GoodIPSProxiedSession,        'SixSixDailiProxiedSession': SixSixDailiProxiedSession,          'DpangestuwProxiedSession': DpangestuwProxiedSession,    'ProxyNovaProxiedSession': ProxyNovaProxiedSession,    'ProxyShareProxiedSession': ProxyShareProxiedSession,
         'OpenProxyListProxiedSession': OpenProxyListProxiedSession,   'IPRoyalProxiedSession': IPRoyalProxiedSession,                'ADVFPProxiedSession': ADVFPProxiedSession,            'RoundProxiesProxiedSession': RoundProxiesProxiedSession,        'SocksListProxiedSession': SocksListProxiedSession,      'ProxiwareProxiedSession': ProxiwareProxiedSession,    'ProxyFreeOnlyProxiedSession': ProxyFreeOnlyProxiedSession,
-        'TrustyTechProxiedSession': TrustyTechProxiedSession,
+        'TrustyTechProxiedSession': TrustyTechProxiedSession,         'FreeVPNNodeProxiedSession': FreeVPNNodeProxiedSession,
     }
 
 

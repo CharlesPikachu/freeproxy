@@ -69,9 +69,9 @@
 
 # ✨ What's New
 
+- 2026-04-08: Released pyfreeproxy v0.4.4 — Added two high-quality free proxy sources, "freevpnnode.com" and "trustytech.io"; fixed some potential bugs in setup; and improved IDE support.
 - 2026-04-08: Released pyfreeproxy v0.4.3 — Added two new free proxy sources: "proxyfreeonly.com" and "proxiware.com"; optimized ProxyInfo implementation; optimized the implementation of the logging function.
 - 2026-04-04: Released pyfreeproxy v0.4.2 — Added scraping support for two additional free proxy sources, *i.e.*, "sockslist.us" and "roundproxies.com", and optimized the document content.
-- 2026-03-30: Released pyfreeproxy v0.4.1 — Added scraping for two new free proxy sources (*i.e.*, "advanced.name" and "iproyal.com"); optimized DrissionPage arguments.
 
 
 # 📘 Introduction
@@ -91,6 +91,7 @@ If you find this project useful, please consider giving it a ⭐ to support deve
 | [FreeproxylistProxiedSession](https://free-proxy-list.net/)                            | [FreeProxyList](https://free-proxy-list.net/)                               | ✔           | ✔         | ✔         | ❌         | [freeproxylist.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/freeproxylist.py)  |
 | [FineProxyProxiedSession](https://fineproxy.org/cn/free-proxy/)                        | [FineProxy](https://fineproxy.org/cn/free-proxy/)                           | ✔           | ✔         | ✔         | ✔         | [fineproxy.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/fineproxy.py)          |
 | [FreeProxyDBProxiedSession](https://freeproxydb.com/)                                  | [FreeProxyDB](https://freeproxydb.com/)                                     | ✔           | ❌         | ✔         | ✔         | [freeproxydb.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/freeproxydb.py)      |
+| [FreeVPNNodeProxiedSession](https://www.freevpnnode.com/free-proxy)                    | [FreeVPNNode](https://www.freevpnnode.com/free-proxy)                       | ✔           | ❌         | ✔         | ✔         | [freevpnnode.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/freevpnnode.py)      |
 | [GeonodeProxiedSession](https://geonode.com/free-proxy-list)                           | [Geonode](https://geonode.com/free-proxy-list)                              | ✔           | ✔         | ✔         | ✔         | [geonode.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/geonode.py)              |
 | [GoodIPSProxiedSession](https://www.goodips.com/)                                      | [谷德免费代理](https://www.goodips.com/)                                    | ✔           | ✔         | ✔         | ✔         | [goodips.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/goodips.py)              |
 | [IPLocateProxiedSession](https://www.iplocate.io/)                                     | [IPLocate](https://www.iplocate.io/)                                        | ✔           | ✔         | ✔         | ✔         | [iplocate.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/iplocate.py)            |
@@ -304,6 +305,7 @@ Example output:
   'ADVFPProxiedSession':         ADVFPProxiedSession,         'RoundProxiesProxiedSession':  RoundProxiesProxiedSession,
   'SocksListProxiedSession':     SocksListProxiedSession,     'ProxiwareProxiedSession':     ProxiwareProxiedSession,
   'ProxyFreeOnlyProxiedSession': ProxyFreeOnlyProxiedSession, 'TrustyTechProxiedSession':    TrustyTechProxiedSession,
+  'FreeVPNNodeProxiedSession':   FreeVPNNodeProxiedSession,
 }
 ```
 

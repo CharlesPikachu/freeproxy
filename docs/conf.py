@@ -20,7 +20,7 @@
 project = 'freeproxy'
 copyright = '2022-2030, Zhenchao Jin'
 author = 'Zhenchao Jin'
-release = '0.4.3'
+release = '0.4.4'
 
 # -- General configuration ---------------------------------------------------
 
