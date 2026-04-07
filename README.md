@@ -69,9 +69,9 @@
 
 # ✨ What's New
 
+- 2026-04-08: Released pyfreeproxy v0.4.3 — Added two new free proxy sources: "proxyfreeonly.com" and "proxiware.com"; optimized the implementation of the ProxyInfo type; optimized the implementation of the logging function.
 - 2026-04-04: Released pyfreeproxy v0.4.2 — Added scraping support for two additional free proxy sources, *i.e.*, "sockslist.us" and "roundproxies.com", and optimized the document content.
 - 2026-03-30: Released pyfreeproxy v0.4.1 — Added scraping for two new free proxy sources (*i.e.*, "advanced.name" and "iproyal.com"); optimized DrissionPage arguments.
-- 2026-03-26: Released pyfreeproxy v0.4.0 — Implemented a partial refactor to switch from Playwright to DrissionPage, expanded proxy support with multiple free sources, and fixed a number of known bugs.
 
 
 # 📘 Introduction
@@ -111,6 +111,7 @@ If you find this project useful, please consider giving it a ⭐ to support deve
 | [ProxyNovaProxiedSession](https://www.proxynova.com/proxy-server-list/)                | [ProxyNova](https://www.proxynova.com/proxy-server-list/)                   | ✔           | ❌         | ❌         | ❌         | [proxynova.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/proxynova.py)          |
 | [ProxyShareProxiedSession](https://www.proxyshare.com/zh/free-proxy/)                  | [ProxyShare](https://www.proxyshare.com/zh/free-proxy/)                     | ✔           | ✔         | ✔         | ✔         | [proxyshare.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/proxyshare.py)        |
 | [ProxiwareProxiedSession](https://proxiware.com/free-proxy-list)                       | [Proxiware](https://proxiware.com/free-proxy-list)                          | ✔           | ✔         | ✔         | ✔         | [proxiware.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/proxiware.py)          |
+| [ProxyFreeOnlyProxiedSession](https://proxyfreeonly.com/free-proxy-list)               | [ProxyFreeOnly](https://proxyfreeonly.com/free-proxy-list)                  | ✔           | ✔         | ✔         | ✔         | [proxyfreeonly.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/proxyfreeonly.py)  |
 | [QiyunipProxiedSession](https://www.qiyunip.com/freeProxy/1.html)                      | [齐云代理](https://www.qiyunip.com/freeProxy/1.html)                        | ✔           | ✔         | ❌         | ❌         | [qiyunip.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/qiyunip.py)              |
 | [RoundProxiesProxiedSession](https://roundproxies.com/free-proxy-list/)                | [Roundproxies](https://roundproxies.com/free-proxy-list/)                   | ✔           | ✔         | ✔         | ✔         | [roundproxies.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/roundproxies.py)    |
 | [SpysoneProxiedSession](https://spys.one/en/free-proxy-list/)                          | [SPYS.ONE](https://spys.one/en/free-proxy-list/)                            | ✔           | ❌         | ❌         | ✔         | [spysone.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/spysone.py)              |
@@ -301,6 +302,7 @@ Example output:
   'OpenProxyListProxiedSession': OpenProxyListProxiedSession, 'IPRoyalProxiedSession':       IPRoyalProxiedSession,
   'ADVFPProxiedSession':         ADVFPProxiedSession,         'RoundProxiesProxiedSession':  RoundProxiesProxiedSession,
   'SocksListProxiedSession':     SocksListProxiedSession,     'ProxiwareProxiedSession':     ProxiwareProxiedSession,
+  'ProxyFreeOnlyProxiedSession': ProxyFreeOnlyProxiedSession,
 }
 ```
 
