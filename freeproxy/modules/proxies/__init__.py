@@ -23,6 +23,7 @@ from .fineproxy import FineProxyProxiedSession
 from .thespeedx import TheSpeedXProxiedSession
 from .proxynova import ProxyNovaProxiedSession
 from .sockslist import SocksListProxiedSession
+from .proxiware import ProxiwareProxiedSession
 from .tomcat1235 import Tomcat1235ProxiedSession
 from .proxydaily import ProxydailyProxiedSession
 from .proxyelite import ProxyEliteProxiedSession
@@ -43,7 +44,7 @@ class ProxiedSessionBuilder(BaseModuleBuilder):
         'ProxydailyProxiedSession': ProxydailyProxiedSession,         'ProxydbProxiedSession': ProxydbProxiedSession,                'ProxyhubProxiedSession': ProxyhubProxiedSession,      'ProxylistProxiedSession': ProxylistProxiedSession,              'QiyunipProxiedSession': QiyunipProxiedSession,          'SpysoneProxiedSession': SpysoneProxiedSession,        'Tomcat1235ProxiedSession': Tomcat1235ProxiedSession, 
         'DatabayProxiedSession': DatabayProxiedSession,               'FineProxyProxiedSession': FineProxyProxiedSession,            'IPLocateProxiedSession': IPLocateProxiedSession,      'JiliuipProxiedSession': JiliuipProxiedSession,                  'TheSpeedXProxiedSession': TheSpeedXProxiedSession,      'GeonodeProxiedSession': GeonodeProxiedSession,        'FreeProxyDBProxiedSession': FreeProxyDBProxiedSession, 
         'ProxyScrapeProxiedSession': ProxyScrapeProxiedSession,       'SCDNProxiedSession': SCDNProxiedSession,                      'GoodIPSProxiedSession': GoodIPSProxiedSession,        'SixSixDailiProxiedSession': SixSixDailiProxiedSession,          'DpangestuwProxiedSession': DpangestuwProxiedSession,    'ProxyNovaProxiedSession': ProxyNovaProxiedSession,    'ProxyShareProxiedSession': ProxyShareProxiedSession,
-        'OpenProxyListProxiedSession': OpenProxyListProxiedSession,   'IPRoyalProxiedSession': IPRoyalProxiedSession,                'ADVFPProxiedSession': ADVFPProxiedSession,            'RoundProxiesProxiedSession': RoundProxiesProxiedSession,        'SocksListProxiedSession': SocksListProxiedSession,
+        'OpenProxyListProxiedSession': OpenProxyListProxiedSession,   'IPRoyalProxiedSession': IPRoyalProxiedSession,                'ADVFPProxiedSession': ADVFPProxiedSession,            'RoundProxiesProxiedSession': RoundProxiesProxiedSession,        'SocksListProxiedSession': SocksListProxiedSession,      'ProxiwareProxiedSession': ProxiwareProxiedSession,
     }
 
 

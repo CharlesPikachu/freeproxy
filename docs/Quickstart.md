@@ -148,7 +148,7 @@ Example output:
   'ProxyNovaProxiedSession':     ProxyNovaProxiedSession,     'ProxyShareProxiedSession':    ProxyShareProxiedSession,
   'OpenProxyListProxiedSession': OpenProxyListProxiedSession, 'IPRoyalProxiedSession':       IPRoyalProxiedSession,
   'ADVFPProxiedSession':         ADVFPProxiedSession,         'RoundProxiesProxiedSession':  RoundProxiesProxiedSession,
-  'SocksListProxiedSession':     SocksListProxiedSession,
+  'SocksListProxiedSession':     SocksListProxiedSession,     'ProxiwareProxiedSession':     ProxiwareProxiedSession,
 }
 ```
 

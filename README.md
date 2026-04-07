@@ -109,7 +109,8 @@ If you find this project useful, please consider giving it a ⭐ to support deve
 | [ProxyScrapeProxiedSession](https://proxyscrape.com/free-proxy-list)                   | [ProxyScrape](https://proxyscrape.com/free-proxy-list)                      | ✔           | ❌         | ✔         | ✔         | [proxyscrape.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/proxyscrape.py)      |
 | [ProxyEliteProxiedSession](https://proxyelite.info/cn/free/asia/china/)                | [ProxyElite](https://proxyelite.info/cn/free/asia/china/)                   | ✔           | ❌         | ✔         | ✔         | [proxyelite.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/proxyelite.py)        |
 | [ProxyNovaProxiedSession](https://www.proxynova.com/proxy-server-list/)                | [ProxyNova](https://www.proxynova.com/proxy-server-list/)                   | ✔           | ❌         | ❌         | ❌         | [proxynova.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/proxynova.py)          |
-| [ProxyShareProxiedSession](https://www.proxyshare.com/zh/free-proxy/)                  | [ProxyShare免费代理](https://www.proxyshare.com/zh/free-proxy/)             | ✔           | ✔         | ✔         | ✔         | [proxyshare.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/proxyshare.py)        |
+| [ProxyShareProxiedSession](https://www.proxyshare.com/zh/free-proxy/)                  | [ProxyShare](https://www.proxyshare.com/zh/free-proxy/)                     | ✔           | ✔         | ✔         | ✔         | [proxyshare.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/proxyshare.py)        |
+| [ProxiwareProxiedSession](https://proxiware.com/free-proxy-list)                       | [Proxiware](https://proxiware.com/free-proxy-list)                          | ✔           | ✔         | ✔         | ✔         | [proxiware.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/proxiware.py)          |
 | [QiyunipProxiedSession](https://www.qiyunip.com/freeProxy/1.html)                      | [齐云代理](https://www.qiyunip.com/freeProxy/1.html)                        | ✔           | ✔         | ❌         | ❌         | [qiyunip.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/qiyunip.py)              |
 | [RoundProxiesProxiedSession](https://roundproxies.com/free-proxy-list/)                | [Roundproxies](https://roundproxies.com/free-proxy-list/)                   | ✔           | ✔         | ✔         | ✔         | [roundproxies.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/roundproxies.py)    |
 | [SpysoneProxiedSession](https://spys.one/en/free-proxy-list/)                          | [SPYS.ONE](https://spys.one/en/free-proxy-list/)                            | ✔           | ❌         | ❌         | ✔         | [spysone.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/spysone.py)              |
@@ -299,7 +300,7 @@ Example output:
   'ProxyNovaProxiedSession':     ProxyNovaProxiedSession,     'ProxyShareProxiedSession':    ProxyShareProxiedSession,
   'OpenProxyListProxiedSession': OpenProxyListProxiedSession, 'IPRoyalProxiedSession':       IPRoyalProxiedSession,
   'ADVFPProxiedSession':         ADVFPProxiedSession,         'RoundProxiesProxiedSession':  RoundProxiesProxiedSession,
-  'SocksListProxiedSession':     SocksListProxiedSession,
+  'SocksListProxiedSession':     SocksListProxiedSession,     'ProxiwareProxiedSession':     ProxiwareProxiedSession,
 }
 ```
 
