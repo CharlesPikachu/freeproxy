@@ -120,6 +120,7 @@ If you find this project useful, please consider giving it a ⭐ to support deve
 | [SocksListProxiedSession](https://sockslist.us/)                                       | [FreeSocks5Proxy](https://sockslist.us/)                                    | ❌           | ❌         | ❌         | ✔         | [sockslist.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/sockslist.py)          |
 | [Tomcat1235ProxiedSession](https://tomcat1235.nyc.mn/proxy_list?page=1)                | [北极光代理](https://tomcat1235.nyc.mn/proxy_list?page=1)                   | ❌           | ❌         | ❌         | ✔         | [tomcat1235.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/tomcat1235.py)        |
 | [TheSpeedXProxiedSession](https://github.com/TheSpeedX)                                | [TheSpeedX](https://github.com/TheSpeedX)                                   | ✔           | ❌         | ✔         | ✔         | [thespeedx.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/thespeedx.py)          |
+| [TrustyTechProxiedSession](https://trustytech.io/tools/free-proxy/)                    | [TrustyTech](https://trustytech.io/tools/free-proxy/)                       | ✔           | ✔         | ✔         | ✔         | [trustytech.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/trustytech.py)        |
 
 
 # 🎮 Playground
@@ -302,7 +303,7 @@ Example output:
   'OpenProxyListProxiedSession': OpenProxyListProxiedSession, 'IPRoyalProxiedSession':       IPRoyalProxiedSession,
   'ADVFPProxiedSession':         ADVFPProxiedSession,         'RoundProxiesProxiedSession':  RoundProxiesProxiedSession,
   'SocksListProxiedSession':     SocksListProxiedSession,     'ProxiwareProxiedSession':     ProxiwareProxiedSession,
-  'ProxyFreeOnlyProxiedSession': ProxyFreeOnlyProxiedSession,
+  'ProxyFreeOnlyProxiedSession': ProxyFreeOnlyProxiedSession, 'TrustyTechProxiedSession':    TrustyTechProxiedSession,
 }
 ```
 
