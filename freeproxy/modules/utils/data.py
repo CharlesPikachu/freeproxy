@@ -11,8 +11,8 @@ import time
 import socket
 import requests
 import ipaddress
-from datetime import datetime
 from urllib.parse import urlparse
+from datetime import datetime, UTC
 from typing import Dict, Any, Tuple
 from dataclasses import dataclass, field, asdict
 
@@ -45,49 +45,33 @@ class ProxyInfo:
     @property
     def tcp_connect_delay(self) -> int:
         if self._tcp_connect_delay: return self._tcp_connect_delay
-        start = time.monotonic()
-        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        s.settimeout(self.test_timeout)
-        try:
-            s.connect((self.ip, int(float(self.port))))
-            elapsed_ms = int((time.monotonic() - start) * 1000)
-            self._tcp_connect_delay = elapsed_ms
-            return elapsed_ms
-        except (socket.timeout, OSError):
-            return self.failed_connection_default_timeout
-        finally:
-            s.close()
+        start = time.monotonic(); (s := socket.socket(socket.AF_INET, socket.SOCK_STREAM)).settimeout(self.test_timeout)
+        try: s.connect((self.ip, int(float(self.port)))); self._tcp_connect_delay = (elapsed_ms := int((time.monotonic() - start) * 1000)); return elapsed_ms
+        except (socket.timeout, OSError): return self.failed_connection_default_timeout
+        finally: s.close()
     @property
     def http_connect_delay(self) -> int:
         if self._http_connect_delay: return self._http_connect_delay
         start = time.monotonic()
-        try:
-            resp = requests.head(self.test_url, proxies=self.requests_format_proxy, timeout=self.test_timeout, headers=self.test_headers)
-            resp.raise_for_status()
-            elapsed_ms = int((time.monotonic() - start) * 1000)
-            self._http_connect_delay = elapsed_ms
-            return elapsed_ms
-        except Exception:
-            return self.failed_connection_default_timeout
+        try: requests.head(self.test_url, proxies=self.requests_format_proxy, timeout=self.test_timeout, headers=self.test_headers).raise_for_status(); self._http_connect_delay = (elapsed_ms := int((time.monotonic() - start) * 1000)); return elapsed_ms
+        except Exception: return self.failed_connection_default_timeout
     '''todict'''
     def todict(self) -> Dict[str, Any]:
         item = asdict(self)
         if isinstance(self.created_at, datetime): item["created_at"] = self.created_at.isoformat()
         return item
+    '''parsecreatedat'''
+    @staticmethod
+    def parsecreatedat(v):
+        try: return datetime.fromisoformat(v) if isinstance(v, str) and v else datetime.now(UTC)
+        except ValueError: return datetime.now(UTC)
     '''fromdict'''
     @classmethod
     def fromdict(cls, item: Dict[str, Any]) -> "ProxyInfo":
-        created_at = item.get("created_at")
-        if isinstance(created_at, str) and created_at:
-            try: created_at = datetime.fromisoformat(created_at)
-            except ValueError: created_at = datetime.utcnow()
-        else:
-            created_at = datetime.utcnow()
+        created_at = ProxyInfo.parsecreatedat(item.get("created_at"))
         return cls(
-            source=item.get("source", "UNKNOWNSOURCE"), protocol=item.get("protocol", ""), ip=item.get("ip", ""), port=item.get("port", ""), country_code=item.get("country_code", ""), 
-            in_chinese_mainland=item.get("in_chinese_mainland", None), anonymity=item.get("anonymity", None), delay=item.get("delay", None), test_timeout=item.get("test_timeout", 5),
-            test_url=item.get("test_url", "http://www.baidu.com"), test_headers=item.get("test_headers", {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/124.0.0.0"}), 
-            failed_connection_default_timeout=item.get("failed_connection_default_timeout", 3600000), created_at=created_at, extra=item.get("extra", {}),
+            source=item.get("source", "UNKNOWNSOURCE"), protocol=item.get("protocol", ""), ip=item.get("ip", ""), port=item.get("port", ""), country_code=item.get("country_code", ""), in_chinese_mainland=item.get("in_chinese_mainland", None), anonymity=item.get("anonymity", None), delay=item.get("delay", None), test_timeout=item.get("test_timeout", 5),
+            test_url=item.get("test_url", "http://www.baidu.com"), test_headers=item.get("test_headers", {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/124.0.0.0"}), failed_connection_default_timeout=item.get("failed_connection_default_timeout", 3600000), created_at=created_at, extra=item.get("extra", {}),
         )
     '''selfcheck'''
     def selfcheck(self) -> Tuple[bool, str]:
