@@ -14,6 +14,7 @@ from .spysone import SpysoneProxiedSession
 from .databay import DatabayProxiedSession
 from .jiliuip import JiliuipProxiedSession
 from .iproyal import IPRoyalProxiedSession
+from .pubproxy import PubProxyProxiedSession
 from .iplocate import IPLocateProxiedSession
 from .proxifly import ProxiflyProxiedSession
 from .proxyhub import ProxyhubProxiedSession
@@ -49,7 +50,7 @@ class ProxiedSessionBuilder(BaseModuleBuilder):
         'DatabayProxiedSession': DatabayProxiedSession,               'FineProxyProxiedSession': FineProxyProxiedSession,            'IPLocateProxiedSession': IPLocateProxiedSession,      'JiliuipProxiedSession': JiliuipProxiedSession,                  'TheSpeedXProxiedSession': TheSpeedXProxiedSession,      'GeonodeProxiedSession': GeonodeProxiedSession,        'FreeProxyDBProxiedSession': FreeProxyDBProxiedSession, 
         'ProxyScrapeProxiedSession': ProxyScrapeProxiedSession,       'SCDNProxiedSession': SCDNProxiedSession,                      'GoodIPSProxiedSession': GoodIPSProxiedSession,        'SixSixDailiProxiedSession': SixSixDailiProxiedSession,          'DpangestuwProxiedSession': DpangestuwProxiedSession,    'ProxyNovaProxiedSession': ProxyNovaProxiedSession,    'ProxyShareProxiedSession': ProxyShareProxiedSession,
         'OpenProxyListProxiedSession': OpenProxyListProxiedSession,   'IPRoyalProxiedSession': IPRoyalProxiedSession,                'ADVFPProxiedSession': ADVFPProxiedSession,            'RoundProxiesProxiedSession': RoundProxiesProxiedSession,        'SocksListProxiedSession': SocksListProxiedSession,      'ProxiwareProxiedSession': ProxiwareProxiedSession,    'ProxyFreeOnlyProxiedSession': ProxyFreeOnlyProxiedSession,
-        'TrustyTechProxiedSession': TrustyTechProxiedSession,         'FreeVPNNodeProxiedSession': FreeVPNNodeProxiedSession,        'FloppyDataProxiedSession': FloppyDataProxiedSession,
+        'TrustyTechProxiedSession': TrustyTechProxiedSession,         'FreeVPNNodeProxiedSession': FreeVPNNodeProxiedSession,        'FloppyDataProxiedSession': FloppyDataProxiedSession,  'PubProxyProxiedSession': PubProxyProxiedSession,
     }
 
 

@@ -69,9 +69,9 @@
 
 # ✨ What's New
 
+- 2026-04-08: Released pyfreeproxy v0.4.5 — Fix compatibility issues with Python 3.10; add support for two new high-quality free proxy sources: "pubproxy.com" and "floppydata.com".
 - 2026-04-08: Released pyfreeproxy v0.4.4 — Added two high-quality free proxy sources, "freevpnnode.com" and "trustytech.io"; fixed some potential bugs in setup; and improved IDE support.
 - 2026-04-08: Released pyfreeproxy v0.4.3 — Added two new free proxy sources: "proxyfreeonly.com" and "proxiware.com"; optimized ProxyInfo implementation; optimized the implementation of the logging function.
-- 2026-04-04: Released pyfreeproxy v0.4.2 — Added scraping support for two additional free proxy sources, *i.e.*, "sockslist.us" and "roundproxies.com", and optimized the document content.
 
 
 # 📘 Introduction
@@ -114,6 +114,7 @@ If you find this project useful, please consider giving it a ⭐ to support deve
 | [ProxyShareProxiedSession](https://www.proxyshare.com/zh/free-proxy/)                  | [ProxyShare](https://www.proxyshare.com/zh/free-proxy/)                     | ✔           | ✔         | ✔         | ✔         | [proxyshare.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/proxyshare.py)        |
 | [ProxiwareProxiedSession](https://proxiware.com/free-proxy-list)                       | [Proxiware](https://proxiware.com/free-proxy-list)                          | ✔           | ✔         | ✔         | ✔         | [proxiware.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/proxiware.py)          |
 | [ProxyFreeOnlyProxiedSession](https://proxyfreeonly.com/free-proxy-list)               | [ProxyFreeOnly](https://proxyfreeonly.com/free-proxy-list)                  | ✔           | ✔         | ✔         | ✔         | [proxyfreeonly.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/proxyfreeonly.py)  |
+| [PubProxyProxiedSession](http://pubproxy.com/)                                         | [PubProxy](http://pubproxy.com/)                                            | ✔           | ❌         | ❌         | ❌         | [pubproxy.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/pubproxy.py)            |
 | [QiyunipProxiedSession](https://www.qiyunip.com/freeProxy/1.html)                      | [齐云代理](https://www.qiyunip.com/freeProxy/1.html)                        | ✔           | ✔         | ❌         | ❌         | [qiyunip.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/qiyunip.py)              |
 | [RoundProxiesProxiedSession](https://roundproxies.com/free-proxy-list/)                | [Roundproxies](https://roundproxies.com/free-proxy-list/)                   | ✔           | ✔         | ✔         | ✔         | [roundproxies.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/roundproxies.py)    |
 | [SpysoneProxiedSession](https://spys.one/en/free-proxy-list/)                          | [SPYS.ONE](https://spys.one/en/free-proxy-list/)                            | ✔           | ❌         | ❌         | ✔         | [spysone.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/spysone.py)              |
@@ -307,6 +308,7 @@ Example output:
   'SocksListProxiedSession':     SocksListProxiedSession,     'ProxiwareProxiedSession':     ProxiwareProxiedSession,
   'ProxyFreeOnlyProxiedSession': ProxyFreeOnlyProxiedSession, 'TrustyTechProxiedSession':    TrustyTechProxiedSession,
   'FreeVPNNodeProxiedSession':   FreeVPNNodeProxiedSession,   'FloppyDataProxiedSession':    FloppyDataProxiedSession,
+  'PubProxyProxiedSession':      PubProxyProxiedSession,
 }
 ```
 
