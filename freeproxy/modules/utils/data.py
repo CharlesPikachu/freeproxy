@@ -12,8 +12,8 @@ import socket
 import requests
 import ipaddress
 from urllib.parse import urlparse
-from datetime import datetime, UTC
 from typing import Dict, Any, Tuple
+from datetime import datetime, timezone
 from dataclasses import dataclass, field, asdict
 
 
@@ -32,7 +32,7 @@ class ProxyInfo:
     test_url: str = "http://www.baidu.com"
     test_headers: Dict[str, Any] = field(default_factory=lambda: {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"})
     failed_connection_default_timeout: int = 3600000
-    created_at: datetime = field(default_factory=datetime.utcnow)
+    created_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
     extra: Dict[str, Any] = field(default_factory=dict)
     _tcp_connect_delay: int | None = None
     _http_connect_delay: int | None = None
@@ -63,8 +63,8 @@ class ProxyInfo:
     '''parsecreatedat'''
     @staticmethod
     def parsecreatedat(v):
-        try: return datetime.fromisoformat(v) if isinstance(v, str) and v else datetime.now(UTC)
-        except ValueError: return datetime.now(UTC)
+        try: return datetime.fromisoformat(v) if isinstance(v, str) and v else datetime.now(timezone.utc)
+        except ValueError: return datetime.now(timezone.utc)
     '''fromdict'''
     @classmethod
     def fromdict(cls, item: Dict[str, Any]) -> "ProxyInfo":
