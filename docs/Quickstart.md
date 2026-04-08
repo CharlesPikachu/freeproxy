@@ -150,7 +150,7 @@ Example output:
   'ADVFPProxiedSession':         ADVFPProxiedSession,         'RoundProxiesProxiedSession':  RoundProxiesProxiedSession,
   'SocksListProxiedSession':     SocksListProxiedSession,     'ProxiwareProxiedSession':     ProxiwareProxiedSession,
   'ProxyFreeOnlyProxiedSession': ProxyFreeOnlyProxiedSession, 'TrustyTechProxiedSession':    TrustyTechProxiedSession,
-  'FreeVPNNodeProxiedSession':   FreeVPNNodeProxiedSession,
+  'FreeVPNNodeProxiedSession':   FreeVPNNodeProxiedSession,   'FloppyDataProxiedSession':    FloppyDataProxiedSession,
 }
 ```
 

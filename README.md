@@ -92,6 +92,7 @@ If you find this project useful, please consider giving it a ⭐ to support deve
 | [FineProxyProxiedSession](https://fineproxy.org/cn/free-proxy/)                        | [FineProxy](https://fineproxy.org/cn/free-proxy/)                           | ✔           | ✔         | ✔         | ✔         | [fineproxy.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/fineproxy.py)          |
 | [FreeProxyDBProxiedSession](https://freeproxydb.com/)                                  | [FreeProxyDB](https://freeproxydb.com/)                                     | ✔           | ❌         | ✔         | ✔         | [freeproxydb.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/freeproxydb.py)      |
 | [FreeVPNNodeProxiedSession](https://www.freevpnnode.com/free-proxy)                    | [FreeVPNNode](https://www.freevpnnode.com/free-proxy)                       | ✔           | ❌         | ✔         | ✔         | [freevpnnode.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/freevpnnode.py)      |
+| [FloppyDataProxiedSession](https://floppydata.com/free-proxy/)                         | [FloppyData](https://floppydata.com/free-proxy/)                            | ✔           | ❌         | ❌         | ❌         | [floppydata.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/floppydata.py)        |
 | [GeonodeProxiedSession](https://geonode.com/free-proxy-list)                           | [Geonode](https://geonode.com/free-proxy-list)                              | ✔           | ✔         | ✔         | ✔         | [geonode.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/geonode.py)              |
 | [GoodIPSProxiedSession](https://www.goodips.com/)                                      | [谷德免费代理](https://www.goodips.com/)                                    | ✔           | ✔         | ✔         | ✔         | [goodips.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/goodips.py)              |
 | [IPLocateProxiedSession](https://www.iplocate.io/)                                     | [IPLocate](https://www.iplocate.io/)                                        | ✔           | ✔         | ✔         | ✔         | [iplocate.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/iplocate.py)            |
@@ -305,7 +306,7 @@ Example output:
   'ADVFPProxiedSession':         ADVFPProxiedSession,         'RoundProxiesProxiedSession':  RoundProxiesProxiedSession,
   'SocksListProxiedSession':     SocksListProxiedSession,     'ProxiwareProxiedSession':     ProxiwareProxiedSession,
   'ProxyFreeOnlyProxiedSession': ProxyFreeOnlyProxiedSession, 'TrustyTechProxiedSession':    TrustyTechProxiedSession,
-  'FreeVPNNodeProxiedSession':   FreeVPNNodeProxiedSession,
+  'FreeVPNNodeProxiedSession':   FreeVPNNodeProxiedSession,   'FloppyDataProxiedSession':    FloppyDataProxiedSession,
 }
 ```
 
