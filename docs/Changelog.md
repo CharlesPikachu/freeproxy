@@ -1,6 +1,6 @@
 # Release Log
 
-- 2026-04-22: Released pyfreeproxy v0.4.6 — Added two new free proxy nodes: "https://free.geonix.com" and "https://proxyverity.com/".
+- 2026-04-22: Released pyfreeproxy v0.4.6 — Added two new free proxy nodes: [Geonix](https://free.geonix.com) and [ProxyVerity](https://proxyverity.com/).
 
 - 2026-04-08: Released pyfreeproxy v0.4.5 — Fix compatibility issues with Python 3.10; add support for two new high-quality free proxy sources: "pubproxy.com" and "floppydata.com".
 
