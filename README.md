@@ -69,9 +69,9 @@
 
 # ✨ What's New
 
+- 2026-04-22: Released pyfreeproxy v0.4.6 — Added two new free proxy nodes: "https://free.geonix.com" and "https://proxyverity.com/".
 - 2026-04-08: Released pyfreeproxy v0.4.5 — Fix compatibility issues with Python 3.10; add support for two new high-quality free proxy sources: "pubproxy.com" and "floppydata.com".
 - 2026-04-08: Released pyfreeproxy v0.4.4 — Added two high-quality free proxy sources, "freevpnnode.com" and "trustytech.io"; fixed some potential bugs in setup; and improved IDE support.
-- 2026-04-08: Released pyfreeproxy v0.4.3 — Added two new free proxy sources: "proxyfreeonly.com" and "proxiware.com"; optimized ProxyInfo implementation; optimized the implementation of the logging function.
 
 
 # 📘 Introduction
@@ -95,6 +95,7 @@ If you find this project useful, please consider giving it a ⭐ to support deve
 | [FloppyDataProxiedSession](https://floppydata.com/free-proxy/)                         | [FloppyData](https://floppydata.com/free-proxy/)                            | ✔           | ❌         | ❌         | ❌         | [floppydata.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/floppydata.py)        |
 | [GeonodeProxiedSession](https://geonode.com/free-proxy-list)                           | [Geonode](https://geonode.com/free-proxy-list)                              | ✔           | ✔         | ✔         | ✔         | [geonode.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/geonode.py)              |
 | [GoodIPSProxiedSession](https://www.goodips.com/)                                      | [谷德免费代理](https://www.goodips.com/)                                    | ✔           | ✔         | ✔         | ✔         | [goodips.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/goodips.py)              |
+| [GeonixProxiedSession](https://free.geonix.com/)                                       | [Geonix](https://free.geonix.com/)                                          | ✔           | ✔         | ✔         | ✔         | [geonix.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/geonix.py)                |
 | [IPLocateProxiedSession](https://www.iplocate.io/)                                     | [IPLocate](https://www.iplocate.io/)                                        | ✔           | ✔         | ✔         | ✔         | [iplocate.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/iplocate.py)            |
 | [IP3366ProxiedSession](http://www.ip3366.net/free/?stype=1&page=1)                     | [云代理](http://www.ip3366.net/free/?stype=1&page=1)                        | ✔           | ✔         | ❌         | ❌         | [ip3366.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/ip3366.py)                |
 | [IP89ProxiedSession](http://api.89ip.cn/tqdl.html?api=1&num=1000&port=&address=&isp=)  | [IP89](http://api.89ip.cn/tqdl.html?api=1&num=1000&port=&address=&isp=)     | ✔           | ❌         | ❌         | ❌         | [ip89.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/ip89.py)                    |
@@ -115,6 +116,7 @@ If you find this project useful, please consider giving it a ⭐ to support deve
 | [ProxiwareProxiedSession](https://proxiware.com/free-proxy-list)                       | [Proxiware](https://proxiware.com/free-proxy-list)                          | ✔           | ✔         | ✔         | ✔         | [proxiware.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/proxiware.py)          |
 | [ProxyFreeOnlyProxiedSession](https://proxyfreeonly.com/free-proxy-list)               | [ProxyFreeOnly](https://proxyfreeonly.com/free-proxy-list)                  | ✔           | ✔         | ✔         | ✔         | [proxyfreeonly.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/proxyfreeonly.py)  |
 | [PubProxyProxiedSession](http://pubproxy.com/)                                         | [PubProxy](http://pubproxy.com/)                                            | ✔           | ❌         | ❌         | ❌         | [pubproxy.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/pubproxy.py)            |
+| [ProxyVerityProxiedSession](https://proxyverity.com/free-proxy-list)                   | [ProxyVerity](https://proxyverity.com/free-proxy-list)                      | ✔           | ✔         | ✔         | ✔         | [proxyverity.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/proxyverity.py)      |
 | [QiyunipProxiedSession](https://www.qiyunip.com/freeProxy/1.html)                      | [齐云代理](https://www.qiyunip.com/freeProxy/1.html)                        | ✔           | ✔         | ❌         | ❌         | [qiyunip.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/qiyunip.py)              |
 | [RoundProxiesProxiedSession](https://roundproxies.com/free-proxy-list/)                | [Roundproxies](https://roundproxies.com/free-proxy-list/)                   | ✔           | ✔         | ✔         | ✔         | [roundproxies.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/roundproxies.py)    |
 | [SpysoneProxiedSession](https://spys.one/en/free-proxy-list/)                          | [SPYS.ONE](https://spys.one/en/free-proxy-list/)                            | ✔           | ❌         | ❌         | ✔         | [spysone.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/spysone.py)              |
@@ -308,7 +310,8 @@ Example output:
   'SocksListProxiedSession':     SocksListProxiedSession,     'ProxiwareProxiedSession':     ProxiwareProxiedSession,
   'ProxyFreeOnlyProxiedSession': ProxyFreeOnlyProxiedSession, 'TrustyTechProxiedSession':    TrustyTechProxiedSession,
   'FreeVPNNodeProxiedSession':   FreeVPNNodeProxiedSession,   'FloppyDataProxiedSession':    FloppyDataProxiedSession,
-  'PubProxyProxiedSession':      PubProxyProxiedSession,
+  'PubProxyProxiedSession':      PubProxyProxiedSession,      'ProxyVerityProxiedSession':   ProxyVerityProxiedSession,
+  'GeonixProxiedSession':        GeonixProxiedSession,
 }
 ```
 
