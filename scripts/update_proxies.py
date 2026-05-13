@@ -1,6 +1,6 @@
 '''
 Function:
-    Proxies update for proxy.json in https://github.com/CharlesPikachu/freeproxy
+    Proxies Update For proxy.json In https://github.com/CharlesPikachu/freeproxy
 Author:
     Zhenchao Jin
 WeChat Official Account (微信公众号):

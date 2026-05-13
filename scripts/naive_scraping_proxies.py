@@ -1,6 +1,6 @@
 '''
 Function:
-    Naive scraping proxies from specified proxy sources
+    Naive Scraping Proxies From Specified Proxy Sources
 Author:
     Zhenchao Jin
 WeChat Official Account (微信公众号):
