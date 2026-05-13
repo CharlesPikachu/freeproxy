@@ -37,6 +37,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           G4F_MODELS: ${{ vars.G4F_MODELS }}
+          ECYLT_FREE_GPT_ENABLED: ${{ vars.ECYLT_FREE_GPT_ENABLED || 'true' }}
+          ECYLT_FREE_GPT_URL: ${{ vars.ECYLT_FREE_GPT_URL || 'https://api.ecylt.top/v1/free_gpt/chat_json.php' }}
           OPENAI_COMPATIBLE_API_KEY: ${{ secrets.OPENAI_COMPATIBLE_API_KEY }}
           OPENAI_COMPATIBLE_BASE_URL: ${{ vars.OPENAI_COMPATIBLE_BASE_URL }}
           OPENAI_COMPATIBLE_MODEL: ${{ vars.OPENAI_COMPATIBLE_MODEL }}

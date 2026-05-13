@@ -268,9 +268,104 @@ class OpenAICompatibleIssueReplyBot(G4FIssueReplyBot):
         return self.validatereply(reply)
 
 
+'''EcyltFreeGPTIssueReplyBot'''
+class EcyltFreeGPTIssueReplyBot(G4FIssueReplyBot):
+    def __init__(self) -> None:
+        super(EcyltFreeGPTIssueReplyBot, self).__init__()
+        self.ecylt_enabled = EcyltFreeGPTIssueReplyBot.getenv("ECYLT_FREE_GPT_ENABLED", "true").lower()
+        self.ecylt_api_url = EcyltFreeGPTIssueReplyBot.getenv("ECYLT_FREE_GPT_URL", "https://api.ecylt.top/v1/free_gpt/chat_json.php")
+    '''generatereply'''
+    def generatereply(self, issue: dict[str, Any], repository_context: str) -> str:
+        if not self.ecyltenabled(): print("Ecylt Free GPT API is disabled. Falling back to g4f."); return super().generatereply(issue, repository_context)
+        messages = self.buildmessages(issue, repository_context)
+        try:
+            reply = self.generatewithecylt(messages); print("Ecylt Free GPT API succeeded."); return reply
+        except Exception as error:
+            print("Ecylt Free GPT API failed. Falling back to g4f.")
+            print(repr(error)); traceback.print_exc()
+            return super().generatereply(issue, repository_context)
+    '''ecyltenabled'''
+    def ecyltenabled(self) -> bool:
+        return self.ecylt_enabled not in {"0", "false", "no", "off"}
+    '''generatewithecylt'''
+    def generatewithecylt(self, messages: list[dict[str, str]]) -> str:
+        conversation_id = None; system_prompt, user_prompt = self.splitmessages(messages)
+        try:
+            conversation_id = self.extractconversationid(self.ecyltpost({"action": "new", "system_prompt": system_prompt}))
+            reply = self.extractreplytext(self.ecyltpost({"action": "continue", "message": user_prompt, "conversation_id": conversation_id}))
+            return self.validatereply(reply)
+        finally:
+            if conversation_id: self.deleteecyltconversation(conversation_id)
+    '''splitmessages'''
+    @staticmethod
+    def splitmessages(messages: list[dict[str, str]]) -> tuple[str, str]:
+        system_parts, user_parts = [], []
+        for message in messages:
+            role, content = message.get("role"), message.get("content", "")
+            if role == "system": system_parts.append(content)
+            else: user_parts.append(content)
+        return "\n\n".join(system_parts), "\n\n".join(user_parts)
+    '''ecyltpost'''
+    def ecyltpost(self, payload: dict[str, Any]) -> dict[str, Any]:
+        resp = requests.post(self.ecylt_api_url, json=payload, timeout=self.timeout_seconds)
+        if resp.status_code >= 300: raise RuntimeError(f"Ecylt API failed: {resp.status_code}\n{resp.text}")
+        try: data = resp.json()
+        except Exception as error: raise RuntimeError(f"Ecylt API returned non-JSON response: {resp.text[:500]}") from error
+        if isinstance(data, dict): return data
+        raise RuntimeError(f"Ecylt API returned unexpected response: {data!r}")
+    '''extractconversationid'''
+    @staticmethod
+    def extractconversationid(data: dict[str, Any]) -> str:
+        candidate_keys = ["conversation_id", "conversationId", "id", "data"]
+        for key in candidate_keys:
+            if isinstance((value := data.get(key)), str) and value.strip(): return value.strip()
+            if isinstance(value, dict) and isinstance(nested_value := (value.get("conversation_id") or value.get("id")), str) and nested_value.strip(): return nested_value.strip()
+        raise RuntimeError(f"Conversation id not found in response: {data!r}")
+    '''extractreplytext'''
+    @staticmethod
+    def extractreplytext(data: dict[str, Any]) -> str:
+        candidate_keys = ["reply", "message", "content", "answer", "text", "response", "result", "data"]
+        for key in candidate_keys:
+            if isinstance((value := data.get(key)), str) and value.strip(): return value.strip()
+            if isinstance(value, dict) and (nested_text := EcyltFreeGPTIssueReplyBot.extractreplytext(value)): return nested_text
+        raise RuntimeError(f"Reply text not found in response: {data!r}")
+    '''deleteecyltconversation'''
+    def deleteecyltconversation(self, conversation_id: str) -> None:
+        try: self.ecyltpost({"action": "delete", "conversation_id": conversation_id}); print("Ecylt conversation deleted.")
+        except Exception as error: print(f"Warning: failed to delete Ecylt conversation: {error!r}")
+
+
+'''MultiProviderIssueReplyBot'''
+class MultiProviderIssueReplyBot(G4FIssueReplyBot):
+    def __init__(self) -> None:
+        super(MultiProviderIssueReplyBot, self).__init__()
+        self.openai_bot = OpenAICompatibleIssueReplyBot()
+        self.ecylt_bot = EcyltFreeGPTIssueReplyBot()
+    '''generatereply'''
+    def generatereply(self, issue: dict[str, Any], repository_context: str) -> str:
+        provider_attempts, errors = [("OpenAI-compatible API", self.tryopenaicompatible), ("Ecylt Free GPT API", self.tryecylt), ("G4F", self.tryg4f)], []
+        for provider_name, provider_call in provider_attempts:
+            try: print(f"Trying provider: {provider_name}"); reply = provider_call(issue, repository_context); print(f"Provider succeeded: {provider_name}"); return reply
+            except Exception as error: error_message = f"{provider_name}: {repr(error)}"; errors.append(error_message); print(f"Provider failed: {error_message}"); traceback.print_exc()
+        raise RuntimeError("All providers failed:\n" + "\n".join(errors))
+    '''tryopenaicompatible'''
+    def tryopenaicompatible(self, issue: dict[str, Any], repository_context: str) -> str:
+        if not self.openai_bot.openaicompatibleenabled(): raise RuntimeError("OpenAI-compatible API is not configured.")
+        messages = self.buildmessages(issue, repository_context)
+        return self.openai_bot.generatewithopenaicompatible(messages)
+    '''tryecylt'''
+    def tryecylt(self, issue: dict[str, Any], repository_context: str) -> str:
+        if not self.ecylt_bot.ecyltenabled(): raise RuntimeError("Ecylt Free GPT API is disabled.")
+        messages = self.buildmessages(issue, repository_context)
+        return self.ecylt_bot.generatewithecylt(messages)
+    '''tryg4f'''
+    def tryg4f(self, issue: dict[str, Any], repository_context: str) -> str:
+        return super().generatereply(issue, repository_context)
+
+
 '''main'''
 def main() -> None:
-    bot = G4FIssueReplyBot()
+    bot = MultiProviderIssueReplyBot()
     bot.run()
 
 
