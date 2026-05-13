@@ -22,7 +22,7 @@ from g4f.client import Client
 '''G4FIssueReplyBot'''
 class G4FIssueReplyBot:
     BOT_MARKER = "<!-- g4f-issue-auto-reply -->"
-    DEFAULT_MODELS = ["gpt-4o-mini", "gpt-4o", "gpt-4", "qwen-2.5-coder-32b", "qwen-2.5-72b", "llama-3.1-70b", "llama-3.1-8b", "gemini-1.5-flash", "gemini-1.5-pro"]
+    DEFAULT_MODELS = ["gpt-4.1-nano", "deepseek-r1", "llama-4-scout", "mistral-small-3.1-24b", "qwen-3-4b", "qwen-3-1.7b", "qwen-3-0.6b", "phi-4", "command-r7b", "llama-3.2-1b", "llama-3.1-8b", "gpt-4o-mini"]
     SKIP_LABELS = {"no-bot", "ai-ignore", "bot-ignore", "skip-ai", "skip-bot"}
     PROVIDER_ERROR_PHRASES = ["missingautherror", "api key required", "rate limit", "cloudflare", "provider not working", "error occurred"]
     CONTEXT_FILES = [("README.md", 8000), ("docs/Quickstart.md", 4000)]

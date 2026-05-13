@@ -29,6 +29,9 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -U "g4f[all]" requests openai
+      
+      - name: Create g4f Dirs
+        run: mkdir -p ~/.g4f/cookies
 
       - name: Generate and Post Issue Reply
         env:
