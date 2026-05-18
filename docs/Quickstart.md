@@ -152,7 +152,7 @@ Example output:
   'ProxyFreeOnlyProxiedSession': ProxyFreeOnlyProxiedSession, 'TrustyTechProxiedSession':    TrustyTechProxiedSession,
   'FreeVPNNodeProxiedSession':   FreeVPNNodeProxiedSession,   'FloppyDataProxiedSession':    FloppyDataProxiedSession,
   'PubProxyProxiedSession':      PubProxyProxiedSession,      'ProxyVerityProxiedSession':   ProxyVerityProxiedSession,
-  'GeonixProxiedSession':        GeonixProxiedSession,
+  'GeonixProxiedSession':        GeonixProxiedSession,        'HideProxiedSession':          HideProxiedSession,
 }
 ```
 

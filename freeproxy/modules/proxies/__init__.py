@@ -1,6 +1,7 @@
 '''initialize'''
 from .base import BaseProxiedSession
 from .scdn import SCDNProxiedSession
+from .hide import HideProxiedSession
 from .ip89 import IP89ProxiedSession
 from ..utils import BaseModuleBuilder
 from .advfp import ADVFPProxiedSession
