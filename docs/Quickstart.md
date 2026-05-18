@@ -153,6 +153,7 @@ Example output:
   'FreeVPNNodeProxiedSession':   FreeVPNNodeProxiedSession,   'FloppyDataProxiedSession':    FloppyDataProxiedSession,
   'PubProxyProxiedSession':      PubProxyProxiedSession,      'ProxyVerityProxiedSession':   ProxyVerityProxiedSession,
   'GeonixProxiedSession':        GeonixProxiedSession,        'HideProxiedSession':          HideProxiedSession,
+  'ProxybrosProxiedSession':     ProxybrosProxiedSession,
 }
 ```
 

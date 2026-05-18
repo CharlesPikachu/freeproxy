@@ -118,6 +118,7 @@ If you find this project useful, please consider giving it a ⭐ to support deve
 | [ProxyFreeOnlyProxiedSession](https://proxyfreeonly.com/free-proxy-list)               | [ProxyFreeOnly](https://proxyfreeonly.com/free-proxy-list)                  | ✔           | ✔         | ✔         | ✔         | [proxyfreeonly.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/proxyfreeonly.py)  |
 | [PubProxyProxiedSession](http://pubproxy.com/)                                         | [PubProxy](http://pubproxy.com/)                                            | ✔           | ❌         | ❌         | ❌         | [pubproxy.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/pubproxy.py)            |
 | [ProxyVerityProxiedSession](https://proxyverity.com/free-proxy-list)                   | [ProxyVerity](https://proxyverity.com/free-proxy-list)                      | ✔           | ✔         | ✔         | ✔         | [proxyverity.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/proxyverity.py)      |
+| [ProxybrosProxiedSession](https://proxybros.com/free-proxy-list/)                      | [ProxyBros](https://proxybros.com/free-proxy-list/)                         | ✔           | ✔         | ✔         | ✔         | [proxybros.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/proxybros.py)          |
 | [QiyunipProxiedSession](https://www.qiyunip.com/freeProxy/1.html)                      | [齐云代理](https://www.qiyunip.com/freeProxy/1.html)                        | ✔           | ✔         | ❌         | ❌         | [qiyunip.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/qiyunip.py)              |
 | [RoundProxiesProxiedSession](https://roundproxies.com/free-proxy-list/)                | [Roundproxies](https://roundproxies.com/free-proxy-list/)                   | ✔           | ✔         | ✔         | ✔         | [roundproxies.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/roundproxies.py)    |
 | [SpysoneProxiedSession](https://spys.one/en/free-proxy-list/)                          | [SPYS.ONE](https://spys.one/en/free-proxy-list/)                            | ✔           | ❌         | ❌         | ✔         | [spysone.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/spysone.py)              |
@@ -313,6 +314,7 @@ Example output:
   'FreeVPNNodeProxiedSession':   FreeVPNNodeProxiedSession,   'FloppyDataProxiedSession':    FloppyDataProxiedSession,
   'PubProxyProxiedSession':      PubProxyProxiedSession,      'ProxyVerityProxiedSession':   ProxyVerityProxiedSession,
   'GeonixProxiedSession':        GeonixProxiedSession,        'HideProxiedSession':          HideProxiedSession,
+  'ProxybrosProxiedSession':     ProxybrosProxiedSession,
 }
 ```
 
