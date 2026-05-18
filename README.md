@@ -69,9 +69,9 @@
 
 # ✨ What's New
 
+- 2026-05-19: Released pyfreeproxy v0.4.7 — Add two proxy sources: [hide.mn](https://hide.mn/en/proxy-list/) and [proxybros.com](https://proxybros.com/free-proxy-list/).
 - 2026-04-22: Released pyfreeproxy v0.4.6 — Added two new free proxy nodes: [Geonix](https://free.geonix.com) and [ProxyVerity](https://proxyverity.com/).
 - 2026-04-08: Released pyfreeproxy v0.4.5 — Fix compatibility issues with Python 3.10; add support for two new high-quality free proxy sources: "pubproxy.com" and "floppydata.com".
-- 2026-04-08: Released pyfreeproxy v0.4.4 — Added two high-quality free proxy sources, "freevpnnode.com" and "trustytech.io"; fixed some potential bugs in setup; and improved IDE support.
 
 
 # 📘 Introduction
