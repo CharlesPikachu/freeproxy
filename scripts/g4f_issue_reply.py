@@ -25,7 +25,7 @@ class G4FIssueReplyBot:
     DEFAULT_MODELS = ["gpt-4.1-nano", "deepseek-r1", "llama-4-scout", "mistral-small-3.1-24b", "qwen-3-4b", "qwen-3-1.7b", "qwen-3-0.6b", "phi-4", "command-r7b", "llama-3.2-1b", "llama-3.1-8b", "gpt-4o-mini"]
     SKIP_LABELS = {"no-bot", "ai-ignore", "bot-ignore", "skip-ai", "skip-bot"}
     PROVIDER_ERROR_PHRASES = ["missingautherror", "api key required", "rate limit", "cloudflare", "provider not working", "error occurred"]
-    CONTEXT_FILES = [("README.md", 8000), ("docs/Quickstart.md", 4000)]
+    CONTEXT_FILES = [("README.md", 8000000)]
     def __init__(self) -> None:
         self.github_token = G4FIssueReplyBot.getenv("GITHUB_TOKEN")
         self.github_repository = G4FIssueReplyBot.getenv("GITHUB_REPOSITORY")
