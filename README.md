@@ -107,7 +107,6 @@ If you find this project useful, please consider giving it a ⭐ to support deve
 | [OpenProxyListProxiedSession](https://api.openproxylist.xyz/)                          | [OpenProxyList](https://api.openproxylist.xyz/)                             | ✔           | ✔         | ✔         | ✔         | [openproxylist.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/openproxylist.py)  |
 | [ProxyhubProxiedSession](https://proxyhub.me/)                                         | [ProxyHub](https://proxyhub.me/)                                            | ✔           | ✔         | ✔         | ✔         | [proxyhub.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/proxyhub.py)            |
 | [ProxydbProxiedSession](https://proxydb.net/?offset=0)                                 | [ProxyDB](https://proxydb.net/?offset=0)                                    | ✔           | ✔         | ❌         | ✔         | [proxydb.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/proxydb.py)              |
-| [ProxylistProxiedSession](https://www.proxy-list.download/HTTP/)                       | [ProxyList](https://www.proxy-list.download/HTTP/)                          | ✔           | ✔         | ✔         | ✔         | [proxylist.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/proxylist.py)          |
 | [ProxiflyProxiedSession](https://proxifly.dev/)                                        | [Proxifly](https://proxifly.dev/)                                           | ✔           | ✔         | ✔         | ✔         | [proxifly.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/proxifly.py)            |
 | [ProxydailyProxiedSession](https://proxy-daily.com/)                                   | [ProxyDaily](https://proxy-daily.com/)                                      | ✔           | ✔         | ✔         | ✔         | [proxydaily.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/proxydaily.py)        |
 | [ProxyScrapeProxiedSession](https://proxyscrape.com/free-proxy-list)                   | [ProxyScrape](https://proxyscrape.com/free-proxy-list)                      | ✔           | ❌         | ✔         | ✔         | [proxyscrape.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/proxyscrape.py)      |
@@ -125,7 +124,6 @@ If you find this project useful, please consider giving it a ⭐ to support deve
 | [SCDNProxiedSession](https://proxy.scdn.io/)                                           | [公共代理池](https://proxy.scdn.io/)                                        | ✔           | ✔         | ✔         | ✔         | [scdn.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/scdn.py)                    |
 | [SixSixDailiProxiedSession](https://www.66daili.com/)                                  | [66免费代理](https://www.66daili.com/)                                      | ✔           | ✔         | ✔         | ✔         | [sixsixdaili.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/sixsixdaili.py)      |
 | [SocksListProxiedSession](https://sockslist.us/)                                       | [FreeSocks5Proxy](https://sockslist.us/)                                    | ❌           | ❌         | ❌         | ✔         | [sockslist.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/sockslist.py)          |
-| [Tomcat1235ProxiedSession](https://tomcat1235.nyc.mn/proxy_list?page=1)                | [北极光代理](https://tomcat1235.nyc.mn/proxy_list?page=1)                   | ❌           | ❌         | ❌         | ✔         | [tomcat1235.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/tomcat1235.py)        |
 | [TheSpeedXProxiedSession](https://github.com/TheSpeedX)                                | [TheSpeedX](https://github.com/TheSpeedX)                                   | ✔           | ❌         | ✔         | ✔         | [thespeedx.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/thespeedx.py)          |
 | [TrustyTechProxiedSession](https://trustytech.io/tools/free-proxy/)                    | [TrustyTech](https://trustytech.io/tools/free-proxy/)                       | ✔           | ✔         | ✔         | ✔         | [trustytech.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/trustytech.py)        |
 
@@ -177,7 +175,7 @@ from tqdm import tqdm
 from freeproxy.modules import BaseProxiedSession, ProxyInfo, BuildProxiedSession, printtable, colorize
 
 '''settings'''
-SOURCES = ["ProxiflyProxiedSession", "KuaidailiProxiedSession", "QiyunipProxiedSession", "ProxylistProxiedSession"]
+SOURCES = ["ProxiflyProxiedSession", "KuaidailiProxiedSession", "QiyunipProxiedSession", "TrustyTechProxiedSession"]
 TITLES = ["Source", "Retrieved Example", "HTTP", "HTTPS", "SOCKS4", "SOCKS5", "Chinese IP", "Elite", "Total"]
 
 '''scrape'''
@@ -275,7 +273,7 @@ All proxies are saved to `free_proxies.json` in the current directory, *e.g.*:
   ],
   "ProxiflyProxiedSession": [],
   "QiyunipProxiedSession": [],
-  "ProxylistProxiedSession": []
+  "TrustyTechProxiedSession": []
 }
 ```
 
@@ -298,8 +296,7 @@ Example output:
   'IP3366ProxiedSession':        IP3366ProxiedSession,        'KuaidailiProxiedSession':     KuaidailiProxiedSession,
   'KxdailiProxiedSession':       KxdailiProxiedSession,       'ProxydailyProxiedSession':    ProxydailyProxiedSession,
   'ProxydbProxiedSession':       ProxydbProxiedSession,       'ProxyhubProxiedSession':      ProxyhubProxiedSession,
-  'ProxylistProxiedSession':     ProxylistProxiedSession,     'QiyunipProxiedSession':       QiyunipProxiedSession,
-  'SpysoneProxiedSession':       SpysoneProxiedSession,       'Tomcat1235ProxiedSession':    Tomcat1235ProxiedSession,
+  'QiyunipProxiedSession':       QiyunipProxiedSession,       'SpysoneProxiedSession':       SpysoneProxiedSession,
   'DatabayProxiedSession':       DatabayProxiedSession,       'FineProxyProxiedSession':     FineProxyProxiedSession,
   'IPLocateProxiedSession':      IPLocateProxiedSession,      'JiliuipProxiedSession':       JiliuipProxiedSession,
   'TheSpeedXProxiedSession':     TheSpeedXProxiedSession,     'GeonodeProxiedSession':       GeonodeProxiedSession,
@@ -426,7 +423,7 @@ Example: filter scraped proxies via the unified client
 from freeproxy.freeproxy import ProxiedSessionClient
 
 client = ProxiedSessionClient(
-    proxy_sources=["ProxyScrapeProxiedSession", "ProxylistProxiedSession"],
+    proxy_sources=["ProxyScrapeProxiedSession", "TrustyTechProxiedSession"],
     init_proxied_session_cfg={
         "max_pages": 2,
         "filter_rule": {

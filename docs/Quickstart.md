@@ -16,7 +16,7 @@ from tqdm import tqdm
 from freeproxy.modules import BaseProxiedSession, ProxyInfo, BuildProxiedSession, printtable, colorize
 
 '''settings'''
-SOURCES = ["ProxiflyProxiedSession", "KuaidailiProxiedSession", "QiyunipProxiedSession", "ProxylistProxiedSession"]
+SOURCES = ["ProxiflyProxiedSession", "KuaidailiProxiedSession", "QiyunipProxiedSession", "TrustyTechProxiedSession"]
 TITLES = ["Source", "Retrieved Example", "HTTP", "HTTPS", "SOCKS4", "SOCKS5", "Chinese IP", "Elite", "Total"]
 
 '''scrape'''
@@ -114,7 +114,7 @@ All proxies are saved to `free_proxies.json` in the current directory, *e.g.*:
   ],
   "ProxiflyProxiedSession": [],
   "QiyunipProxiedSession": [],
-  "ProxylistProxiedSession": []
+  "TrustyTechProxiedSession": []
 }
 ```
 
@@ -137,8 +137,7 @@ Example output:
   'IP3366ProxiedSession':        IP3366ProxiedSession,        'KuaidailiProxiedSession':     KuaidailiProxiedSession,
   'KxdailiProxiedSession':       KxdailiProxiedSession,       'ProxydailyProxiedSession':    ProxydailyProxiedSession,
   'ProxydbProxiedSession':       ProxydbProxiedSession,       'ProxyhubProxiedSession':      ProxyhubProxiedSession,
-  'ProxylistProxiedSession':     ProxylistProxiedSession,     'QiyunipProxiedSession':       QiyunipProxiedSession,
-  'SpysoneProxiedSession':       SpysoneProxiedSession,       'Tomcat1235ProxiedSession':    Tomcat1235ProxiedSession,
+  'QiyunipProxiedSession':       QiyunipProxiedSession,       'SpysoneProxiedSession':       SpysoneProxiedSession, 
   'DatabayProxiedSession':       DatabayProxiedSession,       'FineProxyProxiedSession':     FineProxyProxiedSession,
   'IPLocateProxiedSession':      IPLocateProxiedSession,      'JiliuipProxiedSession':       JiliuipProxiedSession,
   'TheSpeedXProxiedSession':     TheSpeedXProxiedSession,     'GeonodeProxiedSession':       GeonodeProxiedSession,
@@ -265,7 +264,7 @@ Example: filter scraped proxies via the unified client
 from freeproxy.freeproxy import ProxiedSessionClient
 
 client = ProxiedSessionClient(
-    proxy_sources=["ProxyScrapeProxiedSession", "ProxylistProxiedSession"],
+    proxy_sources=["ProxyScrapeProxiedSession", "TrustyTechProxiedSession"],
     init_proxied_session_cfg={
         "max_pages": 2,
         "filter_rule": {
