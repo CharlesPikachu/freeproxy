@@ -1,6 +1,6 @@
 # Release Log
 
-- 2026-06-15: Released pyfreeproxy v0.4.8 — Added two new free proxy sources: spys.me and www.my-proxy.com; removed websites that no longer share free proxies to avoid giving them free advertising; fixed the ProxyHub and IPRoyal proxy sources.
+- 2026-06-15: Released pyfreeproxy v0.4.8 — Add spys.me and my-proxy.com as new free proxy sources; remove sites that no longer provide free proxies to avoid giving them free exposure; fix ProxyHub and IPRoyal sources.
 
 - 2026-05-19: Released pyfreeproxy v0.4.7 — Add two proxy sources: [hide.mn](https://hide.mn/en/proxy-list/) and [proxybros.com](https://proxybros.com/free-proxy-list/).
 
