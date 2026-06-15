@@ -104,6 +104,7 @@ If you find this project useful, please consider giving it a ⭐ to support deve
 | [JiliuipProxiedSession](https://www.jiliuip.com/free/page-1/)                          | [积流代理](https://www.jiliuip.com/free/page-1/)                            | ✔           | ❌         | ❌         | ❌         | [jiliuip.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/jiliuip.py)              |
 | [KuaidailiProxiedSession](https://www.kuaidaili.com/free/inha/1/)                      | [快代理](https://www.kuaidaili.com/free/inha/1/)                            | ✔           | ✔         | ❌         | ❌         | [kuaidaili.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/kuaidaili.py)          |
 | [KxdailiProxiedSession](http://www.kxdaili.com/dailiip.html)                           | [开心代理](http://www.kxdaili.com/dailiip.html)                             | ✔           | ✔         | ❌         | ❌         | [kxdaili.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/kxdaili.py)              |
+| [MyProxyProxiedSession](https://www.my-proxy.com/free-proxy-list.html)                 | [MyProxy](https://www.my-proxy.com/free-proxy-list.html)                    | ✔           | ❌         | ✔         | ✔         | [myproxy.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/myproxy.py)              |
 | [OpenProxyListProxiedSession](https://api.openproxylist.xyz/)                          | [OpenProxyList](https://api.openproxylist.xyz/)                             | ✔           | ✔         | ✔         | ✔         | [openproxylist.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/openproxylist.py)  |
 | [ProxyhubProxiedSession](https://proxyhub.me/)                                         | [ProxyHub](https://proxyhub.me/)                                            | ✔           | ✔         | ✔         | ✔         | [proxyhub.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/proxyhub.py)            |
 | [ProxydbProxiedSession](https://proxydb.net/?offset=0)                                 | [ProxyDB](https://proxydb.net/?offset=0)                                    | ✔           | ✔         | ❌         | ✔         | [proxydb.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/proxydb.py)              |
@@ -311,7 +312,7 @@ Example output:
   'FreeVPNNodeProxiedSession':   FreeVPNNodeProxiedSession,   'FloppyDataProxiedSession':    FloppyDataProxiedSession,
   'PubProxyProxiedSession':      PubProxyProxiedSession,      'ProxyVerityProxiedSession':   ProxyVerityProxiedSession,
   'GeonixProxiedSession':        GeonixProxiedSession,        'HideProxiedSession':          HideProxiedSession,
-  'ProxybrosProxiedSession':     ProxybrosProxiedSession,
+  'ProxybrosProxiedSession':     ProxybrosProxiedSession,     'MyProxyProxiedSession':       MyProxyProxiedSession,
 }
 ```
 
