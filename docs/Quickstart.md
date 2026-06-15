@@ -153,6 +153,7 @@ Example output:
   'PubProxyProxiedSession':      PubProxyProxiedSession,      'ProxyVerityProxiedSession':   ProxyVerityProxiedSession,
   'GeonixProxiedSession':        GeonixProxiedSession,        'HideProxiedSession':          HideProxiedSession,
   'ProxybrosProxiedSession':     ProxybrosProxiedSession,     'MyProxyProxiedSession':       MyProxyProxiedSession,
+  'SpysMeProxiedSession':        SpysMeProxiedSession,
 }
 ```
 

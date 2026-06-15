@@ -125,6 +125,7 @@ If you find this project useful, please consider giving it a ⭐ to support deve
 | [SCDNProxiedSession](https://proxy.scdn.io/)                                           | [公共代理池](https://proxy.scdn.io/)                                        | ✔           | ✔         | ✔         | ✔         | [scdn.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/scdn.py)                    |
 | [SixSixDailiProxiedSession](https://www.66daili.com/)                                  | [66免费代理](https://www.66daili.com/)                                      | ✔           | ✔         | ✔         | ✔         | [sixsixdaili.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/sixsixdaili.py)      |
 | [SocksListProxiedSession](https://sockslist.us/)                                       | [FreeSocks5Proxy](https://sockslist.us/)                                    | ❌           | ❌         | ❌         | ✔         | [sockslist.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/sockslist.py)          |
+| [SpysMeProxiedSession](https://spys.me/)                                               | [SPYS.ME](https://spys.me/)                                                 | ✔           | ❌         | ❌         | ✔         | [spysme.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/spysme.py)                |
 | [TheSpeedXProxiedSession](https://github.com/TheSpeedX)                                | [TheSpeedX](https://github.com/TheSpeedX)                                   | ✔           | ❌         | ✔         | ✔         | [thespeedx.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/thespeedx.py)          |
 | [TrustyTechProxiedSession](https://trustytech.io/tools/free-proxy/)                    | [TrustyTech](https://trustytech.io/tools/free-proxy/)                       | ✔           | ✔         | ✔         | ✔         | [trustytech.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/trustytech.py)        |
 
@@ -313,6 +314,7 @@ Example output:
   'PubProxyProxiedSession':      PubProxyProxiedSession,      'ProxyVerityProxiedSession':   ProxyVerityProxiedSession,
   'GeonixProxiedSession':        GeonixProxiedSession,        'HideProxiedSession':          HideProxiedSession,
   'ProxybrosProxiedSession':     ProxybrosProxiedSession,     'MyProxyProxiedSession':       MyProxyProxiedSession,
+  'SpysMeProxiedSession':        SpysMeProxiedSession,
 }
 ```
 
