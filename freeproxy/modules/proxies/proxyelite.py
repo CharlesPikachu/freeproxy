@@ -6,12 +6,12 @@ Author:
 WeChat Official Account (微信公众号):
     Charles的皮卡丘
 '''
-import re
+import json
 import random
 import requests
 from bs4 import BeautifulSoup
 from .base import BaseProxiedSession
-from ..utils import filterinvalidproxies, applyfilterrule, ProxyInfo, DrissionPageUtils
+from ..utils import filterinvalidproxies, applyfilterrule, ProxyInfo
 
 
 '''ProxyEliteProxiedSession'''
@@ -20,32 +20,20 @@ class ProxyEliteProxiedSession(BaseProxiedSession):
     homepage = 'https://proxyelite.info/cn/free/asia/china/'
     def __init__(self, **kwargs):
         super(ProxyEliteProxiedSession, self).__init__(**kwargs)
-    '''_getnonce'''
-    def _getnonce(self):
-        headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36'}
-        page = DrissionPageUtils.initsmartbrowser(headless=True, requests_headers=headers, requests_proxies=None, requests_cookies=None)
-        page.get(self.homepage); m = re.search(r'"nonce"\s*:\s*"([^"]+)"', page.html); nonce = m.group(1); DrissionPageUtils.quitpage(page=page)
-        return nonce
     '''refreshproxies'''
     @applyfilterrule()
     @filterinvalidproxies
     def refreshproxies(self):
         # initialize
-        self.candidate_proxies, session, nonce = [], requests.Session(), self._getnonce()
-        headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'}
+        self.candidate_proxies, session = [], requests.Session()
+        headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36'}
         # obtain proxies
-        for page in range(1, self.max_pages+1):
-            data = {'action': 'proxylister_load_more', 'nonce': nonce, 'page': f'{page}', 'atts[downloads]': 'true'}
-            try: (resp := session.post('https://proxyelite.info/wp-admin/admin-ajax.php', headers=self.getrandomheaders(base_headers=headers), timeout=60, data=data)).raise_for_status(); resp.encoding = 'utf-8'; rows = resp.json()['data']['rows']
-            except Exception: continue
-            for row in (BeautifulSoup(rows, 'html.parser').find_all('tr') or []):
-                if not (cells := row.find_all('td')) or (len(cells) < 7): continue
-                protocol: str = random.choice(str(cells[2].text).strip().lower().split(',')); anonymity = "transparent"
-                if str(cells[3].text).strip().lower() in ('anonymous', 'elite', 'transparent'): anonymity = str(cells[3].text).strip().lower()
-                elif '匿名' in str(cells[3].text).strip(): anonymity = 'anonymous'
-                elif '精英' in str(cells[3].text).strip(): anonymity = 'elite'
-                try: proxy_info = ProxyInfo(source=self.source, ip=cells[0].text.strip(), port=cells[1].text.strip(), protocol=protocol.strip(), delay=int(float(re.search(r'^(\d+)', cells[6].text.strip()).group(1))), anonymity=anonymity.lower(), country_code='CN', in_chinese_mainland=True)
-                except Exception: continue
-                self.candidate_proxies.append(proxy_info)
+        try: (resp := session.get(self.homepage, headers=self.getrandomheaders(base_headers=headers), timeout=60)).raise_for_status()
+        except Exception: return self.candidate_proxies
+        for item in json.loads(BeautifulSoup(resp.text, 'html.parser').find('script', id='fpb-data').text):
+            if not isinstance(item, dict) or not (protocols := [str(protocol).lower() for protocol in item.get('protos', []) if str(protocol).lower() in ('http', 'https', 'socks4', 'socks5')]): continue
+            anonymity = {'anon': 'anonymous', 'trans': 'transparent'}.get((item.get('anon', '') or '').lower(), (item.get('anon', 'transparent') or '').lower())
+            proxy_info = ProxyInfo(source=self.source, ip=str(item['ip']).strip(), port=str(item['port']).strip(), protocol=random.choice(protocols), delay=int(item.get('latency', 0)), anonymity=anonymity, country_code='CN', in_chinese_mainland=True)
+            self.candidate_proxies.append(proxy_info)
         # return
         return self.candidate_proxies

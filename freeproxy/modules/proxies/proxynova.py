@@ -22,48 +22,29 @@ class ProxyNovaProxiedSession(BaseProxiedSession):
     def __init__(self, **kwargs):
         super(ProxyNovaProxiedSession, self).__init__(**kwargs)
     '''_jsiptotext'''
-    def _jsiptotext(self, script_body: str) -> str:
-        if not (m := re.search(r"document\.write\((.*)\)\s*;?\s*$", script_body.strip(), flags=re.S)): return ""
-        expr = m.group(1); ctx = quickjs.Context(); out = {"s": ""}
-        ctx.add_callable("py_write", lambda x: out.__setitem__("s", out["s"] + str(x)))
-        ctx.add_callable("py_atob", lambda s: base64.b64decode(s).decode("utf-8", errors="ignore"))
-        ctx.eval("""var document = { write: function(x){ py_write(x); } }; function atob(s){ return py_atob(s); }""")
-        ctx.eval(f"document.write({expr});")
-        return out["s"].strip()
-    '''_parserow'''
-    def _parserow(self, tr: BeautifulSoup):
-        if len((tds := tr.find_all("td"))) < 7: return None
-        # ip
-        ip, script = "", tds[0].find("script")
-        if script and script.string: ip = self._jsiptotext(script.string)
-        else: ip = tds[0].get_text(strip=True)
-        # port
-        port = tds[1].get_text(strip=True)
-        # delay
-        delay_text = tds[3].find("small").get_text(strip=True) if tds[3].find("small") else tds[3].get_text(strip=True)
-        m = re.search(r"(\d+)\s*ms", delay_text.lower()); latency_ms = int(m.group(1)) if m else None
-        # anonymity
-        anonymity = str(tds[6].get_text(" ", strip=True)).lower()
-        # country_code
-        img, country_code = tds[5].find("img", class_=re.compile(r"\bflag\b")), None
-        country_code = (next((c.split("-", 1)[1].upper() for c in img.get("class", []) if c.startswith("flag-") and len(c) == 7), None) or (img.get("alt") or "").upper() or None) if img else None
-        # return
-        proxy_info = ProxyInfo(source=self.source, protocol="http", ip=ip, port=port, anonymity=anonymity, country_code=country_code, in_chinese_mainland=(str(country_code).lower() in ['cn']), delay=latency_ms)
-        return proxy_info
+    def _jsiptotext(self, script_body: str):
+        try:
+            expression, context = re.search(r'document\.write\((.*)\)\s*;?', script_body, re.S).group(1), quickjs.Context()
+            context.add_callable('atob', lambda text: base64.b64decode(text).decode())
+            return str(context.eval(expression)).strip()
+        except Exception:
+            return ''
     '''refreshproxies'''
     @applyfilterrule()
     @filterinvalidproxies
     def refreshproxies(self):
         # initialize
         self.candidate_proxies, session = [], requests.Session()
-        headers = {"user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"}
+        headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36'}
         # obtain proxies
-        try: (resp := session.get(f"https://www.proxynova.com/proxy-server-list/", headers=self.getrandomheaders(base_headers=headers))).raise_for_status()
+        try: (resp := session.get(self.homepage, headers=self.getrandomheaders(base_headers=headers))).raise_for_status()
         except Exception: return self.candidate_proxies
-        table = BeautifulSoup(resp.text, "lxml").select_one('table#tbl_proxy_list.table')
-        if not table: return self.candidate_proxies
-        for tr in table.select("tbody > tr"):
-            item = self._parserow(tr)
-            if item: self.candidate_proxies.append(item)
+        for tr in BeautifulSoup(resp.text, 'lxml').select('#tbl_proxy_list tbody > tr'):
+            if len((tds := tr.find_all('td'))) < 7: continue
+            if not (ip := self._jsiptotext(script.text) if (script := tds[0].find('script')) else tds[0].get_text(strip=True)): continue
+            delay = re.search(r'(\d+)\s*ms', tds[3].get_text(' ', strip=True), re.I)
+            country_code = next((item[5:].upper() for item in flag.get('class', []) if item.startswith('flag-')), '') if (flag := tds[5].find('img')) else ''
+            proxy_info = ProxyInfo(source=self.source, protocol='http', ip=ip, port=tds[1].get_text(strip=True), anonymity=tds[6].get_text(' ', strip=True).lower(), country_code=country_code, in_chinese_mainland=(country_code in ['CN']), delay=int(delay.group(1)) if delay else None)
+            self.candidate_proxies.append(proxy_info)
         # return
         return self.candidate_proxies

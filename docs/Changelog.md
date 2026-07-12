@@ -1,5 +1,7 @@
 # Release Log
 
+- 2026-07-13: Released pyfreeproxy v0.5.0 — Regularly check whether all proxy sources are still functional, fix three invalid proxy sources, and add three new free proxy sources: `ChillyProxyProxiedSession`, `FreeProxyWorldProxiedSession`, and `ProxySpaceProxiedSession`.
+
 - 2026-06-15: Released pyfreeproxy v0.4.8 — Add spys.me and my-proxy.com as new free proxy sources; remove sites that no longer provide free proxies to avoid giving them free exposure; fix ProxyHub and IPRoyal sources.
 
 - 2026-05-19: Released pyfreeproxy v0.4.7 — Add two proxy sources: [hide.mn](https://hide.mn/en/proxy-list/) and [proxybros.com](https://proxybros.com/free-proxy-list/).
