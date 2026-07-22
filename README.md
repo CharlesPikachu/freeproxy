@@ -490,7 +490,13 @@ If you use this project in your research, please cite the repository.
 
 # 🌟 Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=CharlesPikachu/freeproxy&type=date&legend=top-left)](https://www.star-history.com/#CharlesPikachu/freeproxy&type=date&legend=top-left)
+<a href="https://www.star-history.com/?repos=CharlesPikachu%2Ffreeproxy&type=date&legend=top-left">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=CharlesPikachu/freeproxy&type=date&theme=dark&legend=top-left&sealed_token=n8NpzGskiGBxLc09MgjCvrhytD4LkA9tGL8W762Ig0WcuViZM_nvpF13J3S-J_yRmSgmvD_CSgHFyGYBrzNXKgkvO27Gz2ZvEVM7sbWU75KFcErDXzsF_Q" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=CharlesPikachu/freeproxy&type=date&legend=top-left&sealed_token=n8NpzGskiGBxLc09MgjCvrhytD4LkA9tGL8W762Ig0WcuViZM_nvpF13J3S-J_yRmSgmvD_CSgHFyGYBrzNXKgkvO27Gz2ZvEVM7sbWU75KFcErDXzsF_Q" />
+   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=CharlesPikachu/freeproxy&type=date&legend=top-left&sealed_token=n8NpzGskiGBxLc09MgjCvrhytD4LkA9tGL8W762Ig0WcuViZM_nvpF13J3S-J_yRmSgmvD_CSgHFyGYBrzNXKgkvO27Gz2ZvEVM7sbWU75KFcErDXzsF_Q" />
+ </picture>
+</a>
 
 
 # ☕ Appreciation (赞赏 / 打赏)
