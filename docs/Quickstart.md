@@ -155,7 +155,7 @@ Example output:
   'ProxybrosProxiedSession':     ProxybrosProxiedSession,     'MyProxyProxiedSession':          MyProxyProxiedSession,
   'SpysMeProxiedSession':        SpysMeProxiedSession,        'ProxySpaceProxiedSession':       ProxySpaceProxiedSession,
   'ChillyProxyProxiedSession':   ChillyProxyProxiedSession,   'FreeProxyWorldProxiedSession':   FreeProxyWorldProxiedSession,
-  'ProxyListerProxiedSession':   ProxyListerProxiedSession,
+  'ProxyListerProxiedSession':   ProxyListerProxiedSession,   'LitportProxiedSession':          LitportProxiedSession,
 }
 ```
 

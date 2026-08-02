@@ -8,6 +8,7 @@ from .advfp import ADVFPProxiedSession
 from .spysme import SpysMeProxiedSession
 from .ip3366 import IP3366ProxiedSession
 from .geonix import GeonixProxiedSession
+from .litport import LitportProxiedSession
 from .myproxy import MyProxyProxiedSession
 from .goodips import GoodIPSProxiedSession
 from .geonode import GeonodeProxiedSession
@@ -59,7 +60,7 @@ class ProxiedSessionBuilder(BaseModuleBuilder):
         'ProxyScrapeProxiedSession': ProxyScrapeProxiedSession,       'SCDNProxiedSession': SCDNProxiedSession,                      'GoodIPSProxiedSession': GoodIPSProxiedSession,            'SixSixDailiProxiedSession': SixSixDailiProxiedSession,          'DpangestuwProxiedSession': DpangestuwProxiedSession,    'ProxyNovaProxiedSession': ProxyNovaProxiedSession,       'ProxyShareProxiedSession': ProxyShareProxiedSession,
         'OpenProxyListProxiedSession': OpenProxyListProxiedSession,   'IPRoyalProxiedSession': IPRoyalProxiedSession,                'ADVFPProxiedSession': ADVFPProxiedSession,                'RoundProxiesProxiedSession': RoundProxiesProxiedSession,        'SocksListProxiedSession': SocksListProxiedSession,      'ProxiwareProxiedSession': ProxiwareProxiedSession,       'ProxyFreeOnlyProxiedSession': ProxyFreeOnlyProxiedSession,
         'TrustyTechProxiedSession': TrustyTechProxiedSession,         'FreeVPNNodeProxiedSession': FreeVPNNodeProxiedSession,        'FloppyDataProxiedSession': FloppyDataProxiedSession,      'PubProxyProxiedSession': PubProxyProxiedSession,                'GeonixProxiedSession': GeonixProxiedSession,            'ProxyVerityProxiedSession': ProxyVerityProxiedSession,   'MyProxyProxiedSession': MyProxyProxiedSession,
-        'SpysMeProxiedSession': SpysMeProxiedSession,                 'FreeProxyWorldProxiedSession': FreeProxyWorldProxiedSession,  'ChillyProxyProxiedSession': ChillyProxyProxiedSession,    'ProxySpaceProxiedSession': ProxySpaceProxiedSession,            'ProxyListerProxiedSession': ProxyListerProxiedSession,
+        'SpysMeProxiedSession': SpysMeProxiedSession,                 'FreeProxyWorldProxiedSession': FreeProxyWorldProxiedSession,  'ChillyProxyProxiedSession': ChillyProxyProxiedSession,    'ProxySpaceProxiedSession': ProxySpaceProxiedSession,            'ProxyListerProxiedSession': ProxyListerProxiedSession,  'LitportProxiedSession': LitportProxiedSession,
     }
 
 

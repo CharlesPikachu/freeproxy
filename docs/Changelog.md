@@ -1,5 +1,7 @@
 # Release Log
 
+- 2026-08-03: Released pyfreeproxy v0.5.1 — Perform monthly code maintenance, fix the ProxyShare and ProxyVerity proxy sources, and add ProxyLister and LitPort as new proxy sources.
+
 - 2026-07-13: Released pyfreeproxy v0.5.0 — Regularly check whether all proxy sources are still functional, fix three invalid proxy sources, and add three new free proxy sources: `ChillyProxy`, `FreeProxyWorld`, and `ProxySpace`.
 
 - 2026-06-15: Released pyfreeproxy v0.4.8 — Add spys.me and my-proxy.com as new free proxy sources; remove sites that no longer provide free proxies to avoid giving them free exposure; fix ProxyHub and IPRoyal sources.
