@@ -28,7 +28,7 @@ class PubProxyProxiedSession(BaseProxiedSession):
             try: (resp := session.get(f'http://pubproxy.com/api/proxy?limit=100&format=json&page={page}', headers=self.getrandomheaders(base_headers=headers))).raise_for_status()
             except Exception: continue
             for item in resp.json()['data']:
-                try: proxy_info = ProxyInfo(source=self.source, protocol=str(item["type"]).lower(), ip=item["ip"], port=item["port"], anonymity=item['proxy_level'], country_code=item["country"], in_chinese_mainland=(item["country"] in {"CN"}), delay=float(item["speed"]))
+                try: proxy_info = ProxyInfo(source=self.source, protocol=str(item["type"]).lower(), ip=item["ip"], port=item["port"], anonymity=item['proxy_level'], country_code=item["country"], in_chinese_mainland=(item["country"] in {"CN"}), delay=float(item["speed"]) * 1000)
                 except Exception: continue
                 self.candidate_proxies.append(proxy_info)
         # return

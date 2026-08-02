@@ -37,7 +37,7 @@ class KuaidailiProxiedSession(BaseProxiedSession):
             try: (resp := session.get(f'https://www.kuaidaili.com/free/inha/{page}/', headers=self.getrandomheaders(base_headers=headers))).raise_for_status(); proxies = json_repair.loads(re.compile(r'\b(?:const|let|var)\s+fpsList\s*=\s*(\[[\s\S]*?\])\s*;', re.MULTILINE).search(resp.text).group(1))
             except Exception: continue
             for proxy in proxies:
-                try: proxy_info = ProxyInfo(source=self.source, protocol='http', ip=proxy['ip'], port=proxy['port'], anonymity='elite', delay=proxy['speed'])
+                try: proxy_info = ProxyInfo(source=self.source, protocol='http', ip=proxy['ip'], port=proxy['port'], anonymity='elite', delay=proxy['speed'] * 1000)
                 except Exception: continue
                 self.candidate_proxies.append(proxy_info)
         # obtain proxies: 'https://www.kuaidaili.com/free/dps/1/'
@@ -46,7 +46,7 @@ class KuaidailiProxiedSession(BaseProxiedSession):
             except Exception: continue
             for proxy in proxies:
                 if not isinstance(proxy, dict) or not proxy.get('is_valid'): continue
-                try: proxy_info = ProxyInfo(source=self.source, protocol='https', ip=proxy['ip'], port=proxy['port'], anonymity='elite', delay=proxy['speed'])
+                try: proxy_info = ProxyInfo(source=self.source, protocol='https', ip=proxy['ip'], port=proxy['port'], anonymity='elite', delay=proxy['speed'] * 1000)
                 except Exception: continue
                 self.candidate_proxies.append(proxy_info)
         # obtain proxies: 'https://www.kuaidaili.com/free/intr/1/'
@@ -54,7 +54,7 @@ class KuaidailiProxiedSession(BaseProxiedSession):
             try: (resp := session.get(f'https://www.kuaidaili.com/free/intr/{page}/', headers=self.getrandomheaders(base_headers=headers))).raise_for_status(); proxies = json_repair.loads(re.compile(r'\b(?:const|let|var)\s+fpsList\s*=\s*(\[[\s\S]*?\])\s*;', re.MULTILINE).search(resp.text).group(1))
             except Exception: continue
             for proxy in proxies:
-                try: proxy_info = ProxyInfo(source=self.source, protocol='http', ip=proxy['ip'], port=proxy['port'], anonymity='elite', delay=proxy['speed'])
+                try: proxy_info = ProxyInfo(source=self.source, protocol='http', ip=proxy['ip'], port=proxy['port'], anonymity='elite', delay=proxy['speed'] * 1000)
                 except Exception: continue
                 self.candidate_proxies.append(proxy_info)
         # obtain proxies: 'https://www.kuaidaili.com/free/fps/1/'
@@ -62,7 +62,7 @@ class KuaidailiProxiedSession(BaseProxiedSession):
             try: (resp := session.get(f'https://www.kuaidaili.com/free/fps/{page}/', headers=self.getrandomheaders(base_headers=headers))).raise_for_status(); proxies = json_repair.loads(re.compile(r'\b(?:const|let|var)\s+fpsList\s*=\s*(\[[\s\S]*?\])\s*;', re.MULTILINE).search(resp.text).group(1))
             except Exception: continue
             for proxy in proxies:
-                try: proxy_info = ProxyInfo(source=self.source, protocol='https', ip=proxy['ip'], port=proxy['port'], anonymity='elite', delay=proxy['speed'])
+                try: proxy_info = ProxyInfo(source=self.source, protocol='https', ip=proxy['ip'], port=proxy['port'], anonymity='elite', delay=proxy['speed'] * 1000)
                 except Exception: continue
                 self.candidate_proxies.append(proxy_info)
         # append country code info
