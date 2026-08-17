@@ -133,7 +133,7 @@ If you find this project useful, please consider giving it a ⭐ to support deve
 | [SpysMeProxiedSession](https://spys.me/)                                               | [SPYS.ME](https://spys.me/)                                                 | ✔           | ❌         | ❌         | ✔         | [spysme.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/spysme.py)                        |
 | [TheSpeedXProxiedSession](https://github.com/TheSpeedX)                                | [TheSpeedX](https://github.com/TheSpeedX)                                   | ✔           | ❌         | ✔         | ✔         | [thespeedx.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/thespeedx.py)                  |
 | [TrustyTechProxiedSession](https://trustytech.io/tools/free-proxy/)                    | [TrustyTech](https://trustytech.io/tools/free-proxy/)                       | ✔           | ✔         | ✔         | ✔         | [trustytech.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/trustytech.py)                |
-
+| [GonzoProxyProxiedSession](https://gonzoproxy.com/?utm_source=github)                    | [GonzoProxy](https://gonzoproxy.com/?utm_source=github)                    | ✔           | ✔         | ✔         | ✔         | [gonzoproxy.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/gonzoproxy.py) 
 
 # 🎮 Playground
 
