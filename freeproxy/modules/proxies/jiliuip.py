@@ -6,11 +6,10 @@ Author:
 WeChat Official Account (微信公众号):
     Charles的皮卡丘
 '''
-import re
 import requests
-import json_repair
 from bs4 import BeautifulSoup
-from .base import BaseProxiedSession
+from typing_extensions import Unpack
+from .base import BaseProxiedSession, BaseProxiedSessionKwargs
 from ..utils import filterinvalidproxies, applyfilterrule, ProxyInfo
 
 
@@ -18,7 +17,7 @@ from ..utils import filterinvalidproxies, applyfilterrule, ProxyInfo
 class JiliuipProxiedSession(BaseProxiedSession):
     source = 'JiliuipProxiedSession'
     homepage = 'https://www.jiliuip.com/free/page-1/'
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Unpack[BaseProxiedSessionKwargs]):
         super(JiliuipProxiedSession, self).__init__(**kwargs)
     '''refreshproxies'''
     @applyfilterrule()
@@ -33,11 +32,10 @@ class JiliuipProxiedSession(BaseProxiedSession):
         for page in range(1, self.max_pages+1):
             try:
                 (resp := session.get(f'https://www.jiliuip.com/free/page-{page}/', headers=self.getrandomheaders(base_headers=headers))).raise_for_status()
-                soup, target_script = (soup := BeautifulSoup(resp.text, "html.parser")), next((script.string for script in soup.find_all("script") if script.string and "const fpsList" in script.string), "")
-                fps_list = json_repair.loads(re.search(r"const\s+fpsList\s*=\s*(\[[\s\S]*?\]);", target_script).group(1))
+                proxy_list = [[span.get_text(strip=True) for span in row.find_all("span", recursive=False)] for row in BeautifulSoup(resp.text, "lxml").select(".v2-free-table__row")]
             except Exception: continue
-            for item in fps_list:
-                try: proxy_info = ProxyInfo(source=self.source, protocol='http', ip=item["ip"], port=item["port"], anonymity="elite", country_code="CN", in_chinese_mainland=True, delay=item["speed"])
+            for item in proxy_list:
+                try: proxy_info = ProxyInfo(source=self.source, protocol=item[3].lower(), ip=item[0], port=item[1], anonymity="elite", country_code="CN", in_chinese_mainland=True, delay=float(item[5]))
                 except Exception: continue
                 self.candidate_proxies.append(proxy_info)
         # return

@@ -99,6 +99,7 @@ If you find this project useful, please consider giving it a ⭐ to support deve
 | [GoodIPSProxiedSession](https://www.goodips.com/)                                      | [谷德免费代理](https://www.goodips.com/)                                    | ✔           | ✔         | ✔         | ✔         | [goodips.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/goodips.py)                      |
 | [GeonixProxiedSession](https://free.geonix.com/)                                       | [Geonix](https://free.geonix.com/)                                          | ✔           | ✔         | ✔         | ✔         | [geonix.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/geonix.py)                        |
 | [HideProxiedSession](https://hide.mn/en/proxy-list/)                                   | [HideMyName](https://hide.mn/en/proxy-list/)                                | ✔           | ✔         | ✔         | ✔         | [hide.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/hide.py)                            |
+| [HProxyProxiedSession](https://hproxy.com/free-proxy-list)                             | [HProxy](https://hproxy.com/free-proxy-list)                                | ✔           | ✔         | ✔         | ✔         | [hproxy.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/hproxy.py)                        |
 | [IPLocateProxiedSession](https://www.iplocate.io/)                                     | [IPLocate](https://www.iplocate.io/)                                        | ✔           | ✔         | ✔         | ✔         | [iplocate.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/iplocate.py)                    |
 | [IP3366ProxiedSession](http://www.ip3366.net/free/?stype=1&page=1)                     | [云代理](http://www.ip3366.net/free/?stype=1&page=1)                        | ✔           | ✔         | ❌         | ❌         | [ip3366.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/ip3366.py)                        |
 | [IP89ProxiedSession](http://api.89ip.cn/tqdl.html?api=1&num=1000&port=&address=&isp=)  | [IP89](http://api.89ip.cn/tqdl.html?api=1&num=1000&port=&address=&isp=)     | ✔           | ❌         | ❌         | ❌         | [ip89.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/ip89.py)                            |
@@ -132,7 +133,6 @@ If you find this project useful, please consider giving it a ⭐ to support deve
 | [SocksListProxiedSession](https://sockslist.us/)                                       | [FreeSocks5Proxy](https://sockslist.us/)                                    | ❌           | ❌         | ❌         | ✔         | [sockslist.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/sockslist.py)                  |
 | [SpysMeProxiedSession](https://spys.me/)                                               | [SPYS.ME](https://spys.me/)                                                 | ✔           | ❌         | ❌         | ✔         | [spysme.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/spysme.py)                        |
 | [TheSpeedXProxiedSession](https://github.com/TheSpeedX)                                | [TheSpeedX](https://github.com/TheSpeedX)                                   | ✔           | ❌         | ✔         | ✔         | [thespeedx.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/thespeedx.py)                  |
-| [TrustyTechProxiedSession](https://trustytech.io/tools/free-proxy/)                    | [TrustyTech](https://trustytech.io/tools/free-proxy/)                       | ✔           | ✔         | ✔         | ✔         | [trustytech.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/trustytech.py)                |
 
 
 # 🎮 Playground
@@ -182,7 +182,7 @@ from tqdm import tqdm
 from freeproxy.modules import BaseProxiedSession, ProxyInfo, BuildProxiedSession, printtable, colorize
 
 '''settings'''
-SOURCES = ["ProxiflyProxiedSession", "KuaidailiProxiedSession", "QiyunipProxiedSession", "TrustyTechProxiedSession"]
+SOURCES = ["ProxiflyProxiedSession", "KuaidailiProxiedSession", "QiyunipProxiedSession", "HProxyProxiedSession"]
 TITLES = ["Source", "Retrieved Example", "HTTP", "HTTPS", "SOCKS4", "SOCKS5", "Chinese IP", "Elite", "Total"]
 
 '''scrape'''
@@ -280,7 +280,7 @@ All proxies are saved to `free_proxies.json` in the current directory, *e.g.*:
   ],
   "ProxiflyProxiedSession": [],
   "QiyunipProxiedSession": [],
-  "TrustyTechProxiedSession": []
+  "HProxyProxiedSession": []
 }
 ```
 
@@ -314,7 +314,7 @@ Example output:
   'OpenProxyListProxiedSession': OpenProxyListProxiedSession, 'IPRoyalProxiedSession':          IPRoyalProxiedSession,
   'ADVFPProxiedSession':         ADVFPProxiedSession,         'RoundProxiesProxiedSession':     RoundProxiesProxiedSession,
   'SocksListProxiedSession':     SocksListProxiedSession,     'ProxiwareProxiedSession':        ProxiwareProxiedSession,
-  'ProxyFreeOnlyProxiedSession': ProxyFreeOnlyProxiedSession, 'TrustyTechProxiedSession':       TrustyTechProxiedSession,
+  'ProxyFreeOnlyProxiedSession': ProxyFreeOnlyProxiedSession, 'HProxyProxiedSession':           HProxyProxiedSession,
   'FreeVPNNodeProxiedSession':   FreeVPNNodeProxiedSession,   'FloppyDataProxiedSession':       FloppyDataProxiedSession,
   'PubProxyProxiedSession':      PubProxyProxiedSession,      'ProxyVerityProxiedSession':      ProxyVerityProxiedSession,
   'GeonixProxiedSession':        GeonixProxiedSession,        'HideProxiedSession':             HideProxiedSession,
@@ -433,7 +433,7 @@ Example: filter scraped proxies via the unified client
 from freeproxy.freeproxy import ProxiedSessionClient
 
 client = ProxiedSessionClient(
-    proxy_sources=["ProxyScrapeProxiedSession", "TrustyTechProxiedSession"],
+    proxy_sources=["ProxyScrapeProxiedSession", "HProxyProxiedSession"],
     init_proxied_session_cfg={
         "max_pages": 2,
         "filter_rule": {
@@ -472,6 +472,7 @@ print("Forwarded:", resp.json()["headers"].get("Forwarded"))
 | 🖼️ **Paperdl**<br/>轻量级学术论文搜索下载器                | [![Stars](https://img.shields.io/github/stars/CharlesPikachu/paperdl?style=flat-square)](https://github.com/CharlesPikachu/paperdl)                   | [![Version](https://img.shields.io/pypi/v/paperdl)](https://pypi.org/project/paperdl)                      | [![Last Commit](https://img.shields.io/github/last-commit/CharlesPikachu/paperdl?style=flat-square)](https://github.com/CharlesPikachu/paperdl/commits/main)                     | [🛠 Repository](https://github.com/CharlesPikachu/paperdl)           |
 | 🌐 **FreeProxy**<br/>全球海量高质量免费代理采集器          | [![Stars](https://img.shields.io/github/stars/CharlesPikachu/freeproxy?style=flat-square)](https://github.com/CharlesPikachu/freeproxy)               | [![Version](https://img.shields.io/pypi/v/pyfreeproxy)](https://pypi.org/project/pyfreeproxy)              | [![Last Commit](https://img.shields.io/github/last-commit/CharlesPikachu/freeproxy?style=flat-square)](https://github.com/CharlesPikachu/freeproxy/commits/master)               | [🛠 Repository](https://github.com/CharlesPikachu/freeproxy)         |
 | 🌐 **MusicSquare**<br/>简易音乐搜索下载和播放网页          | [![Stars](https://img.shields.io/github/stars/CharlesPikachu/musicsquare?style=flat-square)](https://github.com/CharlesPikachu/musicsquare)           | [![Version](https://img.shields.io/pypi/v/musicdl)](https://pypi.org/project/musicdl)                      | [![Last Commit](https://img.shields.io/github/last-commit/CharlesPikachu/musicsquare?style=flat-square)](https://github.com/CharlesPikachu/musicsquare/commits/main)             | [🛠 Repository](https://github.com/CharlesPikachu/musicsquare)       |
+| 🌐 **ZHIHU://VERSE**<br/>Zhihu CLI 驱动的交互式知乎实验场  | [![Stars](https://img.shields.io/github/stars/CharlesPikachu/zhihu-verse?style=flat-square)](https://github.com/CharlesPikachu/zhihu-verse)           | [![Version](https://img.shields.io/pypi/v/pyzhihu-cli)](https://pypi.org/project/pyzhihu-cli)              | [![Last Commit](https://img.shields.io/github/last-commit/CharlesPikachu/zhihu-verse?style=flat-square)](https://github.com/CharlesPikachu/zhihu-verse/commits/main)             | [🛠 Repository](https://github.com/CharlesPikachu/zhihu-verse)       |
 | 🌐 **FreeGPTHub**<br/>真正免费的GPT统一接口                | [![Stars](https://img.shields.io/github/stars/CharlesPikachu/FreeGPTHub?style=flat-square)](https://github.com/CharlesPikachu/FreeGPTHub)             | [![Version](https://img.shields.io/pypi/v/freegpthub)](https://pypi.org/project/freegpthub)                | [![Last Commit](https://img.shields.io/github/last-commit/CharlesPikachu/FreeGPTHub?style=flat-square)](https://github.com/CharlesPikachu/FreeGPTHub/commits/main)               | [🛠 Repository](https://github.com/CharlesPikachu/FreeGPTHub)        |
 
 

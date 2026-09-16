@@ -9,7 +9,8 @@ WeChat Official Account (微信公众号):
 import requests
 from tqdm import tqdm
 from urllib.parse import urlparse
-from .base import BaseProxiedSession
+from typing_extensions import Unpack
+from .base import BaseProxiedSession, BaseProxiedSessionKwargs
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from ..utils import filterinvalidproxies, applyfilterrule, ProxyInfo, IPLocater
 
@@ -18,7 +19,7 @@ from ..utils import filterinvalidproxies, applyfilterrule, ProxyInfo, IPLocater
 class DatabayProxiedSession(BaseProxiedSession):
     source = 'DatabayProxiedSession'
     homepage = 'https://databay.com/free-proxy-list'
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Unpack[BaseProxiedSessionKwargs]):
         super(DatabayProxiedSession, self).__init__(**kwargs)
     '''refreshproxies'''
     @applyfilterrule()

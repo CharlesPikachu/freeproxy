@@ -10,7 +10,8 @@ import re
 import random
 import requests
 from lxml import etree
-from .base import BaseProxiedSession
+from typing_extensions import Unpack
+from .base import BaseProxiedSession, BaseProxiedSessionKwargs
 from ..utils import filterinvalidproxies, applyfilterrule, ProxyInfo
 
 
@@ -18,7 +19,7 @@ from ..utils import filterinvalidproxies, applyfilterrule, ProxyInfo
 class LitportProxiedSession(BaseProxiedSession):
     source = 'LitportProxiedSession'
     homepage = 'https://litport.net/free-proxy'
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Unpack[BaseProxiedSessionKwargs]):
         super(LitportProxiedSession, self).__init__(**kwargs)
     '''refreshproxies'''
     @applyfilterrule()

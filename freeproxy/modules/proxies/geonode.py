@@ -8,7 +8,8 @@ WeChat Official Account (微信公众号):
 '''
 import random
 import requests
-from .base import BaseProxiedSession
+from typing_extensions import Unpack
+from .base import BaseProxiedSession, BaseProxiedSessionKwargs
 from ..utils import filterinvalidproxies, applyfilterrule, ProxyInfo
 
 
@@ -16,7 +17,7 @@ from ..utils import filterinvalidproxies, applyfilterrule, ProxyInfo
 class GeonodeProxiedSession(BaseProxiedSession):
     source = 'GeonodeProxiedSession'
     homepage = 'https://geonode.com/free-proxy-list'
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Unpack[BaseProxiedSessionKwargs]):
         super(GeonodeProxiedSession, self).__init__(**kwargs)
     '''refreshproxies'''
     @applyfilterrule()

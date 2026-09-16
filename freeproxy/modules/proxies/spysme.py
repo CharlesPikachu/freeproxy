@@ -8,7 +8,8 @@ WeChat Official Account:
 '''
 import re
 import requests
-from .base import BaseProxiedSession
+from typing_extensions import Unpack
+from .base import BaseProxiedSession, BaseProxiedSessionKwargs
 from ..utils import filterinvalidproxies, applyfilterrule, ProxyInfo
 
 
@@ -16,7 +17,7 @@ from ..utils import filterinvalidproxies, applyfilterrule, ProxyInfo
 class SpysMeProxiedSession(BaseProxiedSession):
     source = 'SpysMeProxiedSession'
     homepage = 'https://spys.me/'
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Unpack[BaseProxiedSessionKwargs]):
         super(SpysMeProxiedSession, self).__init__(**kwargs)
     '''_extractproxies'''
     def _extractproxies(self, text, default_protocol):

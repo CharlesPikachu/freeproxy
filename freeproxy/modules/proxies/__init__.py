@@ -8,6 +8,7 @@ from .advfp import ADVFPProxiedSession
 from .spysme import SpysMeProxiedSession
 from .ip3366 import IP3366ProxiedSession
 from .geonix import GeonixProxiedSession
+from .hproxy import HProxyProxiedSession
 from .litport import LitportProxiedSession
 from .myproxy import MyProxyProxiedSession
 from .goodips import GoodIPSProxiedSession
@@ -32,7 +33,6 @@ from .proxiware import ProxiwareProxiedSession
 from .proxybros import ProxybrosProxiedSession
 from .proxyspace import ProxySpaceProxiedSession
 from .floppydata import FloppyDataProxiedSession
-from .trustytech import TrustyTechProxiedSession
 from .proxydaily import ProxydailyProxiedSession
 from .proxyelite import ProxyEliteProxiedSession
 from .dpangestuw import DpangestuwProxiedSession
@@ -59,7 +59,7 @@ class ProxiedSessionBuilder(BaseModuleBuilder):
         'DatabayProxiedSession': DatabayProxiedSession,               'FineProxyProxiedSession': FineProxyProxiedSession,            'IPLocateProxiedSession': IPLocateProxiedSession,          'JiliuipProxiedSession': JiliuipProxiedSession,                  'TheSpeedXProxiedSession': TheSpeedXProxiedSession,      'GeonodeProxiedSession': GeonodeProxiedSession,           'FreeProxyDBProxiedSession': FreeProxyDBProxiedSession, 
         'ProxyScrapeProxiedSession': ProxyScrapeProxiedSession,       'SCDNProxiedSession': SCDNProxiedSession,                      'GoodIPSProxiedSession': GoodIPSProxiedSession,            'SixSixDailiProxiedSession': SixSixDailiProxiedSession,          'DpangestuwProxiedSession': DpangestuwProxiedSession,    'ProxyNovaProxiedSession': ProxyNovaProxiedSession,       'ProxyShareProxiedSession': ProxyShareProxiedSession,
         'OpenProxyListProxiedSession': OpenProxyListProxiedSession,   'IPRoyalProxiedSession': IPRoyalProxiedSession,                'ADVFPProxiedSession': ADVFPProxiedSession,                'RoundProxiesProxiedSession': RoundProxiesProxiedSession,        'SocksListProxiedSession': SocksListProxiedSession,      'ProxiwareProxiedSession': ProxiwareProxiedSession,       'ProxyFreeOnlyProxiedSession': ProxyFreeOnlyProxiedSession,
-        'TrustyTechProxiedSession': TrustyTechProxiedSession,         'FreeVPNNodeProxiedSession': FreeVPNNodeProxiedSession,        'FloppyDataProxiedSession': FloppyDataProxiedSession,      'PubProxyProxiedSession': PubProxyProxiedSession,                'GeonixProxiedSession': GeonixProxiedSession,            'ProxyVerityProxiedSession': ProxyVerityProxiedSession,   'MyProxyProxiedSession': MyProxyProxiedSession,
+        'HProxyProxiedSession': HProxyProxiedSession,                 'FreeVPNNodeProxiedSession': FreeVPNNodeProxiedSession,        'FloppyDataProxiedSession': FloppyDataProxiedSession,      'PubProxyProxiedSession': PubProxyProxiedSession,                'GeonixProxiedSession': GeonixProxiedSession,            'ProxyVerityProxiedSession': ProxyVerityProxiedSession,   'MyProxyProxiedSession': MyProxyProxiedSession,
         'SpysMeProxiedSession': SpysMeProxiedSession,                 'FreeProxyWorldProxiedSession': FreeProxyWorldProxiedSession,  'ChillyProxyProxiedSession': ChillyProxyProxiedSession,    'ProxySpaceProxiedSession': ProxySpaceProxiedSession,            'ProxyListerProxiedSession': ProxyListerProxiedSession,  'LitportProxiedSession': LitportProxiedSession,
     }
 

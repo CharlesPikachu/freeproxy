@@ -11,7 +11,8 @@ import base64
 import quickjs
 import requests
 from bs4 import BeautifulSoup
-from .base import BaseProxiedSession
+from typing_extensions import Unpack
+from .base import BaseProxiedSession, BaseProxiedSessionKwargs
 from ..utils import filterinvalidproxies, applyfilterrule, ProxyInfo
 
 
@@ -19,7 +20,7 @@ from ..utils import filterinvalidproxies, applyfilterrule, ProxyInfo
 class ProxyNovaProxiedSession(BaseProxiedSession):
     source = 'ProxyNovaProxiedSession'
     homepage = 'https://www.proxynova.com/proxy-server-list/'
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Unpack[BaseProxiedSessionKwargs]):
         super(ProxyNovaProxiedSession, self).__init__(**kwargs)
     '''_jsiptotext'''
     def _jsiptotext(self, script_body: str):

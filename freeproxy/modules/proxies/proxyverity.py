@@ -10,7 +10,8 @@ import re
 import base64
 import requests
 from bs4 import BeautifulSoup
-from .base import BaseProxiedSession
+from typing_extensions import Unpack
+from .base import BaseProxiedSession, BaseProxiedSessionKwargs
 from ..utils import filterinvalidproxies, applyfilterrule, ProxyInfo
 
 
@@ -18,7 +19,7 @@ from ..utils import filterinvalidproxies, applyfilterrule, ProxyInfo
 class ProxyVerityProxiedSession(BaseProxiedSession):
     source = 'ProxyVerityProxiedSession'
     homepage = 'https://proxyverity.com/free-proxy-list'
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Unpack[BaseProxiedSessionKwargs]):
         super(ProxyVerityProxiedSession, self).__init__(**kwargs)
     '''refreshproxies'''
     @applyfilterrule()

@@ -9,7 +9,8 @@ WeChat Official Account (微信公众号):
 import re
 import requests
 import pycountry
-from .base import BaseProxiedSession
+from typing_extensions import Unpack
+from .base import BaseProxiedSession, BaseProxiedSessionKwargs
 from ..utils import filterinvalidproxies, applyfilterrule, ProxyInfo
 
 
@@ -17,7 +18,7 @@ from ..utils import filterinvalidproxies, applyfilterrule, ProxyInfo
 class IPRoyalProxiedSession(BaseProxiedSession):
     source = 'IPRoyalProxiedSession'
     homepage = 'https://iproyal.com/free-proxy-list/'
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Unpack[BaseProxiedSessionKwargs]):
         super(IPRoyalProxiedSession, self).__init__(**kwargs)
     '''refreshproxies'''
     @applyfilterrule()

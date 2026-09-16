@@ -10,7 +10,8 @@ import re
 import requests
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin
-from .base import BaseProxiedSession
+from typing_extensions import Unpack
+from .base import BaseProxiedSession, BaseProxiedSessionKwargs
 from ..utils import filterinvalidproxies, applyfilterrule, ProxyInfo
 
 
@@ -18,7 +19,7 @@ from ..utils import filterinvalidproxies, applyfilterrule, ProxyInfo
 class ProxyhubProxiedSession(BaseProxiedSession):
     source = 'ProxyhubProxiedSession'
     homepage = 'https://proxyhub.me/'
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Unpack[BaseProxiedSessionKwargs]):
         super(ProxyhubProxiedSession, self).__init__(**kwargs)
     '''refreshproxies'''
     @applyfilterrule()

@@ -9,7 +9,8 @@ WeChat Official Account (微信公众号):
 import requests
 import pycountry
 from lxml import html
-from .base import BaseProxiedSession
+from typing_extensions import Unpack
+from .base import BaseProxiedSession, BaseProxiedSessionKwargs
 from ..utils import filterinvalidproxies, applyfilterrule, ProxyInfo
 
 
@@ -17,7 +18,7 @@ from ..utils import filterinvalidproxies, applyfilterrule, ProxyInfo
 class SocksListProxiedSession(BaseProxiedSession):
     source = 'SocksListProxiedSession'
     homepage = 'https://sockslist.us/'
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Unpack[BaseProxiedSessionKwargs]):
         super(SocksListProxiedSession, self).__init__(**kwargs)
     '''refreshproxies'''
     @applyfilterrule()

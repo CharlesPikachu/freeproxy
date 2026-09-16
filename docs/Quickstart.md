@@ -16,7 +16,7 @@ from tqdm import tqdm
 from freeproxy.modules import BaseProxiedSession, ProxyInfo, BuildProxiedSession, printtable, colorize
 
 '''settings'''
-SOURCES = ["ProxiflyProxiedSession", "KuaidailiProxiedSession", "QiyunipProxiedSession", "TrustyTechProxiedSession"]
+SOURCES = ["ProxiflyProxiedSession", "KuaidailiProxiedSession", "QiyunipProxiedSession", "HProxyProxiedSession"]
 TITLES = ["Source", "Retrieved Example", "HTTP", "HTTPS", "SOCKS4", "SOCKS5", "Chinese IP", "Elite", "Total"]
 
 '''scrape'''
@@ -114,7 +114,7 @@ All proxies are saved to `free_proxies.json` in the current directory, *e.g.*:
   ],
   "ProxiflyProxiedSession": [],
   "QiyunipProxiedSession": [],
-  "TrustyTechProxiedSession": []
+  "HProxyProxiedSession": []
 }
 ```
 
@@ -148,7 +148,7 @@ Example output:
   'OpenProxyListProxiedSession': OpenProxyListProxiedSession, 'IPRoyalProxiedSession':          IPRoyalProxiedSession,
   'ADVFPProxiedSession':         ADVFPProxiedSession,         'RoundProxiesProxiedSession':     RoundProxiesProxiedSession,
   'SocksListProxiedSession':     SocksListProxiedSession,     'ProxiwareProxiedSession':        ProxiwareProxiedSession,
-  'ProxyFreeOnlyProxiedSession': ProxyFreeOnlyProxiedSession, 'TrustyTechProxiedSession':       TrustyTechProxiedSession,
+  'ProxyFreeOnlyProxiedSession': ProxyFreeOnlyProxiedSession, 'HProxyProxiedSession':           HProxyProxiedSession,
   'FreeVPNNodeProxiedSession':   FreeVPNNodeProxiedSession,   'FloppyDataProxiedSession':       FloppyDataProxiedSession,
   'PubProxyProxiedSession':      PubProxyProxiedSession,      'ProxyVerityProxiedSession':      ProxyVerityProxiedSession,
   'GeonixProxiedSession':        GeonixProxiedSession,        'HideProxiedSession':             HideProxiedSession,
@@ -267,7 +267,7 @@ Example: filter scraped proxies via the unified client
 from freeproxy.freeproxy import ProxiedSessionClient
 
 client = ProxiedSessionClient(
-    proxy_sources=["ProxyScrapeProxiedSession", "TrustyTechProxiedSession"],
+    proxy_sources=["ProxyScrapeProxiedSession", "HProxyProxiedSession"],
     init_proxied_session_cfg={
         "max_pages": 2,
         "filter_rule": {

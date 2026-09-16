@@ -10,7 +10,8 @@ import random
 import base64
 import requests
 from bs4 import BeautifulSoup
-from .base import BaseProxiedSession
+from typing_extensions import Unpack
+from .base import BaseProxiedSession, BaseProxiedSessionKwargs
 from ..utils import filterinvalidproxies, applyfilterrule, ProxyInfo
 
 
@@ -18,7 +19,7 @@ from ..utils import filterinvalidproxies, applyfilterrule, ProxyInfo
 class ADVFPProxiedSession(BaseProxiedSession):
     source = 'ADVFPProxiedSession'
     homepage = 'https://advanced.name/freeproxy'
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Unpack[BaseProxiedSessionKwargs]):
         super(ADVFPProxiedSession, self).__init__(**kwargs)
     '''_b64decode'''
     def _b64decode(self, s: str):

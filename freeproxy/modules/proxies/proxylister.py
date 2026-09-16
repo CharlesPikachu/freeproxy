@@ -8,7 +8,8 @@ WeChat Official Account (微信公众号):
 '''
 import random
 import requests
-from .base import BaseProxiedSession
+from typing_extensions import Unpack
+from .base import BaseProxiedSession, BaseProxiedSessionKwargs
 from ..utils import filterinvalidproxies, applyfilterrule, ProxyInfo
 
 
@@ -16,7 +17,7 @@ from ..utils import filterinvalidproxies, applyfilterrule, ProxyInfo
 class ProxyListerProxiedSession(BaseProxiedSession):
     source = 'ProxyListerProxiedSession'
     homepage = 'https://proxylister.com/free-proxies'
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Unpack[BaseProxiedSessionKwargs]):
         super(ProxyListerProxiedSession, self).__init__(**kwargs)
     '''refreshproxies'''
     @applyfilterrule()

@@ -10,7 +10,17 @@ import random
 import requests
 import ipaddress
 from fake_useragent import UserAgent
+from typing_extensions import TypedDict
 from ..utils import LoggerHandle, ProxyInfo
+
+
+'''BaseProxiedSessionKwargs'''
+class BaseProxiedSessionKwargs(TypedDict, total=False):
+    max_pages: int
+    logger_handle: LoggerHandle | None
+    disable_print: bool
+    filter_rule: dict | None
+    trust_env: bool
 
 
 '''BaseProxiedSession'''

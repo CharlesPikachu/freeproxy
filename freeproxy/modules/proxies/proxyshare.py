@@ -11,7 +11,8 @@ import secrets
 import requests
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin
-from .base import BaseProxiedSession
+from typing_extensions import Unpack
+from .base import BaseProxiedSession, BaseProxiedSessionKwargs
 from ..utils import filterinvalidproxies, applyfilterrule, ProxyInfo
 
 
@@ -20,7 +21,7 @@ class ProxyShareProxiedSession(BaseProxiedSession):
     endpoint = ''
     source = 'ProxyShareProxiedSession'
     homepage = 'https://www.proxyshare.com/zh/free-proxy/'
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Unpack[BaseProxiedSessionKwargs]):
         super(ProxyShareProxiedSession, self).__init__(**kwargs)
         self.client_hash = secrets.token_hex(16)
     '''resolveendpoint'''

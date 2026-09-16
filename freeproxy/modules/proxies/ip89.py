@@ -9,7 +9,8 @@ WeChat Official Account (微信公众号):
 import re
 import requests
 from tqdm import tqdm
-from .base import BaseProxiedSession
+from typing_extensions import Unpack
+from .base import BaseProxiedSession, BaseProxiedSessionKwargs
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from ..utils import filterinvalidproxies, applyfilterrule, ProxyInfo, IPLocater
 
@@ -18,7 +19,7 @@ from ..utils import filterinvalidproxies, applyfilterrule, ProxyInfo, IPLocater
 class IP89ProxiedSession(BaseProxiedSession):
     source = 'IP89ProxiedSession'
     homepage = 'https://api.89ip.cn/tqdl.html?api=1&num=1000&port=&address=&isp='
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Unpack[BaseProxiedSessionKwargs]):
         super(IP89ProxiedSession, self).__init__(**kwargs)
     '''refreshproxies'''
     @applyfilterrule()

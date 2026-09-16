@@ -10,7 +10,8 @@ import re
 import requests
 import json_repair
 from tqdm import tqdm
-from .base import BaseProxiedSession
+from typing_extensions import Unpack
+from .base import BaseProxiedSession, BaseProxiedSessionKwargs
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from ..utils import filterinvalidproxies, applyfilterrule, ProxyInfo, IPLocater
 
@@ -19,7 +20,7 @@ from ..utils import filterinvalidproxies, applyfilterrule, ProxyInfo, IPLocater
 class KuaidailiProxiedSession(BaseProxiedSession):
     source = 'KuaidailiProxiedSession'
     homepage = 'https://www.kuaidaili.com/free/inha/1/'
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Unpack[BaseProxiedSessionKwargs]):
         super(KuaidailiProxiedSession, self).__init__(**kwargs)
     '''refreshproxies'''
     @applyfilterrule()

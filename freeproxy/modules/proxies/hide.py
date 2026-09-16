@@ -11,7 +11,8 @@ import random
 import requests
 import pycountry
 from bs4 import BeautifulSoup
-from .base import BaseProxiedSession
+from typing_extensions import Unpack
+from .base import BaseProxiedSession, BaseProxiedSessionKwargs
 from ..utils import filterinvalidproxies, applyfilterrule, ProxyInfo
 
 

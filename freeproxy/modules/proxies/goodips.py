@@ -7,7 +7,8 @@ WeChat Official Account (微信公众号):
     Charles的皮卡丘
 '''
 import requests
-from .base import BaseProxiedSession
+from typing_extensions import Unpack
+from .base import BaseProxiedSession, BaseProxiedSessionKwargs
 from ..utils import filterinvalidproxies, applyfilterrule, ProxyInfo
 
 
@@ -15,7 +16,7 @@ from ..utils import filterinvalidproxies, applyfilterrule, ProxyInfo
 class GoodIPSProxiedSession(BaseProxiedSession):
     source = 'GoodIPSProxiedSession'
     homepage = 'https://www.goodips.com/'
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Unpack[BaseProxiedSessionKwargs]):
         super(GoodIPSProxiedSession, self).__init__(**kwargs)
     '''refreshproxies'''
     @applyfilterrule()

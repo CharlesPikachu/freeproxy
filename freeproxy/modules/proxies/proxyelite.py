@@ -10,7 +10,8 @@ import json
 import random
 import requests
 from bs4 import BeautifulSoup
-from .base import BaseProxiedSession
+from typing_extensions import Unpack
+from .base import BaseProxiedSession, BaseProxiedSessionKwargs
 from ..utils import filterinvalidproxies, applyfilterrule, ProxyInfo
 
 
@@ -18,7 +19,7 @@ from ..utils import filterinvalidproxies, applyfilterrule, ProxyInfo
 class ProxyEliteProxiedSession(BaseProxiedSession):
     source = 'ProxyEliteProxiedSession'
     homepage = 'https://proxyelite.info/cn/free/asia/china/'
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Unpack[BaseProxiedSessionKwargs]):
         super(ProxyEliteProxiedSession, self).__init__(**kwargs)
     '''refreshproxies'''
     @applyfilterrule()

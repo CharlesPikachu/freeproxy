@@ -9,7 +9,8 @@ WeChat Official Account (微信公众号):
 import re
 import requests
 from bs4 import BeautifulSoup
-from .base import BaseProxiedSession
+from typing_extensions import Unpack
+from .base import BaseProxiedSession, BaseProxiedSessionKwargs
 from ..utils import filterinvalidproxies, applyfilterrule, ProxyInfo
 
 
@@ -17,7 +18,7 @@ from ..utils import filterinvalidproxies, applyfilterrule, ProxyInfo
 class ProxydbProxiedSession(BaseProxiedSession):
     source = 'ProxydbProxiedSession'
     homepage = 'https://proxydb.net/?offset=0'
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Unpack[BaseProxiedSessionKwargs]):
         super(ProxydbProxiedSession, self).__init__(**kwargs)
     '''refreshproxies'''
     @applyfilterrule()

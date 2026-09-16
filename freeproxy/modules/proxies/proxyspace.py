@@ -10,7 +10,8 @@ import re
 import requests
 import ipaddress
 from tqdm import tqdm
-from .base import BaseProxiedSession
+from typing_extensions import Unpack
+from .base import BaseProxiedSession, BaseProxiedSessionKwargs
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from ..utils import filterinvalidproxies, applyfilterrule, ProxyInfo, IPLocater
 
@@ -19,7 +20,7 @@ from ..utils import filterinvalidproxies, applyfilterrule, ProxyInfo, IPLocater
 class ProxySpaceProxiedSession(BaseProxiedSession):
     source = 'ProxySpaceProxiedSession'
     homepage = 'https://proxyspace.pro/'
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Unpack[BaseProxiedSessionKwargs]):
         super(ProxySpaceProxiedSession, self).__init__(**kwargs)
     '''_extractproxies'''
     def _extractproxies(self, text: str, protocol: str):

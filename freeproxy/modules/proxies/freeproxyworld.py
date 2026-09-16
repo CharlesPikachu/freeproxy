@@ -11,7 +11,8 @@ import random
 import requests
 import ipaddress
 from lxml import etree
-from .base import BaseProxiedSession
+from typing_extensions import Unpack
+from .base import BaseProxiedSession, BaseProxiedSessionKwargs
 from ..utils import filterinvalidproxies, applyfilterrule, ProxyInfo
 
 
@@ -19,7 +20,7 @@ from ..utils import filterinvalidproxies, applyfilterrule, ProxyInfo
 class FreeProxyWorldProxiedSession(BaseProxiedSession):
     source = 'FreeProxyWorldProxiedSession'
     homepage = 'https://www.freeproxy.world/'
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Unpack[BaseProxiedSessionKwargs]):
         super(FreeProxyWorldProxiedSession, self).__init__(**kwargs)
     '''refreshproxies'''
     @applyfilterrule()

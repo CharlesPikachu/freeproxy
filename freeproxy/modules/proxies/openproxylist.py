@@ -8,7 +8,8 @@ WeChat Official Account (微信公众号):
 '''
 import requests
 from tqdm import tqdm
-from .base import BaseProxiedSession
+from typing_extensions import Unpack
+from .base import BaseProxiedSession, BaseProxiedSessionKwargs
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from ..utils import filterinvalidproxies, applyfilterrule, ProxyInfo, IPLocater
 
@@ -17,7 +18,7 @@ from ..utils import filterinvalidproxies, applyfilterrule, ProxyInfo, IPLocater
 class OpenProxyListProxiedSession(BaseProxiedSession):
     source = 'OpenProxyListProxiedSession'
     homepage = 'https://api.openproxylist.xyz/'
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Unpack[BaseProxiedSessionKwargs]):
         super(OpenProxyListProxiedSession, self).__init__(**kwargs)
     '''refreshproxies'''
     @applyfilterrule()

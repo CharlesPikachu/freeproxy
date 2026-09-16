@@ -7,7 +7,8 @@ WeChat Official Account (微信公众号):
     Charles的皮卡丘
 '''
 import requests
-from .base import BaseProxiedSession
+from typing_extensions import Unpack
+from .base import BaseProxiedSession, BaseProxiedSessionKwargs
 from ..utils import filterinvalidproxies, applyfilterrule, ProxyInfo
 
 
@@ -15,7 +16,7 @@ from ..utils import filterinvalidproxies, applyfilterrule, ProxyInfo
 class ProxyScrapeProxiedSession(BaseProxiedSession):
     source = 'ProxyScrapeProxiedSession'
     homepage = 'https://proxyscrape.com/free-proxy-list'
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Unpack[BaseProxiedSessionKwargs]):
         super(ProxyScrapeProxiedSession, self).__init__(**kwargs)
     '''refreshproxies'''
     @applyfilterrule()

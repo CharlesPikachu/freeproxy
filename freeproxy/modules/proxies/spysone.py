@@ -11,7 +11,8 @@ import requests
 import functools
 from bs4 import BeautifulSoup
 from urllib.parse import urlparse
-from .base import BaseProxiedSession
+from typing_extensions import Unpack
+from .base import BaseProxiedSession, BaseProxiedSessionKwargs
 from ..utils import filterinvalidproxies, applyfilterrule, ProxyInfo
 
 
@@ -19,7 +20,7 @@ from ..utils import filterinvalidproxies, applyfilterrule, ProxyInfo
 class SpysoneProxiedSession(BaseProxiedSession):
     source = 'SpysoneProxiedSession'
     homepage = 'https://spys.one/en/free-proxy-list/'
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Unpack[BaseProxiedSessionKwargs]):
         super(SpysoneProxiedSession, self).__init__(**kwargs)
     '''_extractspysproxies'''
     def _extractspysproxies(self, html: str):

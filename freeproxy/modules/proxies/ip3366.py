@@ -9,7 +9,8 @@ WeChat Official Account (微信公众号):
 import re
 import requests
 from bs4 import BeautifulSoup
-from .base import BaseProxiedSession
+from typing_extensions import Unpack
+from .base import BaseProxiedSession, BaseProxiedSessionKwargs
 from ..utils import filterinvalidproxies, applyfilterrule, cookies2string, ProxyInfo, DrissionPageUtils
 
 
@@ -17,7 +18,7 @@ from ..utils import filterinvalidproxies, applyfilterrule, cookies2string, Proxy
 class IP3366ProxiedSession(BaseProxiedSession):
     source = 'IP3366ProxiedSession'
     homepage = 'http://www.ip3366.net/free/?stype=1&page=1'
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Unpack[BaseProxiedSessionKwargs]):
         super(IP3366ProxiedSession, self).__init__(**kwargs)
     '''_getcookies'''
     def _getcookies(self):
