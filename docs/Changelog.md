@@ -1,6 +1,6 @@
 # Release Log
 
-- 2026-09-16: Released pyfreeproxy v0.5.2 — Performed the monthly routine maintenance of the proxy pool. This update removed the outdated proxy source `TrustyTechProxiedSession`, added a new working proxy source `HProxyProxiedSession`, fixed several existing proxy sources, and improved IDE type hints for proxy session initialization.
+- 2026-09-16: Released pyfreeproxy v0.5.2 — Monthly proxy maintenance: removed the outdated `TrustyTechProxiedSession`, added `HProxyProxiedSession`, fixed several proxy sources, and improved IDE hints for session initialization.
 
 - 2026-08-03: Released pyfreeproxy v0.5.1 — Perform monthly code maintenance, fix the ProxyShare and ProxyVerity proxy sources, and add ProxyLister and LitPort as new proxy sources.
 
