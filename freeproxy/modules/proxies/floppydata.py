@@ -8,6 +8,7 @@ WeChat Official Account (微信公众号):
 '''
 import re
 import requests
+from urllib.parse import urljoin
 from typing_extensions import Unpack
 from .base import BaseProxiedSession, BaseProxiedSessionKwargs
 from ..utils import filterinvalidproxies, applyfilterrule, ProxyInfo
@@ -26,8 +27,11 @@ class FloppyDataProxiedSession(BaseProxiedSession):
         # initialize
         self.candidate_proxies, session, headers = [], requests.Session(), {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36'}
         # obtain proxies
-        (resp := session.get('https://floppydata.com/free-proxy/', headers=headers)).raise_for_status()
-        auth_code = re.compile(r"(['\"]?)Authorization\1\s*:\s*(['\"`])([^'\"`]+)\2", re.IGNORECASE).search(resp.text).group(3)
+        (resp := session.get(self.homepage, headers=headers)).raise_for_status()
+        script_src = re.search(r'<script\b[^>]*\bsrc=["\']([^"\']*FreeProxyList[^"\']*\.js)["\']', resp.text, re.IGNORECASE).group(1)
+        (resp := session.get(urljoin(self.homepage, script_src), headers=headers)).raise_for_status()
+        auth_var = re.search(r'\bAuthorization\s*:\s*(\w+)', resp.text).group(1)
+        auth_code = re.search(rf'\b{auth_var}\s*=\s*["\']([^"\']+)["\']', resp.text).group(1)
         headers.update({'content-type': 'application/json', 'authorization': auth_code})
         (resp := session.get('https://geoxy.io/proxies?count=99999', headers=self.getrandomheaders(base_headers=headers))).raise_for_status()
         for item in resp.json():
