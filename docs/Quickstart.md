@@ -143,7 +143,7 @@ Example output:
   'TheSpeedXProxiedSession':     TheSpeedXProxiedSession,     'GeonodeProxiedSession':          GeonodeProxiedSession,
   'FreeProxyDBProxiedSession':   FreeProxyDBProxiedSession,   'ProxyScrapeProxiedSession':      ProxyScrapeProxiedSession,
   'SCDNProxiedSession':          SCDNProxiedSession,          'GoodIPSProxiedSession':          GoodIPSProxiedSession,
-  'SixSixDailiProxiedSession':   SixSixDailiProxiedSession,   'DpangestuwProxiedSession':       DpangestuwProxiedSession,
+  'WMToolsProxiedSession':       WMToolsProxiedSession,       'DpangestuwProxiedSession':       DpangestuwProxiedSession,
   'ProxyNovaProxiedSession':     ProxyNovaProxiedSession,     'ProxyShareProxiedSession':       ProxyShareProxiedSession,
   'OpenProxyListProxiedSession': OpenProxyListProxiedSession, 'IPRoyalProxiedSession':          IPRoyalProxiedSession,
   'ADVFPProxiedSession':         ADVFPProxiedSession,         'RoundProxiesProxiedSession':     RoundProxiesProxiedSession,

@@ -129,10 +129,10 @@ If you find this project useful, please consider giving it a ⭐ to support deve
 | [RoundProxiesProxiedSession](https://roundproxies.com/free-proxy-list/)                | [Roundproxies](https://roundproxies.com/free-proxy-list/)                   | ✔           | ✔         | ✔         | ✔         | [roundproxies.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/roundproxies.py)            |
 | [SpysoneProxiedSession](https://spys.one/en/free-proxy-list/)                          | [SPYS.ONE](https://spys.one/en/free-proxy-list/)                            | ✔           | ❌         | ❌         | ✔         | [spysone.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/spysone.py)                      |
 | [SCDNProxiedSession](https://proxy.scdn.io/)                                           | [公共代理池](https://proxy.scdn.io/)                                        | ✔           | ✔         | ✔         | ✔         | [scdn.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/scdn.py)                            |
-| [SixSixDailiProxiedSession](https://www.66daili.com/)                                  | [66免费代理](https://www.66daili.com/)                                      | ✔           | ✔         | ✔         | ✔         | [sixsixdaili.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/sixsixdaili.py)              |
 | [SocksListProxiedSession](https://sockslist.us/)                                       | [FreeSocks5Proxy](https://sockslist.us/)                                    | ❌           | ❌         | ❌         | ✔         | [sockslist.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/sockslist.py)                  |
 | [SpysMeProxiedSession](https://spys.me/)                                               | [SPYS.ME](https://spys.me/)                                                 | ✔           | ❌         | ❌         | ✔         | [spysme.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/spysme.py)                        |
 | [TheSpeedXProxiedSession](https://github.com/TheSpeedX)                                | [TheSpeedX](https://github.com/TheSpeedX)                                   | ✔           | ❌         | ✔         | ✔         | [thespeedx.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/thespeedx.py)                  |
+| [WMToolsProxiedSession](https://wmgrid.com/zh/proxy)                                   | [WMTools](https://wmgrid.com/zh/proxy)                                      | ✔           | ❌         | ✔         | ✔         | [wmtools.py](https://github.com/CharlesPikachu/freeproxy/blob/master/freeproxy/modules/proxies/wmtools.py)                      |
 
 
 # 🎮 Playground
@@ -309,7 +309,7 @@ Example output:
   'TheSpeedXProxiedSession':     TheSpeedXProxiedSession,     'GeonodeProxiedSession':          GeonodeProxiedSession,
   'FreeProxyDBProxiedSession':   FreeProxyDBProxiedSession,   'ProxyScrapeProxiedSession':      ProxyScrapeProxiedSession,
   'SCDNProxiedSession':          SCDNProxiedSession,          'GoodIPSProxiedSession':          GoodIPSProxiedSession,
-  'SixSixDailiProxiedSession':   SixSixDailiProxiedSession,   'DpangestuwProxiedSession':       DpangestuwProxiedSession,
+  'WMToolsProxiedSession':       WMToolsProxiedSession,       'DpangestuwProxiedSession':       DpangestuwProxiedSession,
   'ProxyNovaProxiedSession':     ProxyNovaProxiedSession,     'ProxyShareProxiedSession':       ProxyShareProxiedSession,
   'OpenProxyListProxiedSession': OpenProxyListProxiedSession, 'IPRoyalProxiedSession':          IPRoyalProxiedSession,
   'ADVFPProxiedSession':         ADVFPProxiedSession,         'RoundProxiesProxiedSession':     RoundProxiesProxiedSession,

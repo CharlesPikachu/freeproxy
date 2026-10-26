@@ -20,6 +20,7 @@ from .spysone import SpysoneProxiedSession
 from .databay import DatabayProxiedSession
 from .jiliuip import JiliuipProxiedSession
 from .iproyal import IPRoyalProxiedSession
+from .wmtools import WMToolsProxiedSession
 from .pubproxy import PubProxyProxiedSession
 from .iplocate import IPLocateProxiedSession
 from .proxifly import ProxiflyProxiedSession
@@ -41,7 +42,6 @@ from .proxylister import ProxyListerProxiedSession
 from .chillyproxy import ChillyProxyProxiedSession
 from .freeproxydb import FreeProxyDBProxiedSession
 from .proxyscrape import ProxyScrapeProxiedSession
-from .sixsixdaili import SixSixDailiProxiedSession
 from .freevpnnode import FreeVPNNodeProxiedSession
 from .proxyverity import ProxyVerityProxiedSession
 from .roundproxies import RoundProxiesProxiedSession
@@ -57,7 +57,7 @@ class ProxiedSessionBuilder(BaseModuleBuilder):
         'ProxiflyProxiedSession': ProxiflyProxiedSession,             'FreeproxylistProxiedSession': FreeproxylistProxiedSession,    'IP89ProxiedSession': IP89ProxiedSession,                  'ProxyEliteProxiedSession': ProxyEliteProxiedSession,            'IP3366ProxiedSession': IP3366ProxiedSession,            'KuaidailiProxiedSession': KuaidailiProxiedSession,       'KxdailiProxiedSession': KxdailiProxiedSession, 
         'ProxydailyProxiedSession': ProxydailyProxiedSession,         'ProxydbProxiedSession': ProxydbProxiedSession,                'ProxyhubProxiedSession': ProxyhubProxiedSession,          'ProxybrosProxiedSession': ProxybrosProxiedSession,              'QiyunipProxiedSession': QiyunipProxiedSession,          'SpysoneProxiedSession': SpysoneProxiedSession,           'HideProxiedSession': HideProxiedSession,
         'DatabayProxiedSession': DatabayProxiedSession,               'FineProxyProxiedSession': FineProxyProxiedSession,            'IPLocateProxiedSession': IPLocateProxiedSession,          'JiliuipProxiedSession': JiliuipProxiedSession,                  'TheSpeedXProxiedSession': TheSpeedXProxiedSession,      'GeonodeProxiedSession': GeonodeProxiedSession,           'FreeProxyDBProxiedSession': FreeProxyDBProxiedSession, 
-        'ProxyScrapeProxiedSession': ProxyScrapeProxiedSession,       'SCDNProxiedSession': SCDNProxiedSession,                      'GoodIPSProxiedSession': GoodIPSProxiedSession,            'SixSixDailiProxiedSession': SixSixDailiProxiedSession,          'DpangestuwProxiedSession': DpangestuwProxiedSession,    'ProxyNovaProxiedSession': ProxyNovaProxiedSession,       'ProxyShareProxiedSession': ProxyShareProxiedSession,
+        'ProxyScrapeProxiedSession': ProxyScrapeProxiedSession,       'SCDNProxiedSession': SCDNProxiedSession,                      'GoodIPSProxiedSession': GoodIPSProxiedSession,            'WMToolsProxiedSession': WMToolsProxiedSession,                  'DpangestuwProxiedSession': DpangestuwProxiedSession,    'ProxyNovaProxiedSession': ProxyNovaProxiedSession,       'ProxyShareProxiedSession': ProxyShareProxiedSession,
         'OpenProxyListProxiedSession': OpenProxyListProxiedSession,   'IPRoyalProxiedSession': IPRoyalProxiedSession,                'ADVFPProxiedSession': ADVFPProxiedSession,                'RoundProxiesProxiedSession': RoundProxiesProxiedSession,        'SocksListProxiedSession': SocksListProxiedSession,      'ProxiwareProxiedSession': ProxiwareProxiedSession,       'ProxyFreeOnlyProxiedSession': ProxyFreeOnlyProxiedSession,
         'HProxyProxiedSession': HProxyProxiedSession,                 'FreeVPNNodeProxiedSession': FreeVPNNodeProxiedSession,        'FloppyDataProxiedSession': FloppyDataProxiedSession,      'PubProxyProxiedSession': PubProxyProxiedSession,                'GeonixProxiedSession': GeonixProxiedSession,            'ProxyVerityProxiedSession': ProxyVerityProxiedSession,   'MyProxyProxiedSession': MyProxyProxiedSession,
         'SpysMeProxiedSession': SpysMeProxiedSession,                 'FreeProxyWorldProxiedSession': FreeProxyWorldProxiedSession,  'ChillyProxyProxiedSession': ChillyProxyProxiedSession,    'ProxySpaceProxiedSession': ProxySpaceProxiedSession,            'ProxyListerProxiedSession': ProxyListerProxiedSession,  'LitportProxiedSession': LitportProxiedSession,
