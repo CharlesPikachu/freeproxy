@@ -31,22 +31,22 @@ class SCDNProxiedSession(BaseProxiedSession):
         for page in range(1, self.max_pages+1):
             # --https
             try:
-                (resp := session.get(f'https://proxy.scdn.io/api/get_proxy.php?protocol=https&count=20&page={page}', headers=self.getrandomheaders(base_headers=headers), timeout=60)).raise_for_status()
+                (resp := session.get(f'https://proxy.scdn.io/api/get_proxy.php?protocol=https&count=20&page={page}', headers=headers, timeout=60)).raise_for_status()
                 for item in resp.json()['data']['proxies']: self.candidate_proxies.append(ProxyInfo(source=self.source, protocol='https', ip=str(item).split(':')[0], port=str(item).split(':')[1], country_code="", in_chinese_mainland=None, anonymity=""))
             except Exception: pass
             # --http
             try:
-                (resp := session.get(f'https://proxy.scdn.io/api/get_proxy.php?protocol=http&count=20&page={page}', headers=self.getrandomheaders(base_headers=headers), timeout=60)).raise_for_status()
+                (resp := session.get(f'https://proxy.scdn.io/api/get_proxy.php?protocol=http&count=20&page={page}', headers=headers, timeout=60)).raise_for_status()
                 for item in resp.json()['data']['proxies']: self.candidate_proxies.append(ProxyInfo(source=self.source, protocol='http', ip=str(item).split(':')[0], port=str(item).split(':')[1], country_code="", in_chinese_mainland=None, anonymity=""))
             except Exception: pass
             # --socks4
             try:
-                (resp := session.get(f'https://proxy.scdn.io/api/get_proxy.php?protocol=socks4&count=20&page={page}', headers=self.getrandomheaders(base_headers=headers), timeout=60)).raise_for_status()
+                (resp := session.get(f'https://proxy.scdn.io/api/get_proxy.php?protocol=socks4&count=20&page={page}', headers=headers, timeout=60)).raise_for_status()
                 for item in resp.json()['data']['proxies']: self.candidate_proxies.append(ProxyInfo(source=self.source, protocol='socks4', ip=str(item).split(':')[0], port=str(item).split(':')[1], country_code="", in_chinese_mainland=None, anonymity=""))
             except Exception: pass
             # --socks5
             try:
-                (resp := session.get(f'https://proxy.scdn.io/api/get_proxy.php?protocol=socks5&count=20&page={page}', headers=self.getrandomheaders(base_headers=headers), timeout=60)).raise_for_status()
+                (resp := session.get(f'https://proxy.scdn.io/api/get_proxy.php?protocol=socks5&count=20&page={page}', headers=headers, timeout=60)).raise_for_status()
                 for item in resp.json()['data']['proxies']: self.candidate_proxies.append(ProxyInfo(source=self.source, protocol='socks5', ip=str(item).split(':')[0], port=str(item).split(':')[1], country_code="", in_chinese_mainland=None, anonymity=""))
             except Exception: pass
         # append country code info
