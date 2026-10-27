@@ -147,7 +147,7 @@ Example output:
   'ProxyNovaProxiedSession':     ProxyNovaProxiedSession,     'ProxyShareProxiedSession':       ProxyShareProxiedSession,
   'OpenProxyListProxiedSession': OpenProxyListProxiedSession, 'IPRoyalProxiedSession':          IPRoyalProxiedSession,
   'ADVFPProxiedSession':         ADVFPProxiedSession,         'RoundProxiesProxiedSession':     RoundProxiesProxiedSession,
-  'SocksListProxiedSession':     SocksListProxiedSession,     'ProxiwareProxiedSession':        ProxiwareProxiedSession,
+  'ProxyCheckProxiedSession':    ProxyCheckProxiedSession,    'ProxiwareProxiedSession':        ProxiwareProxiedSession,
   'ProxyFreeOnlyProxiedSession': ProxyFreeOnlyProxiedSession, 'HProxyProxiedSession':           HProxyProxiedSession,
   'FreeVPNNodeProxiedSession':   FreeVPNNodeProxiedSession,   'FloppyDataProxiedSession':       FloppyDataProxiedSession,
   'PubProxyProxiedSession':      PubProxyProxiedSession,      'ProxyVerityProxiedSession':      ProxyVerityProxiedSession,

@@ -30,9 +30,9 @@ from .kuaidaili import KuaidailiProxiedSession
 from .fineproxy import FineProxyProxiedSession
 from .thespeedx import TheSpeedXProxiedSession
 from .proxynova import ProxyNovaProxiedSession
-from .sockslist import SocksListProxiedSession
 from .proxiware import ProxiwareProxiedSession
 from .proxybros import ProxybrosProxiedSession
+from .proxycheck import ProxyCheckProxiedSession
 from .proxyspace import ProxySpaceProxiedSession
 from .floppydata import FloppyDataProxiedSession
 from .proxydaily import ProxydailyProxiedSession
@@ -58,7 +58,7 @@ class ProxiedSessionBuilder(BaseModuleBuilder):
         'ProxydailyProxiedSession': ProxydailyProxiedSession,         'ProxydbProxiedSession': ProxydbProxiedSession,                'ProxyhubProxiedSession': ProxyhubProxiedSession,          'ProxybrosProxiedSession': ProxybrosProxiedSession,              'QiyunipProxiedSession': QiyunipProxiedSession,          'SpysoneProxiedSession': SpysoneProxiedSession,           'HideProxiedSession': HideProxiedSession,
         'DatabayProxiedSession': DatabayProxiedSession,               'FineProxyProxiedSession': FineProxyProxiedSession,            'IPLocateProxiedSession': IPLocateProxiedSession,          'JiliuipProxiedSession': JiliuipProxiedSession,                  'TheSpeedXProxiedSession': TheSpeedXProxiedSession,      'GeonodeProxiedSession': GeonodeProxiedSession,           'FreeProxyDBProxiedSession': FreeProxyDBProxiedSession, 
         'ProxyScrapeProxiedSession': ProxyScrapeProxiedSession,       'SCDNProxiedSession': SCDNProxiedSession,                      'GoodIPSProxiedSession': GoodIPSProxiedSession,            'WMToolsProxiedSession': WMToolsProxiedSession,                  'DpangestuwProxiedSession': DpangestuwProxiedSession,    'ProxyNovaProxiedSession': ProxyNovaProxiedSession,       'ProxyShareProxiedSession': ProxyShareProxiedSession,
-        'OpenProxyListProxiedSession': OpenProxyListProxiedSession,   'IPRoyalProxiedSession': IPRoyalProxiedSession,                'ADVFPProxiedSession': ADVFPProxiedSession,                'RoundProxiesProxiedSession': RoundProxiesProxiedSession,        'SocksListProxiedSession': SocksListProxiedSession,      'ProxiwareProxiedSession': ProxiwareProxiedSession,       'ProxyFreeOnlyProxiedSession': ProxyFreeOnlyProxiedSession,
+        'OpenProxyListProxiedSession': OpenProxyListProxiedSession,   'IPRoyalProxiedSession': IPRoyalProxiedSession,                'ADVFPProxiedSession': ADVFPProxiedSession,                'RoundProxiesProxiedSession': RoundProxiesProxiedSession,        'ProxyCheckProxiedSession': ProxyCheckProxiedSession,    'ProxiwareProxiedSession': ProxiwareProxiedSession,       'ProxyFreeOnlyProxiedSession': ProxyFreeOnlyProxiedSession,
         'HProxyProxiedSession': HProxyProxiedSession,                 'FreeVPNNodeProxiedSession': FreeVPNNodeProxiedSession,        'FloppyDataProxiedSession': FloppyDataProxiedSession,      'PubProxyProxiedSession': PubProxyProxiedSession,                'GeonixProxiedSession': GeonixProxiedSession,            'ProxyVerityProxiedSession': ProxyVerityProxiedSession,   'MyProxyProxiedSession': MyProxyProxiedSession,
         'SpysMeProxiedSession': SpysMeProxiedSession,                 'ProxmintProxiedSession': ProxmintProxiedSession,              'ChillyProxyProxiedSession': ChillyProxyProxiedSession,    'ProxySpaceProxiedSession': ProxySpaceProxiedSession,            'ProxyListerProxiedSession': ProxyListerProxiedSession,  'LitportProxiedSession': LitportProxiedSession,
     }
