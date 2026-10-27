@@ -1,6 +1,6 @@
 # Release Log
 
-- 2026-10-27: Released pyfreeproxy v0.5.3 — During our monthly maintenance of all free proxy sources, we identified 9 that were no longer working, replacing 3 whose websites were no longer maintained and repairing the remaining 6.
+- 2026-10-27: Released pyfreeproxy v0.5.3 — During our monthly check of all free proxy sources, we found 9 inactive sources, replaced 3 that were no longer maintained with new ones, and fixed the remaining 6.
 
 - 2026-09-16: Released pyfreeproxy v0.5.2 — Perform monthly code maintenance, removed `TrustyTechProxiedSession`, added `HProxyProxiedSession`, fixed several proxy sources, and improved IDE hints.
 
