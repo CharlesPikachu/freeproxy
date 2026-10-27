@@ -28,13 +28,13 @@ class IPRoyalProxiedSession(BaseProxiedSession):
         self.candidate_proxies, session, headers = [], requests.Session(), {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36'}
         # dynamically obtain current FreeProxyListTable js file
         (resp := session.get(self.homepage, headers=headers, timeout=60)).raise_for_status()
-        js_path = re.search(r'["\'](?P<path>/_astro/FreeProxyListTable\.[^"\']+\.js)["\']', resp.text).group('path')
+        js_path = re.search(r'/_astro/FreeProxyListTable\.[^"\'\s<>]+\.js', resp.text).group()
         (resp := session.get('https://iproyal.com' + js_path, headers=headers, timeout=60)).raise_for_status()
-        if (m := re.search(r'Authorization\s*:\s*(["\'])(.*?)\1', resp.text)): headers['Authorization'] = m.group(2)
-        headers.update({'Origin': 'https://iproyal.com', 'Referer': 'https://iproyal.com/'})
+        if not (m := re.search(r'(?<![0-9a-f])([0-9a-f]{256})(?![0-9a-f])', resp.text, re.I)): raise RuntimeError('IPRoyal Authorization token not found in FreeProxyListTable JS')
+        headers.update({'Origin': 'https://iproyal.com', 'Referer': 'https://iproyal.com/', 'Authorization': 'Bearer ' + m.group(1)})
         # obtain proxies
         for page in range(1, self.max_pages + 1):
-            params = {"fields[0]": "ip", "fields[1]": "port", "fields[2]": "protocol", "fields[3]": "country", "fields[4]": "city", "pagination[page]": page, "pagination[pageSize]": 100}
+            params = {"fields[0]": "ip", "fields[1]": "port", "fields[2]": "protocol", "fields[3]": "country", "fields[4]": "city", "pagination[page]": page, "pagination[pageSize]": 10}
             try: (resp := session.get('https://cms.iproyal.com/api/free-proxy-records', headers=self.getrandomheaders(base_headers=headers), params=params, timeout=60)).raise_for_status(); data_items = resp.json()['data']
             except Exception: continue
             for item in data_items:
