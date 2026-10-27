@@ -1,4 +1,3 @@
-
 '''
 Function:
     Implementation of WMToolsProxiedSession

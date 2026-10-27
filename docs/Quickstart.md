@@ -154,7 +154,7 @@ Example output:
   'GeonixProxiedSession':        GeonixProxiedSession,        'HideProxiedSession':             HideProxiedSession,
   'ProxybrosProxiedSession':     ProxybrosProxiedSession,     'MyProxyProxiedSession':          MyProxyProxiedSession,
   'SpysMeProxiedSession':        SpysMeProxiedSession,        'ProxySpaceProxiedSession':       ProxySpaceProxiedSession,
-  'ChillyProxyProxiedSession':   ChillyProxyProxiedSession,   'FreeProxyWorldProxiedSession':   FreeProxyWorldProxiedSession,
+  'ChillyProxyProxiedSession':   ChillyProxyProxiedSession,   'ProxmintProxiedSession':         ProxmintProxiedSession,
   'ProxyListerProxiedSession':   ProxyListerProxiedSession,   'LitportProxiedSession':          LitportProxiedSession,
 }
 ```

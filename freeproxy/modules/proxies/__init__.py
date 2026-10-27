@@ -21,6 +21,7 @@ from .databay import DatabayProxiedSession
 from .jiliuip import JiliuipProxiedSession
 from .iproyal import IPRoyalProxiedSession
 from .wmtools import WMToolsProxiedSession
+from .proxmint import ProxmintProxiedSession
 from .pubproxy import PubProxyProxiedSession
 from .iplocate import IPLocateProxiedSession
 from .proxifly import ProxiflyProxiedSession
@@ -48,7 +49,6 @@ from .roundproxies import RoundProxiesProxiedSession
 from .openproxylist import OpenProxyListProxiedSession
 from .freeproxylist import FreeproxylistProxiedSession
 from .proxyfreeonly import ProxyFreeOnlyProxiedSession
-from .freeproxyworld import FreeProxyWorldProxiedSession
 
 
 '''ProxiedSessionBuilder'''
@@ -60,7 +60,7 @@ class ProxiedSessionBuilder(BaseModuleBuilder):
         'ProxyScrapeProxiedSession': ProxyScrapeProxiedSession,       'SCDNProxiedSession': SCDNProxiedSession,                      'GoodIPSProxiedSession': GoodIPSProxiedSession,            'WMToolsProxiedSession': WMToolsProxiedSession,                  'DpangestuwProxiedSession': DpangestuwProxiedSession,    'ProxyNovaProxiedSession': ProxyNovaProxiedSession,       'ProxyShareProxiedSession': ProxyShareProxiedSession,
         'OpenProxyListProxiedSession': OpenProxyListProxiedSession,   'IPRoyalProxiedSession': IPRoyalProxiedSession,                'ADVFPProxiedSession': ADVFPProxiedSession,                'RoundProxiesProxiedSession': RoundProxiesProxiedSession,        'SocksListProxiedSession': SocksListProxiedSession,      'ProxiwareProxiedSession': ProxiwareProxiedSession,       'ProxyFreeOnlyProxiedSession': ProxyFreeOnlyProxiedSession,
         'HProxyProxiedSession': HProxyProxiedSession,                 'FreeVPNNodeProxiedSession': FreeVPNNodeProxiedSession,        'FloppyDataProxiedSession': FloppyDataProxiedSession,      'PubProxyProxiedSession': PubProxyProxiedSession,                'GeonixProxiedSession': GeonixProxiedSession,            'ProxyVerityProxiedSession': ProxyVerityProxiedSession,   'MyProxyProxiedSession': MyProxyProxiedSession,
-        'SpysMeProxiedSession': SpysMeProxiedSession,                 'FreeProxyWorldProxiedSession': FreeProxyWorldProxiedSession,  'ChillyProxyProxiedSession': ChillyProxyProxiedSession,    'ProxySpaceProxiedSession': ProxySpaceProxiedSession,            'ProxyListerProxiedSession': ProxyListerProxiedSession,  'LitportProxiedSession': LitportProxiedSession,
+        'SpysMeProxiedSession': SpysMeProxiedSession,                 'ProxmintProxiedSession': ProxmintProxiedSession,              'ChillyProxyProxiedSession': ChillyProxyProxiedSession,    'ProxySpaceProxiedSession': ProxySpaceProxiedSession,            'ProxyListerProxiedSession': ProxyListerProxiedSession,  'LitportProxiedSession': LitportProxiedSession,
     }
 
 
