@@ -25,74 +25,24 @@ class FreeproxylistProxiedSession(BaseProxiedSession):
     def refreshproxies(self):
         # initialize
         self.candidate_proxies, session = [], requests.Session()
-        # obtain proxies: https://free-proxy-list.net/
-        try: (resp := session.get('https://free-proxy-list.net/', headers=self.getrandomheaders())).raise_for_status()
-        except Exception: return self.candidate_proxies
-        proxy_table = etree.HTML(resp.text).xpath('//div[@class="table-responsive fpl-list"]/table')[0]
-        for tr in proxy_table.xpath('.//tr')[1:]:
-            https = str("".join(text)).strip().lower() if (text := tr.xpath("./td[7]/text()")) else 'no'
-            protocol = 'https' if https in ['yes'] else 'http'
-            try: proxy_info = ProxyInfo(source=self.source, protocol=protocol, ip="".join(tr.xpath("./td[1]/text()")).strip(), port="".join(tr.xpath("./td[2]/text()")).strip(), anonymity="".join(tr.xpath("./td[5]/text()")).strip().split(' ')[0], country_code="".join(tr.xpath("./td[3]/text()")).strip(), in_chinese_mainland=("".join(tr.xpath("./td[3]/text()")).strip().lower() in ['cn']))
+        # obtain proxies
+        for path in ['', 'socks-proxy.html', 'us-proxy.html', 'uk-proxy.html', 'ssl-proxy.html', 'anonymous-proxy.html', 'google-proxy.html']:
+            try: (resp := session.get(f'https://free-proxy-list.net/zh-cn/{path}', headers=self.getrandomheaders())).raise_for_status()
             except Exception: continue
-            self.candidate_proxies.append(proxy_info)
-        # obtain proxies: https://free-proxy-list.net/zh-cn/socks-proxy.html
-        try: (resp := session.get('https://free-proxy-list.net/zh-cn/socks-proxy.html', headers=self.getrandomheaders())).raise_for_status()
-        except Exception: return self.candidate_proxies
-        proxy_table = etree.HTML(resp.text).xpath('//div[@class="table-responsive fpl-list"]/table')[0]
-        for tr in proxy_table.xpath('.//tr')[1:]:
-            try: proxy_info = ProxyInfo(source=self.source, protocol="".join(tr.xpath("./td[5]/text()")).strip().lower(), ip="".join(tr.xpath("./td[1]/text()")).strip(), port="".join(tr.xpath("./td[2]/text()")).strip(), anonymity="".join(tr.xpath("./td[6]/text()")).strip().split(' ')[0], country_code="".join(tr.xpath("./td[3]/text()")).strip(), in_chinese_mainland=("".join(tr.xpath("./td[3]/text()")).strip().lower() in ['cn']))
-            except Exception: continue
-            self.candidate_proxies.append(proxy_info)
-        # obtain proxies: https://free-proxy-list.net/zh-cn/us-proxy.html
-        try: (resp := session.get('https://free-proxy-list.net/zh-cn/us-proxy.html', headers=self.getrandomheaders())).raise_for_status()
-        except Exception: return self.candidate_proxies
-        proxy_table = etree.HTML(resp.text).xpath('//div[@class="table-responsive fpl-list"]/table')[0]
-        for tr in proxy_table.xpath('.//tr')[1:]:
-            https = str("".join(text)).strip().lower() if (text := tr.xpath("./td[7]/text()")) else 'no'
-            protocol = 'https' if https in ['yes'] else 'http'
-            try: proxy_info = ProxyInfo(source=self.source, protocol=protocol, ip="".join(tr.xpath("./td[1]/text()")).strip(), port="".join(tr.xpath("./td[2]/text()")).strip(), anonymity="".join(tr.xpath("./td[5]/text()")).strip().split(' ')[0], country_code="".join(tr.xpath("./td[3]/text()")).strip(), in_chinese_mainland=("".join(tr.xpath("./td[3]/text()")).strip().lower() in ['cn']))
-            except Exception: continue
-            self.candidate_proxies.append(proxy_info)
-        # obtain proxies: https://free-proxy-list.net/zh-cn/uk-proxy.html
-        try: (resp := session.get('https://free-proxy-list.net/zh-cn/uk-proxy.html', headers=self.getrandomheaders())).raise_for_status()
-        except Exception: return self.candidate_proxies
-        proxy_table = etree.HTML(resp.text).xpath('//div[@class="table-responsive fpl-list"]/table')[0]
-        for tr in proxy_table.xpath('.//tr')[1:]:
-            https = str("".join(text)).strip().lower() if (text := tr.xpath("./td[7]/text()")) else 'no'
-            protocol = 'https' if https in ['yes'] else 'http'
-            try: proxy_info = ProxyInfo(source=self.source, protocol=protocol, ip="".join(tr.xpath("./td[1]/text()")).strip(), port="".join(tr.xpath("./td[2]/text()")).strip(), anonymity="".join(tr.xpath("./td[5]/text()")).strip().split(' ')[0], country_code="".join(tr.xpath("./td[3]/text()")).strip(), in_chinese_mainland=("".join(tr.xpath("./td[3]/text()")).strip().lower() in ['cn']))
-            except Exception: continue
-            self.candidate_proxies.append(proxy_info)
-        # obtain proxies: https://free-proxy-list.net/zh-cn/ssl-proxy.html
-        try: (resp := session.get('https://free-proxy-list.net/zh-cn/ssl-proxy.html', headers=self.getrandomheaders())).raise_for_status()
-        except Exception: return self.candidate_proxies
-        proxy_table = etree.HTML(resp.text).xpath('//div[@class="table-responsive fpl-list"]/table')[0]
-        for tr in proxy_table.xpath('.//tr')[1:]:
-            https = str("".join(text)).strip().lower() if (text := tr.xpath("./td[7]/text()")) else 'no'
-            protocol = 'https' if https in ['yes'] else 'http'
-            try: proxy_info = ProxyInfo(source=self.source, protocol=protocol, ip="".join(tr.xpath("./td[1]/text()")).strip(), port="".join(tr.xpath("./td[2]/text()")).strip(), anonymity="".join(tr.xpath("./td[5]/text()")).strip().split(' ')[0], country_code="".join(tr.xpath("./td[3]/text()")).strip(), in_chinese_mainland=("".join(tr.xpath("./td[3]/text()")).strip().lower() in ['cn']))
-            except Exception: continue
-            self.candidate_proxies.append(proxy_info)
-        # obtain proxies: https://free-proxy-list.net/zh-cn/anonymous-proxy.html
-        try: (resp := session.get('https://free-proxy-list.net/zh-cn/anonymous-proxy.html', headers=self.getrandomheaders())).raise_for_status()
-        except Exception: return self.candidate_proxies
-        proxy_table = etree.HTML(resp.text).xpath('//div[@class="table-responsive fpl-list"]/table')[0]
-        for tr in proxy_table.xpath('.//tr')[1:]:
-            https = str("".join(text)).strip().lower() if (text := tr.xpath("./td[7]/text()")) else 'no'
-            protocol = 'https' if https in ['yes'] else 'http'
-            try: proxy_info = ProxyInfo(source=self.source, protocol=protocol, ip="".join(tr.xpath("./td[1]/text()")).strip(), port="".join(tr.xpath("./td[2]/text()")).strip(), anonymity="".join(tr.xpath("./td[5]/text()")).strip().split(' ')[0], country_code="".join(tr.xpath("./td[3]/text()")).strip(), in_chinese_mainland=("".join(tr.xpath("./td[3]/text()")).strip().lower() in ['cn']))
-            except Exception: continue
-            self.candidate_proxies.append(proxy_info)
-        # obtain proxies: https://free-proxy-list.net/zh-cn/google-proxy.html
-        try: (resp := session.get('https://free-proxy-list.net/zh-cn/google-proxy.html', headers=self.getrandomheaders())).raise_for_status()
-        except Exception: return self.candidate_proxies
-        proxy_table = etree.HTML(resp.text).xpath('//div[@class="table-responsive fpl-list"]/table')[0]
-        for tr in proxy_table.xpath('.//tr')[1:]:
-            https = str("".join(text)).strip().lower() if (text := tr.xpath("./td[7]/text()")) else 'no'
-            protocol = 'https' if https in ['yes'] else 'http'
-            try: proxy_info = ProxyInfo(source=self.source, protocol=protocol, ip="".join(tr.xpath("./td[1]/text()")).strip(), port="".join(tr.xpath("./td[2]/text()")).strip(), anonymity="".join(tr.xpath("./td[5]/text()")).strip().split(' ')[0], country_code="".join(tr.xpath("./td[3]/text()")).strip(), in_chinese_mainland=("".join(tr.xpath("./td[3]/text()")).strip().lower() in ['cn']))
-            except Exception: continue
-            self.candidate_proxies.append(proxy_info)
+            if not (proxy_tables := etree.HTML(resp.text).xpath('//div[@class="table-responsive fpl-list"]/table')): continue
+            for tr in proxy_tables[0].xpath('.//tr')[1:]:
+                if (not isinstance(tr, etree._Element)) or len(tr.xpath('./td')) < 7: continue
+                is_new, is_socks = len(tr.xpath('./td')) == 7, path == 'socks-proxy.html'
+                ip = "".join(tr.xpath('./td[1]/text()')).strip()
+                port = "".join(tr.xpath('./td[1]/span/text()' if is_new else './td[2]/text()')).strip().lstrip(':')
+                anonymity = ("".join(tr.xpath('./td[5]/text()' if is_new or not is_socks else './td[6]/text()')).strip().split(' ')[0]).lower()
+                protocol = "".join(tr.xpath('./td[2]/text()' if is_new else './td[5]/text()')).strip().lower() if is_new or is_socks else 'http'
+                https = "".join(tr.xpath('./td[6]/text()' if is_new else './td[7]/text()')).strip().lower()
+                if protocol == 'http' and https == 'yes': protocol = 'https'
+                country_code = "".join(tr.xpath('./td[3]/text()')).strip()
+                try: proxy_info = ProxyInfo(source=self.source, protocol=protocol, ip=ip, port=port, anonymity=anonymity, country_code=country_code, in_chinese_mainland=(country_code.lower() in ['cn']))
+                except Exception: continue
+                self.candidate_proxies.append(proxy_info)
         # return
         self.candidate_proxies = self.candidate_proxies[:self.max_proxies_per_refresh]
         return self.candidate_proxies
