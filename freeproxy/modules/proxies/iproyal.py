@@ -6,7 +6,6 @@ Author:
 WeChat Official Account (微信公众号):
     Charles的皮卡丘
 '''
-import re
 import requests
 import pycountry
 from typing_extensions import Unpack
@@ -26,16 +25,12 @@ class IPRoyalProxiedSession(BaseProxiedSession):
     def refreshproxies(self):
         # initialize
         self.candidate_proxies, session, headers = [], requests.Session(), {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36'}
-        # dynamically obtain current FreeProxyListTable js file
-        (resp := session.get(self.homepage, headers=headers, timeout=60)).raise_for_status()
-        js_path = re.search(r'/_astro/FreeProxyListTable\.[^"\'\s<>]+\.js', resp.text).group()
-        (resp := session.get('https://iproyal.com' + js_path, headers=headers, timeout=60)).raise_for_status()
-        if not (m := re.search(r'(?<![0-9a-f])([0-9a-f]{256})(?![0-9a-f])', resp.text, re.I)): raise RuntimeError('IPRoyal Authorization token not found in FreeProxyListTable JS')
-        headers.update({'Origin': 'https://iproyal.com', 'Referer': 'https://iproyal.com/', 'Authorization': 'Bearer ' + m.group(1)})
+        headers.update({'Origin': 'https://iproyal.com', 'Referer': self.homepage, 'Accept': 'application/json'})
         # obtain proxies
         for page in range(1, self.max_pages + 1):
-            params = {"fields[0]": "ip", "fields[1]": "port", "fields[2]": "protocol", "fields[3]": "country", "fields[4]": "city", "pagination[page]": page, "pagination[pageSize]": 10}
-            try: (resp := session.get('https://cms.iproyal.com/api/free-proxy-records', headers=self.getrandomheaders(base_headers=headers), params=params, timeout=60)).raise_for_status(); data_items = resp.json()['data']
+            try:
+                (resp := session.post('https://iproyal.com/_actions/getFreeProxyList/', headers=self.getrandomheaders(base_headers=headers), json={'page': page}, timeout=60)).raise_for_status()
+                data = resp.json(); data_items = [{k: data[v] if v >= 0 else None for k, v in data[i].items()} for i in data[data[0]['records']]]
             except Exception: continue
             for item in data_items:
                 if not isinstance(item, dict): continue
