@@ -68,4 +68,5 @@ class SpysoneProxiedSession(BaseProxiedSession):
                 proxy_info = ProxyInfo(source=self.source, ip=result['ip'], port=result['port'], protocol=result['protocol'], anonymity=result['anonymity'], delay=result['delay_ms'], country_code=country_code, in_chinese_mainland=(country_code.lower() in ['cn']))
                 self.candidate_proxies.append(proxy_info)
         # return
+        self.candidate_proxies = self.candidate_proxies[:self.max_proxies_per_refresh]
         return self.candidate_proxies

@@ -38,4 +38,5 @@ class FineProxyProxiedSession(BaseProxiedSession):
             proxy_info = ProxyInfo(source=self.source, protocol=str(random.choice(item['protos'])).lower(), ip=item['ip'], port=item['port'], anonymity=anonymity, delay=item.get('latency'), country_code=country_code, in_chinese_mainland=(country_code.lower() in ['cn']),)
             self.candidate_proxies.append(proxy_info)
         # return
+        self.candidate_proxies = self.candidate_proxies[:self.max_proxies_per_refresh]
         return self.candidate_proxies

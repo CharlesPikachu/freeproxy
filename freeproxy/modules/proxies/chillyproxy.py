@@ -33,4 +33,5 @@ class ChillyProxyProxiedSession(BaseProxiedSession):
             proxy_info = ProxyInfo(source=self.source, ip=str(item['ip']).strip(), port=str(item['port']).strip(), protocol=str(item['protocol']).strip(), delay=float(item.get('latency_ms', 0) or 0), anonymity=item.get('anonymity'), country_code=item.get('country'), in_chinese_mainland=(str(item.get('country')).lower() in {'cn'}))
             self.candidate_proxies.append(proxy_info)
         # return
+        self.candidate_proxies = self.candidate_proxies[:self.max_proxies_per_refresh]
         return self.candidate_proxies

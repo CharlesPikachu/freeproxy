@@ -45,4 +45,5 @@ class MyProxyProxiedSession(BaseProxiedSession):
             except Exception: continue
             self.candidate_proxies.extend(self._extractproxies(resp.text, protocol=protocol, anonymity=anonymity))
         # return
+        self.candidate_proxies = self.candidate_proxies[:self.max_proxies_per_refresh]
         return self.candidate_proxies

@@ -39,4 +39,5 @@ class ProxyCheckProxiedSession(BaseProxiedSession):
                 self.candidate_proxies.append(proxy_info)
             if not data_items or page * 200 >= int(data.get('total', 0)): break
         # return
+        self.candidate_proxies = self.candidate_proxies[:self.max_proxies_per_refresh]
         return self.candidate_proxies

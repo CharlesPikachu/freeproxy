@@ -21,19 +21,21 @@ class BaseProxiedSessionKwargs(TypedDict, total=False):
     disable_print: bool
     filter_rule: dict | None
     trust_env: bool
+    max_proxies_per_refresh: int
 
 
 '''BaseProxiedSession'''
 class BaseProxiedSession(requests.Session):
     source = "BaseProxiedSession"
     homepage = "https://github.com/CharlesPikachu/freeproxy"
-    def __init__(self, max_pages=1, logger_handle: LoggerHandle | None = None, disable_print: bool = False, filter_rule: dict = None, trust_env: bool = False, **kwargs):
+    def __init__(self, max_pages=1, logger_handle: LoggerHandle | None = None, disable_print: bool = False, filter_rule: dict = None, max_proxies_per_refresh: int = 10000, trust_env: bool = False, **kwargs):
         super(BaseProxiedSession, self).__init__(**kwargs)
         self.trust_env = trust_env # trust_env=True may cause requests to respect NO_PROXY or system proxy settings, which can bypass your configured proxy.
         self.max_pages = max_pages
         self.disable_print = disable_print
         self.filter_rule = filter_rule or {}
         self.candidate_proxies: list[ProxyInfo] = []
+        self.max_proxies_per_refresh = max_proxies_per_refresh
         self.logger_handle = logger_handle if logger_handle else LoggerHandle()
     '''refreshproxies'''
     def refreshproxies(self):

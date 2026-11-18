@@ -39,4 +39,5 @@ class FloppyDataProxiedSession(BaseProxiedSession):
             except Exception: continue
             self.candidate_proxies.append(proxy_info)
         # return
+        self.candidate_proxies = self.candidate_proxies[:self.max_proxies_per_refresh]
         return self.candidate_proxies

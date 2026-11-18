@@ -50,6 +50,7 @@ class SCDNProxiedSession(BaseProxiedSession):
                 for item in resp.json()['data']['proxies']: self.candidate_proxies.append(ProxyInfo(source=self.source, protocol='socks5', ip=str(item).split(':')[0], port=str(item).split(':')[1], country_code="", in_chinese_mainland=None, anonymity=""))
             except Exception: pass
         # append country code info
+        self.candidate_proxies = self.candidate_proxies[:self.max_proxies_per_refresh]
         with ThreadPoolExecutor(max_workers=20) as executor:
             future_map = {executor.submit(IPLocater.locate, p.ip): p for p in self.candidate_proxies}
             if not self.disable_print: future_map_wrapper = tqdm(as_completed(future_map), desc=f"{self.source} >>> adding country_code")

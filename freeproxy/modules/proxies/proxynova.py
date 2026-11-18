@@ -48,4 +48,5 @@ class ProxyNovaProxiedSession(BaseProxiedSession):
             proxy_info = ProxyInfo(source=self.source, protocol='http', ip=ip, port=tds[1].get_text(strip=True), anonymity=tds[6].get_text(' ', strip=True).lower(), country_code=country_code, in_chinese_mainland=(country_code in ['CN']), delay=int(delay.group(1)) if delay else None)
             self.candidate_proxies.append(proxy_info)
         # return
+        self.candidate_proxies = self.candidate_proxies[:self.max_proxies_per_refresh]
         return self.candidate_proxies

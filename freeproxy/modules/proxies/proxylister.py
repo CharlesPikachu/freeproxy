@@ -39,4 +39,5 @@ class ProxyListerProxiedSession(BaseProxiedSession):
                 self.candidate_proxies.append(proxy_info)
             if len(data_items) < params['limit']: break
         # return
+        self.candidate_proxies = self.candidate_proxies[:self.max_proxies_per_refresh]
         return self.candidate_proxies

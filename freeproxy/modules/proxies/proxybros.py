@@ -38,4 +38,5 @@ class ProxybrosProxiedSession(BaseProxiedSession):
                 self.candidate_proxies.append(proxy_info)
             if page >= data['totalPages']: break
         # return
+        self.candidate_proxies = self.candidate_proxies[:self.max_proxies_per_refresh]
         return self.candidate_proxies

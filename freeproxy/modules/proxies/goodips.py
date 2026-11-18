@@ -80,4 +80,5 @@ class GoodIPSProxiedSession(BaseProxiedSession):
                 for item in resp.json()['data']: self.candidate_proxies.append(ProxyInfo(source=self.source, protocol='http', ip=item['ip'], port=item['port'], country_code="CN", in_chinese_mainland=True, anonymity="transparent"))
             except Exception: pass
         # return
+        self.candidate_proxies = self.candidate_proxies[:self.max_proxies_per_refresh]
         return self.candidate_proxies

@@ -257,6 +257,7 @@ Init arguments:
 - `init_proxied_session_cfg (dict)`: session config; supports:
   - `max_pages`: pages to fetch per source
   - `filter_rule`: filtering rules described above
+  - `max_proxies_per_refresh`: maximum number of proxies to scrape after each call to `refreshproxies`, defaults to 10,000.
   - plus standard `requests.Session` options
 - `disable_print (bool)`: suppress proxy usage logs.
 - `max_tries (int)`: max attempts per `.get()` / `.post()` call.

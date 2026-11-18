@@ -60,4 +60,5 @@ class LitportProxiedSession(BaseProxiedSession):
                 proxy_info = ProxyInfo(source=self.source, protocol=random.choice(protocols), ip=ip, port=port, country_code=country_code, in_chinese_mainland=(country_code.lower() in ['cn']), anonymity=anonymity, delay=delay)
                 self.candidate_proxies.append(proxy_info)
         # return
+        self.candidate_proxies = self.candidate_proxies[:self.max_proxies_per_refresh]
         return self.candidate_proxies

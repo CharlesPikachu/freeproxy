@@ -43,6 +43,7 @@ class IP89ProxiedSession(BaseProxiedSession):
             except Exception: continue
             self.candidate_proxies.append(ProxyInfo(source=self.source, protocol='http', ip=ip, port=port, anonymity=""))
         # append country code info
+        self.candidate_proxies = self.candidate_proxies[:self.max_proxies_per_refresh]
         with ThreadPoolExecutor(max_workers=20) as executor:
             future_map = {executor.submit(IPLocater.locate, p.ip): p for p in self.candidate_proxies}
             if not self.disable_print: future_map_wrapper = tqdm(as_completed(future_map), desc=f"{self.source} >>> adding country_code")

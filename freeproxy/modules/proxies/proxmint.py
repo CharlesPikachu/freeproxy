@@ -38,4 +38,5 @@ class ProxmintProxiedSession(BaseProxiedSession):
                 except (KeyError, ValueError, TypeError): continue
             if page * 200 >= data.get('total', 0): break
         # return
+        self.candidate_proxies = self.candidate_proxies[:self.max_proxies_per_refresh]
         return self.candidate_proxies

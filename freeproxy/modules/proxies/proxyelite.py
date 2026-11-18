@@ -37,4 +37,5 @@ class ProxyEliteProxiedSession(BaseProxiedSession):
             proxy_info = ProxyInfo(source=self.source, ip=str(item['ip']).strip(), port=str(item['port']).strip(), protocol=random.choice(protocols), delay=int(item.get('latency', 0)), anonymity=anonymity, country_code='CN', in_chinese_mainland=True)
             self.candidate_proxies.append(proxy_info)
         # return
+        self.candidate_proxies = self.candidate_proxies[:self.max_proxies_per_refresh]
         return self.candidate_proxies

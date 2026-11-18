@@ -39,4 +39,5 @@ class SpysMeProxiedSession(BaseProxiedSession):
             try: (resp := session.get(url, headers=self.getrandomheaders(base_headers=headers), timeout=30)).raise_for_status()
             except Exception: continue
             self.candidate_proxies.extend(self._extractproxies(resp.text, default_protocol))
+        self.candidate_proxies = self.candidate_proxies[:self.max_proxies_per_refresh]
         return self.candidate_proxies

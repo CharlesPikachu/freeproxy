@@ -49,4 +49,5 @@ class IP3366ProxiedSession(BaseProxiedSession):
                         self.candidate_proxies.append(proxy_info)
             if (num_tries := num_tries + 1) > 5 or len(self.candidate_proxies) > 0: break
         # return
+        self.candidate_proxies = self.candidate_proxies[:self.max_proxies_per_refresh]
         return self.candidate_proxies
